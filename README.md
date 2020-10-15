@@ -6,6 +6,8 @@
 
 - 2020.10.12 ~ 2020.11.27 (약 7주)
 
+- 2020.10.13 ~ 2020.10.15
+    기획서 작성 : https://www.notion.so/SSAFY-PJT-8c8a35904ca7490da92db0ea44a23f27
 <br>
 
 ## Members
