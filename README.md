@@ -9,6 +9,8 @@
 - 2020.10.13 ~ 2020.10.16
     - 2020.10.15 세부 기능 계획
     기획서 작성 : https://www.notion.so/SSAFY-PJT-8c8a35904ca7490da92db0ea44a23f27
+    - 2020.10.16 ERD & 쿼리
+    구성 : https://www.notion.so/SSAFY-PJT-8c8a35904ca7490da92db0ea44a23f27
 
 <br>
 
