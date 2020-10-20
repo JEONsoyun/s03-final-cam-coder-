@@ -11,6 +11,9 @@
     기획서 작성 : https://www.notion.so/SSAFY-PJT-8c8a35904ca7490da92db0ea44a23f27
     - 2020.10.16 ERD & 쿼리
     구성 : https://www.notion.so/SSAFY-PJT-8c8a35904ca7490da92db0ea44a23f27
+    - 2020.10.20 와이어 프레임
+    구성 : https://docs.google.com/presentation/d/1ZRkNElEq_4RqCXx84PFv2ZG2fIW1xKlzgGjxolAzEbo/edit?usp=sharing
+
 
 <br>
 
