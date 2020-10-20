@@ -28,3 +28,11 @@
 🟢  🔵   🟣 
 
 <br>
+
+# Developer
+
+- 🙋[임진희](https://lab.ssafy.com/jinhee6340)
+- 🙆[김채은](https://lab.ssafy.com/fairy037)
+- 🧑[박지호](https://lab.ssafy.com/wlgh325)
+- 🙎[서승희](https://lab.ssafy.com/pucca94)
+- 💁️[전소윤](https://lab.ssafy.com/twoposition)
