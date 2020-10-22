@@ -17,8 +17,48 @@
 
 # 📹 Cam-Coder
 
- 개발자 과외 플랫폼
- 
+ ## 개발자 과외 플랫폼
+
+개발중에 너무 어려운 문제를 마주쳤지만, 구글링을 아무리 해봐도 해결할 수 없을 때, 
+캠코더를 이용해 과외선생님을 찾아보세요. 
+
+
+# ERD 
+![image](https://user-images.githubusercontent.com/50106311/96872564-c19ba480-14ae-11eb-994b-dfb4969d5e86.png)
+
+# API
+![image](https://user-images.githubusercontent.com/50106311/96872899-2ce57680-14af-11eb-8561-fb05ed1855c1.png)
+
+
+
+# 💻Build With 
+- Spring Boot
+- MySQL
+- AWS
+- VueJS
+
+
+# 🛠개발 스택 
+
+###Team Collaboration Tool 
+- GitLab
+- Jira
+- Mattermost
+- Notion
+- Webex
+
+### Language
+- Java
+- JavaScript
+
+### DB
+- MySQL
+
+### Library
+- WebRTC
+
+
+
 <br>
 
 ## Members
