@@ -40,7 +40,7 @@
 
 # 🛠개발 스택 
 
-###Team Collaboration Tool 
+### Team Collaboration Tool 
 - GitLab
 - Jira
 - Mattermost
