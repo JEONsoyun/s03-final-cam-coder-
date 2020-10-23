@@ -1,23 +1,22 @@
 <div align=center>
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://lab.ssafy.com/s03-final/s03p31a110/tree/master)](https://hits.seeyoufarm.com) ![SamSung Badge](https://img.shields.io/badge/-Samsung-blue?style=flat-square&logo=Samsung)
+![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://lab.ssafy.com/s03-final/s03p31a110/tree/master)
+![SamSung Badge](https://img.shields.io/badge/-Samsung-blue?style=flat-square&logo=Samsung) <br>
+
 # SSAFY 3기 2학기 서울 1반 10팀 자율 프로젝트
-## Cam-Coder
+## 📹 Cam-Coder
 
 </div>
 
 # 목차
-- [프로젝트 소개](#Cam-Coder)
+- [프로젝트 소개](#cam-coder-소개)
 - [진행 기간](#프로-젝트-진행-기간)
 - [멤버](#Developer)
 - [ERD](#ERD)
 - [API](#API) 
-- [개발 스택](#Build-With)
-- [IOT 제어 메시지](#IOT-제어-메시지)
-- [환경 상태 메시지](#환경-상태-메시지)
-- [이미지-수신](#이미지-수신)
+- [개발 스택](#기술스택)
 
 
-# 📹 Cam-Coder
+# Cam Coder 소개
 [개발자 과외 플랫폼]
 개발중에 너무 어려운 문제를 마주쳤지만, 구글링을 아무리 해봐도 해결할 수 없을 때, 
 캠코더를 이용해 과외선생님을 찾아보세요.
@@ -53,7 +52,7 @@
 ![image](https://user-images.githubusercontent.com/50106311/96872899-2ce57680-14af-11eb-8561-fb05ed1855c1.png)
 
 
-# 💻Build With
+# 💻기술스택
 
 ## Front
 ![Vuetify Badge](https://img.shields.io/badge/-Vuetify-black?style=flat-square&logo=Vuetify)
