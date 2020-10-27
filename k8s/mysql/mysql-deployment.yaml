@@ -30,7 +30,10 @@ spec:
         env:
           # Use secret in real usage
         - name: MYSQL_ROOT_PASSWORD
-          value: hello
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
         - name: MYSQL_DATABASE
           value: camCoder
         ports:
