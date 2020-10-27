@@ -4,6 +4,9 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import index from '@/pages/index'
+import signup_result from '@/pages/signup-result'
+import teacher_profile from '@/pages/teacher-profile'
+import page from '@/pages/page'
 
 const router = new Router({
   mode: 'history',
@@ -12,6 +15,19 @@ const router = new Router({
       path: '/',
       component: index
     },
+    {
+      path: '/signup_result',
+      component: signup_result
+    },
+    {
+      path: '/teacher_profile',
+      component: teacher_profile
+    },
+    {
+      path: '/page',
+      component: page
+    },    
+
   ]
 })
 
