@@ -3,10 +3,10 @@
     <div>
     <div class="d-flex flex-column justify-center teacher-profile-page">
         <div class="d-flex flex-row teacher-profile">
-            <div class="d-flex">
-                <img  style="width:100px" src="https://kimstudy.com/Resources/images/tutor.png"/>
+            <div class="d-flex" style="width:50px">
+                <img style="width:100%" src="https://kimstudy.com/Resources/images/tutor.png"/>
             </div>
-            <div class="d-flex" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
+            <div class="d-flex justify-left" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
         </div>
     </div>
     </div>
