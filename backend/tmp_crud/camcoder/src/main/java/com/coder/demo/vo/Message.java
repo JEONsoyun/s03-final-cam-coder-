@@ -18,7 +18,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @EntityScan(basePackages = {"com.coder.demo.vo"})
 public class Message implements Serializable{
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long messageCode;
 	
 	private Date sendDate;

@@ -3,6 +3,8 @@ package com.coder.demo.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,7 +35,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User selectOne(long userCode) {
+	public User selectOneByCode(long userCode) {
 		return userdao.findByUserCode(userCode);
 	}
 
@@ -44,9 +46,17 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public void insert(SignupRequest request) throws Exception{
+		String encPw = "";
 		
-		String encPw = passwordEncoder.encode(request.getPw());
+		Optional.of(request)
+		.map(SignupRequest::getPw).orElseThrow(NotExistIdException::new);
+
+		encPw = passwordEncoder.encode(request.getPw());
 		try {
+			//Optional.of(request)
+			//.map(SignupRequest::getId).map(SignupRequest::getName).map(SignupRequest::getProfile)
+			//.ifPresent(pw -> now.setUserPw(pw));
+			
 			userdao.save(new User(request.getId(), encPw, request.getName(), request.getProfile()));
 			//userdao.save(new User(request.getId(), request.getPw(), request.getName(), request.getProfile()));
 		}catch(DataAccessException ex) {
@@ -56,21 +66,31 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void update(User u) {
-		System.out.println("user update");
-	}
-
-	@Override
 	public String createToken(LoginRequest loginRequest) throws Exception{
 		Optional<User> user = Optional.of(Optional.of(userdao.findByUserId(loginRequest.getId())).orElseThrow(NotExistIdException::new));
 		
-		//if(!user.get().checkPassword(loginRequest.getPw())) {
 		if(!(passwordEncoder.matches(loginRequest.getPw(), user.get().getUserPw()))) {
 			throw new WrongPasswordException();
 		}
 		
 		System.out.println("비밀번호 일치");
 		return JwtTokenProvider.createToken(loginRequest.getId());
+	}
+
+	@Override
+	public void update(String id, @Valid SignupRequest u) {
+		User now = userdao.findByUserId(id);
+		
+		Optional.of(u)
+		.map(SignupRequest::getPw).ifPresent(pw -> now.setUserPw(pw));
+
+		Optional.of(u)
+		.map(SignupRequest::getName).ifPresent(name -> now.setUserName(name));
+		
+		Optional.of(u)
+		.map(SignupRequest::getProfile).ifPresent(profile -> now.setUserProfile(profile));
+		
+		userdao.save(now);
 	}
 
 }

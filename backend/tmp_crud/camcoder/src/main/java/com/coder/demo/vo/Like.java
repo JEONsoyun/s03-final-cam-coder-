@@ -18,7 +18,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @EntityScan(basePackages = {"com.coder.demo.vo"})
 public class Like implements Serializable{
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long likeCode;
 	
 	private Long userCode;
