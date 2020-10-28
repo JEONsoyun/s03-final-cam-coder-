@@ -12,7 +12,7 @@ import com.coder.demo.vo.Message;
 public interface MessageDAO extends JpaRepository<Message, Long>{
 	List<Message> findBySenderAndReceiver(Long sender, Long receiver);
 	
-	@Query("Select m from Message m where m.sender = ?1 and m.receiver = sender order by m.sendDate desc")
+	@Query("Select m from Message m where m.sender = ?1 or m.receiver = ?1 order by m.sendDate desc")
 	List<Message> findBySender(Long sender);
 	
 	List<Message> findAll();

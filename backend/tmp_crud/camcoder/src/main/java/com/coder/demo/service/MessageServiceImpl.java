@@ -33,18 +33,7 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public List<Message> selectOne(Long code, String sender) {
 		Long scode = userdao.findByUserId(sender).getUserCode();
-		
-		List<Message> list = messagedao.findBySenderAndReceiver(scode, code);
-		list.addAll(messagedao.findBySenderAndReceiver(code, scode));
-		
-		list.sort(new Comparator<Message>() {
-			@Override
-			public int compare(Message o1, Message o2) {
-				return o2.getSendDate().compareTo(o1.getSendDate());
-			} 
-		});
-		
-		return list;
+		return messagedao.findBySender(scode);
 	}
 
 	@Override
