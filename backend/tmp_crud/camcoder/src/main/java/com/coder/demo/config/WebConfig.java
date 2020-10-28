@@ -33,8 +33,8 @@ public class WebConfig implements WebMvcConfigurer{
 		registry.addInterceptor(authInterceptor).excludePathPatterns("/login").excludePathPatterns("/signup");//.addPathPatterns("/user").addPathPatterns("/users");
 	}
 	
-	@Override
-    public void addArgumentResolvers(List argumentResolvers) {
+	//@Override
+    /*public void addArgumentResolvers(List argumentResolvers) {
         argumentResolvers.add(loginMemberArgumentResolver);
-    }
+    }*/
 }

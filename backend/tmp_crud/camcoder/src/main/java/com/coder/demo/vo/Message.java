@@ -23,28 +23,27 @@ public class Message implements Serializable{
 	
 	private Date sendDate;
 	private String content;
-	@Column(name="mfrom")
-	private Long from;
-	
-	@Column(name="mto")
-	private Long to;
-	private boolean isRead;
+	private Long sender;	
+	private Long receiver;
+	private Byte isRead;
 	
 	@PrePersist
 	public void beforeCreate() {
 		this.sendDate = new Date();
 	}
 	
-	public Message(String content, long from, long to) {
+	
+	public Message(String content, Long sender, Long receiver) {
 		this.content = content;
-		this.from = from;
-		this.to = to;
-		this.isRead = false;
+		this.sender = sender;
+		this.receiver = receiver;
+		this.isRead = 0;
 	}
+
 	@Override
 	public String toString() {
-		return "Message [messageCode=" + messageCode + ", sendDate=" + sendDate + ", content=" + content + ", from="
-				+ from + ", to=" + to + ", isRead=" + isRead + "]";
+		return "Message [messageCode=" + messageCode + ", sendDate=" + sendDate + ", content=" + content + ", sender="
+				+ sender + ", receiver=" + receiver + ", isRead=" + isRead + "]";
 	}
 
 	public Message() {
@@ -68,22 +67,34 @@ public class Message implements Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Long getFrom() {
-		return from;
+
+	public Long getSender() {
+		return sender;
 	}
-	public void setFrom(Long from) {
-		this.from = from;
+
+
+	public void setSender(Long sender) {
+		this.sender = sender;
 	}
-	public Long getTo() {
-		return to;
+
+
+	public Long getReceiver() {
+		return receiver;
 	}
-	public void setTo(Long to) {
-		this.to = to;
+
+
+	public void setReceiver(Long receiver) {
+		this.receiver = receiver;
 	}
-	public boolean isRead() {
+
+
+	public Byte getIsRead() {
 		return isRead;
 	}
-	public void setRead(boolean isRead) {
+
+
+	public void setIsRead(Byte isRead) {
 		this.isRead = isRead;
 	}
+	
 }
