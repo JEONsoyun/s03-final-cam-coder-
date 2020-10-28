@@ -4,8 +4,8 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import index from '@/pages/index'
-import signup_result from '@/pages/signup-result'
-import teacher_profile from '@/pages/teacher-profile'
+import signupResult from '@/pages/signup-result'
+import teacherDetail from '@/pages/teacher-detail'
 import page from '@/pages/page'
 
 const router = new Router({
@@ -16,12 +16,12 @@ const router = new Router({
       component: index
     },
     {
-      path: '/signup_result',
-      component: signup_result
+      path: '/signupResult',
+      component: signupResult
     },
     {
-      path: '/teacher_profile',
-      component: teacher_profile
+      path: '/teacherDetail',
+      component: teacherDetail
     },
     {
       path: '/page',
