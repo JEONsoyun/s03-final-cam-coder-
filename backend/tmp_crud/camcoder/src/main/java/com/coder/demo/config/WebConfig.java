@@ -1,5 +1,6 @@
 package com.coder.demo.config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.annotation.Configuration;
@@ -27,9 +28,9 @@ public class WebConfig implements WebMvcConfigurer{
 	}
 
 	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
+	public void addInterceptors(InterceptorRegistry registry) {	
 		registry.addInterceptor(executeTimeInterceptor);
-		registry.addInterceptor(authInterceptor).addPathPatterns("/user").addPathPatterns("/users");
+		registry.addInterceptor(authInterceptor).excludePathPatterns("/login").excludePathPatterns("/signup");//.addPathPatterns("/user").addPathPatterns("/users");
 	}
 	
 	@Override

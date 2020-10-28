@@ -67,9 +67,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String createToken(LoginRequest loginRequest) throws Exception{
-		Optional<User> user = Optional.of(Optional.of(userdao.findByUserId(loginRequest.getId())).orElseThrow(NotExistIdException::new));
+		User user = Optional.ofNullable(userdao.findByUserId(loginRequest.getId())).orElseThrow(NotExistIdException::new);
 		
-		if(!(passwordEncoder.matches(loginRequest.getPw(), user.get().getUserPw()))) {
+		if(!(passwordEncoder.matches(loginRequest.getPw(), user.getUserPw()))) {
 			throw new WrongPasswordException();
 		}
 		
