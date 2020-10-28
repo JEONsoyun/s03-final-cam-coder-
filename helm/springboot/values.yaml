@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: wlgh325/kubernetes-camcoder-springboot:demo
+  repository: wlgh325/kubernetes-camcoder-springboot:0.1
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -77,3 +77,4 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
