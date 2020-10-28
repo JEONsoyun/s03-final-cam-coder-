@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,7 +47,7 @@ public class ReviewController {
 		
 		return reviewService.deleteReview(reviewCode);
 	}
-	@PostMapping(value="/reviews/{reviewCode}")//유저가 쓴 해당 선생님에 대한 리뷰 수정
+	@PutMapping(value="/reviews/{reviewCode}")//유저가 쓴 해당 선생님에 대한 리뷰 수정
 	public String updateReview(@PathVariable Long reviewCode,@RequestBody Review review) {
 		review.setReviewCode(reviewCode);
 		return reviewService.insert(review);
