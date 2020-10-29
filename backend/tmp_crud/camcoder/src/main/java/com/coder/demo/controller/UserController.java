@@ -29,12 +29,7 @@ public class UserController {
 	@Autowired
 	UserService userservice;
 
-<<<<<<< HEAD
-
-	@PostMapping(value = "/signup")
-=======
 	@PostMapping(value = "/users/signup")
->>>>>>> c985d3dfd7578bcf5dbfae9b889cf66425ec62af
 	public Object insert(@Valid @RequestBody SignupRequest request) throws Exception{
 		userservice.insert(request);
 		System.out.println(request.getId());
@@ -46,12 +41,7 @@ public class UserController {
 		return userservice.selectAll(); // List -> json(by jackson)
 	}
 
-<<<<<<< HEAD
-
-	@GetMapping(value = "/user") // select
-=======
 	@GetMapping(value = "/users") // select
->>>>>>> c985d3dfd7578bcf5dbfae9b889cf66425ec62af
 	public User selectOne(HttpServletRequest request) {
 		return userservice.selectOneByID((String)(request.getAttribute("loginUserId"))); // List -> json(by jackson)
 	}
