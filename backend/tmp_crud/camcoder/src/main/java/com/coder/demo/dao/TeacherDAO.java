@@ -13,5 +13,5 @@ public interface TeacherDAO extends JpaRepository<Teacher, Long>{
 
 	List<Teacher> findAll();
 	Teacher findByTeacherCode(long code);
-	Teacher findByUserCode(Long code);
+	Teacher findByUserCode(long code);
 }

@@ -1,5 +1,7 @@
 package com.coder.demo.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -13,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coder.demo.component.RegisterRequest;
-import com.coder.demo.component.SignupRequest;
 import com.coder.demo.service.TeacherService;
 import com.coder.demo.vo.Teacher;
-import com.coder.demo.vo.User;
 
 @RestController
 public class TeacherController {	
@@ -50,9 +50,13 @@ public class TeacherController {
 	}
 
 	@PostMapping(value = "/teachers/sorted")
-	public Teacher sort(@Valid @PathVariable long code) {
-		return tservice.selectOneByCode(code);
+	public List<Teacher> sort() {
+		return null;
 	}
 	
+	@PostMapping(value = "/teachers/search")
+	public List<Teacher> search() {
+		return null;
+	}
 	
 }
