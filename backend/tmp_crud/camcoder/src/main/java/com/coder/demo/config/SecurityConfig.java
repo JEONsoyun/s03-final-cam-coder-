@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		//https://effectivecode.tistory.com/1018 : 여기서 참고하였다 .왜 이렇게 되는 걸까?
+		//https://songc92.tistory.com/46
 		http.cors().and();
 		http.csrf().disable();
 	}
