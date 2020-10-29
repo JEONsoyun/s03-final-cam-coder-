@@ -20,7 +20,31 @@ public class RegisterRequest extends LoginRequest{
     @ApiModelProperty(required = true)
 	String avaliableTime;
 
-    public String getIntro() {
+    /////////////////////////////////////////////////////////
+    @ApiModelProperty(required = true)
+    Integer sorttype;
+    
+    
+    public Integer getSorttype() {
+		return sorttype;
+	}
+	public void setSorttype(Integer sorttype) {
+		this.sorttype = sorttype;
+	}
+	
+	@ApiModelProperty(required=true)
+	String keywords;
+	
+	public String getKeywords() {
+		return keywords;
+	}
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
+	}
+	////////////////////////////////////////////////////////
+	
+	
+	public String getIntro() {
 		return intro;
 	}
 	public void setIntro(String intro) {

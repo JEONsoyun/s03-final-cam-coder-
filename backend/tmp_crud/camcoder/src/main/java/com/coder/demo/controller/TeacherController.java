@@ -1,6 +1,7 @@
 package com.coder.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -50,13 +51,25 @@ public class TeacherController {
 	}
 
 	@PostMapping(value = "/teachers/sorted")
-	public List<Teacher> sort() {
-		return null;
+	public List<Teacher> sort(@Valid @RequestBody RegisterRequest register) {
+		//아무 값이 없으면 0(수업량 순으로 정렬된다) (0 : 수업량(studentcnt), 1 : 좋아요(like))
+		int type = Optional.ofNullable(register).map(RegisterRequest::getSorttype).orElse(0);
+		if(type > 1) {
+			type = 1;
+		}
+		
+		return tservice.sortBy(type);
 	}
 	
 	@PostMapping(value = "/teachers/search")
-	public List<Teacher> search() {
-		return null;
+	public List<Teacher> search(@Valid @RequestBody RegisterRequest register) {
+		//null이면 무슨 값으로 넣어주지 일단은 "-1" -> 전체다 보이게함
+		String keyword = Optional.ofNullable(register).map(RegisterRequest::getKeywords).orElse("-1");
+		
+		if(keyword.equals("-1")) {
+			return tservice.selectAll();
+		}
+		return tservice.contain(keyword);
 	}
 	
 }

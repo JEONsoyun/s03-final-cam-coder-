@@ -75,37 +75,35 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public Teacher selectOneByCode(long teacherCode) {
-		//exception필요한가?
-		return tdao.findByTeacherCode(teacherCode);
+		return Optional.ofNullable(tdao.findByTeacherCode(teacherCode)).orElse(new Teacher());
+	}	
+	
+	@Override
+	public List<Teacher> sortBy(int type){
+		List<Teacher> result;
+		
+		if(type == 0) {
+			result = tdao.findAllByOrderByStudentCntDesc();
+		}else {
+			result = tdao.findAllByOrderByLikeCntDesc();
+		}
+		
+		return result;
 	}
+
 	
 	
 	@Override
 	public List<Teacher> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return tdao.findAll();
 	}
 
 	
-
 	@Override
-	public List<Teacher> sortByLikes() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Teacher> contain(String keyword) {
+		return tdao.findContainKeyword(keyword);
+		//System.out.println(keyword);
+		//return tdao.findByExpertiseLike(keyword);
 	}
-
-	@Override
-	public List<Teacher> sortByCnt() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Teacher> contains() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 
 }

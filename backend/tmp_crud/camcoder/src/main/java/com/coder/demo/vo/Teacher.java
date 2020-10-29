@@ -14,12 +14,17 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import com.coder.demo.component.AtomicLongConverter;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "teachers")
 @EntityScan(basePackages = {"com.coder.demo.vo"})
 public class Teacher {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)//저장할때만 되나?
 	Long teacherCode;
 	
 	Long userCode;

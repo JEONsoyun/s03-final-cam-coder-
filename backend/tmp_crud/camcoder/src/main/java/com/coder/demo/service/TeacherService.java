@@ -14,7 +14,6 @@ public interface TeacherService {
 	public void insert(RegisterRequest register, String id) throws Exception; //teachers
 	public void update(@Valid RegisterRequest u, String id);//update
 	public void delete(String id);
-	public List<Teacher> sortByLikes();
-	public List<Teacher> sortByCnt();
-	public List<Teacher> contains();	
+	public List<Teacher> sortBy(int type);
+	public List<Teacher> contain(String keyword);	
 }
