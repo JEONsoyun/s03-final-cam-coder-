@@ -28,11 +28,6 @@ public class UserController {
 	@Autowired
 	UserService userservice;
 
-	@RequestMapping("/home")
-	public String home() {
-		return "hello world"+cnt.incrementAndGet();
-	}
-
 	@PostMapping(value = "/signup")
 	public Object insert(@Valid @RequestBody SignupRequest request) throws Exception{
 		userservice.insert(request);

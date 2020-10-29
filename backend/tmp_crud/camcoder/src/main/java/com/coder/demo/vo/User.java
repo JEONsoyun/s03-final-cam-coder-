@@ -11,6 +11,11 @@ import javax.persistence.Table;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name="users")
 @EntityScan(basePackages = {"com.coder.demo.vo"})
