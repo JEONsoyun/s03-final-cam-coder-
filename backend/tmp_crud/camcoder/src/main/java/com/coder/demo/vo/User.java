@@ -2,10 +2,13 @@ package com.coder.demo.vo;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
@@ -22,6 +25,7 @@ import lombok.Setter;
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="user_code")
 	private Long userCode;
 	
 	private String userId;
@@ -31,6 +35,18 @@ public class User {
 	
 	private Date joinDate;
 	
+	/*
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Teacher teacher;
+	
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}*/
+
 	@PrePersist
 	public void beforeCreate() {
 		this.joinDate = new Date();

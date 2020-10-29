@@ -13,11 +13,12 @@ public interface TeacherDAO extends JpaRepository<Teacher, Long>{
 
 	List<Teacher> findAll();
 	Teacher findByTeacherCode(long code);
+	@Query("select t from Teacher t INNER JOIN t.user u where u.userCode = ?1")
 	Teacher findByUserCode(long code);
 	List<Teacher> findAllByOrderByLikeCntDesc();
 	List<Teacher> findAllByOrderByStudentCntDesc();	
 	
-	@Query("select t from Teacher t where t.expertise like %?1% order by t.studentCnt desc, t.teacherCode asc")
+	@Query("select t from Teacher t INNER JOIN t.user u where u.userName like %?1% or t.expertise like %?1% order by t.studentCnt desc, t.teacherCode asc")
 	List<Teacher> findContainKeyword(String keyword);
 	
 	List<Teacher> findByExpertiseLike(String keyword);

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
@@ -25,17 +27,21 @@ import lombok.Setter;
 public class Teacher {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)//저장할때만 되나?
-	Long teacherCode;
+	private Long teacherCode;
 	
-	Long userCode;
-	String intro;
-	String expertise;
-	Long price;
-	String profile;
+	//Long userCode;
+	@OneToOne
+	@JoinColumn(name="user_code", referencedColumnName = "user_code")
+	private User user;
+	
+	private String intro;
+	private String expertise;
+	private Long price;
+	private String profile;
 	@Convert(converter = AtomicLongConverter.class)
 	AtomicLong likeCnt;
 	//Long likeCnt;
-	String avaliableTime;
+	private String avaliableTime;
 	@Convert(converter = AtomicLongConverter.class)
 	AtomicLong studentCnt;
 	//Long studentCnt;
@@ -46,9 +52,9 @@ public class Teacher {
 		this.studentCnt = new AtomicLong();		
 	}
 	
-	public Teacher(Long userCode, String intro, String expertise, Long price, String profile,
+	public Teacher(User userCode, String intro, String expertise, Long price, String profile,
 			String avaliableTime) {
-		this.userCode = userCode;
+		this.user = userCode;
 		this.intro = intro;
 		this.expertise = expertise;
 		this.price = price;
@@ -65,12 +71,15 @@ public class Teacher {
 	public void setTeacherCode(Long teacherCode) {
 		this.teacherCode = teacherCode;
 	}
-	public Long getUserCode() {
-		return userCode;
+	
+	public User getUser() {
+		return user;
 	}
-	public void setUserCode(Long userCode) {
-		this.userCode = userCode;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
+
 	public String getIntro() {
 		return intro;
 	}
@@ -121,7 +130,7 @@ public class Teacher {
 	
 	@Override
 	public String toString() {
-		return "Teacher [teacherCode=" + teacherCode + ", userCode=" + userCode + ", intro=" + intro + ", expertise="
+		return "Teacher [teacherCode=" + teacherCode + ", userCode=" + user + ", intro=" + intro + ", expertise="
 				+ expertise + ", price=" + price + ", profile=" + profile + ", likeCnt=" + likeCnt + ", avaliableTime="
 				+ avaliableTime + ", studentCnt=" + studentCnt + "]";
 	}	
