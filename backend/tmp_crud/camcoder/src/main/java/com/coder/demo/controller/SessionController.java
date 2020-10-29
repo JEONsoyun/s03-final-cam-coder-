@@ -20,7 +20,7 @@ public class SessionController {
 		this.userService = userService;
 	}
 	
-	@PostMapping(value = "/login")
+	@PostMapping(value = "/users/login")
 	public Object login(
 			@Valid @RequestBody LoginRequest loginRequest) throws Exception{
 		String token = userService.createToken(loginRequest);

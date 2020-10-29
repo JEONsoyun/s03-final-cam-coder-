@@ -28,30 +28,30 @@ public class UserController {
 	@Autowired
 	UserService userservice;
 
-	@PostMapping(value = "/signup")
+	@PostMapping(value = "/users/signup")
 	public Object insert(@Valid @RequestBody SignupRequest request) throws Exception{
 		userservice.insert(request);
 		System.out.println(request.getId());
 		return "회원 가입 완료"; //
 	}
 
-	@GetMapping(value = "/users")
+	@GetMapping(value = "/users/all")
 	public List<User> selectAll() { // select
 		return userservice.selectAll(); // List -> json(by jackson)
 	}
 
-	@GetMapping(value = "/user") // select
+	@GetMapping(value = "/users") // select
 	public User selectOne(HttpServletRequest request) {
 		return userservice.selectOneByID((String)(request.getAttribute("loginUserId"))); // List -> json(by jackson)
 	}
 
-	@GetMapping(value = "/user/{code}") // select
+	@GetMapping(value = "/users/{code}") // select
 	public User selectOne(HttpServletRequest request, @PathVariable long code) {
 		return userservice.selectOneByCode(code); // List -> json(by jackson)
 	}
 
 	
-	@PutMapping(value = "/user") // update
+	@PutMapping(value = "/users") // update
 	public String update(@Valid @RequestBody SignupRequest u, HttpServletRequest request) throws Exception { // json-> java object
 		String id = (String)(request.getAttribute("loginUserId"));
 		
