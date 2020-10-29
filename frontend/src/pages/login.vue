@@ -1,0 +1,33 @@
+<template>
+  <div>
+    login
+    <button @click="onLoginClick">로그인</button>
+  </div>
+</template>
+<script>
+export default {
+  name: 'login-page',
+  data: () => ({
+    data: {
+      userId: 'test',
+      userPw: 'test',
+    },
+  }),
+  methods: {
+    async onLoginClick() {
+      try {
+        await this.$api.login(this.data);
+        this.$store.commit('ISSKIP', true);
+        location.href = '/';
+      } catch (e) {
+        alert('아이디 또는 비밀번호를 확인해주세요.');
+      }
+    },
+    onSignupClick() {
+      this.$router.push('/signup');
+    },
+  },
+};
+</script>
+<style>
+</style>

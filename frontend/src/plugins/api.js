@@ -4,19 +4,26 @@ const baseURL = '/api'
 
 export default {
     async login(data) {
-        return (await axios.post(`${baseURL}/accounts/login/`, data))
+        
+        return (await axios.post(`${baseURL}/users/login/`, data)
+        .then((res)=>{
+            if(res.data.status){
+                commit('SET_TOKEN', { token: res.headers["jwt-auth-token"] })
+            }
+        })
+        )
     },
     async logout() {
-        return (await axios.post(`${baseURL}/accounts/logout/`))
+        return (await axios.post(`${baseURL}/users/logout/`))
     },
     async isLoggedIn() {
-        return (await axios.get(`${baseURL}/accounts/islogin/`)).data
+        return (await axios.get(`${baseURL}/users/islogin/`)).data
     },
     async getMe() {
-        return (await axios.get(`${baseURL}/accounts/mypage/`)).data
+        return (await axios.get(`${baseURL}/users/mypage/`)).data
     },
     async signup(data) {
-        return (await axios.post(`${baseURL}/accounts/signup/`, data))
+        return (await axios.post(`${baseURL}/users/signup/`, data))
     },
     //이거 accounts 붙이는 건가 아닌건가 모르겠네
     // teacher api 

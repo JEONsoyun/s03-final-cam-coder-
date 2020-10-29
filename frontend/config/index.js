@@ -4,7 +4,8 @@
 
 const path = require('path')
 
-const URL = 'http://j3a307.p.ssafy.io:8000'
+//const URL = 'http://k3a110.p.ssafy.io:8000'
+const URL = 'http:/localhost:8000'
 
 module.exports = {
   dev: {
