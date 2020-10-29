@@ -24,6 +24,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
             HttpServletResponse response, Object handler) throws Exception{
+
 		String token = authExtractor.extract(request, "Bearer");
 		System.out.println(">>> interceptor.preHandle 호출");
 		if (StringUtils.isEmpty(token)) {
