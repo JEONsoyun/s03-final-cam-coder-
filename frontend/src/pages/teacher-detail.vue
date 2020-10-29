@@ -8,6 +8,9 @@
             </div>
             <div class="d-flex" style="font-weight:bold;font-size:18px;margin-top:10px;margin-left:10px">한국에서 영어 유학</div>
             <div class="d-flex">학교 </div>
+            <div class="d-flex">학교 </div>
+            <div class="d-flex">학교 </div>
+            <div class="d-flex">학교 </div>
         </div>
     </div>
     </div>
