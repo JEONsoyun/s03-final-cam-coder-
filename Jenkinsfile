@@ -66,10 +66,10 @@ podTemplate(label: 'builder',
 
                             //sh "kubectl apply -f ./k8s/k8s-deployment.yaml -n ${NAMESPACE}"
                             //sh "kubectl apply -f ./k8s/k8s-service.yaml -n ${NAMESPACE}"
-                            dir('.././../helm'){
-								sh "ls -al"
-                                sh "cd ../../../helm/"
-                                sh "helm install camcoder-spring springboot"
+								dir('helm'){
+									sh "ls -al"
+                                    sh "helm install camcoder-spring springboot"
+								}
 							}
                         }
                 }
