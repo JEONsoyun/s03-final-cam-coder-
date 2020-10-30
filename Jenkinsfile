@@ -49,7 +49,7 @@ podTemplate(label: 'builder',
                         credentialsId: 'docker_hub_auth',
                         usernameVariable: 'USERNAME',
                         passwordVariable: 'PASSWORD')]) {
-                            sh "kubectl get ns ${NAMESPACE} || kubectl create ns {NAMESPACE}"
+                            sh "kubectl get ns ${NAMESPACE} || kubectl create ns ${NAMESPACE}"
 
                             sh """
                                 kubectl get secret my-secret -n ${NAMESPACE} || \
@@ -66,8 +66,11 @@ podTemplate(label: 'builder',
 
                             //sh "kubectl apply -f ./k8s/k8s-deployment.yaml -n ${NAMESPACE}"
                             //sh "kubectl apply -f ./k8s/k8s-service.yaml -n ${NAMESPACE}"
-                            sh "cd ../../../helm/"
-                            sh "helm install camcoder-spring springboot"
+                            dir('.././../helm'){
+								sh "ls -al"
+                                sh "cd ../../../helm/"
+                                sh "helm install camcoder-spring springboot"
+							}
                         }
                 }
             }
