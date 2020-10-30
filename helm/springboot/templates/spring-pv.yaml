@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: spring-pv-volume
+  labels:
+    location: local
+    type: spring
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadOnlyMany
+  hostPath:
+    path: "/home/ubuntu/env" # local machine path
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: spring-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      location: local
+      type: spring

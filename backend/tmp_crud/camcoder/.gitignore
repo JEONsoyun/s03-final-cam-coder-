@@ -162,4 +162,4 @@ $RECYCLE.BIN/
 
 # End of https://www.gitignore.io/api/java,windows,eclipse
 /build/
->>>>>>> develop-ssh-jpa
+target/
