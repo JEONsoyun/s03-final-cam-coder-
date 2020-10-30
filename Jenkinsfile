@@ -20,14 +20,10 @@ podTemplate(label: 'builder',
             }
             stage('Build') {
                 container('maven') {
-                    sh "pwd"
-                    sh "ls -al"
                     dir('backend/tmp_crud/camcoder'){
-				        sh "pwd"
+						sh "pwd"
+						sh "mvn package"
 					}
-                    sh "pwd"
-					sh "ls -al"
-                    sh "mvn package"
                 }
             }
             stage('Docker build') {
