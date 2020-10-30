@@ -3,11 +3,10 @@
 export default {
   name: '',
   data: () => ({
-    userId: 0,
-    userPw: '',
-    userName: '',
-    userProfile: '',
-    joinDate: '',
+    id: 'studenta',
+    pw: 'passworda',
+    name: 'namea',
+    profile: 'i like math',
   }),
   methods: {},
   async created() {},
