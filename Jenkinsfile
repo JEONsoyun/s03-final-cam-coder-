@@ -20,11 +20,11 @@ podTemplate(label: 'builder',
             }
             stage('Build') {
                 container('maven') {
+					sh "ls /home/env"
                     dir('backend/tmp_crud/camcoder'){
 						sh "pwd"
 						sh "mvn package"
 					}
-					sh "ls /home/env"
                 }
             }
             stage('Docker build') {
