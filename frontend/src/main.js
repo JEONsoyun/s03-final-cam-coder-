@@ -45,14 +45,14 @@ Vue.prototype.$teamLogos = {
 }
 
 // Layout
-// import SMainLayout from './layouts/s-main-layout'
+import CMainLayout from './layouts/c-main-layout'
 
-// Vue.component('s-main-layout', SMainLayout)
+Vue.component('c-main-layout', CMainLayout)
 
 // Component
-// import SButton from './components/common/s-button'
+import CButton from './components/common/c-button'
 
-// Vue.component('s-button', SButton)
+Vue.component('c-button', CButton)
 
 // HTML 태그 제거용
 Vue.filter('striphtml', function (value) {

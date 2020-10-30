@@ -43,6 +43,10 @@ export default {
 </script>
 
 <style>
+* {
+  font-family: 'NanumSquareRound';
+}
+
 .v-overlay__scrim {
   z-index: 1000 !important;
 }

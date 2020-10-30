@@ -1,5 +1,5 @@
 <template>
-  <div>main</div>
+  <c-main-layout>main</c-main-layout>
 </template>
 
 <script>
