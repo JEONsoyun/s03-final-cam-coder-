@@ -5,13 +5,7 @@ const baseURL = '/api'
 export default {
     async login(data) {
         
-        return (await axios.post(`${baseURL}/users/login/`, data)
-        .then((res)=>{
-            if(res.data.status){
-                commit('SET_TOKEN', { token: res.headers["jwt-auth-token"] })
-            }
-        })
-        )
+        return (await axios.post(`${baseURL}/users/login/`, data))
     },
     async logout() {
         return (await axios.post(`${baseURL}/users/logout/`))
