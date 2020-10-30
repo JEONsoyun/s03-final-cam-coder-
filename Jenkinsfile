@@ -12,7 +12,8 @@ podTemplate(label: 'builder',
                 containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.15.3', command: 'cat', ttyEnabled: true)
             ],
             volumes: [
-                hostPathVolume(mountPath: '/home/env', hostPath: '/home/env')
+                hostPathVolume(mountPath: '/home/env', hostPath: '/home/env'),
+                hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
             ]) {
         node('builder') {
             stage('Checkout') {
@@ -20,9 +21,8 @@ podTemplate(label: 'builder',
                 checkout scm
             }
             stage('Build') {
-                sh "ls /var/run/docker.sock"
+                sh "ls /home/"
                 container('maven') {
-					sh "ls /home/env"
                     dir('backend/tmp_crud/camcoder'){
 						sh "pwd"
 						sh "mvn package"
