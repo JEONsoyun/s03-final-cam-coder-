@@ -56,7 +56,7 @@ podTemplate(label: 'builder',
                                 kubectl create secret docker-registry my-secret \
                                 --docker-server=https://index.docker.io/v1/ \
                                 --docker-username=${USERNAME} \
-                                --docker-passowrd=${PASSWORD} \
+                                --docker-password=${PASSWORD} \
                                 --docker-email=wlgh325@gmail.com \
                                 -n ${NAMESPACE}
                             """
