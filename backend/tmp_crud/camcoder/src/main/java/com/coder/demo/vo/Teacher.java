@@ -61,7 +61,7 @@ public class Teacher {
 		this.likeCnt = new AtomicLong();
 		this.studentCnt = new AtomicLong();		
 	}
-
+///////////////////////////////////////////////////////////////////////////////////////
 	@Default
 	@OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Like> likes = new ArrayList<Like>();
@@ -77,8 +77,8 @@ public class Teacher {
 		this.likeCnt.decrementAndGet();
 		like.setTeacher(null);
 	}
-	
-	
+
+////////////////////////////////////////////////////////////////////////////////////////////////	
 	public Teacher(User userCode, String intro, String expertise, Long price, String profile,
 			String avaliableTime) {
 		this.user = userCode;

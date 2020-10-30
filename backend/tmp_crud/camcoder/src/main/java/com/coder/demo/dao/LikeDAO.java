@@ -15,7 +15,4 @@ public interface LikeDAO extends JpaRepository<Like, Long>{
 
 	@Query("select L from Like L INNER JOIN L.teacher t where L.userCode = ?2 and t.teacherCode = ?1")
 	Like findByTeacherCodeAndUserCode(Long teacherCode, Long userCode);
-
-	//@Query("delete L from Like L INNER JOIN L.teacher t where L.userCode = ?2 and t.teacherCode = ?1")
-	//void deleteById(Long tcode, Long ucode);
 }

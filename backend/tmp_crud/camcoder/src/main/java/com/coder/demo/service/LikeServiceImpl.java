@@ -17,13 +17,13 @@ import com.coder.demo.vo.User;
 
 @Service
 public class LikeServiceImpl implements LikeService {
-	
+
 	@Autowired
 	LikeDAO likedao;
-	
+
 	@Autowired
 	UserDAO userdao;
-	
+
 	@Autowired
 	TeacherDAO tdao;
 
@@ -31,13 +31,15 @@ public class LikeServiceImpl implements LikeService {
 	public void delete(Long tcode, String id) throws Exception{
 		Teacher tc = Optional.ofNullable(tdao.findByTeacherCode(tcode)).orElseThrow(NotExistIdException::new);
 		long ucode = Optional.ofNullable(userdao.findByUserId(id)).map(User::getUserCode).orElseThrow(NotExistIdException::new);
-		
-		Like now = new Like(ucode, tc);
+
+		//예외를 바꿀까??
+		Like like = Optional.ofNullable(likedao.findByTeacherCodeAndUserCode(tcode, ucode)).orElseThrow(NotExistIdException::new);
+
 		//likeCnt 감소
-		//tc.deleteLike(now);
+		tc.deleteLike(like);
 		//tdao.save(tc);
-		
-		//likedao.deleteById(tcode, ucode);
+
+		likedao.deleteById(like.getLikeCode());
 	}
 
 	@Override
@@ -49,16 +51,18 @@ public class LikeServiceImpl implements LikeService {
 	@Override
 	public void insert(LikeRequest like, String userid) throws Exception{
 		long ucode = Optional.ofNullable(userdao.findByUserId(userid)).map(User::getUserCode).orElseThrow(NotExistIdException::new);
-		
+
 		long tcode = like.getTeacher();
 		Teacher tc = Optional.ofNullable(tdao.findByTeacherCode(tcode)).orElseThrow(NotExistIdException::new);
-		
-		Like now = new Like(ucode, tc);
-		//likeCnt 증가
-		tc.addLike(now);
-		tdao.save(tc);
-	}
-	
-	
+
+		boolean check = Optional.ofNullable(likedao.findByTeacherCodeAndUserCode(tcode, ucode)).isPresent();
+
+		if(!check) {
+			Like now = new Like(ucode, tc);
+			//likeCnt 증가
+			tc.addLike(now);
+			tdao.save(tc);
+		}
+	}	
 
 }
