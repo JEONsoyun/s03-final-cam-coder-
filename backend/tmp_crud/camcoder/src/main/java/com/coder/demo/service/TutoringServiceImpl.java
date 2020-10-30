@@ -31,7 +31,8 @@ public class TutoringServiceImpl implements TutoringService {
 
 	@Override
 	public List<Tutoring> selectAll(Long code) {
-		return tutoringdao.findByStudentCode(code);
+		return null;
+		//return tutoringdao.findByStudentCode(code);
 	}
 	
 	

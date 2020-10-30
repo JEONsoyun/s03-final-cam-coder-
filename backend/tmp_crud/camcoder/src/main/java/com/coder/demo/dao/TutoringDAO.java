@@ -8,6 +8,6 @@ import com.coder.demo.vo.Tutoring;
 
 public interface TutoringDAO extends JpaRepository<Tutoring, Long>{
 
-	List<Tutoring> findByStudentCode(Long code);
+	//List<Tutoring> findByStudentCode(Long code);
 	
 }

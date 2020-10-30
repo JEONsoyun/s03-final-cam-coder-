@@ -26,7 +26,8 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public List<Review> selectTeacher(Long teacherCode) {
-		return reviewdao.findByTeacherCode(teacherCode);
+		//return reviewdao.findByTeacherCode(teacherCode);
+		return null;
 	}
 
 	@Override
