@@ -21,7 +21,7 @@ podTemplate(label: 'builder',
             stage('Build') {
                 container('maven') {
                     sh "pwd"
-                    sh "tree"
+                    sh "ls -al"
                     sh "cd s03p31a110/backend/tmp_crud/camcoder/"
                     sh "mvn package"
                 }
