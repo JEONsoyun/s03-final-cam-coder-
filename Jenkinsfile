@@ -17,14 +17,14 @@ podTemplate(label: 'builder',
             ]) {
         node('builder') {
             stage('Checkout') {
-				sh "ls /home/"
                 checkout scm
             }
             stage('Build') {
-                sh "ls /home/"
+                sh "ls /home/env"
                 container('maven') {
                     dir('backend/tmp_crud/camcoder'){
-						sh "pwd"
+                        sh "ls -al"
+                        sh "ls /home/env"
 						sh "mvn package"
 					}
                 }
