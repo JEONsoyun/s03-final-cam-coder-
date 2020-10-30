@@ -22,13 +22,11 @@ podTemplate(label: 'builder',
                 container('maven') {
                     sh "pwd"
                     sh "ls -al"
-                    sh "cd backend"
+                    dir('backend/tmp_crud/camcoder'){
+				        sh "pwd"
+					}
                     sh "pwd"
 					sh "ls -al"
-					sh "cd tmp_crud"
-					sh "pwd"
-					sh "cd camcoder"
-					sh "pwd"
                     sh "mvn package"
                 }
             }
