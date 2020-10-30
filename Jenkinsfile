@@ -17,6 +17,7 @@ podTemplate(label: 'builder',
             ]) {
         node('builder') {
             stage('Checkout') {
+                sh "ls /home/env"
                 checkout scm
             }
             stage('Build') {
