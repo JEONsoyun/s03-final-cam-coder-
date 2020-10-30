@@ -7,7 +7,7 @@ def DATE = new Date();
 
 podTemplate(label: 'builder',
             containers: [
-                containerTemplate(name: 'maven', image: 'maven:3.6-jdk-11', command: 'cat', ttyEnabled: true),
+                containerTemplate(name: 'maven', image: 'maven:3.6.3-jdk-11', command: 'cat', ttyEnabled: true),
                 containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
                 containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.15.3', command: 'cat', ttyEnabled: true)
             ],
@@ -22,9 +22,13 @@ podTemplate(label: 'builder',
                 container('maven') {
                     sh "pwd"
                     sh "ls -al"
-                    sh "cd backend/tmp_crud/camcoder"
+                    sh "cd backend"
                     sh "pwd"
 					sh "ls -al"
+					sh "cd tmp_crud"
+					sh "pwd"
+					sh "cd camcoder"
+					sh "pwd"
                     sh "mvn package"
                 }
             }
