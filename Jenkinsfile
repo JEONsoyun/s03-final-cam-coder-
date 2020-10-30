@@ -12,6 +12,8 @@ podTemplate(label: 'builder',
                 containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.15.3', command: 'cat', ttyEnabled: true)
             ],
             volumes: [
+                hostPathVolume(mountPath: '/home/env', hostPath: '/home/ubuntu/env'),
+                hostPathVolume(mountPath: '/home/env', hostPasth: '/home/env'),
                 hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
                 persistentVolumeClaim(mountPath: '/home/env', claimName: 'jenkins-leader-pv-claim', readOnly: true)
             ]) {
