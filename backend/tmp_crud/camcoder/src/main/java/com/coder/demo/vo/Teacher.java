@@ -1,13 +1,18 @@
 package com.coder.demo.vo;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -15,7 +20,10 @@ import javax.persistence.Table;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import com.coder.demo.component.AtomicLongConverter;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,9 +32,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "teachers")
 @EntityScan(basePackages = {"com.coder.demo.vo"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Teacher {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)//저장할때만 되나?
+	@Column(name="teacher_code")
 	private Long teacherCode;
 	
 	//Long userCode;
@@ -39,11 +49,11 @@ public class Teacher {
 	private Long price;
 	private String profile;
 	@Convert(converter = AtomicLongConverter.class)
-	AtomicLong likeCnt;
+	private AtomicLong likeCnt;
 	//Long likeCnt;
 	private String avaliableTime;
 	@Convert(converter = AtomicLongConverter.class)
-	AtomicLong studentCnt;
+	private AtomicLong studentCnt;
 	//Long studentCnt;
 	
 	@PrePersist
@@ -51,6 +61,23 @@ public class Teacher {
 		this.likeCnt = new AtomicLong();
 		this.studentCnt = new AtomicLong();		
 	}
+
+	@Default
+	@OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Like> likes = new ArrayList<Like>();
+	
+	public void addLike(final Like like) {
+		likes.add(like);
+		this.likeCnt.incrementAndGet();
+		like.setTeacher(this);
+	}
+	
+	public void deleteLike(final Like like) {
+		likes.remove(like);
+		this.likeCnt.decrementAndGet();
+		like.setTeacher(null);
+	}
+	
 	
 	public Teacher(User userCode, String intro, String expertise, Long price, String profile,
 			String avaliableTime) {
