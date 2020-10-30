@@ -17,11 +17,9 @@ podTemplate(label: 'builder',
             ]) {
         node('builder') {
             stage('Checkout') {
-                sh "ls /home/env"
                 checkout scm
             }
             stage('Build') {
-                sh "ls /home/env"
                 container('maven') {
                     dir('backend/tmp_crud/camcoder'){
                         sh "ls -al"
@@ -36,10 +34,12 @@ podTemplate(label: 'builder',
                         credentialsId: 'docker_hub_auth',
                         usernameVariable: 'USERNAME',
                         passwordVariable: 'PASSWORD')]) {
-						    sh "ls -al"
-                            sh "docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS} ."
-                            sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-                            sh "docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS}"   
+						    dir('backend/tmp_crud/camcoder'){
+						        sh "ls -al"
+                                sh "docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS} ."
+                                sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+                                sh "docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS}"
+							}
                         }
                 }
             }
