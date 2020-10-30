@@ -13,7 +13,7 @@ podTemplate(label: 'builder',
             ],
             volumes: [
                 hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
-				hostPathVolume(mountPath: '/home/env', hostPath: '/home/env')
+                persistentVolumeClaim(mountPath: '/home/env', claimName: 'jenkins-leader-pv-claim', readOnly: true)
             ]) {
         node('builder') {
             stage('Checkout') {
