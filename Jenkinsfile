@@ -24,6 +24,7 @@ podTemplate(label: 'builder',
 						sh "pwd"
 						sh "mvn package"
 					}
+					sh "ls /home/env"
                 }
             }
             stage('Docker build') {
@@ -32,6 +33,7 @@ podTemplate(label: 'builder',
                         credentialsId: 'docker_hub_auth',
                         usernameVariable: 'USERNAME',
                         passwordVariable: 'PASSWORD')]) {
+						    sh "ls -al"
                             sh "docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS} ."
                             sh "docker login -u ${USERNAME} -p ${PASSWORD}"
                             sh "docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS}"   
