@@ -50,6 +50,7 @@ podTemplate(label: 'builder',
 				container('helm') {
 					try{
 						sh "helm delete ${DEPLOY_NAME} -n ${NAMESPACE}"
+                        sh "sleep 5"
 					}
 					catch (e) {
 						echo "Clear-up Error: " + e.getMessage()
@@ -86,10 +87,5 @@ podTemplate(label: 'builder',
                         }
                 }
             }
-			post{
-				always{
-					step([$class: 'WsCleanup'])
-				}
-			}
         }
 }
