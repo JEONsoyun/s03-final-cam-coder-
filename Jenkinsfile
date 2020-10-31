@@ -49,7 +49,7 @@ podTemplate(label: 'builder',
 			stage('Clean up current deployments'){
 				container('helm') {
 					try{
-						sh "helm delete ${DEPLOY_NAME} --purge"
+						sh "helm delete ${DEPLOY_NAME} -n ${NAMESPACE}"
 					}
 					catch (e) {
 						echo "Clear-up Error: " + e.getMessage()
