@@ -3,13 +3,16 @@ def DOCKER_IMAGE_NAME = "wlgh325/project-camcoder"
 def DOCKER_IMAGE_TAGS = "0.2"
 def NAMESPACE = "camcoder-project"
 def VERSION = "${env.BUILD_NUMBER}"
+def DEPLOY_NAME = "camcoder-spring"
+def HELM_CHART_FILE = "springboot"
 def DATE = new Date();
 
 podTemplate(label: 'builder',
             containers: [
                 containerTemplate(name: 'maven', image: 'maven:3.6-jdk-11-slim', command: 'cat', ttyEnabled: true),
                 containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
-                containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.15.3', command: 'cat', ttyEnabled: true)
+                containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.15.3', command: 'cat', ttyEnabled: true),
+                containerTemplate(name: 'helm', image: 'dtzar/helm-kubectl', command: 'cat', ttyEnabled: true)
             ],
             volumes: [
                 hostPathVolume(mountPath: '/home/env', hostPath: '/home/ubuntu/env'),
@@ -43,8 +46,19 @@ podTemplate(label: 'builder',
                         }
                 }
             }
-            stage('Run kubectl') {
-                container('kubectl') {
+			stage('Clean up current deployments'){
+				container('helm') {
+					try{
+						sh "helm delete ${DEPLOY_NAME} --purge"
+					}
+					catch (e) {
+						echo "Clear-up Error: " + e.getMessage()
+						echo "Continue Process !"
+					}
+				}
+			}
+            stage('deploy to cluster') {
+                container('helm') {
                     withCredentials([usernamePassword(
                         credentialsId: 'docker_hub_auth',
                         usernameVariable: 'USERNAME',
@@ -67,8 +81,9 @@ podTemplate(label: 'builder',
                             //sh "kubectl apply -f ./k8s/k8s-deployment.yaml -n ${NAMESPACE}"
                             //sh "kubectl apply -f ./k8s/k8s-service.yaml -n ${NAMESPACE}"
 							dir('helm'){
+								echo "Install with chart file !"
 						        sh "ls -al"
-                                sh "helm install camcoder-spring springboot"
+                                sh "helm install ${HELM_CHART_FILE} --name ${DEPLOY_NAME} --namespace ${NAMESPACE}"
 							}
                         }
                 }
