@@ -78,8 +78,6 @@ podTemplate(label: 'builder',
                             //sh "echo ${DATE}"
                             //sh "sed -i.bak 's$DATE_STRING#${DATE}#' ./k8s/k8s-deployment.yaml
 
-                            //sh "kubectl apply -f ./k8s/k8s-deployment.yaml -n ${NAMESPACE}"
-                            //sh "kubectl apply -f ./k8s/k8s-service.yaml -n ${NAMESPACE}"
 							dir('helm'){
 								echo "Install with chart file !"
 						        sh "ls -al"
