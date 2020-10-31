@@ -18,6 +18,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: spring-pv-claim
+  namespace: camcoder-project
 spec:
   storageClassName: manual
   accessModes:
