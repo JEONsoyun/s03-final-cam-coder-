@@ -4,7 +4,7 @@ def DOCKER_IMAGE_TAGS = "0.2"
 def NAMESPACE = "camcoder-project"
 def VERSION = "${env.BUILD_NUMBER}"
 def DEPLOY_NAME = "camcoder-spring"
-def HELM_CHART_FILE = "springboot"
+def HELM_CHART_DIR = "springboot"
 def DATE = new Date();
 
 podTemplate(label: 'builder',
@@ -83,7 +83,7 @@ podTemplate(label: 'builder',
 							dir('helm'){
 								echo "Install with chart file !"
 						        sh "ls -al"
-                                sh "helm install ${HELM_CHART_FILE} --name ${DEPLOY_NAME} --namespace ${NAMESPACE}"
+                                sh "helm install ${DEPLOY_NAME} ${HELM_CHART_DIR} --namespace ${NAMESPACE}"
 							}
                         }
                 }
