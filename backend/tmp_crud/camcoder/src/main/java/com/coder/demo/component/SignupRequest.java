@@ -1,6 +1,5 @@
 package com.coder.demo.component;
 import javax.validation.Valid;
-
 import com.sun.istack.NotNull;
 
 import io.swagger.annotations.ApiModelProperty;
