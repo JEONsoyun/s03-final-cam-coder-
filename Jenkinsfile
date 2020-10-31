@@ -19,6 +19,11 @@ podTemplate(label: 'builder',
                 hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
             ]) {
         node('builder') {
+			stage('clean up Workspace'){
+				steps{
+					cleanWs()	
+				}
+			}
             stage('Checkout') {
                 checkout scm
             }
