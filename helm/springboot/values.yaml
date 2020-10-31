@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: wlgh325/project-camcoder:0.2
+  repository: wlgh325/project-camcoder:0.3
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""

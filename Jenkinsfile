@@ -1,6 +1,6 @@
 /* pipeline 변수 설정 */
 def DOCKER_IMAGE_NAME = "wlgh325/project-camcoder"
-def DOCKER_IMAGE_TAGS = "0.2"
+def DOCKER_IMAGE_TAGS = "0.3"
 def NAMESPACE = "camcoder-project"
 def VERSION = "${env.BUILD_NUMBER}"
 def DEPLOY_NAME = "camcoder-spring"
