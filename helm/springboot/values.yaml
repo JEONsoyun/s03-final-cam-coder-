@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: wlgh325/kubernetes-camcoder-springboot:0.1
-  pullPolicy: IfNotPresent
+  repository: wlgh325/project-camcoder:0.2
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
@@ -15,7 +15,6 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  # Specifies whether a service account should be created
   create: true
   # Annotations to add to the service account
   annotations: {}
@@ -77,4 +76,5 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
 
