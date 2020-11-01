@@ -38,7 +38,7 @@ podTemplate(label: 'builder',
 	node('builder') {
 		try{
 			stage('Start'){
-				notifyStarted(SLACK_CHANNEL)	
+				notifyStarted(MM_CHANNEL)	
 			}
 			stage('Checkout') {
 				checkout scm
@@ -104,10 +104,10 @@ podTemplate(label: 'builder',
 						}
 				}
 			}
-			notifySuccessful(SLACK_CHANNEL)
+			notifySuccessful(MM_CHANNEL)
 		} catch(e) {
 			currentBuild.result = "FAILED"
-			notifyFailed(SLACK_CHANNEL)
+			notifyFailed(MM_CHANNEL)
 		}
 	}
 }
