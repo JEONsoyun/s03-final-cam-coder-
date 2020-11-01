@@ -9,16 +9,16 @@ def MM_CHANNEL = "push_10"
 def ICON = "https://jenkins.io/images/logos/jenkins/jenkins.png"
 def DATE = new Date();
 
-def notifyStarted(mm_channel) {
-	mattermostSend(color: "#33C7FF", icon: ICON, channel: "${mm_channel}", message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+def notifyStarted(mm_channel, icon) {
+	mattermostSend(color: "#33C7FF", icon: "${icon}", channel: "${mm_channel}", message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 }
 
-def notifySuccessful(mm_channel) {
-	mattermostSend(color: "#39FF33", icon: ICON, channel: "${mm_channel}", message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+def notifySuccessful(mm_channel, icon) {
+	mattermostSend(color: "#39FF33", icon: "${icon}", channel: "${mm_channel}", message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 }
 
-def notifyFailed(mm_channel) {
-	mattermostSend(color: "#FF4C33", icon: ICON, channel: "${mm_channel}", message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+def notifyFailed(mm_channel, icon) {
+	mattermostSend(color: "#FF4C33", icon: "${icon}", channel: "${mm_channel}", message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 }
 
 podTemplate(label: 'builder',
@@ -35,7 +35,7 @@ podTemplate(label: 'builder',
 	node('builder') {
 		try{
 			stage('Start'){
-				notifyStarted(MM_CHANNEL)	
+				notifyStarted(MM_CHANNEL, ICON)	
 			}
 			stage('Checkout') {
 				checkout scm
@@ -101,10 +101,10 @@ podTemplate(label: 'builder',
 						}
 				}
 			}
-			notifySuccessful(MM_CHANNEL)
+			notifySuccessful(MM_CHANNEL, ICON)
 		} catch(e) {
 			currentBuild.result = "FAILED"
-			notifyFailed(MM_CHANNEL)
+			notifyFailed(MM_CHANNEL, ICON)
 		}
 	}
 }
