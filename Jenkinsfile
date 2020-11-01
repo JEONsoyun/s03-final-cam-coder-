@@ -13,15 +13,15 @@ def ICON = "https://jenkins.io/images/logos/jenkins/jenkins.png"
 def DATE = new Date();
 
 def notifyStarted(mm_channel) {
-	mattermostSend(color: START_COLOR_CODE, icon: ICON, channel: "${mm_channel}", message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+	mattermostSend(color: "${START_COLOR_CODE}", icon: "${ICON}", channel: "${mm_channel}", message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 }
 
 def notifySuccessful(mm_channel) {
-	mattermostSend(color: SUCCESS_COLOR_CODE, icon: ICON, channel: "${mm_channel}", message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+	mattermostSend(color: "${SUCCESS_COLOR_CODE}", icon: "${ICON}", channel: "${mm_channel}", message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 }
 
 def notifyFailed(mm_channel) {
-	mattermostSend(color: FAIL_COLOR_CODE, icon: ICON, channel: "${mm_channel}", message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+	mattermostSend(color: "${FAIL_COLOR_CODE}", icon: "${ICON}", channel: "${mm_channel}", message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 }
 
 podTemplate(label: 'builder',
