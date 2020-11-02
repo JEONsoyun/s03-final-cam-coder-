@@ -9,10 +9,10 @@ import com.coder.demo.vo.Tutoring;
 public interface ReviewService {
 	List<Review> selectTeacher(Long teacherCode);
 
-	String deleteReview(Long reviewCode);
-
 	void insert(TutorRegistRequest review, String id) throws Exception;
 
 	void update(Long rcode, TutorRegistRequest review, String id) throws Exception;
+
+	void deleteReview(Long reviewCode, String id) throws Exception;
 
 }

@@ -80,21 +80,21 @@ public class ReviewServiceImpl implements ReviewService {
 		}		
 	}
 	
+	@Override
+	public void deleteReview(Long rcode, String id) throws Exception {
+		User student = Optional.ofNullable(userdao.findByUserId(id)).orElseThrow(NotExistIdException::new);		
+		
+		Review rv = Optional.ofNullable(reviewdao.findByReviewCode(rcode)).orElseThrow(() -> new NotExistIdException("review"));
+		try {
+			reviewdao.delete(rv);
+		}catch(DataAccessException ex) {
+			ex.printStackTrace();
+			System.out.println(ex.getCause().getMessage());
+		}
+	}
 	
 	@Override
 	public List<Review> selectTeacher(Long teacherCode) {
-		//return reviewdao.findByTeacherCode(teacherCode);
-		return null;
+		return reviewdao.findByTeacherCode(teacherCode);
 	}
-
-	@Override
-	public String deleteReview(Long reviewCode) {
-		try {
-			reviewdao.deleteById(reviewCode);
-		}catch( Exception e) {
-			return "review insert Fail";
-		}
-		return "delete review";
-	}
-
 }

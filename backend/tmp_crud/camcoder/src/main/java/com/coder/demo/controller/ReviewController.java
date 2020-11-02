@@ -41,23 +41,15 @@ public class ReviewController {
 		return "리뷰 변경 완료";
 	}
 	
-	
-	
-	
-	
-	
-	
-	@GetMapping(value="/reviews")//해당 선생님에 대한 리뷰 목록보기
-	public List<Review> selectTeacher() {
-		Long teacherCode = (long)3; 
-		System.out.println(teacherCode);
-		return reviewService.selectTeacher(teacherCode);
-	}
 	@DeleteMapping(value="/reviews/{reviewCode}")//유저가 쓴 해당 선생님에 대한 리뷰 삭제
-	public String deleteReview(@PathVariable Long reviewCode) {
-		Long studentCode = (long)7;
-		
-		return reviewService.deleteReview(reviewCode);
+	public String deleteReview(@PathVariable Long reviewCode, HttpServletRequest request) throws Exception {
+		String id = (String)(request.getAttribute("loginUserId"));
+		reviewService.deleteReview(reviewCode, id);
+		return "리뷰 삭제 완료";
 	}
 	
+	@GetMapping(value="/reviews/{tcode}")//해당 선생님에 대한 리뷰 목록보기
+	public List<Review> selectTeacher(@PathVariable Long tcode, HttpServletRequest request) throws Exception {
+		return reviewService.selectTeacher(tcode);
+	}
 }
