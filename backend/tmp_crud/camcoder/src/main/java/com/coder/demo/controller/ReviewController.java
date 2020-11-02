@@ -34,6 +34,19 @@ public class ReviewController {
 		return "리뷰 등록 완료";
 	}
 	
+	@PutMapping(value="/reviews/{reviewCode}")//유저가 쓴 해당 선생님에 대한 리뷰 수정
+	public String updateReview(@PathVariable Long reviewCode, @RequestBody TutorRegistRequest review, HttpServletRequest request)throws Exception {
+		String id = (String)(request.getAttribute("loginUserId"));
+		reviewService.update(reviewCode, review, id);
+		return "리뷰 변경 완료";
+	}
+	
+	
+	
+	
+	
+	
+	
 	@GetMapping(value="/reviews")//해당 선생님에 대한 리뷰 목록보기
 	public List<Review> selectTeacher() {
 		Long teacherCode = (long)3; 
@@ -46,9 +59,5 @@ public class ReviewController {
 		
 		return reviewService.deleteReview(reviewCode);
 	}
-	/*@PutMapping(value="/reviews/{reviewCode}")//유저가 쓴 해당 선생님에 대한 리뷰 수정
-	public String updateReview(@PathVariable Long reviewCode,@RequestBody Review review) {
-		review.setReviewCode(reviewCode);
-		return reviewService.insert(review);
-	}*/
+	
 }

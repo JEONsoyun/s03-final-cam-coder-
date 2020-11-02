@@ -11,6 +11,8 @@ public interface ReviewService {
 
 	String deleteReview(Long reviewCode);
 
-	void insert(TutorRegistRequest review, String id)throws Exception;
+	void insert(TutorRegistRequest review, String id) throws Exception;
+
+	void update(Long rcode, TutorRegistRequest review, String id) throws Exception;
 
 }

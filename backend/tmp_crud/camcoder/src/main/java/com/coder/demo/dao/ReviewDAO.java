@@ -8,6 +8,6 @@ import com.coder.demo.vo.Review;
 
 public interface ReviewDAO  extends JpaRepository<Review, Long>{
 
-	//List<Review> findByTeacherCode(Long teacherCode);
+	Review findByReviewCode(Long code);
 
 }

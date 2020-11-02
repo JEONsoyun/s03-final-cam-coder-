@@ -35,11 +35,10 @@ import lombok.Setter;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Teacher {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)//저장할때만 되나?
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="teacher_code")
 	private Long teacherCode;
 
-	//Long userCode;
 	@OneToOne
 	@JoinColumn(name="user_code", referencedColumnName = "user_code")
 	private User user;
@@ -87,7 +86,6 @@ public class Teacher {
 
 	public void addTutor(final Tutoring tutor) {
 		tutors.add(tutor);
-		//this.studentCnt.incrementAndGet();
 		tutor.setTeacher(this);
 	}
 
@@ -196,10 +194,4 @@ public class Teacher {
 		this.studentCnt = studentCnt;
 	}
 
-	@Override
-	public String toString() {
-		return "Teacher [teacherCode=" + teacherCode + ", userCode=" + user + ", intro=" + intro + ", expertise="
-				+ expertise + ", price=" + price + ", profile=" + profile + ", likeCnt=" + likeCnt + ", avaliableTime="
-				+ avaliableTime + ", studentCnt=" + studentCnt + "]";
-	}	
 }

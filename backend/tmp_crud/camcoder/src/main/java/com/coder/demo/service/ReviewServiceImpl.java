@@ -62,6 +62,26 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	@Override
+	public void update(Long rcode, TutorRegistRequest review, String id) throws Exception {
+		User student = Optional.ofNullable(userdao.findByUserId(id)).orElseThrow(NotExistIdException::new);		
+		
+		Review rv = Optional.ofNullable(reviewdao.findByReviewCode(rcode)).orElseThrow(() -> new NotExistIdException("review"));
+
+		Teacher tc = Optional.ofNullable(tdao.findByTeacherCode(rv.getTeacher().getTeacherCode())).orElseThrow(() -> new NotExistIdException("teacher"));
+
+		try {
+			String content = Optional.of(review).map(TutorRegistRequest::getContent).orElse("");
+			rv.setEvaluationContent(content);
+			rv.setEvaluationDate(new Date());
+			reviewdao.save(rv);
+		}catch(DataAccessException ex) {
+			ex.printStackTrace();
+			System.out.println(ex.getCause().getMessage());
+		}		
+	}
+	
+	
+	@Override
 	public List<Review> selectTeacher(Long teacherCode) {
 		//return reviewdao.findByTeacherCode(teacherCode);
 		return null;
@@ -76,10 +96,5 @@ public class ReviewServiceImpl implements ReviewService {
 		}
 		return "delete review";
 	}
-
-
-	
-	
-	
 
 }

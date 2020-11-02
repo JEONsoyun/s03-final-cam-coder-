@@ -26,12 +26,10 @@ public class Review {
 	@ManyToOne
 	@JoinColumn(name="student_code", referencedColumnName = "user_code")
 	private User student;
-	//private Long studentCode;
 	
 	@ManyToOne
 	@JoinColumn(name = "teacher_code",referencedColumnName = "teacher_code")
 	private Teacher teacher;
-	//private Long teacherCode;	
 	
 	@PrePersist
 	public void beforeCreate() {
@@ -49,18 +47,6 @@ public class Review {
 		this.student = student;
 		this.teacher = teacher;
 	}
-
-	/*
-	public Review(Long reviewCode, Long tutoringCode, String evaluationContent, Date evaluationDate, Long studentCode,
-			Long teacherCode) {
-		super();
-		this.reviewCode = reviewCode;
-		this.tutoringCode = tutoringCode;
-		this.evaluationContent = evaluationContent;
-		this.evaluationDate = evaluationDate;
-		this.studentCode = studentCode;
-		this.teacherCode = teacherCode;
-	}*/
 	
 	public Long getReviewCode() {
 		return reviewCode;
@@ -81,20 +67,9 @@ public class Review {
 	public Date getEvaluationDate() {
 		return evaluationDate;
 	}
-
-	/*
-	public Long getStudentCode() {
-		return studentCode;
+	public void setEvaluationDate(Date evaluationDate) {
+		this.evaluationDate = evaluationDate;
 	}
-	public void setStudentCode(Long studentCode) {
-		this.studentCode = studentCode;
-	}
-	public Long getTeacherCode() {
-		return teacherCode;
-	}
-	public void setTeacherCode(Long teacherCode) {
-		this.teacherCode = teacherCode;
-	}*/
 
 	public User getStudent() {
 		return student;
