@@ -14,7 +14,22 @@
       <div class="c-main-layout__content">
           <slot />
       </div>
-      <div class="c-main-layout__footer"></div>
+      <div class="c-main-layout__footer">
+          <div class="c-main-layout__footer-content-container">
+              <div class="c-main-layout__footer-content">
+                  <div style="color: #333;margin-bottom: 8px;">CamCoder</div>
+                  SSAFY 3기 자율 프로젝트<br>
+                  팀코드: 110<br>
+                  팀장: 임진희 | 
+                  팀원: 김채은 박지호 서승희 전소윤<br>
+                  도메인: k3a110.p.ssafy.io
+              </div>
+              
+          </div>
+          <div class="d-flex justify-center align-center c-main-layout__footer-bottom">
+              ©2020 CamCoder All Rights Reserved.
+          </div>
+      </div>
   </div>
 </template>
 
@@ -78,5 +93,29 @@ export default {
 .c-main-layout__content {
     padding-top: 75px;
     padding-bottom: 75px;
+}
+
+.c-main-layout__footer-content-container {
+    width: 100%;
+    border-top: 1px solid #eaeaea;
+}
+
+.c-main-layout__footer-content {
+    width: 1024px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 32px 0;
+    color: #a3a3a3;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: -0.32px;
+}
+
+.c-main-layout__footer-bottom {
+    height: 54px;
+    background: #fb8805;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
 }
 </style>
