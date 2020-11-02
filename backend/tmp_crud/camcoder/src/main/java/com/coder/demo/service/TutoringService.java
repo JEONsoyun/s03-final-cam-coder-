@@ -8,8 +8,6 @@ import com.coder.demo.vo.Tutoring;
 
 public interface TutoringService  {
 
-	List<Tutoring> selectAll(String id);
-
 	Tutoring selectOne(Long tutoringCode);
 
 	void insert(TutorRegistRequest regist, String id) throws Exception;

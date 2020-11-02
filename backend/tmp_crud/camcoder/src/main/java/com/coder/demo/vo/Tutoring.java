@@ -40,7 +40,8 @@ public class Tutoring {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date endDate;
 	
-	private String status;
+	//private String status;
+	private int status;
 	
 	private int roomNum;
 	
@@ -54,7 +55,23 @@ public class Tutoring {
 	public Tutoring() {
 	}
 	
-	public Tutoring(Teacher teacher, User student, Date startDate, Date endDate, String status, int roomNum) {
+	public Tutoring(Teacher teacher, User student, Date startDate, Date endDate, int status, int roomNum) {
+		this.teacher = teacher;
+		this.student = student;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.status = status;
+		this.roomNum = roomNum;
+	}
+
+	public Tutoring(Date startDate, Date endDate, int status, int roomNum) {
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.status = status;
+		this.roomNum = roomNum;
+	}
+	
+	/*public Tutoring(Teacher teacher, User student, Date startDate, Date endDate, String status, int roomNum) {
 		this.teacher = teacher;
 		this.student = student;
 		this.startDate = startDate;
@@ -68,7 +85,7 @@ public class Tutoring {
 		this.endDate = endDate;
 		this.status = status;
 		this.roomNum = roomNum;
-	}
+	}*/
 	
 	public Long getTutoringCode() {
 		return tutoringCode;
@@ -102,15 +119,25 @@ public class Tutoring {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public String getStatus() {
+	/*public String getStatus() {
 		return status;
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}*/
+	
+	public int getStatus() {
+		return status;
 	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
 	public int getRoomNum() {
 		return roomNum;
 	}
+
 	public void setRoomNum(int roomNum) {
 		this.roomNum = roomNum;
 	}
