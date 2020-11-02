@@ -131,14 +131,17 @@ public class TutoringServiceImpl implements TutoringService {
 	public List<Tutoring> selectAllTutee(String id) throws NotExistIdException {
 		Long ucode = Optional.ofNullable(userdao.findByUserId(id)).map(User::getUserCode).orElseThrow(NotExistIdException::new);		
 		Long tcode = Optional.ofNullable(tdao.findByUserCode(ucode)).map(Teacher::getTeacherCode).orElseThrow(() -> new NotExistIdException("teacher"));
-		 
+		
+		System.out.println("teacher code : " + tcode);
 		return tutoringdao.findByTeacherCode(tcode);
 	}
 
 	@Override
 	public List<Tutoring> selectAllTutor(String id) throws NotExistIdException{
-		// TODO Auto-generated method stub
-		return null;
+		Long ucode = Optional.ofNullable(userdao.findByUserId(id)).map(User::getUserCode).orElseThrow(NotExistIdException::new);		
+
+		System.out.println("student code : " + ucode);
+		return tutoringdao.findByStudentCode(ucode);
 	}
 
 
