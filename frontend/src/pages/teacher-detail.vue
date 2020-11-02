@@ -59,11 +59,19 @@
         <div class="d-flex flex-column">선생님에게 원하는 수업에 대해서 문의해 보세요!</div>
         <div class="d-flex justify-center align-center flex-grow-0 message_button">문의하기</div>  
     </div>
-    <div class="d-flex flex-column teacher-information">
+    <div class="d-flex flex-column teacher-profile">
         <div class="d-flex flex-column">
-            <div class="d-flex" style="font-weight:bold;font-size:18px">상세정보</div>
-            <div class="d-flex justify-center info">
-                <div class="d-flex">상세정보~~~~~~~~~~~~</div>
+            <div class="d-flex" style="font-weight:bold;font-size:18px">프로필</div>
+            <div class="d-flex justify-center profile">
+                <div class="d-flex">프로필~~~~~~~~~~~~</div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex flex-column teacher-intro">
+        <div class="d-flex flex-column">
+            <div class="d-flex" style="font-weight:bold;font-size:18px">인트로</div>
+            <div class="d-flex justify-center intro">
+                <div class="d-flex">인트로~~~~~~~~~~~~</div>
             </div>
         </div>
     </div>
@@ -90,14 +98,28 @@ export default {
     border-color: #eaeaea;
     border-width: 1px;
 }
-.info {
+.intro {
     margin-top: 20px;
     width : 600px;
     border-style: solid;
     border-color: #eaeaea;
     border-width: 1px;
 }
-.teacher-information {
+.profile {
+    margin-top: 20px;
+    width : 600px;
+    border-style: solid;
+    border-color: #eaeaea;
+    border-width: 1px;
+}
+.teacher-profile {
+    margin-top: 20px;
+    width : 800px;
+    border-style: solid;
+    border-color: #eaeaea;
+    border-width: 1px;
+}
+.teacher-intro {
     margin-top: 20px;
     width : 800px;
     border-style: solid;
