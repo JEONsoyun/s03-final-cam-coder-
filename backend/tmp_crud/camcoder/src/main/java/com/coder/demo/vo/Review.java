@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -32,16 +33,19 @@ public class Review {
 	private Teacher teacher;
 	//private Long teacherCode;	
 	
+	@PrePersist
+	public void beforeCreate() {
+		this.evaluationDate = new Date();
+	}
+	
 	public Review() {
 		super();
 	}
 	
-	public Review(Long reviewCode, Long tutoringCode, String evaluationContent, Date evaluationDate, User student,
+	public Review(Long tutoringCode, String evaluationContent, User student,
 			Teacher teacher) {
-		this.reviewCode = reviewCode;
 		this.tutoringCode = tutoringCode;
 		this.evaluationContent = evaluationContent;
-		this.evaluationDate = evaluationDate;
 		this.student = student;
 		this.teacher = teacher;
 	}
@@ -61,9 +65,7 @@ public class Review {
 	public Long getReviewCode() {
 		return reviewCode;
 	}
-	public void setReviewCode(Long reviewCode) {
-		this.reviewCode = reviewCode;
-	}
+
 	public Long getTutoringCode() {
 		return tutoringCode;
 	}
@@ -79,9 +81,7 @@ public class Review {
 	public Date getEvaluationDate() {
 		return evaluationDate;
 	}
-	public void setEvaluationDate(Date evaluationDate) {
-		this.evaluationDate = evaluationDate;
-	}
+
 	/*
 	public Long getStudentCode() {
 		return studentCode;
