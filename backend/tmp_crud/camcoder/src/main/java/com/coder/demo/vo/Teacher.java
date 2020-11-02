@@ -38,12 +38,12 @@ public class Teacher {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)//저장할때만 되나?
 	@Column(name="teacher_code")
 	private Long teacherCode;
-	
+
 	//Long userCode;
 	@OneToOne
 	@JoinColumn(name="user_code", referencedColumnName = "user_code")
 	private User user;
-	
+
 	private String intro;
 	private String expertise;
 	private Long price;
@@ -55,30 +55,55 @@ public class Teacher {
 	@Convert(converter = AtomicLongConverter.class)
 	private AtomicLong studentCnt;
 	//Long studentCnt;
-	
+
 	@PrePersist
 	public void beforeCreate() {
 		this.likeCnt = new AtomicLong();
 		this.studentCnt = new AtomicLong();		
 	}
-///////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////
 	@Default
 	@OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Like> likes = new ArrayList<Like>();
-	
+
 	public void addLike(final Like like) {
 		likes.add(like);
 		this.likeCnt.incrementAndGet();
 		like.setTeacher(this);
 	}
-	
+
 	public void deleteLike(final Like like) {
 		likes.remove(like);
 		this.likeCnt.decrementAndGet();
 		like.setTeacher(null);
 	}
 
-////////////////////////////////////////////////////////////////////////////////////////////////	
+	////////////////////////////////////////////////////////////////////////////////////////////////	
+
+	///////////////////////////////////////////////////////////////////////////////////////
+	@Default
+	@OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Tutoring> tutors = new ArrayList<Tutoring>();
+
+	public void addTutor(final Tutoring tutor) {
+		tutors.add(tutor);
+		//this.studentCnt.incrementAndGet();
+		tutor.setTeacher(this);
+	}
+
+	//수락되었을 때 cnt를 늘린다.
+	public void setTutor(final Tutoring tutor) {
+		this.studentCnt.incrementAndGet();
+		tutor.setTeacher(this);
+	}
+	
+	public void deleteTutor(final Tutoring tutor) {
+		tutors.remove(tutor);
+		this.studentCnt.decrementAndGet();
+		tutor.setTeacher(null);
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public Teacher(User userCode, String intro, String expertise, Long price, String profile,
 			String avaliableTime) {
 		this.user = userCode;
@@ -88,17 +113,17 @@ public class Teacher {
 		this.profile = profile;
 		this.avaliableTime = avaliableTime;
 	}
-	
+
 	public Teacher() {
 	}
-	
+
 	public Long getTeacherCode() {
 		return teacherCode;
 	}
 	public void setTeacherCode(Long teacherCode) {
 		this.teacherCode = teacherCode;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}
@@ -154,7 +179,7 @@ public class Teacher {
 	public void setStudentCnt(AtomicLong studentCnt) {
 		this.studentCnt = studentCnt;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Teacher [teacherCode=" + teacherCode + ", userCode=" + user + ", intro=" + intro + ", expertise="

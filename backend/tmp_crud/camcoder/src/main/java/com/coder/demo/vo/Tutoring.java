@@ -6,23 +6,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "tutorings")
 @EntityScan(basePackages = {"com.coder.demo.vo"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Tutoring {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long tutoringCode;
 	
-	private Long teacherCode;
-	private Long studentCode;
+	@ManyToOne
+	@JoinColumn(name = "teacher_code",referencedColumnName = "teacher_code")
+	private Teacher teacher;
+	
+	@ManyToOne
+	@JoinColumn(name="student_code", referencedColumnName = "user_code")
+	private User student;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date startDate;
@@ -44,41 +54,42 @@ public class Tutoring {
 	public Tutoring() {
 	}
 	
-	public Tutoring(Long tutoringCode, Long teacherCode, Long studentCode, Date startDate, Date endDate, String status,
-			int roomNum) {
-		this.tutoringCode = tutoringCode;
-		this.teacherCode = teacherCode;
-		this.studentCode = studentCode;
+	public Tutoring(Teacher teacher, User student, Date startDate, Date endDate, String status, int roomNum) {
+		this.teacher = teacher;
+		this.student = student;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.status = status;
+		this.roomNum = roomNum;
+	}
+
+	public Tutoring(Date startDate, Date endDate, String status, int roomNum) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.status = status;
 		this.roomNum = roomNum;
 	}
 	
-	@Override
-	public String toString() {
-		return "Tutoring [tutoringCode=" + tutoringCode + ", teacherCode=" + teacherCode + ", studentCode="
-				+ studentCode + ", startDate=" + startDate + ", endDate=" + endDate + ", status=" + status
-				+ ", roomNum=" + roomNum + ", requestDate=" + requestDate + "]";
-	}
 	public Long getTutoringCode() {
 		return tutoringCode;
 	}
-	public void setTutoringCode(Long tutoringCode) {
-		this.tutoringCode = tutoringCode;
+	
+	public Teacher getTeacher() {
+		return teacher;
 	}
-	public Long getTeacherCode() {
-		return teacherCode;
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
-	public void setTeacherCode(Long teacherCode) {
-		this.teacherCode = teacherCode;
+
+	public User getStudent() {
+		return student;
 	}
-	public Long getStudentCode() {
-		return studentCode;
+
+	public void setStudent(User student) {
+		this.student = student;
 	}
-	public void setStudentCode(Long studentCode) {
-		this.studentCode = studentCode;
-	}
+
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -105,9 +116,6 @@ public class Tutoring {
 	}
 	public Date getRequestDate() {
 		return requestDate;
-	}
-	public void setRequestDate(Date requestDate) {
-		this.requestDate = requestDate;
 	}
 	
 }

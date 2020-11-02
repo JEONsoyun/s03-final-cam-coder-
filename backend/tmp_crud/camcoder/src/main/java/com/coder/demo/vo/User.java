@@ -1,31 +1,40 @@
 package com.coder.demo.vo;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Builder.Default;
 
 @Getter
 @Setter
 @Entity
 @Table(name="users")
 @EntityScan(basePackages = {"com.coder.demo.vo"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="user_code")
 	private Long userCode;
-	
+
 	private String userId;
 	private String userPw;
 	private String userName;
@@ -35,7 +44,7 @@ public class User {
 	/*
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Teacher teacher;
-	
+
 	public Teacher getTeacher() {
 		return teacher;
 	}
@@ -43,12 +52,30 @@ public class User {
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}*/
-	
+
+	///////////////////////////////////////////////////////////////////////////////////////
+	@Default
+	@OneToMany(mappedBy = "student",cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Tutoring> tutors = new ArrayList<Tutoring>();
+
+	public void addTutor(final Tutoring tutor) {
+		tutors.add(tutor);
+		tutor.setStudent(this);
+	}
+
+	public void deleteTutor(final Tutoring tutor) {
+		tutors.remove(tutor);
+		tutor.setStudent(null);
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 	@PrePersist
 	public void beforeCreate() {
 		this.joinDate = new Date();
 	}
-	
+
 	@Override
 	public String toString() {
 		return "User [userCode=" + userCode + ", userId=" + userId + ", userPw=" + userPw + ", userName=" + userName
