@@ -38,8 +38,8 @@ export default {
     data:() => ({
         selectedId: null,
         items: [
-            {text: '선생님 찾기', id: 0, path: '/'},
-            {text: '마이페이지', id: 1, path: '/'},
+            {text: '선생님 찾기', id: 0, path: '/teacher/search'},
+            {text: '마이페이지', id: 1, path: '/mypage'},
         ]
     }),
     methods: {
@@ -47,10 +47,12 @@ export default {
             this.$router.push('/');
         },
         onItemClick(item) {
-            
             this.$router.push(item.path);
             this.selectedId = item.id;
         }
+    },
+    created() {
+        // if(this.$route.path)
     }
 }
 </script>
