@@ -5,9 +5,6 @@ import java.util.Date;
 import io.swagger.annotations.ApiModelProperty;
 
 public class TutorRegistRequest {
-	@ApiModelProperty(required = true)
-	String content;
-
 	@ApiModelProperty(required=true)
 	Long teacher_code;
 
@@ -16,10 +13,7 @@ public class TutorRegistRequest {
 
 	@ApiModelProperty(required=true)
 	Date end;
-
-    @ApiModelProperty(required = true)
-	Long price;
-    
+    /////////////for 상태 /////////////////////
     @ApiModelProperty(required = true)
     Integer status;
     
@@ -29,12 +23,20 @@ public class TutorRegistRequest {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	public Long getPrice() {
-		return price;
+	///////////////////////////////////////////////
+	@ApiModelProperty(required = true)
+	String content;
+	@ApiModelProperty(required = true)
+	Long tutoring_code;
+	///////////////////////////////////////////////
+	
+	public Long getTutoring_code() {
+		return tutoring_code;
 	}
-	public void setPrice(Long price) {
-		this.price = price;
+	public void setTutoring_code(Long tutoring_code) {
+		this.tutoring_code = tutoring_code;
 	}
+	
 	public String getContent() {
 		return content;
 	}
