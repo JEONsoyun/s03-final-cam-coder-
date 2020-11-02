@@ -24,7 +24,7 @@ public class SwaggerConfig {
 	
 	private ApiInfo metadata() {
 		return new ApiInfoBuilder()
-				.title("JPub Spring Boot")
+				.title("CamCoder Api List")
 				.description("Spring Boot Rest API")
 				.version("1.0")
 				.build();
