@@ -153,7 +153,7 @@ export default {
 }
 
 .signup-page__container {
-    width: 600px;
+    width: 420px;
     margin: 0 auto;
 }
 

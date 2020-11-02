@@ -3,7 +3,7 @@
       <div class="c-main-layout__header-container">
           <div class="c-main-layout__header">
             <div @click="onLogoClick" class="d-flex flex-grow-0 align-center" style="margin-right: 40px;cursor:pointer">
-                <img src="/static/images/CamCoder.png" style="height: 40px;"/>
+                <img src="/static/images/CamCoder_text.png" style="height: 40px;"/>
             </div>
             <div v-for="(item, ii) in items" :key="`item-${ii}`" @click="onItemClick(item)" class="c-main-layout__item" :class="{'c-main-layout__item--selected': selectedId == item.id}">{{item.text}}</div>
             <div class="d-flex" />
@@ -43,9 +43,8 @@ export default {
 <style>
 .c-main-layout {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #f6f7f7;
-    
 }
 
 .c-main-layout__header-container {
@@ -78,5 +77,6 @@ export default {
 
 .c-main-layout__content {
     padding-top: 75px;
+    padding-bottom: 75px;
 }
 </style>

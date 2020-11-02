@@ -93,7 +93,7 @@ export default {
 }
 
 .login-page-content {
-  width: 600px;
+  width: 420px;
   margin: 0 auto;
   padding: 0 16px;
 }
