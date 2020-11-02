@@ -41,6 +41,10 @@ public class ReviewServiceImpl implements ReviewService {
 		Long tutoring_code = Optional.ofNullable(review).map(TutorRegistRequest::getTutoring_code).orElse((long)0);
 		Tutoring tutoring = Optional.ofNullable(tutoringdao.findByTutoringCode(tutoring_code)).orElseThrow(() -> new NotExistIdException("tutoring"));
 		
+		if(tutoring.getStudent().getUserCode() != student.getUserCode()) {
+			throw new NotExistIdException("tutoring");
+		}
+		
 		if(tutoring.getStatus() != 2) {
 			//완료되지 않은 수업을 평가 불가
 			throw new NotExistIdException("Finished tutoring");
@@ -66,9 +70,12 @@ public class ReviewServiceImpl implements ReviewService {
 		User student = Optional.ofNullable(userdao.findByUserId(id)).orElseThrow(NotExistIdException::new);		
 		
 		Review rv = Optional.ofNullable(reviewdao.findByReviewCode(rcode)).orElseThrow(() -> new NotExistIdException("review"));
-
 		Teacher tc = Optional.ofNullable(tdao.findByTeacherCode(rv.getTeacher().getTeacherCode())).orElseThrow(() -> new NotExistIdException("teacher"));
-
+		
+		if(rv.getStudent().getUserCode() != student.getUserCode()) {
+			throw new NotExistIdException("review");
+		}
+		
 		try {
 			String content = Optional.of(review).map(TutorRegistRequest::getContent).orElse("");
 			rv.setEvaluationContent(content);
@@ -85,6 +92,10 @@ public class ReviewServiceImpl implements ReviewService {
 		User student = Optional.ofNullable(userdao.findByUserId(id)).orElseThrow(NotExistIdException::new);		
 		
 		Review rv = Optional.ofNullable(reviewdao.findByReviewCode(rcode)).orElseThrow(() -> new NotExistIdException("review"));
+		
+		if(rv.getStudent().getUserCode() != student.getUserCode()) {
+			throw new NotExistIdException("review");
+		}
 		try {
 			reviewdao.delete(rv);
 		}catch(DataAccessException ex) {
