@@ -35,15 +35,14 @@ import lombok.Setter;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Teacher {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)//저장할때만 되나?
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="teacher_code")
 	private Long teacherCode;
-	
-	//Long userCode;
+
 	@OneToOne
 	@JoinColumn(name="user_code", referencedColumnName = "user_code")
 	private User user;
-	
+
 	private String intro;
 	private String expertise;
 	private Long price;
@@ -55,30 +54,70 @@ public class Teacher {
 	@Convert(converter = AtomicLongConverter.class)
 	private AtomicLong studentCnt;
 	//Long studentCnt;
-	
+
 	@PrePersist
 	public void beforeCreate() {
 		this.likeCnt = new AtomicLong();
 		this.studentCnt = new AtomicLong();		
 	}
-///////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////
+	//for like
 	@Default
 	@OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Like> likes = new ArrayList<Like>();
-	
+
 	public void addLike(final Like like) {
 		likes.add(like);
 		this.likeCnt.incrementAndGet();
 		like.setTeacher(this);
 	}
-	
+
 	public void deleteLike(final Like like) {
 		likes.remove(like);
 		this.likeCnt.decrementAndGet();
 		like.setTeacher(null);
 	}
 
-////////////////////////////////////////////////////////////////////////////////////////////////	
+	///////////////////////////////////////////////////////////////////////////////////////
+	//for studentCnt
+	@Default
+	@OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Tutoring> tutors = new ArrayList<Tutoring>();
+
+	public void addTutor(final Tutoring tutor) {
+		tutors.add(tutor);
+		tutor.setTeacher(this);
+	}
+
+	//수락되었을 때 cnt를 늘린다.
+	public void setTutor(final Tutoring tutor) {
+		this.studentCnt.incrementAndGet();
+		tutor.setTeacher(this);
+	}
+	
+	public void deleteTutor(final Tutoring tutor) {
+		tutors.remove(tutor);
+		this.studentCnt.decrementAndGet();
+		tutor.setTeacher(null);
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	//for reviews
+	@Default
+	@OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Review> reviews = new ArrayList<Review>();
+
+	public void addReview(final Review review) {
+		reviews.add(review);
+		review.setTeacher(this);
+	}
+	
+	public void deleteReview(final Review review) {
+		reviews.remove(review);
+		review.setTeacher(null);
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
 	public Teacher(User userCode, String intro, String expertise, Long price, String profile,
 			String avaliableTime) {
 		this.user = userCode;
@@ -88,17 +127,17 @@ public class Teacher {
 		this.profile = profile;
 		this.avaliableTime = avaliableTime;
 	}
-	
+
 	public Teacher() {
 	}
-	
+
 	public Long getTeacherCode() {
 		return teacherCode;
 	}
 	public void setTeacherCode(Long teacherCode) {
 		this.teacherCode = teacherCode;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}
@@ -154,11 +193,5 @@ public class Teacher {
 	public void setStudentCnt(AtomicLong studentCnt) {
 		this.studentCnt = studentCnt;
 	}
-	
-	@Override
-	public String toString() {
-		return "Teacher [teacherCode=" + teacherCode + ", userCode=" + user + ", intro=" + intro + ", expertise="
-				+ expertise + ", price=" + price + ", profile=" + profile + ", likeCnt=" + likeCnt + ", avaliableTime="
-				+ avaliableTime + ", studentCnt=" + studentCnt + "]";
-	}	
+
 }
