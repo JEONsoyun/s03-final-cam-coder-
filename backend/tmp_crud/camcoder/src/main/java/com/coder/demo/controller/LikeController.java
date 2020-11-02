@@ -2,6 +2,8 @@ package com.coder.demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coder.demo.component.LikeRequest;
 import com.coder.demo.service.LikeService;
 import com.coder.demo.vo.Like;
 
@@ -22,17 +25,19 @@ public class LikeController {
 	LikeService likeService;
 	
 	@PostMapping(value="/likes")
-	public String insert(@RequestBody Like like) {
-		System.out.println(like);
-		return likeService.insert(like);
+	public String insert(@RequestBody LikeRequest like, HttpServletRequest request) throws Exception{
+		likeService.insert(like, (String)(request.getAttribute("loginUserId")));
+		return "좋아요 완료";
 	}
-	@GetMapping(value="/likes/{code}")
-	public List<Like> selectAll(@PathVariable Long code) {
-		System.out.println(code);
-		return likeService.selectAll(code);
+	
+	@GetMapping(value="/likes")
+	public List<Like> selectAll(HttpServletRequest request) throws Exception{
+		return likeService.selectMine((String)(request.getAttribute("loginUserId")));
 	}
-	@DeleteMapping(value="/likes/{likeCode}")
-	public void deleteLike(@PathVariable Long likeCode) {
-		likeService.delete(likeCode);
+	
+	@DeleteMapping(value="/likes/{Code}")
+	public String deleteLike(@PathVariable Long Code, HttpServletRequest request) throws Exception{
+		likeService.delete(Code, (String)(request.getAttribute("loginUserId")));
+		return "좋아요 취소";
 	}
 }
