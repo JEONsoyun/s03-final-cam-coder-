@@ -8,7 +8,7 @@ import lombok.ToString;
 
 @Valid
 @ToString
-public class RegisterRequest extends LoginRequest{
+public class RegisterRequest{
     @ApiModelProperty(required = true)
 	String intro;
 	@ApiModelProperty(required = true)
@@ -19,8 +19,7 @@ public class RegisterRequest extends LoginRequest{
     String profile;
     @ApiModelProperty(required = true)
 	String avaliableTime;
-
-    /////////////////////////////////////////////////////////
+    
     @ApiModelProperty(required = true)
     Integer sorttype;
     
@@ -41,8 +40,6 @@ public class RegisterRequest extends LoginRequest{
 	public void setKeywords(String keywords) {
 		this.keywords = keywords;
 	}
-	////////////////////////////////////////////////////////
-	
 	
 	public String getIntro() {
 		return intro;

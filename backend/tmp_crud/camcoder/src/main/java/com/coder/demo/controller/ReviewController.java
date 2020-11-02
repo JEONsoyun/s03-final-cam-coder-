@@ -29,8 +29,8 @@ public class ReviewController {
 	@PostMapping(value="/reviews")//리뷰 등록
 	public String insert(@RequestBody Review review) {
 		Tutoring tutoring = tutoringdao.findById(review.getTutoringCode()).get();
-		review.setStudentCode(tutoring.getStudentCode());
-		review.setTeacherCode(tutoring.getTeacherCode());
+		//review.setStudentCode(tutoring.getStudentCode());
+		//review.setTeacherCode(tutoring.getTeacherCode());
 		review.setEvaluationDate( Calendar.getInstance().getTime());
 		System.out.println(review);
 		return reviewService.insert(review);
