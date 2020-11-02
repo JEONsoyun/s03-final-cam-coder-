@@ -62,6 +62,7 @@ public class Teacher {
 		this.studentCnt = new AtomicLong();		
 	}
 	///////////////////////////////////////////////////////////////////////////////////////
+	//for like
 	@Default
 	@OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Like> likes = new ArrayList<Like>();
@@ -78,9 +79,8 @@ public class Teacher {
 		like.setTeacher(null);
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////	
-
 	///////////////////////////////////////////////////////////////////////////////////////
+	//for studentCnt
 	@Default
 	@OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Tutoring> tutors = new ArrayList<Tutoring>();
@@ -103,6 +103,22 @@ public class Teacher {
 		tutor.setTeacher(null);
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////
+	//for reviews
+	@Default
+	@OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Review> reviews = new ArrayList<Review>();
+
+	public void addReview(final Review review) {
+		reviews.add(review);
+		review.setTeacher(this);
+	}
+	
+	public void deleteReview(final Review review) {
+		reviews.remove(review);
+		review.setTeacher(null);
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	
 	public Teacher(User userCode, String intro, String expertise, Long price, String profile,
 			String avaliableTime) {

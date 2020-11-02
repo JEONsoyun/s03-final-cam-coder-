@@ -69,7 +69,21 @@ public class User {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
+	//for reviews
+	@Default
+	@OneToMany(mappedBy = "student",cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Review> reviews = new ArrayList<Review>();
 
+	public void addReview(final Review review) {
+		reviews.add(review);
+		review.setStudent(this);
+	}
+
+	public void deleteReview(final Review review) {
+		reviews.remove(review);
+		review.setStudent(null);
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@PrePersist
 	public void beforeCreate() {

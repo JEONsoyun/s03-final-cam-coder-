@@ -41,7 +41,7 @@ public class TutoringController {
 	public String updateLike(@PathVariable Long tutoringCode, @RequestBody TutorRegistRequest regist, HttpServletRequest request) throws Exception {
 		String id = (String)(request.getAttribute("loginUserId"));
 		tutoringService.update(regist, id, tutoringCode);
-		return "변경 완료";
+		return "변경 완료"; 
 	}
 	
 	@GetMapping(value="/tutorings/0/teacher")
