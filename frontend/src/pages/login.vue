@@ -12,7 +12,7 @@
           <div class="login-page-id">
             <v-text-field
               label="이메일 입력"
-              v-model="data.user_email"
+              v-model="data.id"
               single-line
               solo
               flat
@@ -23,7 +23,7 @@
           <div class="login-page-pwd">
             <v-text-field
               label="비밀번호 입력"
-              v-model="data.user_password"
+              v-model="data.pw"
               single-line
               solo
               flat
@@ -50,10 +50,8 @@ export default {
   name: 'login-page',
   data: () => ({
     data: {
-      id: 'studenta',
-      pw: 'passworda',
-      name: 'namea',
-      profile: 'i like math',
+      id: '',
+      pw: '',
     },
   }),
   methods: {
@@ -62,15 +60,15 @@ export default {
         //console.log(this.data);
         //console.log(this.data.id);
         await this.$api.login(this.data).then((res) => {
-          //console.log(res.data);
+          console.log(res.data);
           //console.log(res.data.token);
           this.$store.commit('SET_AUTHTOKEN', res.data.token);
           console.log(this.$store.state.AUTHTOKEN);
           //console.log(this.$store.state.config);
         });
         alert('로그인 성공');
-        //location.href = '/';
-        this.$router.push('/user');
+        location.href = '/';
+        //this.$router.push('/user');
       } catch (e) {
         alert('아이디 또는 비밀번호를 확인해주세요.');
       }

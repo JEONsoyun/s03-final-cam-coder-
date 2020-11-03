@@ -26,6 +26,7 @@ export default new Vuex.Store({
     SET_AUTHTOKEN(state, val) {
       state.AUTHTOKEN = val,
       state.config.headers.Authorization = `Bearer `+val
+      state.ISLOGGEDIN= true
     },
 
   },
