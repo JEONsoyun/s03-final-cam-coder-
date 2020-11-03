@@ -80,19 +80,21 @@
             <div class="d-flex" style="font-weight:bold;font-size:18px">리뷰</div>
             <div class="d-flex" style="margin-top: 8px;font-size:10px">실제 과외를 수강한 학생들이 남긴 리뷰입니다.</div>
             <div class="d-flex flex-row review">
-                <div class="d-flex flex-row" style="width:20px">
-                    <div class="d-flex">
-                        <img  style="width:50px" src="https://kimstudy.com/Resources/images/tutor.png"/>
+                <div class="d-flex flex-row flex-wrap review-list">
+                    <div class="d-flex align-center flex-grow-0 list">
+                        <div class="d-flex" style="width:120px">
+                            <img style="width:120px" src="https://kimstudy.com/Resources/images/tutor.png"/>
+                        </div>
+                        <div class="d-flex" style="font-weight:bold;font-size:18px">김00</div>
+                        <div class="d-flex">이해가 너무 잘돼요~~~~~</div>
                     </div>
-                    <div class="d-flex">김00</div>
-                    <div class="d-flex">너무 좋아요~~!!!</div>
-                </div>
-                <div class="d-flex flex-row" style="width:20px">
-                    <div class="d-flex justify-center">
-                        <img  style="width:50px" src="https://kimstudy.com/Resources/images/tutor.png"/>
+                    <div class="d-flex align-center flex-grow-0 list">
+                        <div class="d-flex" style="width:120px">
+                            <img style="width:120px" src="https://kimstudy.com/Resources/images/tutor.png"/>
+                        </div>
+                        <div class="d-flex" style="font-weight:bold;font-size:18px">임00</div>
+                        <div class="d-flex">선생님 너무 친절하세요!!</div>
                     </div>
-                    <div class="d-flex justify-center">임00</div>
-                    <div class="d-flex justify-center">이해가 정말 잘돼요!!</div>
                 </div>
             </div>
         </div>

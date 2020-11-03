@@ -10,9 +10,9 @@
                     <img style="width:120px" src="https://kimstudy.com/Resources/images/tutor.png"/>
                 </div>
                 <div class="d-flex" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
-                <div class="d-flex">그럼 3시 20분에 과외 진행할게요~~~~~</div>
-                <div class="d-flex justify-center align-center flex-grow-1 detail_button">메세지 상세보기</div>      
-                <div class="d-flex justify-center align-center flex-grow-1 detail_button">메세지 삭제하기</div>      
+                <div class="d-flex">과외 상태 (요청중, 수락, 완료, 취소)</div>
+                <div class="d-flex justify-center align-center flex-grow-1 enter_button">입장하기</div>      
+                <div class="d-flex justify-center align-center flex-grow-1 cancel_button">취소하기</div>      
             </div>
         </div>
     </div>
@@ -44,7 +44,18 @@ export default {
         border-width: 1px;
     height: 120px;   
 }
-.detail_button {
+.enter_button {
+    background-color: #fb8805;
+    box-shadow: 5px;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    height: 30px;
+    width: 20px;
+    margin-top: 90px; 
+    margin-left: 10px;
+}
+.cancel_button {
     background-color: #fb8805;
     box-shadow: 5px;
     color: white;

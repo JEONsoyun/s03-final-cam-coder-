@@ -8,6 +8,7 @@ import signupResult from '@/pages/signup-result'
 import teacherDetail from '@/pages/teacher/detail'
 import like from '@/pages/mypage/student/like'
 import messageIndex from '@/pages/mypage/message/index'
+import tutoring from '@/pages/mypage/student/tutoring'
 import page from '@/pages/page'
 
 const router = new Router({
@@ -28,6 +29,10 @@ const router = new Router({
     {
       path: '/mypage/student/like',
       component: like
+    }, 
+    {
+      path: '/mypage/student/tutoring',
+      component: tutoring
     },  
     {
       path: '/mypage/message',
