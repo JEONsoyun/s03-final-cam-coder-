@@ -8,6 +8,7 @@ import login from '@/pages/login'
 import signup from '@/pages/signup'
 import user from '@/pages/userDetail'
 import teacherSearch from '@/pages/teacher/search' 
+import teacherDetail from '@/pages/teacher/detail'
 
 const router = new Router({
   mode: 'history',
@@ -32,6 +33,10 @@ const router = new Router({
       path : '/teacher/search',
       component : teacherSearch
     },
+    {
+      path : '/teacher/detail/:id',
+      component : teacherDetail
+    }
   ]
 })
 
