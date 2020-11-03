@@ -61,18 +61,19 @@ podTemplate(label: 'builder',
 						}
 				}
 			}
-			stage('Clean up current deployments'){
-				container('helm') {
-					try{
-						sh "helm delete ${DEPLOY_NAME} -n ${NAMESPACE}"
-						sh "sleep 5"
-					}
-					catch (e) {
-						echo "Clear-up Error: " + e.getMessage()
-						echo "Continue Process !"
-					}
-				}
-			}
+			//stage('Clean up current deployments'){
+			//	container('helm') {
+			//		try{
+			//			sh "helm delete ${DEPLOY_NAME} -n ${NAMESPACE}"
+			//			sh "sleep 5"
+			//		}
+			//		catch (e) {
+			//			echo "Clear-up Error: " + e.getMessage()
+			//			echo "Continue Process !"
+			//		}
+			//	}
+			//}
+			
 			stage('deploy to cluster') {
 				container('helm') {
 					withCredentials([usernamePassword(
