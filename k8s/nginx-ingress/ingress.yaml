@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: k3a110.p.ssafy.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: camcoder-spring-springboot
+          servicePort: 8080
