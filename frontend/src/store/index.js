@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-const storagesession = window.sessionStorage;
-const storagelocal = window.localStorage;
+//const storagesession = window.sessionStorage;
+//const storagelocal = window.localStorage;
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -28,6 +28,7 @@ export default new Vuex.Store({
       state.AUTHTOKEN = val,
       state.config.headers.Authorization = `Bearer `+val
       state.ISLOGGEDIN= true
+      localStorage.setItem('token', val)
     },
 
   },

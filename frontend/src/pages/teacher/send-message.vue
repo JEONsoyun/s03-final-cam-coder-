@@ -1,37 +1,48 @@
 <template>
   <div>
-    <div v-for="(teacher, ti) in teachers" :key="`teacher-${ti}`">
-      <div>{{ teachers }}</div>
-    </div>
+    <button style="margin-top: 24px" @click="onSendClick">메시지 보내기</button>
+    <div>{{ teacher }}</div>
   </div>
 </template>
 <script>
 export default {
-  name: 'login-page',
+  name: 'send-message-page',
   data: () => ({
-    teachers: [],
-    searchKey: {
-      avaliableTime: '',
-      expertise: '',
-      intro: '',
-      keywords: '',
-      price: null,
-      profile: '',
-      sorttype: null,
+    teacherId: 0,
+    teacher: {},
+    data: {
+      content: 'hello',
+      receiver: 'teacher0',
     },
   }),
   methods: {
-    async onSearchClick() {
+    async onSendClick() {
       try {
-        this.teachers = await this.$api.searchTeacher(this.searchKey);
+        console.log(this.data);
+        console.log(storagelocal);
+        await this.$api.sendMessage(this.data, this.$store.state.config);
+        alert('메시지 전송 성공');
       } catch (e) {
-        console.log('선생님 로딩 실패');
+        alert('메시지 전송 실패.');
       }
     },
   },
   async created() {
+    console.log(this.$store.storagelocal);
+    this.teacherId = this.$route.params.userid;
+    console.log(this.teacherId);
+    if (this.teacherId == 0) {
+      alert('잘못된 접근입니다.');
+      this.$router.push('/');
+    }
+    console.dir(this.$store.state.config);
     try {
-      this.teachers = await this.$api.searchTeacher(this.searchKey);
+      console.log(this.teacherId);
+      console.dir(this.$store.state.config);
+      this.teacher = await this.$api.getTeacher(
+        this.teacherId,
+        this.$store.state.config
+      );
     } catch (e) {
       console.log('선생님 로딩 실패');
     }

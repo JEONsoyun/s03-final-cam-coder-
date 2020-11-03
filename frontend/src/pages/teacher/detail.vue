@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: 'login-page',
+  name: 'teacher-detail-page',
   data: () => ({
     teacherId: 0,
     teacher: {},

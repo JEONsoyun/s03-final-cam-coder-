@@ -7,7 +7,7 @@
 </template>
 <script>
 export default {
-  name: 'login-page',
+  name: 'teacher-search-page',
   data: () => ({
     teachers: [],
     searchKey: {
