@@ -14,6 +14,8 @@ import teacherDetail from '@/pages/teacher/detail'
 import like from '@/pages/mypage/student/like'
 import messageIndex from '@/pages/mypage/message/index'
 import tutoring from '@/pages/mypage/student/tutoring'
+import messageDetail from '@/pages/mypage/message/detail'
+import studentIndex from '@/pages/mypage/student/index'
 import page from '@/pages/page'
 
 const router = new Router({
@@ -44,7 +46,7 @@ const router = new Router({
       component : user
     },
     {
-      path: '/signupResult',
+      path: '/signup-result',
       component: signupResult
     },
     {
@@ -52,9 +54,13 @@ const router = new Router({
       component: teacherDetail
     },
     {
+      path: '/mypage/student',
+      component: studentIndex
+    },  
+    {
       path: '/mypage/student/like',
       component: like
-    }, 
+    },    
     {
       path: '/mypage/student/tutoring',
       component: tutoring
@@ -62,6 +68,10 @@ const router = new Router({
     {
       path: '/mypage/message',
       component: messageIndex
+    }, 
+    {
+      path: '/mypage/message/:messageId',
+      component: messageDetail
     }, 
     {
       path: '/page',
