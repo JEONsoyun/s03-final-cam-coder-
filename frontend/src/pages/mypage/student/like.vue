@@ -2,9 +2,9 @@
 <div style="padding: 16px;">
     <div class="d-flex flex-column like-page">
         <div class="d-flex flex-column like-page__title">
-            <div class="d-flex" style="font-weight:bold;font-size:30px">나의 관심 선생님 목록</div>
+            <div class="d-flex" style="font-weight:bold;font-size:30px;margin-bottom:20px;">나의 관심 선생님 목록</div>
         </div>
-        <div class="d-flex teacher-list">
+        <div class="d-flex flex-wrap teacher-list">
             <div class="d-flex flex-column align-center flex-grow-0 list">
                 <div class="d-flex flex-column justify-center">
                     <img  style="width:120px" src="https://kimstudy.com/Resources/images/tutor.png"/>
