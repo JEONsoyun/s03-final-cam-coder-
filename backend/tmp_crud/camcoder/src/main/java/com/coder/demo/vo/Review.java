@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -19,33 +22,36 @@ public class Review {
 	private Long tutoringCode;
 	private String evaluationContent;
 	private Date evaluationDate;
-	private Long studentCode;
-	private Long teacherCode;
-	@Override
-	public String toString() {
-		return "Review [reviewCode=" + reviewCode + ", tutoringCode=" + tutoringCode + ", evaluationContent="
-				+ evaluationContent + ", evaluationDate=" + evaluationDate + ", studentCode=" + studentCode
-				+ ", teacherCode=" + teacherCode + "]";
+	
+	@ManyToOne
+	@JoinColumn(name="student_code", referencedColumnName = "user_code")
+	private User student;
+	
+	@ManyToOne
+	@JoinColumn(name = "teacher_code",referencedColumnName = "teacher_code")
+	private Teacher teacher;
+	
+	@PrePersist
+	public void beforeCreate() {
+		this.evaluationDate = new Date();
 	}
+	
 	public Review() {
 		super();
 	}
-	public Review(Long reviewCode, Long tutoringCode, String evaluationContent, Date evaluationDate, Long studentCode,
-			Long teacherCode) {
-		super();
-		this.reviewCode = reviewCode;
+	
+	public Review(Long tutoringCode, String evaluationContent, User student,
+			Teacher teacher) {
 		this.tutoringCode = tutoringCode;
 		this.evaluationContent = evaluationContent;
-		this.evaluationDate = evaluationDate;
-		this.studentCode = studentCode;
-		this.teacherCode = teacherCode;
+		this.student = student;
+		this.teacher = teacher;
 	}
+	
 	public Long getReviewCode() {
 		return reviewCode;
 	}
-	public void setReviewCode(Long reviewCode) {
-		this.reviewCode = reviewCode;
-	}
+
 	public Long getTutoringCode() {
 		return tutoringCode;
 	}
@@ -64,18 +70,21 @@ public class Review {
 	public void setEvaluationDate(Date evaluationDate) {
 		this.evaluationDate = evaluationDate;
 	}
-	public Long getStudentCode() {
-		return studentCode;
+
+	public User getStudent() {
+		return student;
 	}
-	public void setStudentCode(Long studentCode) {
-		this.studentCode = studentCode;
+
+	public void setStudent(User student) {
+		this.student = student;
 	}
-	public Long getTeacherCode() {
-		return teacherCode;
+
+	public Teacher getTeacher() {
+		return teacher;
 	}
-	public void setTeacherCode(Long teacherCode) {
-		this.teacherCode = teacherCode;
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
-	
 	
 }

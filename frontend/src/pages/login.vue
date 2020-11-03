@@ -3,7 +3,9 @@
     <div class="d-flex flex-column">
       <div class="login-page-top">
         <div class="login-page-text1">로그인이 필요합니다</div>
-        <div class="login-page-text2">로그인을 통해 CamCoder의 과외 서비스를 이용해보세요!</div>
+        <div class="login-page-text2">
+          로그인을 통해 CamCoder의 과외 서비스를 이용해보세요!
+        </div>
       </div>
       <div class="login-page-content">
         <div class="login-page-container">
@@ -32,8 +34,12 @@
             ></v-text-field>
           </div>
         </div>
-        <c-button style="margin-top: 24px;" @click="onLoginClick">로그인</c-button>
-        <c-button style="margin-top: 8px;" type="white" @click="onSignupClick">회원가입</c-button>
+        <c-button style="margin-top: 24px" @click="onLoginClick"
+          >로그인</c-button
+        >
+        <c-button style="margin-top: 8px" type="white" @click="onSignupClick"
+          >회원가입</c-button
+        >
       </div>
     </div>
   </c-main-layout>
@@ -43,15 +49,31 @@
 export default {
   name: 'login-page',
   data: () => ({
-    data: {},
+    data: {
+      id: 'studenta',
+      pw: 'passworda',
+      name: 'namea',
+      profile: 'i like math',
+    },
   }),
   methods: {
     async onLoginClick() {
-    //   try {
-    //     await this.$api.login(this.data);
-    //   } catch (e) {
-    //     alert('아이디 또는 비밀번호를 확인해주세요.');
-    //   }
+      try {
+        //console.log(this.data);
+        //console.log(this.data.id);
+        await this.$api.login(this.data).then((res) => {
+          //console.log(res.data);
+          //console.log(res.data.token);
+          this.$store.commit('SET_AUTHTOKEN', res.data.token);
+          console.log(this.$store.state.AUTHTOKEN);
+          //console.log(this.$store.state.config);
+        });
+        alert('로그인 성공');
+        //location.href = '/';
+        this.$router.push('/user');
+      } catch (e) {
+        alert('아이디 또는 비밀번호를 확인해주세요.');
+      }
     },
     onSignupClick() {
       this.$router.push('/signup');
@@ -59,7 +81,6 @@ export default {
   },
 };
 </script>
-
 
 <style>
 .login-page-top {

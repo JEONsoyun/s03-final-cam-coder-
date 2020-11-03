@@ -8,6 +8,7 @@ import login from '@/pages/login'
 import signup from '@/pages/signup'
 import teacherSearch from '@/pages/teacher/search'
 import mypage from '@/pages/mypage'
+import user from '@/pages/userDetail'
 
 const router = new Router({
   mode: 'history',
@@ -32,6 +33,10 @@ const router = new Router({
       path: '/mypage',
       component: mypage
     },
+    {
+      path : '/user',
+      component : user
+    }
   ]
 })
 
