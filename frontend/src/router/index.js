@@ -12,7 +12,7 @@ import teacherSearch from '@/pages/teacher/search'
 import teacherDetail from '@/pages/teacher/detail'
 import sendMessage from '@/pages/teacher/send-message'
 
-// import mypageEdit from '@pages/mypage/edit'
+import mypageEdit from '@pages/mypage/edit'
 // import mypageMessageIndex from '@pages/mypage/message/index'
 // import mypageMessageDetail from '@pages/mypage/message/detail'
 import mypageStudentIndex from '@/pages/mypage/student/index'
@@ -56,10 +56,10 @@ const router = new Router({
       path : '/mypage/student',
       component : mypageStudentIndex
     },
-    // {
-    //   path : '/mypage/edit',
-    //   component : mypageEdit
-    // },
+    {
+      path : '/mypage/edit',
+      component : mypageEdit
+    },
     // {
     //   path : '/mypage/message',
     //   component : mypageMessageIndex
