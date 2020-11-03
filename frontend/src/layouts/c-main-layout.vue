@@ -1,5 +1,5 @@
 <template>
-  <div class="c-main-layout">
+  <div class="d-flex flex-column c-main-layout">
       <div class="c-main-layout__header-container">
           <div class="c-main-layout__header">
             <div @click="onLogoClick" class="d-flex flex-grow-0 align-center" style="margin-right: 40px;cursor:pointer">
@@ -11,10 +11,10 @@
             <c-button @click="$router.push('/login')" class="flex-grow-0">로그인</c-button>
           </div>
       </div>
-      <div class="c-main-layout__content">
+      <div class="d-flex flex-column flex-grow-1 c-main-layout__content">
           <slot />
       </div>
-      <div class="c-main-layout__footer">
+      <div class="d-flex flex-column c-main-layout__footer">
           <div class="c-main-layout__footer-content-container">
               <div class="c-main-layout__footer-content">
                   <div style="color: #333;margin-bottom: 8px;">CamCoder</div>
@@ -38,8 +38,8 @@ export default {
     data:() => ({
         selectedId: null,
         items: [
-            {text: '선생님 찾기', id: 0, path: '/'},
-            {text: '마이페이지', id: 1, path: '/'},
+            {text: '선생님 찾기', id: 0, path: '/teacher/search'},
+            {text: '마이페이지', id: 1, path: '/mypage'},
         ]
     }),
     methods: {
@@ -47,9 +47,15 @@ export default {
             this.$router.push('/');
         },
         onItemClick(item) {
-            
             this.$router.push(item.path);
             this.selectedId = item.id;
+        }
+    },
+    created() {
+        if(this.$route.path.includes('/teacher')) {
+            this.selectedId = 0;
+        } else if(this.$route.path.includes('/mypage')) {
+            this.selectedId = 1;
         }
     }
 }
@@ -58,8 +64,8 @@ export default {
 <style>
 .c-main-layout {
     width: 100%;
-    min-height: 100vh;
     background-color: #f6f7f7;
+    min-height: 100vh;
 }
 
 .c-main-layout__header-container {
