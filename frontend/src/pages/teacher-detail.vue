@@ -1,4 +1,5 @@
 <template>
+<c-main-layout>
 <div class="d-flex justify-center">
     <div class="d-flex flex-column">
     <div class="d-flex flex-column justify-center teacher-detail-page">
@@ -57,7 +58,8 @@
     <div class="d-flex flex-column flex-grow-1 teacher-message">
         <div class="d-flex flex-column" style="font-weight:bold;font-size:18px">한국에서 영어유학</div>
         <div class="d-flex flex-column">선생님에게 원하는 수업에 대해서 문의해 보세요!</div>
-        <div class="d-flex justify-center align-center flex-grow-0 message_button">문의하기</div>  
+        <div class="d-flex justify-center align-center flex-grow-0 message_button">문의하기</div> 
+        <c-button>문의하기</c-button> 
     </div>
     <div class="d-flex flex-column teacher-profile">
         <div class="d-flex flex-column">
@@ -101,7 +103,7 @@
     </div>
     </div>
 </div>  
-
+</c-main-layout>
 </template>
 
 <script>

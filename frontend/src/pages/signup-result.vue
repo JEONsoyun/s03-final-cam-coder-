@@ -1,4 +1,5 @@
 <template>
+<c-main-layout>
 <div class="d-flex justify-center">
     <div>
     <div class="d-flex flex-column justify-center signup-result-page">
@@ -9,11 +10,12 @@
             <div class="d-flex" style="margin-left:10px;font-weight:bold;font-size:20px">ooo님, 반갑습니다.</div>
             <div class="d-flex main-page__10-black" style="margin-left:10px;margin-top: 8px">실시간 화상 코딩 과외 서비스 플랫폼 'Cam-coder'입니다.</div>
             <div class="d-flex main-page__10-black" style="margin-left:10px;margin-top: 8px">지금 바로 나에게 맞는 과외 선생님을 만나 보세요!</div>
-            <div class="d-flex justify-center align-center flex-grow-0 search_button">선생님 찾으러 가기</div>  
+            <c-button style="margin-top:20px;">선생님 찾으러가기</c-button>
         </div>
     </div>
     </div>
 </div>
+</c-main-layout>
 </template>
 
 <script>

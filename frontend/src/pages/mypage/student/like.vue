@@ -11,7 +11,7 @@
                 </div>
                 <div class="d-flex flex-column justify-center" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
                 <div class="d-flex flex-column justify-center">가격 : 시간당 20,000원</div>
-                <div class="d-flex flex-column justify-center align-center flex-grow-1 delete_button">삭제</div>      
+                <c-button style="margin-top:10px">삭제</c-button>   
             </div>
             <div class="d-flex flex-column align-center flex-grow-0 list">
                 <div class="d-flex flex-column justify-center">
@@ -19,7 +19,7 @@
                 </div>
                 <div class="d-flex flex-column justify-center" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
                 <div class="d-flex flex-column justify-center">가격 : 시간당 20,000원</div>
-                <div class="d-flex flex-column justify-center align-center flex-grow-1 delete_button">삭제</div>      
+                <c-button style="margin-top:10px">삭제</c-button>   
             </div>
             <div class="d-flex flex-column align-center flex-grow-0 list">
                 <div class="d-flex flex-column justify-center">
@@ -27,7 +27,7 @@
                 </div>
                 <div class="d-flex flex-column justify-center" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
                 <div class="d-flex flex-column justify-center">가격 : 시간당 20,000원</div>
-                <div class="d-flex flex-column justify-center align-center flex-grow-1 delete_button">삭제</div>      
+                <c-button style="margin-top:10px">삭제</c-button>   
             </div>
             <div class="d-flex flex-column align-center flex-grow-0 list">
                 <div class="d-flex flex-column justify-center">
@@ -35,40 +35,9 @@
                 </div>
                 <div class="d-flex flex-column justify-center" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
                 <div class="d-flex flex-column justify-center">가격 : 시간당 20,000원</div>
-                <div class="d-flex flex-column justify-center align-center flex-grow-1 delete_button">삭제</div>      
+                <c-button style="margin-top:10px">삭제</c-button>   
             </div>
-            <div class="d-flex flex-column align-center flex-grow-0 list">
-                <div class="d-flex flex-column justify-center">
-                    <img  style="width:120px" src="https://kimstudy.com/Resources/images/tutor.png"/>
-                </div>
-                <div class="d-flex flex-column justify-center" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
-                <div class="d-flex flex-column justify-center">가격 : 시간당 20,000원</div>
-                <div class="d-flex flex-column justify-center align-center flex-grow-1 delete_button">삭제</div>      
-            </div>
-            <div class="d-flex flex-column align-center flex-grow-0 list">
-                <div class="d-flex flex-column justify-center">
-                    <img  style="width:120px" src="https://kimstudy.com/Resources/images/tutor.png"/>
-                </div>
-                <div class="d-flex flex-column justify-center" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
-                <div class="d-flex flex-column justify-center">가격 : 시간당 20,000원</div>
-                <div class="d-flex flex-column justify-center align-center flex-grow-1 delete_button">삭제</div>      
-            </div>
-            <div class="d-flex flex-column align-center flex-grow-0 list">
-                <div class="d-flex flex-column justify-center">
-                    <img  style="width:120px" src="https://kimstudy.com/Resources/images/tutor.png"/>
-                </div>
-                <div class="d-flex flex-column justify-center" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
-                <div class="d-flex flex-column justify-center">가격 : 시간당 20,000원</div>
-                <div class="d-flex flex-column justify-center align-center flex-grow-1 delete_button">삭제</div>      
-            </div>
-            <div class="d-flex flex-column align-center flex-grow-0 list">
-                <div class="d-flex flex-column justify-center">
-                    <img  style="width:120px" src="https://kimstudy.com/Resources/images/tutor.png"/>
-                </div>
-                <div class="d-flex flex-column justify-center" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
-                <div class="d-flex flex-column justify-center">가격 : 시간당 20,000원</div>
-                <div class="d-flex flex-column justify-center align-center flex-grow-1 delete_button">삭제</div>      
-            </div>
+
         </div>
     </div>
 </div>

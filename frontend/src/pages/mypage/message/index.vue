@@ -11,8 +11,8 @@
                 </div>
                 <div class="d-flex" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
                 <div class="d-flex">그럼 3시 20분에 과외 진행할게요~~~~~</div>
-                <div class="d-flex justify-center align-center flex-grow-1 detail_button">메세지 상세보기</div>      
-                <div class="d-flex justify-center align-center flex-grow-1 delete_button">메세지 삭제하기</div>      
+                <c-button style="margin-top:60px;margin-right:10px;">메세지 상세보기</c-button>
+                <c-button type="white" style="margin-top:60px;margin-right:10px;">메세지 삭제하기</c-button>
             </div>
             <div class="d-flex align-center flex-grow-0 list">
                 <div class="d-flex" style="width:120px">
@@ -20,8 +20,8 @@
                 </div>
                 <div class="d-flex" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
                 <div class="d-flex">그럼 3시 20분에 과외 진행할게요~~~~~</div>
-                <div class="d-flex justify-center align-center flex-grow-1 detail_button">메세지 상세보기</div>      
-                <div class="d-flex justify-center align-center flex-grow-1 delete_button">메세지 삭제하기</div>      
+                <c-button style="margin-top:60px;margin-right:10px;">메세지 상세보기</c-button>
+                <c-button type="white" style="margin-top:60px;margin-right:10px;">메세지 삭제하기</c-button>
             </div>
             <div class="d-flex align-center flex-grow-0 list">
                 <div class="d-flex" style="width:120px">
@@ -29,8 +29,8 @@
                 </div>
                 <div class="d-flex" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
                 <div class="d-flex">그럼 3시 20분에 과외 진행할게요~~~~~</div>
-                <div class="d-flex justify-center align-center flex-grow-1 detail_button">메세지 상세보기</div>      
-                <div class="d-flex justify-center align-center flex-grow-1 delete_button">메세지 삭제하기</div>      
+                <c-button style="margin-top:60px;margin-right:10px;">메세지 상세보기</c-button>
+                <c-button type="white" style="margin-top:60px;margin-right:10px;">메세지 삭제하기</c-button>
             </div>
             <div class="d-flex align-center flex-grow-0 list">
                 <div class="d-flex" style="width:120px">
@@ -38,17 +38,8 @@
                 </div>
                 <div class="d-flex" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
                 <div class="d-flex">그럼 3시 20분에 과외 진행할게요~~~~~</div>
-                <div class="d-flex justify-center align-center flex-grow-1 detail_button">메세지 상세보기</div>      
-                <div class="d-flex justify-center align-center flex-grow-1 delete_button">메세지 삭제하기</div>      
-            </div>
-            <div class="d-flex align-center flex-grow-0 list">
-                <div class="d-flex" style="width:120px">
-                    <img style="width:120px" src="https://kimstudy.com/Resources/images/tutor.png"/>
-                </div>
-                <div class="d-flex" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
-                <div class="d-flex">그럼 3시 20분에 과외 진행할게요~~~~~</div>
-                <div class="d-flex justify-center align-center flex-grow-1 detail_button">메세지 상세보기</div>      
-                <div class="d-flex justify-center align-center flex-grow-1 delete_button">메세지 삭제하기</div>      
+                <c-button style="margin-top:60px;margin-right:10px;">메세지 상세보기</c-button>
+                <c-button type="white" style="margin-top:60px;margin-right:10px;">메세지 삭제하기</c-button>
             </div>
         </div>
     </div>

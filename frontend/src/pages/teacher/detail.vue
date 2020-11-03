@@ -1,4 +1,5 @@
 <template>
+<c-main-layout>
 <div class="d-flex justify-center">
     <div class="d-flex flex-column">
     <div class="d-flex flex-column justify-center teacher-detail-page">
@@ -26,27 +27,6 @@
                     <div class="d-flex" style="font-size:15px;width:20px">CamCoder에서의 과외 횟수</div>
                     <div class="d-flex" style="font-size:15px">20회</div>
                 </div> 
-                <!-- <div class="d-flex flex-row">
-                    <div class="d-flex">
-                        <img style="width:50px;height:50px;" src="https://kimstudy.com/Resources/images/tutor.png"/>
-                    </div>
-                    <div class="d-flex" style="font-size:15px">과목</div>
-                    <div class="d-flex" style="font-size:15px">영어, 회화</div>
-                </div> 
-                <div class="d-flex flex-row">
-                    <div class="d-flex">
-                        <img style="width:50px;height:50px;" src="https://kimstudy.com/Resources/images/tutor.png"/>
-                    </div>
-                    <div class="d-flex" style="font-size:15px">지역</div>
-                    <div class="d-flex" style="font-size:15px">서울 강남구, 경기 수원시 권선구, 경기 수원시 영통구</div>
-                </div>  
-                <div class="d-flex flex-row">
-                    <div class="d-flex">
-                        <img style="width:50px;height:50px;" src="https://kimstudy.com/Resources/images/tutor.png"/>
-                    </div>
-                    <div class="d-flex" style="font-size:15px">조회수</div>
-                    <div class="d-flex" style="font-size:15px">1,210</div>
-                </div>               -->
             </div>
         </div>
         <div class="d-flex flex-row teacher-information">
@@ -57,19 +37,11 @@
     <div class="d-flex flex-column flex-grow-1 teacher-message">
         <div class="d-flex flex-column" style="font-weight:bold;font-size:18px">한국에서 영어유학</div>
         <div class="d-flex flex-column">선생님에게 원하는 수업에 대해서 문의해 보세요!</div>
-        <div class="d-flex justify-center align-center flex-grow-0 message_button">문의하기</div>  
-    </div>
-    <div class="d-flex flex-column teacher-profile">
-        <div class="d-flex flex-column">
-            <div class="d-flex" style="font-weight:bold;font-size:18px">프로필</div>
-            <div class="d-flex justify-center profile">
-                <div class="d-flex">프로필,,,,,,,,,,,,</div>
-            </div>
-        </div>
+        <c-button>문의하기</c-button> 
     </div>
     <div class="d-flex flex-column teacher-intro">
         <div class="d-flex flex-column">
-            <div class="d-flex" style="font-weight:bold;font-size:18px">인트로</div>
+            <div class="d-flex" style="font-weight:bold;font-size:18px">INTRODUCE</div>
             <div class="d-flex justify-center intro">
                 <div class="d-flex">인트로~~~~~~~~~~~~</div>
             </div>
@@ -77,8 +49,8 @@
     </div>
     <div class="d-flex flex-column teacher-review">
         <div class="d-flex flex-column">
-            <div class="d-flex" style="font-weight:bold;font-size:18px">리뷰</div>
-            <div class="d-flex" style="margin-top: 8px;font-size:10px">실제 과외를 수강한 학생들이 남긴 리뷰입니다.</div>
+            <div class="d-flex" style="font-weight:bold;font-size:18px">REVIEW</div>
+            <div class="d-flex" style="margin-top: 8px;font-size:15px">실제 과외를 수강한 학생들이 남긴 리뷰입니다.</div>
             <div class="d-flex flex-row review">
                 <div class="d-flex flex-row flex-wrap review-list">
                     <div class="d-flex align-center flex-grow-0 list">
@@ -101,7 +73,7 @@
     </div>
     </div>
 </div>  
-
+</c-main-layout>
 </template>
 
 <script>
@@ -125,12 +97,9 @@ export default {
     border-color: #eaeaea;
     border-width: 1px;
 }
-.profile {
-    margin-top: 20px;
-    width : 600px;
-    border-style: solid;
-    border-color: #eaeaea;
-    border-width: 1px;
+.user {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .review {
     margin-top: 20px;
@@ -138,10 +107,6 @@ export default {
     border-style: solid;
     border-color: #eaeaea;
     border-width: 1px;
-}
-.user {
-    margin-right: 10px;
-    margin-left: 10px;
 }
 .teacher-profile {
     margin-top: 20px;
@@ -170,16 +135,6 @@ export default {
     border-style: solid;
     border-color: #eaeaea;
     border-width: 1px;
-}
-.message_button {
-    background-color: #fb8805;
-    box-shadow: 1px;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
-    height: 40px;
-    padding: 0 12px;
-    margin-top: 50px;
 }
 .teacher-page__title {
     margin-top: 10px;
