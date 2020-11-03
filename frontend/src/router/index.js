@@ -5,7 +5,8 @@ Vue.use(Router)
 
 import index from '@/pages/index'
 import signupResult from '@/pages/signup-result'
-import teacherDetail from '@/pages/teacher-detail'
+import teacherDetail from '@/pages/teacher/detail'
+import like from '@/pages/mypage/student/like'
 import page from '@/pages/page'
 
 const router = new Router({
@@ -24,9 +25,13 @@ const router = new Router({
       component: teacherDetail
     },
     {
+      path: '/mypage/student/like',
+      component: like
+    },    
+    {
       path: '/page',
       component: page
-    },    
+    },  
 
   ]
 })
