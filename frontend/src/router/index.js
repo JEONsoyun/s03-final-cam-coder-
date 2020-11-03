@@ -15,7 +15,7 @@ import sendMessage from '@/pages/teacher/send-message'
 // import mypageEdit from '@pages/mypage/edit'
 // import mypageMessageIndex from '@pages/mypage/message/index'
 // import mypageMessageDetail from '@pages/mypage/message/detail'
-// import mypageStudentIndex from '@/pages/mypage/student/index'
+import mypageStudentIndex from '@/pages/mypage/student/index'
 // import mypageStudentLike from '@pages/mypage/student/like'
 // import mypageStudentTutoring from '@pages/mypage/student/tutoring'
 // import mypageTeacherEdit from '@pages/mypage/teacher/edit'
@@ -52,10 +52,10 @@ const router = new Router({
       path : '/teacher/send-message/:userid',
       component : sendMessage
     },
-    // {
-    //   path : '/mypage/student',
-    //   component : mypageStudentIndex
-    // },
+    {
+      path : '/mypage/student',
+      component : mypageStudentIndex
+    },
     // {
     //   path : '/mypage/edit',
     //   component : mypageEdit

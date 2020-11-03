@@ -77,12 +77,12 @@ export default {
     },
     //mesage api
     async sendMessage(data,config){
-        return  (await axios.post(`${baseURL}/messages`,data,config))
+        return  (await axios.post(`${baseURL}/message`,data,config))
     },
     async getMessage(config){
-        return  (await axios.get(`${baseURL}/messages`,config)).data
+        return  (await axios.get(`${baseURL}/message`,config)).data
     },
     async getUserMessage(user_id,config){
-        return  (await axios.get(`${baseURL}/messages/${user_id}`,config)).data
+        return  (await axios.get(`${baseURL}/message/${user_id}`,config)).data
     },
 }

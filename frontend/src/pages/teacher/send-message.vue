@@ -10,17 +10,17 @@ export default {
   data: () => ({
     teacherId: 0,
     teacher: {},
-    data: {
+    message: {
       content: 'hello',
-      receiver: 'teacher0',
+      receiver: '',
     },
   }),
   methods: {
     async onSendClick() {
       try {
-        console.log(this.data);
-        console.log(storagelocal);
-        await this.$api.sendMessage(this.data, this.$store.state.config);
+        console.log(this.message);
+        console.log(this.$store.state.config);
+        await this.$api.sendMessage(this.message, this.$store.state.config);
         alert('메시지 전송 성공');
       } catch (e) {
         alert('메시지 전송 실패.');
@@ -43,6 +43,8 @@ export default {
         this.teacherId,
         this.$store.state.config
       );
+      this.message.receiver = this.teacher.user.userCode;
+      console.log(this.teacher.user.userCode);
     } catch (e) {
       console.log('선생님 로딩 실패');
     }
