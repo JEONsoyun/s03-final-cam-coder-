@@ -52,7 +52,11 @@ export default {
         }
     },
     created() {
-        console.log(this.$route.path);
+        if(this.$route.path.includes('/teacher')) {
+            this.selectedId = 0;
+        } else if(this.$route.path.includes('/mypage')) {
+            this.selectedId = 1;
+        }
     }
 }
 </script>
