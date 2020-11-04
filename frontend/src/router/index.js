@@ -11,6 +11,7 @@ import teacherSearch from '@/pages/teacher/search'
 import teacherDetail from '@/pages/teacher/detail'
 import sendMessage from '@/pages/teacher/send-message'
 
+import mypage from '@/pages/mypage/index'
 import mypageEdit from '@/pages/mypage/edit'
 import mypageMessageIndex from '@/pages/mypage/message/index'
 import mypageMessageDetail from '@/pages/mypage/message/detail'
@@ -39,10 +40,10 @@ const router = new Router({
       path: '/teacher/search',
       component: teacherSearch
     },
-    // {
-    //   path: '/mypage',
-    //   component: mypage
-    // },
+    {
+      path: '/mypage',
+      component: mypage
+    },
     // {
     //   path : '/user',
     //   component : user

@@ -4,7 +4,8 @@
             <div class="c-mypage-layout__top" />
             <div class="c-mypage-layout__content-container">
                 <div class="c-mypage-layout__content">
-                    <div></div>
+                    <div @click="selectedId=0" class="c-mypage-layout__content-menu1" :class="{'c-mypage-layout__content-menu--selected': selectedId == 0}"></div>
+                    <div @click="selectedId=1" class="c-mypage-layout__content-menu2" :class="{'c-mypage-layout__content-menu--selected': selectedId == 1}"></div>
                 </div>
             </div>
         </div>
@@ -14,6 +15,7 @@
 <script>
 export default {
     data:() => ({
+        selectedId: 0,
     }),
 }
 </script>
@@ -50,6 +52,35 @@ export default {
 
 .c-mypage-layout__content {
     position: relative;
+}
 
+.c-mypage-layout__content-menu1 {
+    position: absolute;
+    right: 100px;
+    top: -56px;
+    width: 60px;
+    height: 40px;
+    background: rgb(209, 209, 209);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    cursor: pointer;
+}
+
+.c-mypage-layout__content-menu2 {
+    position: absolute;
+    right: 42px;
+    top: -56px;
+    width: 60px;
+    height: 40px;
+    background: rgb(209, 209, 209);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    cursor: pointer;
+}
+
+.c-mypage-layout__content-menu--selected {
+    background: #fff;
+    box-shadow: 2px -6px 6px 1px rgba(0, 0, 0, 0.3);
+    z-index: 2;
 }
 </style>
