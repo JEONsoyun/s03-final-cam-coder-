@@ -10,6 +10,13 @@
 export default {
   data: () => ({
     user: {},
+    data: {
+      id: '',
+      pw: '',
+      name: '',
+      profile: '',
+      pw_verification: '',
+    },
   }),
   methods: {
     async onUpdateUser() {
@@ -17,7 +24,6 @@ export default {
         console.log(this.$store.state.config);
         await this.$api.sendMessage(this.message, this.$store.state.config);
         alert('정보변경 성공');
-        this.user = await this.$api.getMe(this.$store.state.config);
       } catch (e) {
         alert('정보변경 실패.');
       }
@@ -27,6 +33,10 @@ export default {
     console.log(this.$store.state.config);
     try {
       this.user = await this.$api.getMe(this.$store.state.config);
+      this.user = await this.$api.getMe(this.$store.state.config);
+      this.data.id = this.user.userId;
+      this.data.name = this.user.userName;
+      this.data.profile = this.user.userProfile;
     } catch (e) {
       console.log('잘못된 접근입니다. 로딩 실패');
     }

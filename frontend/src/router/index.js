@@ -72,7 +72,7 @@ const router = new Router({
       component : mypageMessageIndex
     },
     {
-      path : '/mypage/message/:messageId',
+      path : '/mypage/message/:usercode',
       component : mypageMessageDetail
     },
     {

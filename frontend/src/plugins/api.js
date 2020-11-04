@@ -43,17 +43,20 @@ export default {
         return (await axios.post(`${baseURL}/teachers/search`, data)).data
     },
     // Tutorings api
-    async postTutoring(data){
+    async postTutoring(data,config){
         return (await axios.post(`${baseURL}/tutorings`, data))
     },
-    async getUserTutoring(config){
-        return (await axios.get(`${baseURL}/tutorings`,config)).data
+    async getTeacherTutoring(config){
+        return (await axios.get(`${baseURL}/tutorings/0/teacher`,config)).data
     },
-    async getTutoring(tutorings_id){
-        return  (await axios.get(`${baseURL}/tutorings/${tutorings_id}`)).data
+    async getStudentTutoring(config){
+        return (await axios.get(`${baseURL}/tutorings/0/student`,config)).data
     },
-    async updateTutoring(data){
-        return  (await axios.put(`${baseURL}/tutorings/${data.tutorings_id}`)).data
+    async getTutoring(tutorings_id,config){
+        return  (await axios.get(`${baseURL}/tutorings/${tutorings_id}`,config)).data
+    },
+    async updateTutoring(data,config){
+        return  (await axios.put(`${baseURL}/tutorings/${data.tutorings_id}`,config)).data
     },
     // like api 
     async postLike(data){
@@ -85,7 +88,7 @@ export default {
     async getMessage(config){
         return  (await axios.get(`${baseURL}/message`,config)).data
     },
-    async getUserMessage(user_id,config){
-        return  (await axios.get(`${baseURL}/message/${user_id}`,config)).data
+    async getUserMessage(user_code,config){
+        return  (await axios.get(`${baseURL}/message/${user_code}`,config)).data
     },
 }
