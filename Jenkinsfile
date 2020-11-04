@@ -1,6 +1,6 @@
 /* pipeline 변수 설정 */
 def DOCKER_IMAGE_NAME = "wlgh325/project-camcoder"
-def DOCKER_IMAGE_TAGS = "0.3"
+def DOCKER_IMAGE_TAGS = "0.4"
 def NAMESPACE = "camcoder-project"
 def VERSION = "${env.BUILD_NUMBER}"
 def DEPLOY_NAME = "camcoder-spring"
@@ -65,7 +65,7 @@ podTemplate(label: 'builder',
 				container('helm') {
 					try{
 						sh "helm delete ${DEPLOY_NAME} -n ${NAMESPACE}"
-						sh "sleep 5"
+                        sh "sleep 20"
 					}
 					catch (e) {
 						echo "Clear-up Error: " + e.getMessage()
