@@ -8,6 +8,10 @@ export default new Vuex.Store({
     ISLOGGEDIN: null,
     USER: {},
     ISSKIP: false,
+    AUTHTOKEN:null,
+    config : {
+      headers: { Authorization:null}
+   },
   },
   mutations: {
     ISLOGGEDIN(state, val) {
@@ -18,6 +22,10 @@ export default new Vuex.Store({
     },
     ISSKIP(state, val) {
       state.ISSKIP = val
+    },
+    SET_AUTHTOKEN(state, val) {
+      state.AUTHTOKEN = val,
+      state.config.headers.Authorization = `Bearer `+val
     },
 
   },
@@ -31,6 +39,9 @@ export default new Vuex.Store({
     },
     ISLOGGEDIN(state) {
       return state.ISLOGGEDIN;
-    }
+    },
+    AUTHTOKEN(state) {
+      return state.AUTHTOKEN;
+    },
   }
 })

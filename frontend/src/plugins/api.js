@@ -1,39 +1,40 @@
 import axios from 'axios'
 
+
 const baseURL = '/api'
 
 export default {
     async login(data) {
-        return (await axios.post(`${baseURL}/accounts/login/`, data))
+        return (await axios.post(`${baseURL}/users/login/`, data))
     },
-    async logout() {
-        return (await axios.post(`${baseURL}/accounts/logout/`))
+    async logout(config) {
+        return (await axios.post(`${baseURL}/users/logout/`,config))
     },
     async isLoggedIn() {
-        return (await axios.get(`${baseURL}/accounts/islogin/`)).data
+        return (await axios.get(`${baseURL}/users/islogin/`)).data
     },
-    async getMe() {
-        return (await axios.get(`${baseURL}/accounts/mypage/`)).data
+    async getMe(config) {
+        return (await axios.get(`${baseURL}/users`, config)).data
     },
     async signup(data) {
-        return (await axios.post(`${baseURL}/accounts/signup/`, data))
+        return (await axios.post(`${baseURL}/users/signup/`, data))
     },
     //이거 accounts 붙이는 건가 아닌건가 모르겠네
     // teacher api 
-    async updateTeacher(data){
-        return (await axios.update(`${baseURL}/teachers/${data.user_id}`),data)
+    async updateTeacher(data,config){
+        return (await axios.put(`${baseURL}/teachers/${data.user_id}`,data,config))
     },
-    async deleteTeacher(user_id){
+    async deleteTeacher(data){
         return (await axios.delete(`${baseURL}/teachers/${data.user_id}`))
     },
-    async postTeacher(data){
-        return (await axios.post(`${baseURL}/teachers`, data))
+    async postTeacher(data,config){
+        return (await axios.post(`${baseURL}/teachers`, data,config))
     },
-    async getTeacher(teacher_code) {
-        return (await axios.get(`${baseURL}/teachers/${teacher_code}`)).data
+    async getTeacher(teacher_code,config) {
+        return (await axios.get(`${baseURL}/teachers/${teacher_code}`,config)).data
     },
-    async sortTeacher(data){
-        return (await axios.post(`${baseURL}/teachers/sorted`, data)).data
+    async sortTeacher(data,config){
+        return (await axios.post(`${baseURL}/teachers/sorted`, data,config)).data
     },
     async searchTeacher(data){
         return (await axios.post(`${baseURL}/teachers/search`, data)).data
@@ -42,14 +43,14 @@ export default {
     async postTutoring(data){
         return (await axios.post(`${baseURL}/tutorings`, data))
     },
-    async getUserTutoring(){
-        return (await axios.get(`${baseURL}/tutorings`)).data
+    async getUserTutoring(config){
+        return (await axios.get(`${baseURL}/tutorings`,config)).data
     },
     async getTutoring(tutorings_id){
         return  (await axios.get(`${baseURL}/tutorings/${tutorings_id}`)).data
     },
     async updateTutoring(data){
-        return  (await axios.update(`${baseURL}/tutorings/${data.tutorings_id}`)).data
+        return  (await axios.put(`${baseURL}/tutorings/${data.tutorings_id}`)).data
     },
     // like api 
     async postLike(data){
@@ -75,13 +76,13 @@ export default {
         return  (await axios.delete(`${baseURL}/reviews`,data))
     },
     //mesage api
-    async sendMessage(data){
-        return  (await axios.post(`${baseURL}/messages`,data))
+    async sendMessage(data,config){
+        return  (await axios.post(`${baseURL}/messages`,data,config))
     },
-    async getMessage(){
-        return  (await axios.get(`${baseURL}/messages`)).data
+    async getMessage(config){
+        return  (await axios.get(`${baseURL}/messages`,config)).data
     },
-    async getUserMessage(user_id){
-        return  (await axios.get(`${baseURL}/messages/${user_id}`)).data
+    async getUserMessage(user_id,config){
+        return  (await axios.get(`${baseURL}/messages/${user_id}`,config)).data
     },
 }

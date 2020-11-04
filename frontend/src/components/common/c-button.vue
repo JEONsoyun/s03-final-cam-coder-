@@ -5,7 +5,9 @@
     :class="{
       'c-button__white': type == 'white',
       'c-button__gray': type == 'gray',
-      'c-button__small': size =='small'
+      'c-button__gradient': type == 'gradient',
+      'c-button__small': size =='small',
+      
     }"
   >
     <slot />
@@ -61,6 +63,17 @@ export default {
   letter-spacing: -0.16px;
   font-size: 16px;
   padding: 0 16px;
+}
+
+.c-button__gradient {
+  height: 42px;
+  border-radius: 6px;
+  background: linear-gradient(to right, #EEA849, #F46B45);
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: -0.16px;
+  font-size: 16px;
+  padding: 0 16px;  
 }
 
 .c-button__small {
