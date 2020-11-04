@@ -17,4 +17,4 @@ spec:
       - path: /
         backend:
           serviceName: camcoder-spring-springboot
-          servicePort: 8080
+          servicePort: 5000
