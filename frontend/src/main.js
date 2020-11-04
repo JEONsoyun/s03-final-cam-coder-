@@ -71,5 +71,11 @@ new Vue({
   components: { App },
   template: '<App/>',
   store,
-  vuetify
+  vuetify,
+  created () { 
+    let token = localStorage.getItem('token')
+    if (token) {
+      console.log(token)
+     this.$store.commit('SET_AUTHTOKEN', token) 
+    } },
 })

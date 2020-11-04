@@ -27,34 +27,56 @@
                 </div>
             </div>
           </div>
-      </div>
+        </div>
   </c-main-layout>
 </template>
 
 <script>
 export default {
-    name: 'teacher-search-page',
-    methods: {
-        onSearchClick() {
-            
-        }
+  name: 'teacher-search-page',
+  data: () => ({
+    teachers: [],
+    searchKey: {
+      avaliableTime: '',
+      expertise: '',
+      intro: '',
+      keywords: '',
+      price: null,
+      profile: '',
+      sorttype: null,
+    },
+  }),
+  methods: {
+    async onSearchClick() {
+      try {
+        this.teachers = await this.$api.searchTeacher(this.searchKey);
+      } catch (e) {
+        console.log('선생님 로딩 실패');
+      }
+    },
+  },
+  async created() {
+    try {
+      this.teachers = await this.$api.searchTeacher(this.searchKey);
+    } catch (e) {
+      console.log('선생님 로딩 실패');
     }
-}
+  },
+};
 </script>
 
 <style>
 .teacher-search-page__container {
-    padding: 40px 0;
-    width: 100%;
+  padding: 40px 0;
+  width: 100%;
 }
 
 .teacher-search-page {
-    width: 1024px;
-    margin: 0 auto;
+  width: 1024px;
+  margin: 0 auto;
 }
 
 .teacher-search-page__title {
-
 }
 
 .teacher-search-page__search-container {

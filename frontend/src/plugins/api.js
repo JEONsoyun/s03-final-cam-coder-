@@ -19,10 +19,13 @@ export default {
     async signup(data) {
         return (await axios.post(`${baseURL}/users/signup/`, data))
     },
+    async updateUser(data,config){
+        return (await axios.put((`${baseURL}/teachers`, data,config)))
+    },
     //이거 accounts 붙이는 건가 아닌건가 모르겠네
     // teacher api 
     async updateTeacher(data,config){
-        return (await axios.put(`${baseURL}/teachers/${data.user_id}`,data,config))
+        return (await axios.put(`${baseURL}/teachers`,data,config))
     },
     async deleteTeacher(data){
         return (await axios.delete(`${baseURL}/teachers/${data.user_id}`))
@@ -40,24 +43,27 @@ export default {
         return (await axios.post(`${baseURL}/teachers/search`, data)).data
     },
     // Tutorings api
-    async postTutoring(data){
+    async postTutoring(data,config){
         return (await axios.post(`${baseURL}/tutorings`, data))
     },
-    async getUserTutoring(config){
-        return (await axios.get(`${baseURL}/tutorings`,config)).data
+    async getTeacherTutoring(config){
+        return (await axios.get(`${baseURL}/tutorings/0/teacher`,config)).data
     },
-    async getTutoring(tutorings_id){
-        return  (await axios.get(`${baseURL}/tutorings/${tutorings_id}`)).data
+    async getStudentTutoring(config){
+        return (await axios.get(`${baseURL}/tutorings/0/student`,config)).data
     },
-    async updateTutoring(data){
-        return  (await axios.put(`${baseURL}/tutorings/${data.tutorings_id}`)).data
+    async getTutoring(tutorings_id,config){
+        return  (await axios.get(`${baseURL}/tutorings/${tutorings_id}`,config)).data
+    },
+    async updateTutoring(data,config){
+        return  (await axios.put(`${baseURL}/tutorings/${data.tutorings_id}`,config)).data
     },
     // like api 
     async postLike(data){
         return  (await axios.post(`${baseURL}/likes`,data))
     },
-    async getLike(){
-        return  (await axios.get(`${baseURL}/likes`)).data
+    async getLike(config){
+        return  (await axios.get(`${baseURL}/likes`,config)).data
     },
     async deleteLike(like_id){
         return  (await axios.delete(`${baseURL}/likes/${like_id}`))
@@ -77,12 +83,12 @@ export default {
     },
     //mesage api
     async sendMessage(data,config){
-        return  (await axios.post(`${baseURL}/messages`,data,config))
+        return  (await axios.post(`${baseURL}/message`,data,config))
     },
     async getMessage(config){
-        return  (await axios.get(`${baseURL}/messages`,config)).data
+        return  (await axios.get(`${baseURL}/message`,config)).data
     },
-    async getUserMessage(user_id,config){
-        return  (await axios.get(`${baseURL}/messages/${user_id}`,config)).data
+    async getUserMessage(user_code,config){
+        return  (await axios.get(`${baseURL}/message/${user_code}`,config)).data
     },
 }
