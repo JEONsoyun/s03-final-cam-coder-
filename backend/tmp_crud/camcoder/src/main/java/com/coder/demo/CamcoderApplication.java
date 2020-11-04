@@ -4,9 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.coder.demo.dao.MessageDAO;
-import com.coder.demo.vo.Message;
-
 @SpringBootApplication
 public class CamcoderApplication {
 

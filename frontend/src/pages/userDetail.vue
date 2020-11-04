@@ -1,4 +1,8 @@
-<template></template>
+<template>
+  <div>
+    {{ user.userCode }}
+  </div>
+</template>
 <script>
 export default {
   name: '',

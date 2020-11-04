@@ -6,15 +6,19 @@ Vue.use(Router)
 import index from '@/pages/index'
 import login from '@/pages/login'
 import signup from '@/pages/signup'
-import teacherSearch from '@/pages/teacher/search'
-import mypage from '@/pages/mypage'
-import user from '@/pages/userDetail'
-import signupResult from '@/pages/signup-result'
+
+import teacherSearch from '@/pages/teacher/search' 
 import teacherDetail from '@/pages/teacher/detail'
-import like from '@/pages/mypage/student/like'
-import messageIndex from '@/pages/mypage/message/index'
-import tutoring from '@/pages/mypage/student/tutoring'
-import page from '@/pages/page'
+import sendMessage from '@/pages/teacher/send-message'
+
+import mypageEdit from '@/pages/mypage/edit'
+import mypageMessageIndex from '@/pages/mypage/message/index'
+import mypageMessageDetail from '@/pages/mypage/message/detail'
+import mypageStudentIndex from '@/pages/mypage/student/index'
+import mypageStudentLike from '@/pages/mypage/student/like'
+import mypageStudentTutoring from '@/pages/mypage/student/tutoring'
+import mypageTeacherEdit from '@/pages/mypage/teacher/edit'
+
 
 const router = new Router({
   mode: 'history',
@@ -35,39 +39,54 @@ const router = new Router({
       path: '/teacher/search',
       component: teacherSearch
     },
+    // {
+    //   path: '/mypage',
+    //   component: mypage
+    // },
+    // {
+    //   path : '/user',
+    //   component : user
+    // },
     {
-      path: '/mypage',
-      component: mypage
+      path : '/teacher/search',
+      component : teacherSearch
     },
     {
-      path : '/user',
-      component : user
+      path : '/teacher/detail/:id',
+      component : teacherDetail
     },
     {
-      path: '/signupResult',
-      component: signupResult
+      path : '/teacher/send-message/:userid',
+      component : sendMessage
     },
     {
-      path: '/teacherDetail',
-      component: teacherDetail
+      path : '/mypage/student',
+      component : mypageStudentIndex
     },
     {
-      path: '/mypage/student/like',
-      component: like
-    }, 
+      path : '/mypage/edit',
+      component : mypageEdit
+    },
     {
-      path: '/mypage/student/tutoring',
-      component: tutoring
-    },  
+      path : '/mypage/message',
+      component : mypageMessageIndex
+    },
     {
-      path: '/mypage/message',
-      component: messageIndex
-    }, 
+      path : '/mypage/message/:usercode',
+      component : mypageMessageDetail
+    },
     {
-      path: '/page',
-      component: page
-    },  
-
+      path : '/mypage/student/tutoring',
+      component : mypageStudentTutoring
+    },
+    {
+      path : '/mypage/student/like',
+      component : mypageStudentLike
+    },
+    {
+      path : '/mypage/teacher/edit',
+      component : mypageTeacherEdit
+    },
   ]
 })
 
