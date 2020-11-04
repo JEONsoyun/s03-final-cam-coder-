@@ -11,13 +11,13 @@ import teacherSearch from '@/pages/teacher/search'
 import teacherDetail from '@/pages/teacher/detail'
 import sendMessage from '@/pages/teacher/send-message'
 
-import mypageEdit from '@pages/mypage/edit'
-// import mypageMessageIndex from '@pages/mypage/message/index'
-// import mypageMessageDetail from '@pages/mypage/message/detail'
+import mypageEdit from '@/pages/mypage/edit'
+import mypageMessageIndex from '@/pages/mypage/message/index'
+import mypageMessageDetail from '@/pages/mypage/message/detail'
 import mypageStudentIndex from '@/pages/mypage/student/index'
-// import mypageStudentLike from '@pages/mypage/student/like'
-// import mypageStudentTutoring from '@pages/mypage/student/tutoring'
-// import mypageTeacherEdit from '@pages/mypage/teacher/edit'
+import mypageStudentLike from '@/pages/mypage/student/like'
+import mypageStudentTutoring from '@/pages/mypage/student/tutoring'
+import mypageTeacherEdit from '@/pages/mypage/teacher/edit'
 
 
 const router = new Router({
@@ -39,14 +39,14 @@ const router = new Router({
       path: '/teacher/search',
       component: teacherSearch
     },
-    {
-      path: '/mypage',
-      component: mypage
-    },
-    {
-      path : '/user',
-      component : user
-    },
+    // {
+    //   path: '/mypage',
+    //   component: mypage
+    // },
+    // {
+    //   path : '/user',
+    //   component : user
+    // },
     {
       path : '/teacher/search',
       component : teacherSearch
@@ -67,26 +67,26 @@ const router = new Router({
       path : '/mypage/edit',
       component : mypageEdit
     },
-    // {
-    //   path : '/mypage/message',
-    //   component : mypageMessageIndex
-    // },
-    // {
-    //   path : '/mypage/message/:messageId',
-    //   component : mypageMessageDetail
-    // },
-    // {
-    //   path : '/mypage/student/tutoring',
-    //   component : mypageStudentTutoring
-    // },
-    // {
-    //   path : '/mypage/student/like',
-    //   component : mypageStudentLike
-    // },
-    // {
-    //   path : '/mypage/teacher/edit',
-    //   component : mypageTeacherEdit
-    // },
+    {
+      path : '/mypage/message',
+      component : mypageMessageIndex
+    },
+    {
+      path : '/mypage/message/:messageId',
+      component : mypageMessageDetail
+    },
+    {
+      path : '/mypage/student/tutoring',
+      component : mypageStudentTutoring
+    },
+    {
+      path : '/mypage/student/like',
+      component : mypageStudentLike
+    },
+    {
+      path : '/mypage/teacher/edit',
+      component : mypageTeacherEdit
+    },
   ]
 })
 

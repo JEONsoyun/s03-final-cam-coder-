@@ -1,11 +1,10 @@
 <template>
   <div>
-    <div>{{ user }}</div>
+    <div>{{ this.user }}</div>
   </div>
 </template>
 <script>
 export default {
-  name: 'teacher-detail-page',
   data: () => ({
     user: {},
   }),
