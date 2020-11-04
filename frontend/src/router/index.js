@@ -36,10 +36,7 @@ const router = new Router({
       path: '/signup',
       component: signup
     },
-    {
-      path: '/teacher/search',
-      component: teacherSearch
-    },
+
     {
       path: '/mypage',
       component: mypage
@@ -49,8 +46,8 @@ const router = new Router({
     //   component : user
     // },
     {
-      path : '/teacher/search',
-      component : teacherSearch
+      path: '/teacher/search',
+      component: teacherSearch
     },
     {
       path : '/teacher/detail/:id',
