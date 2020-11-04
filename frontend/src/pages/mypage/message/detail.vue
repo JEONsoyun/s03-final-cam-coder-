@@ -12,6 +12,10 @@
         <div class="d-flex flex-row message">
             <div class="d-flex">
             </div>    
+            <div class="d-flex">
+            </div>  
+        </div>
+        <div class="d-flex flex-row send">
         </div>
     </div>
     </div>
