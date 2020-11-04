@@ -46,8 +46,10 @@ Vue.prototype.$teamLogos = {
 
 // Layout
 import CMainLayout from './layouts/c-main-layout'
+import CMypageLayout from './layouts/c-mypage-layout'
 
 Vue.component('c-main-layout', CMainLayout)
+Vue.component('c-mypage-layout', CMypageLayout)
 
 // Component
 import CButton from './components/common/c-button'
@@ -69,5 +71,11 @@ new Vue({
   components: { App },
   template: '<App/>',
   store,
-  vuetify
+  vuetify,
+  created () { 
+    let token = localStorage.getItem('token')
+    if (token) {
+      console.log(token)
+     this.$store.commit('SET_AUTHTOKEN', token) 
+    } },
 })
