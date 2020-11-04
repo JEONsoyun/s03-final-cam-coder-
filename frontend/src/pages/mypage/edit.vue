@@ -22,7 +22,7 @@ export default {
     async onUpdateUser() {
       try {
         console.log(this.$store.state.config);
-        await this.$api.sendMessage(this.message, this.$store.state.config);
+        await this.$api.updateUser(this.data, this.$store.state.config);
         alert('정보변경 성공');
       } catch (e) {
         alert('정보변경 실패.');

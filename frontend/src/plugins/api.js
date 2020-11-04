@@ -25,7 +25,7 @@ export default {
     //이거 accounts 붙이는 건가 아닌건가 모르겠네
     // teacher api 
     async updateTeacher(data,config){
-        return (await axios.put(`${baseURL}/teachers/${data.user_id}`,data,config))
+        return (await axios.put(`${baseURL}/teachers`,data,config))
     },
     async deleteTeacher(data){
         return (await axios.delete(`${baseURL}/teachers/${data.user_id}`))
@@ -62,8 +62,8 @@ export default {
     async postLike(data){
         return  (await axios.post(`${baseURL}/likes`,data))
     },
-    async getLike(){
-        return  (await axios.get(`${baseURL}/likes`)).data
+    async getLike(config){
+        return  (await axios.get(`${baseURL}/likes`,config)).data
     },
     async deleteLike(like_id){
         return  (await axios.delete(`${baseURL}/likes/${like_id}`))
