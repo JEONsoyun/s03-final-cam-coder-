@@ -8,7 +8,6 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }} # Inside the cluster, what port does the service expose?
-      nodePort: 30005
       targetPort: http
       protocol: TCP
       name: http
