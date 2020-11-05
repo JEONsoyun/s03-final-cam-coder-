@@ -36,7 +36,7 @@ spec:
               name: mysql-pass
               key: password
         - name: MYSQL_DATABASE
-          value: camCoder
+          value: camcoder
         ports:
         - containerPort: 3306
           name: mysql
