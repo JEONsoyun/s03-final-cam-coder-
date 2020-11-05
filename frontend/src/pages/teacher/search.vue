@@ -5,15 +5,16 @@
             <div class="teacher-search-page__title">221,440명의 과외 선생님이 있습니다.</div>
             <div class="d-flex teacher-search-page__search-container">
             <v-text-field
-              label="키워드를 입력해주세요."
-              single-line
+              class="teacher-search-page-input"
+              dense
+              hide-details
               solo
               flat
-              height="44px"
-              hide-details
+              outlined
+              label="키워드를 입력해주세요."
               @keydown.enter="onSearchClick"
             ></v-text-field>
-                <c-button class="flex-grow-0" style="height:48px;width:80px;">검색</c-button>
+            <c-button class="flex-grow-0" style="width:80px;">검색</c-button>
             </div>
             <div class="teacher-search-page__content">
                 <div class="teacher-search-page__item">
@@ -84,36 +85,20 @@ export default {
     max-width: 500px;
 }
 
-.teacher-search-page .v-input__control {
-  height: 44px !important;
-  border-color:  #fb8805 !important;
+.teacher-search-page-input input {
+  padding: 0 !important;
+}
+.teacher-search-page-input .v-input__control {
+  height: 42px !important;
 }
 
-.teacher-search-page .v-input__slot {
-border-color:  #fb8805 !important;
-border-color:  #fb8805 !important;
-}
-
-.teacher-search-page .v-text-field__slot {
-  height: 44px;
-  font-size: 16px;
-  color: #8a8a8a !important;
-  border-color:  #fb8805 !important;
-}
-
-.teacher-search-page fieldset {
-  border-color:  #fb8805 !important;
-  height: 48px;
-  background: #fff;
-}
-
-.teacher-search-page .v-text-field {
-    border-color:  #fb8805 !important;
+.teacher-search-page-input .v-text-field__slot {
+  height: 42px;
   font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.39px;
-  color: #c5c5c5;
+  color: #8a8a8a !important;
 }
-
-
+.teacher-search-page-input fieldset {
+  border-color:  #fb8805 !important;
+  height: 46px;
+}
 </style>
