@@ -15,10 +15,19 @@
                         선생님
                     </div>
                     <div class="d-flex flex-column flex-grow-0 align-center c-mypage-layout__content-left">
-                        <div class="c-mypage-layout__profile-image">프로필 이미지</div>
-                        <div class="c-mypage-layout__profile-text">사용자 이름<span style="font-weight:400">님
-                            <v-icon>keyboard_arrow_right</v-icon></span></div>
-                        <div></div>
+                        <div class="d-flex flex-shrink-0 c-mypage-layout__profile-image"></div>
+                        <div class="d-flex flex-shrink-0 align-center c-mypage-layout__profile-text">
+                            test
+                            <span style="font-weight:400">님
+                            <v-icon>keyboard_arrow_right</v-icon></span>
+                        </div>
+                        <div class="d-flex flex-column" style="width:100%;height:100%;padding:32px;padding-bottom:0">
+                            <div class="c-mypage-layout__bar"/>
+                            <c-button class="flex-grow-0" style="margin-top:24px;width: 100%" type="gradient">쪽지함</c-button>
+                            <div class="d-flex flex-grow-1"></div>
+                            <c-button class="flex-grow-0" style="width: 100%" type="gray">로그아웃</c-button>
+                        </div>
+                        
                     </div>
                     <div class="d-flex c-mypage-layout__content-right"></div>
                 </div>
@@ -111,7 +120,7 @@ export default {
 
 .c-mypage-layout__content-menu--selected {
     background: #fff;
-    box-shadow: 2px -6px 6px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px -4px 4px 1px rgba(0, 0, 0, 0.2);
     z-index: 2;
     color:#F46B45;
     font-weight: 800;
@@ -127,7 +136,7 @@ export default {
     border-left: 1px solid #f2f4f6;
     border-left-width: 1px;
     border-left-style: solid;
-    border-left-color: rgb(242, 244, 246);
+    border-left-color: #eaeaea;
 }
 
 .c-mypage-layout__profile-image {
@@ -138,10 +147,17 @@ export default {
     overflow: hidden;
 }
 .c-mypage-layout__profile-text {
+    cursor: pointer;
     margin-right: -24px;
     margin-top: 16px;
     font-size: 14px;
     font-weight: 800;
 }
+
+.c-mypage-layout__bar {
+    width: 100%;
+    border-top: solid 1px #eaeaea;
+}
+
 
 </style>

@@ -57,7 +57,7 @@ export default {
 .c-button__gray {
   height: 42px;
   border-radius: 6px;
-  background: #d2d2d2;
+  background: #dfdfdf;
   color: #fff;
   font-weight: 800;
   letter-spacing: -0.16px;
