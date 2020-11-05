@@ -52,9 +52,9 @@ export default {
         }
     },
     created() {
-        if(this.$route.path.includes('/teacher')) {
+        if(this.$route.path.match(/^\/teacher/) != null) {
             this.selectedId = 0;
-        } else if(this.$route.path.includes('/mypage')) {
+        } else if(this.$route.path.match(/^\/mypage/) != null) {
             this.selectedId = 1;
         }
     }
