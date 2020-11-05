@@ -14,7 +14,7 @@
                     :class="{'c-mypage-layout__content-menu--selected': selectedId == 1}">
                         선생님
                     </div>
-                    <div class="d-flex flex-column flex-grow-0 align-center c-mypage-layout__content-left">
+                    <div class="d-flex flex-column flex-grow-0 flex-shrink-0 align-center c-mypage-layout__content-left">
                         <div class="d-flex flex-shrink-0 c-mypage-layout__profile-image"></div>
                         <div class="d-flex flex-shrink-0 align-center c-mypage-layout__profile-text">
                             test
@@ -29,7 +29,9 @@
                         </div>
                         
                     </div>
-                    <div class="d-flex c-mypage-layout__content-right"></div>
+                    <div class="d-flex flex-column c-mypage-layout__content-right">
+                        <slot />
+                    </div>
                 </div>
             </div>
         </div>
@@ -137,6 +139,9 @@ export default {
     border-left-width: 1px;
     border-left-style: solid;
     border-left-color: #eaeaea;
+    width: 100%;
+    height: 100%;
+    padding: 0 32px;
 }
 
 .c-mypage-layout__profile-image {
