@@ -162,6 +162,7 @@ export default {
 .c-mypage-layout__bar {
     width: 100%;
     border-top: solid 1px #eaeaea;
+    overflow-y:scroll;
 }
 
 

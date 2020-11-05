@@ -1,12 +1,13 @@
 <template>
-  <div>
-    <button style="margin-top: 24px" @click="onUpdateTeacher">
-      선생님 정보 수정하기
-    </button>
-  </div>
+    <c-mypage-layout>    
+      <button style="margin-top: 24px" @click="onUpdateTeacher">
+        선생님 정보 수정하기
+      </button>
+    </c-mypage-layout>
 </template>
 <script>
 export default {
+  name: "mypage-teacher-edit-page",
   data: () => ({
     data: {
       intro: '재미있는 자료구조 수업입니다.',

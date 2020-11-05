@@ -11,13 +11,13 @@ import teacherSearch from '@/pages/teacher/search'
 import teacherDetail from '@/pages/teacher/detail'
 import sendMessage from '@/pages/teacher/send-message'
 
-import mypage from '@/pages/mypage/index'
 import mypageEdit from '@/pages/mypage/edit'
 import mypageMessageIndex from '@/pages/mypage/message/index'
 import mypageMessageDetail from '@/pages/mypage/message/detail'
-import mypageStudentIndex from '@/pages/mypage/student/index'
+import mypageStudent from '@/pages/mypage/student/index'
 import mypageStudentLike from '@/pages/mypage/student/like'
 import mypageStudentTutoring from '@/pages/mypage/student/tutoring'
+import mypageTeacher from '@/pages/mypage/teacher/index'
 import mypageTeacherEdit from '@/pages/mypage/teacher/edit'
 
 
@@ -37,10 +37,6 @@ const router = new Router({
       component: signup
     },
 
-    {
-      path: '/mypage',
-      component: mypage
-    },
     // {
     //   path : '/user',
     //   component : user
@@ -59,7 +55,11 @@ const router = new Router({
     },
     {
       path : '/mypage/student',
-      component : mypageStudentIndex
+      component : mypageStudent
+    },
+    {
+      path: '/mypage/teacher',
+      component: mypageTeacher
     },
     {
       path : '/mypage/edit',
@@ -81,6 +81,7 @@ const router = new Router({
       path : '/mypage/student/like',
       component : mypageStudentLike
     },
+
     {
       path : '/mypage/teacher/edit',
       component : mypageTeacherEdit
