@@ -4,7 +4,7 @@
 
 <script>
 export default {
-    name: "mypage-page"
+    name: "mypage-teacher-page"
 }
 </script>
 
