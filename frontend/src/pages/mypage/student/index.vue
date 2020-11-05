@@ -1,5 +1,5 @@
 <template>
-  <c-mypage-layout>
+  <c-mypage-layout title="학생 메뉴">
       <div>{{ this.user }}</div>
   </c-mypage-layout>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <c-mypage-layout>
+  <c-mypage-layout title="나의 과외 현황">
   </c-mypage-layout>
 </template>
 

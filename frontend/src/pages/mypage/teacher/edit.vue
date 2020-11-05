@@ -1,5 +1,5 @@
 <template>
-    <c-mypage-layout>    
+    <c-mypage-layout title="선생님 정보 수정"> 
       <button style="margin-top: 24px" @click="onUpdateTeacher">
         선생님 정보 수정하기
       </button>
