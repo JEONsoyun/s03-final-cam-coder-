@@ -39,7 +39,7 @@ export default {
         selectedId: null,
         items: [
             {text: '선생님 찾기', id: 0, path: '/teacher/search'},
-            {text: '마이페이지', id: 1, path: '/mypage'},
+            {text: '마이페이지', id: 1, path: '/mypage/student'},
         ]
     }),
     methods: {
