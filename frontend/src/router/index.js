@@ -18,6 +18,7 @@ import mypageStudent from '@/pages/mypage/student/index'
 import mypageStudentLike from '@/pages/mypage/student/like'
 import mypageStudentTutoring from '@/pages/mypage/student/tutoring'
 import mypageTeacher from '@/pages/mypage/teacher/index'
+import mypageTeacherTutoring from '@/pages/mypage/teacher/tutoring'
 import mypageTeacherEdit from '@/pages/mypage/teacher/edit'
 
 
@@ -81,7 +82,10 @@ const router = new Router({
       path : '/mypage/student/like',
       component : mypageStudentLike
     },
-
+    {
+      path : '/mypage/teacher/tutoring',
+      component : mypageTeacherTutoring
+    },
     {
       path : '/mypage/teacher/edit',
       component : mypageTeacherEdit
