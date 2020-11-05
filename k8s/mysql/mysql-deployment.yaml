@@ -6,6 +6,7 @@ spec:
   type: NodePort
   ports:
   - port: 3306
+    nodePort: 31771
   selector:
     app: mysql
 ---
