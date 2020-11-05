@@ -1,5 +1,5 @@
 <template>
-    <c-mypage-layout>
+    <c-mypage-layout title="나의 쪽지 목록">
         <div style="padding: 16px;">
             <div class="d-flex flex-column message-index-page">
                 <div class="d-flex flex-column message-index-page__title">
