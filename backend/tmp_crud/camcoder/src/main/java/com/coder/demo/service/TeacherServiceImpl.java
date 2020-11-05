@@ -104,4 +104,10 @@ public class TeacherServiceImpl implements TeacherService {
 		return tdao.findContainKeyword(keyword);
 	}
 
+	@Override
+	public Teacher selectOneByMyCode(String id) {
+		Long code = userdao.findByUserId(id).getUserCode();		
+		return Optional.ofNullable(tdao.findByUserCode(code)).orElse(new Teacher());
+	}
+
 }
