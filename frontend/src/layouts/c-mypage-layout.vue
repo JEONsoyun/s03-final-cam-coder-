@@ -6,24 +6,25 @@
             </div>
             <div class="c-mypage-layout__content-container">
                 <div class="d-flex c-mypage-layout__content">
-                    <div @click="selectedId=0" class="d-flex justify-center align-center c-mypage-layout__content-menu1" 
+                    <div @click="onMenuClick(0)" class="d-flex justify-center align-center c-mypage-layout__content-menu1" 
                     :class="{'c-mypage-layout__content-menu--selected': selectedId == 0}">
                         학생
                     </div>
-                    <div @click="selectedId=1" class="d-flex justify-center align-center c-mypage-layout__content-menu2" 
+                    <div @click="onMenuClick(1)" class="d-flex justify-center align-center c-mypage-layout__content-menu2" 
                     :class="{'c-mypage-layout__content-menu--selected': selectedId == 1}">
                         선생님
                     </div>
                     <div class="d-flex flex-column flex-grow-0 flex-shrink-0 align-center c-mypage-layout__content-left">
                         <div class="d-flex flex-shrink-0 c-mypage-layout__profile-image"></div>
                         <div @click="$router.push('/mypage/edit')" class="d-flex flex-shrink-0 align-center c-mypage-layout__profile-text">
-                            test
+                            테스트
                             <span style="font-weight:400">님
-                            <v-icon>keyboard_arrow_right</v-icon></span>
+                            <v-icon size="28">keyboard_arrow_right</v-icon></span>
                         </div>
+                        <div style="font-size:12px;color:#868e96;font-weight:800">{{selectedId == 0 ? '학생 회원 메뉴' : (selectedId == 1 ? '선생님 회원 메뉴' : '통합 회원 메뉴')}}</div>
                         <div class="d-flex flex-column" style="width:100%;height:100%;padding:32px;padding-bottom:0">
                             <div class="c-mypage-layout__bar"/>
-                            <c-button class="flex-grow-0" style="margin-top:24px;width: 100%" type="gradient">쪽지함</c-button>
+                            <c-button @click="$router.push('/mypage/message')" class="flex-grow-0" style="margin-top:24px;width: 100%" type="gradient">쪽지함</c-button>
                             <div class="d-flex flex-grow-1"></div>
                             <c-button class="flex-grow-0" style="width: 100%" type="gray">로그아웃</c-button>
                         </div>
@@ -47,6 +48,24 @@ export default {
     data:() => ({
         selectedId: 0,
     }),
+    methods: {
+        onMenuClick(id) {
+            if(id == 0) {
+                this.$router.push('/mypage/student');
+            } else if(id == 1) {
+                this.$router.push('/mypage/teacher');
+            }
+        }
+    },
+    created() {
+        if(this.$route.path.includes('/student')) {
+            this.selectedId = 0;
+        } else if(this.$route.path.includes('/teacher')) {
+            this.selectedId = 1;
+        } else {
+            this.selectedId = null;
+        }
+    }
 }
 </script>
 
@@ -165,7 +184,8 @@ export default {
     cursor: pointer;
     margin-right: -24px;
     margin-top: 16px;
-    font-size: 14px;
+    margin-bottom : 2px;
+    font-size: 18px;
     font-weight: 800;
 }
 

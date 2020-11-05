@@ -1,5 +1,5 @@
 <template>
-  <c-mypage-layout>
+  <c-mypage-layout title="쪽지 보기">
     <div>{{ this.messages }}</div>
   </c-mypage-layout>
 </template>
