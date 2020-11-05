@@ -1,5 +1,7 @@
 <template>
-  <c-mypage-layout></c-mypage-layout>
+  <c-mypage-layout title="선생님 메뉴">
+
+  </c-mypage-layout>
 </template>
 
 <script>

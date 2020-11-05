@@ -16,7 +16,7 @@
                     </div>
                     <div class="d-flex flex-column flex-grow-0 flex-shrink-0 align-center c-mypage-layout__content-left">
                         <div class="d-flex flex-shrink-0 c-mypage-layout__profile-image"></div>
-                        <div class="d-flex flex-shrink-0 align-center c-mypage-layout__profile-text">
+                        <div @click="$router.push('/mypage/edit')" class="d-flex flex-shrink-0 align-center c-mypage-layout__profile-text">
                             test
                             <span style="font-weight:400">님
                             <v-icon>keyboard_arrow_right</v-icon></span>
@@ -30,6 +30,7 @@
                         
                     </div>
                     <div class="d-flex flex-column c-mypage-layout__content-right">
+                        <div class="c-mypage-layout__content-title">{{title}}</div>
                         <slot />
                     </div>
                 </div>
@@ -40,6 +41,9 @@
 
 <script>
 export default {
+    props: {
+        title: {type:String, default:""}
+    },
     data:() => ({
         selectedId: 0,
     }),
@@ -142,6 +146,12 @@ export default {
     width: 100%;
     height: 100%;
     padding: 0 32px;
+}
+
+.c-mypage-layout__content-title {
+    font-weight: 800;
+    font-size: 18px;
+    margin-bottom: 40px;
 }
 
 .c-mypage-layout__profile-image {

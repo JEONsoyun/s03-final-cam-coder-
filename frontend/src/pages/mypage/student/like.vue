@@ -1,5 +1,5 @@
 <template>
-  <c-mypage-layout>
+  <c-mypage-layout title="나의 관심 선생님 목록">
     <div style="padding: 16px">
       <div class="d-flex flex-column like-page">
         <div class="d-flex flex-column like-page__title">
