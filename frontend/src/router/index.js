@@ -6,6 +6,7 @@ Vue.use(Router)
 import index from '@/pages/index'
 import login from '@/pages/login'
 import signup from '@/pages/signup'
+import room from '@/pages/room'
 
 import teacherSearch from '@/pages/teacher/search' 
 import teacherDetail from '@/pages/teacher/detail'
@@ -20,8 +21,6 @@ import mypageStudentTutoring from '@/pages/mypage/student/tutoring'
 import mypageTeacher from '@/pages/mypage/teacher/index'
 import mypageTeacherTutoring from '@/pages/mypage/teacher/tutoring'
 import mypageTeacherEdit from '@/pages/mypage/teacher/edit'
-
-import room from '@/pages/room'
 
 
 const router = new Router({
