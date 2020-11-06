@@ -12,9 +12,10 @@
               flat
               outlined
               label="키워드를 입력해주세요."
+              v-model="keyword"
               @keydown.enter="onSearchClick"
             ></v-text-field>
-            <c-button type="gradient" class="flex-grow-0" style="width:80px;">검색</c-button>
+            <c-button @click="onSearchClick" type="gradient" class="flex-grow-0" style="width:80px;">검색</c-button>
             </div>
             <div class="d-flex teacher-search-page__content">
               <div v-for="(item, ti) in SAMPLE_DATA" :key="`teacher-${ti}`" class="d-flex flex-column teacher-search-page__item-container">
@@ -54,15 +55,16 @@ export default {
   name: 'teacher-search-page',
   data: () => ({
     teachers: [],
-    searchKey: {
-      avaliableTime: '',
-      expertise: '',
-      intro: '',
-      keywords: '',
-      price: null,
-      profile: '',
-      sorttype: null,
-    },
+    // searchKey: {
+    //   avaliableTime: '',
+    //   expertise: '',
+    //   intro: '',
+    //   keywords: '',
+    //   price: null,
+    //   profile: '',
+    //   sorttype: null,
+    // },
+    keyword: "",
     SAMPLE_DATA : [
     {
         "teacherCode": 1,
@@ -177,7 +179,7 @@ export default {
   methods: {
     async onSearchClick() {
       // try {
-      //   this.teachers = await this.$api.searchTeacher(this.searchKey);
+      //   this.teachers = await this.$api.searchTeacher(this.keyword);
       // } catch (e) {
       //   console.log('선생님 로딩 실패');
       // }
@@ -187,11 +189,7 @@ export default {
     }
   },
   async created() {
-    // try {
-    //   this.teachers = await this.$api.searchTeacher(this.searchKey);
-    // } catch (e) {
-    //   console.log('선생님 로딩 실패');
-    // }
+    this.onSearchClick();
   },
 };
 </script>
