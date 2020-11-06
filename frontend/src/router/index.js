@@ -21,6 +21,8 @@ import mypageTeacher from '@/pages/mypage/teacher/index'
 import mypageTeacherTutoring from '@/pages/mypage/teacher/tutoring'
 import mypageTeacherEdit from '@/pages/mypage/teacher/edit'
 
+import room from '@/pages/room'
+
 
 const router = new Router({
   mode: 'history',
@@ -37,11 +39,10 @@ const router = new Router({
       path: '/signup',
       component: signup
     },
-
-    // {
-    //   path : '/user',
-    //   component : user
-    // },
+    {
+      path: '/room',
+      component: room
+    },
     {
       path: '/teacher/search',
       component: teacherSearch

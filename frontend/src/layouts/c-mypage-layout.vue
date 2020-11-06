@@ -174,11 +174,15 @@ export default {
 }
 
 .c-mypage-layout__profile-image {
-    width: 100px;
-    height: 100px;
-    background: #eaeaea;
-    border-radius: 50%;
-    overflow: hidden;
+    margin-right:8px;
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    background-image: url('/static/images/user.png');
+    background-size: cover;
+    background-position: center center;
+    border: solid 3px #ccc;
+    opacity: 0.7;
 }
 .c-mypage-layout__profile-text {
     cursor: pointer;
