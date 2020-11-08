@@ -25,11 +25,11 @@ public class Review {
 	
 	@ManyToOne
 	@JoinColumn(name="student_code", referencedColumnName = "user_code")
-	private User student;
+	private User rstudent;
 	
 	@ManyToOne
 	@JoinColumn(name = "teacher_code",referencedColumnName = "teacher_code")
-	private Teacher teacher;
+	private Teacher rteacher;
 	
 	@PrePersist
 	public void beforeCreate() {
@@ -44,8 +44,8 @@ public class Review {
 			Teacher teacher) {
 		this.tutoringCode = tutoringCode;
 		this.evaluationContent = evaluationContent;
-		this.student = student;
-		this.teacher = teacher;
+		this.rstudent = student;
+		this.rteacher = teacher;
 	}
 	
 	public Long getReviewCode() {
@@ -72,19 +72,19 @@ public class Review {
 	}
 
 	public User getStudent() {
-		return student;
+		return rstudent;
 	}
 
 	public void setStudent(User student) {
-		this.student = student;
+		this.rstudent = student;
 	}
 
 	public Teacher getTeacher() {
-		return teacher;
+		return rteacher;
 	}
 
 	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
+		this.rteacher = teacher;
 	}
 	
 }
