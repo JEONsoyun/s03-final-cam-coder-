@@ -4,7 +4,7 @@
             <div class="c-mypage-layout__top-container">
                 <div class="c-mypage-layout__top">[안내] 과외룸 입장은 과외 현황에서 할 수 있습니다.</div>
             </div>
-            <div class="c-mypage-layout__content-container">
+            <div class="d-flex flex-column c-mypage-layout__content-container">
                 <div class="d-flex c-mypage-layout__content">
                     <div @click="onMenuClick(0)" class="d-flex justify-center align-center c-mypage-layout__content-menu1" 
                     :class="{'c-mypage-layout__content-menu--selected': selectedId == 0}">
@@ -15,8 +15,8 @@
                         선생님
                     </div>
                     <div class="d-flex flex-column flex-grow-0 flex-shrink-0 align-center c-mypage-layout__content-left">
-                        <div class="d-flex flex-shrink-0 c-mypage-layout__profile-image"></div>
-                        <div @click="$router.push('/mypage/edit')" class="d-flex flex-shrink-0 align-center c-mypage-layout__profile-text">
+                        <div class="d-flex flex-grow-0 flex-shrink-0 c-mypage-layout__profile-image"></div>
+                        <div @click="$router.push('/mypage/edit')" class="d-flex flex-grow-0 flex-shrink-0 align-center c-mypage-layout__profile-text">
                             테스트
                             <span style="font-weight:400">님
                             <v-icon size="28">keyboard_arrow_right</v-icon></span>
@@ -73,7 +73,7 @@ export default {
 .c-mypage-layout {
     position: relative;
     width: 100%;
-    height: 680px;
+    min-height: 680px;
 }
 
 .c-mypage-layout__top-container {
@@ -96,13 +96,11 @@ export default {
 }
 
 .c-mypage-layout__content-container {
-    position: absolute;
+    position: relative;
     width: 1024px;
-    top: 80px;
-    left: 0;
-    right: 0;
     margin: 0 auto;
-    height: 600px;
+    margin-top: 80px;
+    min-height: 600px;
     background: #fff;
     border-radius: 16px;
     border: solid 1px #eaeaea;
@@ -113,6 +111,7 @@ export default {
     position: relative;
     width: 100%;
     height: 100%;
+    flex: 1 1 auto;
 }
 
 .c-mypage-layout__content-menu1 {
@@ -153,7 +152,6 @@ export default {
 
 .c-mypage-layout__content-left {
     width: 230px;
-    height: 100%;
     padding-top: 24px;
 }
 
@@ -163,7 +161,6 @@ export default {
     border-left-style: solid;
     border-left-color: #eaeaea;
     width: 100%;
-    height: 100%;
     padding: 0 32px;
 }
 

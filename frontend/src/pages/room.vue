@@ -354,6 +354,8 @@ function initScreenShare(vue) {
       el: document.querySelector('#screen-video'),
       stream: stream,
     });
+
+    socket.emit('screen.start', stream);
   }
 
   /**
