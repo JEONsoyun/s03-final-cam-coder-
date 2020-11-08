@@ -30,6 +30,7 @@ public class LikeController {
 		return "좋아요 완료";
 	}
 	
+	//유저가 좋아요한 목록
 	@GetMapping(value="/likes")
 	public List<Like> selectAll(HttpServletRequest request) throws Exception{
 		return likeService.selectMine((String)(request.getAttribute("loginUserId")));

@@ -36,7 +36,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         
         String id = jwtTokenProvider.getSubject(token);
         request.setAttribute("loginUserId", id);
-        System.out.println("save id : " + request.getAttribute("loginUserId"));
+        //System.out.println("save id : " + request.getAttribute("loginUserId"));
         return true;
 	}
 }
