@@ -3,6 +3,7 @@ const debug = require('debug')('rtcSocket');
 
 module.exports = io => {
     let rooms = {};
+    let screenInfo = {};
     let roomId = null;
     let socketIds = {};
 
@@ -82,6 +83,23 @@ module.exports = io => {
             socket.broadcast.to(roomId).emit('leave', rooms[roomId][socket.id]); // 자신 제외 룸안의 유저ID 전달
             delete rooms[roomId][socket.id]; // 해당 유저 제거
         }
+        });
+
+        // 콘텐츠 공유 시작
+        socket.on('screen.start', mediaInfo => {
+            screenInfo[roomId] = info;
+            socket.broadcast.to(roomId).emit('screen.info', mediaInfo); // 자신 제외 룸안의 유저ID 전달
+        });
+
+        // 콘텐츠 공유 종료
+        socket.on('screen.end', () => {
+            delete screenInfo[roomId];
+            socket.broadcast.to(roomId).emit('screen.end'); // 자신 제외 룸안의 유저ID 전달
+        });
+
+        // 콘텐츠 공유 요청
+        socket.on('screen.request', roomId => {
+            socket.broadcast.to(roomId).emit('screen.info', screenInfo[roomId]); // 자신 제외 룸안의 유저ID 전달
         });
     });
 }

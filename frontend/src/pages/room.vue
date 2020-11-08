@@ -275,6 +275,15 @@ function initMedia(vue) {
     }
   }
 
+  function onScreenInfoReceived(mediaInfo) {
+      console.log('onScreenInfoReceived');
+  }
+
+  function onScreenEnded() {
+      // TODO 종료
+      console.log('onScreenEnded');
+  }
+
   /**
    * 초기 설정
    */
@@ -289,6 +298,8 @@ function initMedia(vue) {
     socket.on('join', onJoin);
     socket.on('leave', onLeave);
     socket.on('message', onMessage);
+    socket.on('screen.info', onScreenInfoReceived);
+    socket.on('screen.end', onScreenEnded);
 
     // Peer 관련 이벤트 바인딩
     peerHandler.on('addRemoteStream', onRemoteStream);
