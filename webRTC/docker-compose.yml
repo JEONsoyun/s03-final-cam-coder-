@@ -1,0 +1,7 @@
+version: "3"
+services:
+    backend:
+      image: webrtc_node # 사용할 이미지
+      container_name: webrtc # 컨테이너 이름 설정
+      ports:
+              - "8081:3000" # 접근 포트 설정 (외부:내부)
