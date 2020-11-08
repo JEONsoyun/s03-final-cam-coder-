@@ -13,6 +13,6 @@ public interface LikeDAO extends JpaRepository<Like, Long>{
 
 	List<Like> findByUserCodeOrderByLikeDate(Long code);
 
-	@Query("select L from Like L INNER JOIN L.teacher t where L.userCode = ?2 and t.teacherCode = ?1")
+	@Query("select L from Like L INNER JOIN L.likeTeacher t where L.userCode = ?2 and t.teacherCode = ?1")
 	Like findByTeacherCodeAndUserCode(Long teacherCode, Long userCode);
 }
