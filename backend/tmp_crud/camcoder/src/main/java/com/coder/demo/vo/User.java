@@ -19,9 +19,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Builder.Default;
 
 @Getter
 @Setter
@@ -41,21 +41,10 @@ public class User {
 	private String userProfile;
 
 	private Date joinDate;
-	/*
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Teacher teacher;
 
-	public Teacher getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}*/
-
-	///////////////////////////////////////////////////////////////////////////////////////
+	//자신이 학생으로 등록한 튜터링 목록들
 	@Default
-	@OneToMany(mappedBy = "student",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "tstudent",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Tutoring> tutors = new ArrayList<Tutoring>();
 
 	public void addTutor(final Tutoring tutor) {
@@ -68,10 +57,10 @@ public class User {
 		tutor.setStudent(null);
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////
+	//자신이 작성한 모든 리뷰 목록들
 	//for reviews
 	@Default
-	@OneToMany(mappedBy = "student",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "rstudent",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Review> reviews = new ArrayList<Review>();
 
 	public void addReview(final Review review) {
@@ -83,7 +72,7 @@ public class User {
 		reviews.remove(review);
 		review.setStudent(null);
 	}
-	////////////////////////////////////////////////////////////////////////////////////////////////
+	
 
 	@PrePersist
 	public void beforeCreate() {

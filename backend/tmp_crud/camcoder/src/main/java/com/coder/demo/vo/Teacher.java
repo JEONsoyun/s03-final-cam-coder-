@@ -100,10 +100,10 @@ public class Teacher {
 		this.studentCnt.decrementAndGet();
 		tutor.setTeacher(null);
 	}
-	////////////////////////////////////////////////////////////////////////////////////////////////
-	//for reviews
+	
+	//해당 선생님에게 달린 like목록
 	@Default
-	@OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "likeTeacher",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Review> reviews = new ArrayList<Review>();
 
 	public void addReview(final Review review) {
@@ -115,7 +115,6 @@ public class Teacher {
 		reviews.remove(review);
 		review.setTeacher(null);
 	}
-	////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
 	public Teacher(User userCode, String intro, String expertise, Long price, String profile,
