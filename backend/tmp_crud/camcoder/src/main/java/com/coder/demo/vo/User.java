@@ -28,7 +28,7 @@ import lombok.Setter;
 @Entity
 @Table(name="users")
 @EntityScan(basePackages = {"com.coder.demo.vo"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property="userCode")
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -42,7 +42,7 @@ public class User {
 
 	private Date joinDate;
 
-	//자신이 학생으로 등록한 튜터링 목록들
+	//자신이 학생으로 등록된 튜터링 목록
 	@Default
 	@OneToMany(mappedBy = "tstudent",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Tutoring> tutors = new ArrayList<Tutoring>();
@@ -57,8 +57,7 @@ public class User {
 		tutor.setStudent(null);
 	}
 
-	//자신이 작성한 모든 리뷰 목록들
-	//for reviews
+	//자신이 작성한 모든 리뷰 목록
 	@Default
 	@OneToMany(mappedBy = "rstudent",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Review> reviews = new ArrayList<Review>();
