@@ -32,7 +32,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "teachers")
 @EntityScan(basePackages = {"com.coder.demo.vo"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property="teacherCode")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Teacher {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

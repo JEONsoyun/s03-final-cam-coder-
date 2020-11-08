@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name = "tutorings")
 @EntityScan(basePackages = {"com.coder.demo.vo"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property="tutoringCode")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Tutoring {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

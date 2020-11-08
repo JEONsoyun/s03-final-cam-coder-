@@ -28,7 +28,7 @@ import lombok.Setter;
 @Entity
 @Table(name="users")
 @EntityScan(basePackages = {"com.coder.demo.vo"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property="userCode")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
