@@ -12,9 +12,13 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name = "reviews")
 @EntityScan(basePackages = {"com.coder.demo.vo"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property="reviewCode")
 public class Review {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
