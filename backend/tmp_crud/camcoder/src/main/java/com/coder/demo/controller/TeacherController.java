@@ -23,6 +23,11 @@ import com.coder.demo.vo.Teacher;
 public class TeacherController {	
 	@Autowired
 	TeacherService tservice;
+	
+	@GetMapping(value = "/teachers/all")
+	public List<Teacher> selectAll() { // select
+		return tservice.selectAll(); // List -> json(by jackson)
+	}
 
 	@PostMapping(value = "/teachers")
 	public String insert(@Valid @RequestBody RegisterRequest register, HttpServletRequest request) throws Exception{
