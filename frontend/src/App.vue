@@ -14,13 +14,12 @@ export default {
   data: () => ({
     isLoggedIn: null,
     allowedBeforeLoggedInContext: [],
+    user: {},
   }),
   async beforeCreate() {
     try {
-      let {
-        user: [user],
-      } = await this.$api.getMe(this.$store.state.config);
-      this.$store.commit('USER', user);
+      this.user = await this.$api.getMe(this.$store.state.config);
+      this.$store.commit('USER', this.user);
       this.$store.commit('ISLOGGEDIN', true);
     } catch (e) {
       this.isLoggedIn = false;
@@ -30,7 +29,7 @@ export default {
       }
       this.$store.commit('USER', {});
     }
-    window.$root = this;
+    // window.$root = this;
   },
 };
 </script>

@@ -20,7 +20,7 @@
         </div>
         <div class="d-flex" />
         <template v-if="isLoggedIn == null">
-          <c-button
+          <c-button;
             @click="$router.push('/signup')"
             class="flex-grow-0"
             type="white"
@@ -75,7 +75,7 @@
 <script>
 export default {
   data: () => ({
-    isLoggedIn: this.$store.state.ISLOGGEDIN,
+    isLoggedIn: null,
     selectedId: null,
     userName: this.$store.state.USER.userName,
     items: [
@@ -93,6 +93,8 @@ export default {
     },
   },
   created() {
+    this.isLoggedIn = this.$store.state.ISLOGGEDIN;
+    this.userName = this.$store.state.USER.userName;
     if (this.$route.path.match(/^\/teacher/) != null) {
       this.selectedId = 0;
     } else if (this.$route.path.match(/^\/mypage/) != null) {
