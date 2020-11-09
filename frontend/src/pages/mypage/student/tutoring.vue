@@ -1,10 +1,10 @@
 <template>
 <div style="padding: 16px;">
-    <div class="d-flex flex-column message-index-page">
-        <div class="d-flex flex-column message-index-page__title">
+    <div class="d-flex flex-column tutoring-index-page">
+        <div class="d-flex flex-column tutoring-index-page__title">
             <div class="d-flex" style="font-weight:bold;font-size:30px;margin-bottom:20px;">나의 과외 목록</div>
         </div>
-        <div class="d-flex flex-row flex-wrap message-list">
+        <div class="d-flex flex-row flex-wrap tutoring-list">
             <div class="d-flex align-center flex-grow-0 list">
                 <div class="d-flex" style="width:120px">
                     <img style="width:120px" src="https://kimstudy.com/Resources/images/tutor.png"/>
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style>
-.message-index-page {
+.tutoring-index-page {
   padding: 16px;
   width: 100%;
   border-style: solid;
@@ -52,7 +52,7 @@ export default {
     border-width: 1px;
 
 }
-.message-list {
+.tutoring-list {
     width:100%;
 }
 .list {

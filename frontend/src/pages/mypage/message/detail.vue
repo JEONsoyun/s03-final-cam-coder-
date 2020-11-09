@@ -16,6 +16,9 @@
             </div>  
         </div>
         <div class="d-flex flex-row send">
+            <div class="d-flex align-center flex-grow-0 list">
+                <c-button style="margin-right:1px;">메세지 전송</c-button>
+            </div>            
         </div>
     </div>
     </div>

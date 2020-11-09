@@ -13,7 +13,9 @@ import signupResult from '@/pages/signup-result'
 import teacherDetail from '@/pages/teacher/detail'
 import like from '@/pages/mypage/student/like'
 import messageIndex from '@/pages/mypage/message/index'
-import tutoring from '@/pages/mypage/student/tutoring'
+import studentTutoring from '@/pages/mypage/student/tutoring'
+import teacherIndex from '@/pages/mypage/teacher/index'
+import teacherTutoring from '@/pages/mypage/teacher/tutoring'
 import messageDetail from '@/pages/mypage/message/detail'
 import studentIndex from '@/pages/mypage/student/index'
 import page from '@/pages/page'
@@ -63,8 +65,16 @@ const router = new Router({
     },    
     {
       path: '/mypage/student/tutoring',
-      component: tutoring
+      component: studentTutoring
     },  
+    {
+      path: '/mypage/teacher',
+      component: teacherIndex
+    },
+    {
+      path: '/mypage/teacher/tutoring',
+      component: teacherTutoring
+    }, 
     {
       path: '/mypage/message',
       component: messageIndex

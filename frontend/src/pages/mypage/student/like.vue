@@ -37,7 +37,6 @@
                 <div class="d-flex flex-column justify-center">가격 : 시간당 20,000원</div>
                 <c-button style="margin-top:10px">삭제</c-button>   
             </div>
-
         </div>
     </div>
 </div>

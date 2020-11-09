@@ -12,7 +12,8 @@
                 <div class="d-flex" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
                 <div class="d-flex">과외 상태 (요청중, 수락, 완료, 취소)</div>
                 <c-button style="margin-top:60px;margin-right:10px;">입장하기</c-button>
-                <c-button type="white" style="margin-top:60px;margin-right:10px;">취소하기</c-button>  
+                <c-button style="margin-top:60px;margin-right:10px;">수락하기</c-button>
+                <c-button style="margin-top:60px;margin-right:10px;">취소하기</c-button>  
             </div>
             <div class="d-flex align-center flex-grow-0 list">
                 <div class="d-flex" style="width:120px">
@@ -21,7 +22,8 @@
                 <div class="d-flex" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
                 <div class="d-flex">과외 상태 (요청중, 수락, 완료, 취소)</div>
                 <c-button style="margin-top:60px;margin-right:10px;">입장하기</c-button>
-                <c-button type="white" style="margin-top:60px;margin-right:10px;">취소하기</c-button>  
+                <c-button style="margin-top:60px;margin-right:10px;">수락하기</c-button>
+                <c-button style="margin-top:60px;margin-right:10px;">취소하기</c-button>  
             </div>
             <div class="d-flex align-center flex-grow-0 list">
                 <div class="d-flex" style="width:120px">
@@ -30,7 +32,8 @@
                 <div class="d-flex" style="font-weight:bold;font-size:18px">한국에서 영어 유학</div>
                 <div class="d-flex">과외 상태 (요청중, 수락, 완료, 취소)</div>
                 <c-button style="margin-top:60px;margin-right:10px;">입장하기</c-button>
-                <c-button type="white" style="margin-top:60px;margin-right:10px;">취소하기</c-button>  
+                <c-button style="margin-top:60px;margin-right:10px;">수락하기</c-button>
+                <c-button style="margin-top:60px;margin-right:10px;">취소하기</c-button>  
             </div>
         </div>
     </div>
