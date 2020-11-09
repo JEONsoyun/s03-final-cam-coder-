@@ -31,11 +31,11 @@ public class Like{
 	
 	@ManyToOne
 	@JoinColumn(name = "teacher_code",referencedColumnName = "teacher_code")
-	private Teacher teacher;
+	private Teacher likeTeacher;
 	
 	public Like(Long userCode, Teacher teacher) {
 		this.userCode = userCode;
-		this.teacher = teacher;
+		this.likeTeacher = teacher;
 	}
 
 	@PrePersist
@@ -71,11 +71,11 @@ public class Like{
 	}
 
 	public Teacher getTeacher() {
-		return teacher;
+		return likeTeacher;
 	}
 
 	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
+		this.likeTeacher = teacher;
 	}
 
 }

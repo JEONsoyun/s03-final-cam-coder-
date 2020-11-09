@@ -7,7 +7,7 @@
             </div>
             <div v-for="(item, ii) in items" :key="`item-${ii}`" @click="onItemClick(item)" class="c-main-layout__item" :class="{'c-main-layout__item--selected': selectedId == item.id}">{{item.text}}</div>
             <div class="d-flex" />
-            <template v-if="false">
+            <template v-if="true">
                 <c-button @click="$router.push('/signup')" class="flex-grow-0" type="white" style="margin-right: 12px;">회원가입</c-button>
                 <c-button @click="$router.push('/login')" class="flex-grow-0">로그인</c-button>
             </template>

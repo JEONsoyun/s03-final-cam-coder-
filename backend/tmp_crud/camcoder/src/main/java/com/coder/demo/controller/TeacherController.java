@@ -35,14 +35,14 @@ public class TeacherController {
 	public String update(@Valid @RequestBody RegisterRequest register, HttpServletRequest request) throws Exception{
 		String id = (String)(request.getAttribute("loginUserId"));
 		tservice.update(register, id);	
-		return "변경 완료"; //
+		return "변경 완료";
 	}
 	
 	@DeleteMapping(value = "/teachers")
 	public String update(HttpServletRequest request) throws Exception{
 		String id = (String)(request.getAttribute("loginUserId"));
 		tservice.delete(id);	
-		return "삭제 완료"; //
+		return "삭제 완료";
 	}
 	
 	@GetMapping(value = "/teachers/me")

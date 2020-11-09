@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: ns-frontend
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  replicas: 1
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: wlgh325/camcoder-vuejs:0.2
+          resources:
+            requests:
+              cpu: 100m
+              memory: 300Mi
+          imagePullPolicy: Always
+          ports:
+            - name: frontend-port
+              containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-svc
+  namespace: ns-frontend
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: frontend-port
+  selector:
+    app: frontend

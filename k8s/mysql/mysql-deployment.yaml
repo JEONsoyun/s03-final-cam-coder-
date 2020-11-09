@@ -6,6 +6,7 @@ spec:
   type: NodePort
   ports:
   - port: 3306
+    nodePort: 31771
   selector:
     app: mysql
 ---
@@ -35,7 +36,7 @@ spec:
               name: mysql-pass
               key: password
         - name: MYSQL_DATABASE
-          value: camCoder
+          value: camcoder
         ports:
         - containerPort: 3306
           name: mysql
