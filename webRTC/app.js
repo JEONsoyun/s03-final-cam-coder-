@@ -8,28 +8,28 @@ const http = require('http');
 const fs = require('fs');
 
 // static file 등록
-const publicPath = path.join(__dirname, "./client");
+// const publicPath = path.join(__dirname, "./client");
 
-app.use(express.static(publicPath + '/js'));
-app.use(express.static(publicPath + '/views'));
+// app.use(express.static(publicPath + '/js'));
+// app.use(express.static(publicPath + '/views'));
 
-app.get('/getVideo', (request, response) => {
-  fs.readFile(path.join(__dirname, "client/views/getVideo/index.html"), (error, data) => {
-    response.writeHead(200, { 'Content-Type': 'text/html' });
-    response.end(data);
-  });
-})
+// app.get('/rtc/getVideo', (request, response) => {
+//   fs.readFile(path.join(__dirname, "client/views/getVideo/index.html"), (error, data) => {
+//     response.writeHead(200, { 'Content-Type': 'text/html' });
+//     response.end(data);
+//   });
+// })
 
-app.get('/conference', (request, response) => {
-  fs.readFile(path.join(__dirname, "client/views/conference/index.html"), (error, data) => {
-    response.writeHead(200, { 'Content-Type': 'text/html' });
-    response.end(data);
-  });
-})
+// app.get('/webRTC/conference', (request, response) => {
+//   fs.readFile(path.join(__dirname, "client/views/conference/index.html"), (error, data) => {
+//     response.writeHead(200, { 'Content-Type': 'text/html' });
+//     response.end(data);
+//   });
+// })
 
 // router 등록
-//const routes = require('./routes');
-//app.use('/', routes);
+// const routes = require('./routes');
+// app.use('/webRTC', routes);
 
 // body-parser
 app.use(express.json());
