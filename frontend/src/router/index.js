@@ -6,6 +6,7 @@ Vue.use(Router)
 import index from '@/pages/index'
 import login from '@/pages/login'
 import signup from '@/pages/signup'
+import room from '@/pages/room'
 
 import teacherSearch from '@/pages/teacher/search' 
 import teacherDetail from '@/pages/teacher/detail'
@@ -14,9 +15,11 @@ import sendMessage from '@/pages/teacher/send-message'
 import mypageEdit from '@/pages/mypage/edit'
 import mypageMessageIndex from '@/pages/mypage/message/index'
 import mypageMessageDetail from '@/pages/mypage/message/detail'
-import mypageStudentIndex from '@/pages/mypage/student/index'
+import mypageStudent from '@/pages/mypage/student/index'
 import mypageStudentLike from '@/pages/mypage/student/like'
 import mypageStudentTutoring from '@/pages/mypage/student/tutoring'
+import mypageTeacher from '@/pages/mypage/teacher/index'
+import mypageTeacherTutoring from '@/pages/mypage/teacher/tutoring'
 import mypageTeacherEdit from '@/pages/mypage/teacher/edit'
 
 
@@ -36,20 +39,12 @@ const router = new Router({
       component: signup
     },
     {
+      path: '/room',
+      component: room
+    },
+    {
       path: '/teacher/search',
       component: teacherSearch
-    },
-    // {
-    //   path: '/mypage',
-    //   component: mypage
-    // },
-    // {
-    //   path : '/user',
-    //   component : user
-    // },
-    {
-      path : '/teacher/search',
-      component : teacherSearch
     },
     {
       path : '/teacher/detail/:id',
@@ -61,7 +56,11 @@ const router = new Router({
     },
     {
       path : '/mypage/student',
-      component : mypageStudentIndex
+      component : mypageStudent
+    },
+    {
+      path: '/mypage/teacher',
+      component: mypageTeacher
     },
     {
       path : '/mypage/edit',
@@ -82,6 +81,10 @@ const router = new Router({
     {
       path : '/mypage/student/like',
       component : mypageStudentLike
+    },
+    {
+      path : '/mypage/teacher/tutoring',
+      component : mypageTeacherTutoring
     },
     {
       path : '/mypage/teacher/edit',

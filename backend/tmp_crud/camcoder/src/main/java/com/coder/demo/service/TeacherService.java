@@ -15,5 +15,6 @@ public interface TeacherService {
 	public void update(@Valid RegisterRequest u, String id);//update
 	public void delete(String id);
 	public List<Teacher> sortBy(int type);
-	public List<Teacher> contain(String keyword);	
+	public List<Teacher> contain(String keyword);
+	public Teacher selectOneByMyCode(String id);	
 }

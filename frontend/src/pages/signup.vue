@@ -21,7 +21,7 @@
         <div class="signup-page-title">이메일 (ID)</div>
         <v-text-field
           v-model="data.id"
-          placeholder="이메일 입력 (예: introdogs@introdogs.com)"
+          placeholder="이메일 입력 (예: camcoder@camcoder.com)"
           class="signup-page-box"
           dense
           required

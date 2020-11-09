@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <c-mypage-layout title="쪽지 보기">
     <div>{{ this.messages }}</div>
-  </div>
+  </c-mypage-layout>
 </template>
 <script>
 export default {
+  name: "mypage-message-page",
   data: () => ({
     messages: [],
     anotherUser: '',

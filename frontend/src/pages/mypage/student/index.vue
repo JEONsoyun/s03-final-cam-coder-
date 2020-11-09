@@ -1,10 +1,11 @@
 <template>
-  <div>
-    <div>{{ this.user }}</div>
-  </div>
+  <c-mypage-layout title="학생 메뉴">
+      <div>{{ this.user }}</div>
+  </c-mypage-layout>
 </template>
 <script>
 export default {
+  name: "mypage-student-page",
   data: () => ({
     user: {},
   }),

@@ -45,6 +45,12 @@ public class TeacherController {
 		return "삭제 완료"; //
 	}
 	
+	@GetMapping(value = "/teachers/me")
+	public Teacher findMe(HttpServletRequest request) {
+		String id = (String)(request.getAttribute("loginUserId"));
+		return tservice.selectOneByMyCode(id);
+	}
+	
 	@GetMapping(value = "/teachers/{code}")
 	public Teacher selectOne(@Valid @PathVariable long code) {
 		return tservice.selectOneByCode(code);

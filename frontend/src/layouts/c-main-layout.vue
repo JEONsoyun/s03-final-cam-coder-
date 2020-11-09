@@ -7,8 +7,19 @@
             </div>
             <div v-for="(item, ii) in items" :key="`item-${ii}`" @click="onItemClick(item)" class="c-main-layout__item" :class="{'c-main-layout__item--selected': selectedId == item.id}">{{item.text}}</div>
             <div class="d-flex" />
-            <c-button @click="$router.push('/signup')" class="flex-grow-0" type="white" style="margin-right: 12px;">회원가입</c-button>
-            <c-button @click="$router.push('/login')" class="flex-grow-0">로그인</c-button>
+            <template v-if="false">
+                <c-button @click="$router.push('/signup')" class="flex-grow-0" type="white" style="margin-right: 12px;">회원가입</c-button>
+                <c-button @click="$router.push('/login')" class="flex-grow-0">로그인</c-button>
+            </template>
+            <template v-if="true">
+                <div @click="$router.push('/mypage/student')" class="d-flex flex-grow-0 align-center" style="cursor:pointer">
+                    <div class="c-main-layout__profile" />
+                    <div class="d-flex align-center" style="font-size:14px;font-weight:800;">
+                        <div>사용자</div>
+                        <v-icon style="margin-bottom: 2px;">keyboard_arrow_right</v-icon>
+                    </div>
+                </div>
+            </template>
           </div>
       </div>
       <div class="d-flex flex-column flex-grow-1 c-main-layout__content">
@@ -39,7 +50,7 @@ export default {
         selectedId: null,
         items: [
             {text: '선생님 찾기', id: 0, path: '/teacher/search'},
-            {text: '마이페이지', id: 1, path: '/mypage'},
+            {text: '마이페이지', id: 1, path: '/mypage/student'},
         ]
     }),
     methods: {
@@ -52,9 +63,9 @@ export default {
         }
     },
     created() {
-        if(this.$route.path.includes('/teacher')) {
+        if(this.$route.path.match(/^\/teacher/) != null) {
             this.selectedId = 0;
-        } else if(this.$route.path.includes('/mypage')) {
+        } else if(this.$route.path.match(/^\/mypage/) != null) {
             this.selectedId = 1;
         }
     }
@@ -99,6 +110,18 @@ export default {
 .c-main-layout__content {
     padding-top: 75px;
     padding-bottom: 75px;
+}
+
+.c-main-layout__profile {
+    margin-right:8px;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background-image: url('/static/images/user.png');
+    background-size: cover;
+    background-position: center center;
+    border: solid 1px #aaa;
+    opacity: 0.7;
 }
 
 .c-main-layout__footer-content-container {

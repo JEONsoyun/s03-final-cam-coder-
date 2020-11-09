@@ -51,6 +51,24 @@
 # API
 ![image](https://user-images.githubusercontent.com/50106311/96872899-2ce57680-14af-11eb-8561-fb05ed1855c1.png)
 
+# INSTALLATION
+
+```
+git clone https://lab.ssafy.com/s03-final/s03p31a110.git
+```
+
+# FRONTEND
+
+```sh
+cd frontend
+npm install
+npm run dev
+```
+# BACKEND
+
+```sh
+mvnw spring-boot:run
+```
 
 # 💻기술스택
 
