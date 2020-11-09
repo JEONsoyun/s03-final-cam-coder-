@@ -6,8 +6,9 @@
         <div class="d-flex" />
         <video width="200" id="local-video" autoplay />
       </div>
-      <div class="d-flex room-page__contents-share">
-        <video width="100%" id="screen-video" autoplay></video>
+      <div class="d-flex flex-column room-page__contents-share">
+        <video width="100%" id="screen-local-video" autoplay></video>
+        <video width="100%" id="screen-remote-video" autoplay></video>
       </div>
       <div
         class="d-flex flex-column flex-grow-1 flex-shrink-0"
@@ -66,24 +67,70 @@ export default {
     isMuted: true,
     isPaused: true,
     webRTC: {},
+    displayRTC: {},
     isShared: false,
   }),
   methods: {
+    initRoomToken() {
+      const hash = (Math.random() * new Date().getTime())
+        .toString(32)
+        .toUpperCase()
+        .replace(/\./g, '-');
+
+      this.$router.push({
+        path: this.$route.pash,
+        hash,
+      })
+    },
     onCloseClick() {
       window.close();
     },
   },
   mounted() {
-    this.webRTC = initMedia(this);
+    // 방 초기화
+    if (!this.$route.hash) {
+      this.initRoomToken();
+    }
+
+    // 사용자 공유
+    this.webRTC = new initMedia(this, {
+      namespace: '/userMedia',
+      localVideoId: 'local-video',
+      remoteVideoId: 'remote-video',
+      videoEnabledOnStart: false,
+    });
+
     this.webRTC.peerHandler.getUserMedia(
       this.webRTC.mediaOption,
       this.webRTC.onLocalStream
     );
-    initScreenShare(this);
+
+    $('#btn-camera').click(() => {
+      this.isPaused = !this.isPaused;
+      this.webRTC.mediaHandler[this.isPaused ? 'pauseVideo' : 'resumeVideo']();
+    });
+
+    $('#btn-mic').click(function () {
+      this.isMuted = !this.isMuted;
+      this.webRTC.mediaHandler[this.isMuted ? 'muteAudio' : 'unmuteAudio']();
+    });
+
+    // 스크린 공유
+    this.displayRTC = new initMedia(this, {
+      type: 'displayMedia',
+      namespace: '/displayMedia',
+      localVideoId: 'screen-local-video',
+      remoteVideoId: 'screen-remote-video',
+      videoEnabledOnStart: true,
+    });
+    
+    document.querySelector('#btn-start').onclick = () => {
+      this.displayRTC.peerHandler.getUserMedia(null, this.displayRTC.onLocalStream, true);
+    };
   },
 };
 
-function initMedia(vue) {
+function initMedia(vue, options) {
   console.log('Loaded Main');
 
   let roomId;
@@ -91,11 +138,12 @@ function initMedia(vue) {
   let remoteUserId;
   let isOffer;
 
-  const socket = io(location.hostname + ':3001');
+  console.log('socket: ' + location.hostname + ':3001' + options.namespace);
+  const socket = io(location.hostname + ':3001' + options.namespace);
   const mediaHandler = new MediaHandler();
-  const peerHandler = new PeerHandler({
+  const peerHandler = new PeerHandler(Object.assign({
     send: send,
-  });
+  }, options));
   const animationTime = 500;
   const isSafari = DetectRTC.browser.isSafari;
   const isMobile = DetectRTC.isMobileDevice;
@@ -137,10 +185,13 @@ function initMedia(vue) {
     // );
 
     isOffer = true;
-    peerHandler.getUserMedia(mediaOption, onLocalStream, isOffer);
+    if (options.type != 'displayMedia') {
+      peerHandler.getUserMedia(mediaOption, onLocalStream, isOffer);
+    } else {
+      peerHandler.resetLocalConnection();
+    }
     $(this).attr('disabled', true);
-
-    $createWrap.slideUp(animationTime);
+    // $createWrap.slideUp(animationTime);
   }
 
   /**
@@ -162,9 +213,10 @@ function initMedia(vue) {
    */
   function onLeave(userId) {
     console.log('onLeave', arguments);
+    peerHandler.resetLocalConnection();
 
     if (remoteUserId === userId) {
-      $('#remote-video').remove();
+      $(options.remoteVideoId).remove();
       $body.removeClass('connected').addClass('wait');
       remoteUserId = null;
     }
@@ -238,13 +290,14 @@ function initMedia(vue) {
    */
   function onLocalStream(stream) {
     // $videoWrap.prepend('<video width="200" id="local-video" autoplay />');
-    const localVideo = document.querySelector('#local-video');
+    const localVideo = document.getElementById(options.localVideoId);
+    console.log('onLocalStream', stream, options.localVideoId);
     mediaHandler.setVideoStream({
       type: 'local',
       el: localVideo,
       stream: stream,
     });
-    stream.getVideoTracks()[0].enabled = false;
+    stream.getVideoTracks()[0].enabled = options.videoEnabledOnStart;
 
     $body.addClass('room wait');
 
@@ -261,14 +314,14 @@ function initMedia(vue) {
     console.log('onRemoteStream', stream);
 
     // $videoWrap.prepend('<video width="200" id="remote-video" autoplay />');
-    const remoteVideo = document.querySelector('#remote-video');
+    const remoteVideo = document.getElementById(options.remoteVideoId);
     mediaHandler.setVideoStream({
       type: 'remote',
       el: remoteVideo,
       stream: stream,
     });
 
-    $body.removeClass('wait').addClass('connected');
+    // $body.removeClass('wait').addClass('connected');
 
     if (isMobile && isSafari) {
       mediaHandler.playForIOS(remoteVideo);
@@ -288,101 +341,28 @@ function initMedia(vue) {
    * 초기 설정
    */
   function initialize() {
-    roomId = location.href.replace(/\/|:|#|%|\.|\[|\]/g, '');
-    userId = Math.round(Math.random() * 99999);
-    setRoomToken();
-    setClipboard();
+    roomId = vue.$route.hash;
+    userId = Date.now() + Math.round(Math.random() * 99999);
+    // setRoomToken();
+    // setClipboard();
 
     // 소켓 관련 이벤트 바인딩
     socket.emit('enter', roomId, userId);
     socket.on('join', onJoin);
     socket.on('leave', onLeave);
     socket.on('message', onMessage);
-    socket.on('screen.info', onScreenInfoReceived);
-    socket.on('screen.end', onScreenEnded);
+    // socket.on('screen.info', onScreenInfoReceived);
+    // socket.on('screen.end', onScreenEnded);
 
     // Peer 관련 이벤트 바인딩
     peerHandler.on('addRemoteStream', onRemoteStream);
-
-    $('#btn-start').click(function () {
-      peerHandler.getUserMedia(mediaOption, onLocalStream);
-    });
-
-    $('#btn-camera').click(function () {
-      vue.isPaused = !vue.isPaused;
-      mediaHandler[vue.isPaused ? 'pauseVideo' : 'resumeVideo']();
-    });
-
-    $('#btn-mic').click(function () {
-      vue.isMuted = !vue.isMuted;
-      mediaHandler[vue.isMuted ? 'muteAudio' : 'unmuteAudio']();
-    });
   }
 
   initialize();
   return { peerHandler, mediaOption, onLocalStream, mediaHandler };
 }
 
-/*!
- *
- * WebRTC Lab
- * @author dodortus (dodortus@gmail.com / codejs.co.kr)
- *
- */
-function initScreenShare(vue) {
-  console.log('Loaded Main');
 
-  const screenHandler = new ScreenHandler();
-
-  /**
-   * 비디오 엘리먼트에 재생을 위해 stream 바인딩
-   * @param data
-   */
-  function setVideoStream(data) {
-    const video = data.el;
-    video.srcObject = data.stream;
-  }
-
-  /**
-   * 로컬 스트림 핸들링
-   * @param stream
-   */
-  function onLocalStream(stream) {
-    console.log('onLocalStream', stream);
-
-    setVideoStream({
-      el: document.querySelector('#screen-video'),
-      stream: stream,
-    });
-
-    socket.emit('screen.start', stream);
-  }
-
-  /**
-   * screenHandler를 통해 캡쳐 API를 호출합니다.
-   */
-  function startScreenShare() {
-    screenHandler.start((stream) => {
-      onLocalStream(stream);
-    });
-  }
-
-  /**
-   * DOM 이벤트 바인딩
-   */
-  function bindEvent() {
-    document.querySelector('#btn-start').onclick = startScreenShare;
-  }
-
-  /**
-   * 초기화
-   */
-  function initialize() {
-    bindEvent();
-  }
-
-  initialize();
-}
 </script>
 
 <style>
