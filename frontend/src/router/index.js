@@ -6,6 +6,7 @@ Vue.use(Router)
 import index from '@/pages/index'
 import login from '@/pages/login'
 import signup from '@/pages/signup'
+import signupResult from '@/pages/signup-result'
 import room from '@/pages/room'
 
 import teacherSearch from '@/pages/teacher/search' 
@@ -37,6 +38,10 @@ const router = new Router({
     {
       path: '/signup',
       component: signup
+    },
+    {
+      path: '/signup-result',
+      component: signupResult
     },
     {
       path: '/room',

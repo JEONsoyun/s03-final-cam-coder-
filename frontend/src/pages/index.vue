@@ -51,7 +51,7 @@
         <div style="font-size: 20px;color:#777;font-weight:800">
         1분안에 내게 딱 맞는 과외 선생님 또는 학생을 찾아볼 수 있어요.
         </div>
-        <c-button type="gradient" @click="$router.push('/login')" style="margin-top: 32px">회원 가입하고 서비스 이용하기</c-button>
+        <c-button type="gradient" @click="$router.push('/signup')" style="margin-top: 32px">회원 가입하고 서비스 이용하기</c-button>
       </div>
       
     </div>

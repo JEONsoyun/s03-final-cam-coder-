@@ -1,4 +1,5 @@
 <template>
+<c-main-layout>
 <div class="d-flex justify-center">
     <div>
     <div class="d-flex flex-column justify-center signup-result-page">
@@ -14,6 +15,7 @@
     </div>
     </div>
 </div>
+</c-main-layout>
 </template>
 
 <script>
