@@ -18,12 +18,15 @@ export default {
   }),
   async beforeCreate() {
     try {
+      console.log('이거 실행되나?');
       this.user = await this.$api.getMe(this.$store.state.config);
+      console.log(this.user);
       this.$store.commit('USER', this.user);
       this.$store.commit('ISLOGGEDIN', true);
     } catch (e) {
-      this.isLoggedIn = false;
-      this.$store.commit('ISLOGGEDIN', false);
+      this.isLoggedIn = null;
+      this.$store.commit('ISLOGGEDIN', null);
+      this.$store.commit('LOGOUT', null);
       if (!e || !e.response || e.response.status != 400) {
         console.error(e);
       }

@@ -20,7 +20,7 @@
         </div>
         <div class="d-flex" />
         <template v-if="isLoggedIn == null">
-          <c-button;
+          <c-button
             @click="$router.push('/signup')"
             class="flex-grow-0"
             type="white"
@@ -46,24 +46,6 @@
 
               <v-icon style="margin-bottom: 2px">keyboard_arrow_right</v-icon>
             </div>
-<<<<<<< HEAD
-=======
-            <div v-for="(item, ii) in items" :key="`item-${ii}`" @click="onItemClick(item)" class="c-main-layout__item" :class="{'c-main-layout__item--selected': selectedId == item.id}">{{item.text}}</div>
-            <div class="d-flex" />
-            <template v-if="true">
-                <c-button @click="$router.push('/signup')" class="flex-grow-0" type="white" style="margin-right: 12px;">회원가입</c-button>
-                <c-button @click="$router.push('/login')" class="flex-grow-0">로그인</c-button>
-            </template>
-            <template v-if="true">
-                <div @click="$router.push('/mypage/student')" class="d-flex flex-grow-0 align-center" style="cursor:pointer">
-                    <div class="c-main-layout__profile" />
-                    <div class="d-flex align-center" style="font-size:14px;font-weight:800;">
-                        <div>사용자</div>
-                        <v-icon style="margin-bottom: 2px;">keyboard_arrow_right</v-icon>
-                    </div>
-                </div>
-            </template>
->>>>>>> 700968811dec00ed151b0abf49370cbaa5df7825
           </div>
         </template>
       </div>
@@ -95,7 +77,7 @@ export default {
   data: () => ({
     isLoggedIn: null,
     selectedId: null,
-    userName: this.$store.state.USER.userName,
+    userName: '',
     items: [
       { text: '선생님 찾기', id: 0, path: '/teacher/search' },
       { text: '마이페이지', id: 1, path: '/mypage/student' },
@@ -111,8 +93,16 @@ export default {
     },
   },
   created() {
-    this.isLoggedIn = this.$store.state.ISLOGGEDIN;
-    this.userName = this.$store.state.USER.userName;
+    try {
+      console.log(this.$store.state.ISLOGGEDIN);
+      this.isLoggedIn = this.$store.state.ISLOGGEDIN;
+      console.log(this.$store.state.USER);
+      this.userName = this.$store.state.USER.userName;
+      console.log(this.userName);
+    } catch (e) {
+      (this.isLoggedIn = null), (this.userName = null);
+    }
+
     if (this.$route.path.match(/^\/teacher/) != null) {
       this.selectedId = 0;
     } else if (this.$route.path.match(/^\/mypage/) != null) {

@@ -5,19 +5,19 @@ const baseURL = '/api'
 
 export default {
     async login(data) {
-        return (await axios.post(`${baseURL}/users/login/`, data))
+        return (await axios.post(`${baseURL}/users/login`, data))
     },
     async logout(config) {
-        return (await axios.post(`${baseURL}/users/logout/`,config))
+        return (await axios.post(`${baseURL}/users/logout`,config))
     },
     async isLoggedIn() {
-        return (await axios.get(`${baseURL}/users/islogin/`)).data
+        return (await axios.get(`${baseURL}/users/islogin`)).data
     },
     async getMe(config) {
         return (await axios.get(`${baseURL}/users`, config)).data
     },
     async signup(data) {
-        return (await axios.post(`${baseURL}/users/signup/`, data))
+        return (await axios.post(`${baseURL}/users/signup`, data))
     },
     async updateUser(data,config){
         return (await axios.put((`${baseURL}/teachers`, data,config)))

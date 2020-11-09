@@ -107,6 +107,7 @@ export default {
       try {
         this.$store.commit('LOGOUT', null);
         alert('로그아웃하였습니다.');
+        this.$router.push('/');
       } catch (e) {
         alert('로그아웃 실패');
       }

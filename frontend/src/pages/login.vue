@@ -58,18 +58,34 @@ export default {
   methods: {
     async onLoginClick() {
       try {
-        //console.log(this.data);
-        //console.log(this.data.id);
+        console.log(this.data);
+        console.log(this.data.id);
         await this.$api.login(this.data).then((res) => {
           console.log(res.data);
           //console.log(res.data.token);
           this.$store.commit('SET_AUTHTOKEN', res.data.token);
           console.log(this.$store.state.AUTHTOKEN);
-
           console.log(this.$store.state.config);
+          uploadUser();
         });
 
-        //this.$router.push('/user');
+        // //this.$router.push('/user');
+        // this.user = await this.$api.getMe(this.$store.state.config);
+        // console.log(this.user);
+        // this.$store.commit('USER', this.user);
+        // this.$store.commit('ISLOGGEDIN', true);
+        // alert('로그인 성공');
+        // location.href = '/';
+      } catch (e) {
+        alert('아이디 또는 비밀번호를 확인해주세요.');
+      }
+    },
+    onSignupClick() {
+      this.$router.push('/signup');
+    },
+    async uploadUser() {
+      console.log('UploadUser');
+      try {
         this.user = await this.$api.getMe(this.$store.state.config);
         console.log(this.user);
         this.$store.commit('USER', this.user);
@@ -77,11 +93,8 @@ export default {
         alert('로그인 성공');
         location.href = '/';
       } catch (e) {
-        alert('아이디 또는 비밀번호를 확인해주세요.');
+        alert('유저부르기 실패');
       }
-    },
-    onSignupClick() {
-      this.$router.push('/signup');
     },
   },
 };
