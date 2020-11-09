@@ -16,28 +16,21 @@ export default {
     allowedBeforeLoggedInContext: [],
   }),
   async beforeCreate() {
-    // try {
-    //   this.isLoggedIn = await this.$api.isLoggedIn();
-    //   this.$store.commit('ISLOGGEDIN', this.isLoggedIn);
-    // } catch (e) {
-    //   this.isLoggedIn = false;
-    //   this.$store.commit('ISLOGGEDIN', false);
-    // }
-    // if (this.isLoggedIn) {
-    //   try {
-    //     let {
-    //       user: [user],
-    //     } = await this.$api.getMe();
-    //     this.$store.commit('USER', user);
-    //   } catch (e) {
-    //     if (!e || !e.response || e.response.status != 400) {
-    //       console.error(e);
-    //     }
-    //     this.$store.commit('USER', {});
-    //   }
-    // }
-
-    // window.$root = this;
+    try {
+      let {
+        user: [user],
+      } = await this.$api.getMe(this.$store.state.config);
+      this.$store.commit('USER', user);
+      this.$store.commit('ISLOGGEDIN', true);
+    } catch (e) {
+      this.isLoggedIn = false;
+      this.$store.commit('ISLOGGEDIN', false);
+      if (!e || !e.response || e.response.status != 400) {
+        console.error(e);
+      }
+      this.$store.commit('USER', {});
+    }
+    window.$root = this;
   },
 };
 </script>
