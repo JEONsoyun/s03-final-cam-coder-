@@ -30,6 +30,13 @@ export default new Vuex.Store({
       state.ISLOGGEDIN= true
       localStorage.setItem('token', val)
     },
+    LOGOUT(state){
+      state.USER = null
+      state.AUTHTOKEN = null
+      state.config = null
+      state.ISLOGGEDIN= null
+      localStorage.clear();
+    }
 
   },
   actions: {

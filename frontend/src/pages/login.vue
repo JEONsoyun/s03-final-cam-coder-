@@ -64,11 +64,18 @@ export default {
           //console.log(res.data.token);
           this.$store.commit('SET_AUTHTOKEN', res.data.token);
           console.log(this.$store.state.AUTHTOKEN);
+
           //console.log(this.$store.state.config);
         });
+
+        //this.$router.push('/user');
+        let {
+          user: [user],
+        } = await this.$api.getMe(this.$store.state.config);
+        this.$store.commit('USER', user);
+        this.$store.commit('ISLOGGEDIN', true);
         alert('로그인 성공');
         location.href = '/';
-        //this.$router.push('/user');
       } catch (e) {
         alert('아이디 또는 비밀번호를 확인해주세요.');
       }
