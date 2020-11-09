@@ -19,7 +19,7 @@
           {{ item.text }}
         </div>
         <div class="d-flex" />
-        <template v-if="false">
+        <template v-if="isLoggedIn == null">
           <c-button
             @click="$router.push('/signup')"
             class="flex-grow-0"
@@ -31,7 +31,7 @@
             >로그인</c-button
           >
         </template>
-        <template v-if="true">
+        <template v-else>
           <div
             @click="$router.push('/mypage/student')"
             class="d-flex flex-grow-0 align-center"
@@ -42,8 +42,8 @@
               class="d-flex align-center"
               style="font-size: 14px; font-weight: 800"
             >
-              <div>사용자</div>
-              <div>{{ this.$store.state.USER }}</div>
+              <div>{{ userName }}</div>
+
               <v-icon style="margin-bottom: 2px">keyboard_arrow_right</v-icon>
             </div>
           </div>
@@ -75,7 +75,9 @@
 <script>
 export default {
   data: () => ({
+    isLoggedIn: this.$store.state.ISLOGGEDIN,
     selectedId: null,
+    userName: this.$store.state.USER.userName,
     items: [
       { text: '선생님 찾기', id: 0, path: '/teacher/search' },
       { text: '마이페이지', id: 1, path: '/mypage/student' },

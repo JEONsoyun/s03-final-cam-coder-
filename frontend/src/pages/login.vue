@@ -53,6 +53,7 @@ export default {
       id: '',
       pw: '',
     },
+    user: {},
   }),
   methods: {
     async onLoginClick() {
@@ -65,14 +66,13 @@ export default {
           this.$store.commit('SET_AUTHTOKEN', res.data.token);
           console.log(this.$store.state.AUTHTOKEN);
 
-          //console.log(this.$store.state.config);
+          console.log(this.$store.state.config);
         });
 
         //this.$router.push('/user');
-        let {
-          user: [user],
-        } = await this.$api.getMe(this.$store.state.config);
-        this.$store.commit('USER', user);
+        this.user = await this.$api.getMe(this.$store.state.config);
+        console.log(this.user);
+        this.$store.commit('USER', this.user);
         this.$store.commit('ISLOGGEDIN', true);
         alert('로그인 성공');
         location.href = '/';
