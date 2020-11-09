@@ -1,9 +1,9 @@
 package com.coder.demo.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -47,8 +47,6 @@ public class TutoringServiceImpl implements TutoringService {
 		Teacher tc = Optional.ofNullable(tdao.findByTeacherCode(tcode)).orElseThrow(() -> new NotExistIdException("teacher"));
 
 		try {
-			//String content = Optional.of(regist).map(TutorRegistRequest::getContent).orElse("");
-			//Long price = Optional.of(regist).map(TutorRegistRequest::getPrice).orElse((long)0);
 			Date starttime = Optional.of(regist).map(TutorRegistRequest::getStart).orElse(new Date());
 			Date endtime = Optional.of(regist).map(TutorRegistRequest::getEnd).orElse(new Date());
 
@@ -126,7 +124,11 @@ public class TutoringServiceImpl implements TutoringService {
 	public List<Tutoring> selectAllTutee(String id) throws NotExistIdException {
 		//내가 선생인 수업 목록을 가져옴
 		Long ucode = Optional.ofNullable(userdao.findByUserId(id)).map(User::getUserCode).orElseThrow(NotExistIdException::new);		
-		Long tcode = Optional.ofNullable(tdao.findByUserCode(ucode)).map(Teacher::getTeacherCode).orElseThrow(() -> new NotExistIdException("teacher"));
+		Long tcode = Optional.ofNullable(tdao.findByUserCode(ucode)).map(Teacher::getTeacherCode).orElse((long) -1);
+		
+		if(tcode == -1) {
+			return new ArrayList<Tutoring>();
+		}
 
 		return tutoringdao.findByTeacherCode(tcode);
 	}

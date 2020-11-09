@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: frontend-ingress
+  namespace: ns-frontend
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+  - hosts:
+    - k3a110.p.ssafy.io
+    secretName: tls-secret
+  rules:
+  - host: k3a110.p.ssafy.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: frontend-svc
+          servicePort: 80

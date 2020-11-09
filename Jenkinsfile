@@ -43,7 +43,7 @@ podTemplate(label: 'builder',
 			stage('Build') {
 				container('maven') {
 					dir('backend/tmp_crud/camcoder'){
-						sh "mvn package"
+						sh "mvn clean package"
 					}
 				}
 			}

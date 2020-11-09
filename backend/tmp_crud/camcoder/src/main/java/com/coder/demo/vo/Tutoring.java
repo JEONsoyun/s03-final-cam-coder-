@@ -28,11 +28,11 @@ public class Tutoring {
 	
 	@ManyToOne
 	@JoinColumn(name = "teacher_code",referencedColumnName = "teacher_code")
-	private Teacher teacher;
+	private Teacher tteacher;
 	
 	@ManyToOne
 	@JoinColumn(name="student_code", referencedColumnName = "user_code")
-	private User student;
+	private User tstudent;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date startDate;
@@ -40,7 +40,6 @@ public class Tutoring {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date endDate;
 	
-	//private String status;
 	private int status;
 	
 	private int roomNum;
@@ -56,8 +55,8 @@ public class Tutoring {
 	}
 	
 	public Tutoring(Teacher teacher, User student, Date startDate, Date endDate, int status, int roomNum) {
-		this.teacher = teacher;
-		this.student = student;
+		this.tteacher = teacher;
+		this.tstudent = student;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.status = status;
@@ -71,40 +70,24 @@ public class Tutoring {
 		this.roomNum = roomNum;
 	}
 	
-	/*public Tutoring(Teacher teacher, User student, Date startDate, Date endDate, String status, int roomNum) {
-		this.teacher = teacher;
-		this.student = student;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.status = status;
-		this.roomNum = roomNum;
-	}
-
-	public Tutoring(Date startDate, Date endDate, String status, int roomNum) {
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.status = status;
-		this.roomNum = roomNum;
-	}*/
-	
 	public Long getTutoringCode() {
 		return tutoringCode;
 	}
 	
 	public Teacher getTeacher() {
-		return teacher;
+		return tteacher;
 	}
 
 	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
+		this.tteacher = teacher;
 	}
 
 	public User getStudent() {
-		return student;
+		return tstudent;
 	}
 
 	public void setStudent(User student) {
-		this.student = student;
+		this.tstudent = student;
 	}
 
 	public Date getStartDate() {
@@ -119,13 +102,7 @@ public class Tutoring {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	/*public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}*/
-	
+
 	public int getStatus() {
 		return status;
 	}

@@ -11,6 +11,6 @@ public interface ReviewDAO  extends JpaRepository<Review, Long>{
 
 	Review findByReviewCode(Long code);
 
-	@Query("select r from Review r INNER JOIN r.teacher t where t.teacherCode = ?1 order by r.reviewCode")
+	@Query("select r from Review r INNER JOIN r.rteacher t where t.teacherCode = ?1 order by r.reviewCode")
 	List<Review> findByTeacherCode(Long tcode);
 }

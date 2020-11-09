@@ -63,8 +63,6 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public void insert(MessageRequest m, String sender) throws Exception{
-		//content가 비어있을 수도 있나?
-		
 		//sender, receiver code값 찾기
 		User receiver = Optional.ofNullable(userdao.findByUserCode(Long.parseLong(m.getReceiver()))).orElseThrow(NotExistIdException::new);
 		Long scode = userdao.findByUserId(sender).getUserCode();

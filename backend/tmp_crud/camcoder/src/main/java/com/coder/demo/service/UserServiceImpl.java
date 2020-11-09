@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
 		User now = userdao.findByUserId(id);
 		
 		Optional.of(u)
-		.map(SignupRequest::getPw).ifPresent(pw -> now.setUserPw(pw));
+		.map(SignupRequest::getPw).ifPresent(pw -> now.setUserPw(passwordEncoder.encode(pw)));
 
 		Optional.of(u)
 		.map(SignupRequest::getName).ifPresent(name -> now.setUserName(name));

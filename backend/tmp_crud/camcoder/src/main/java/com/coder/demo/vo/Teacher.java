@@ -49,21 +49,19 @@ public class Teacher {
 	private String profile;
 	@Convert(converter = AtomicLongConverter.class)
 	private AtomicLong likeCnt;
-	//Long likeCnt;
 	private String avaliableTime;
 	@Convert(converter = AtomicLongConverter.class)
 	private AtomicLong studentCnt;
-	//Long studentCnt;
 
 	@PrePersist
 	public void beforeCreate() {
 		this.likeCnt = new AtomicLong();
 		this.studentCnt = new AtomicLong();		
 	}
-	///////////////////////////////////////////////////////////////////////////////////////
-	//for like
+	
+	//선생님에게 달린 like목록
 	@Default
-	@OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "likeTeacher",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Like> likes = new ArrayList<Like>();
 
 	public void addLike(final Like like) {
@@ -78,10 +76,9 @@ public class Teacher {
 		like.setTeacher(null);
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////
-	//for studentCnt
+	//해당 선생님의 tutoring 목록
 	@Default
-	@OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "tteacher",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Tutoring> tutors = new ArrayList<Tutoring>();
 
 	public void addTutor(final Tutoring tutor) {
@@ -100,10 +97,10 @@ public class Teacher {
 		this.studentCnt.decrementAndGet();
 		tutor.setTeacher(null);
 	}
-	////////////////////////////////////////////////////////////////////////////////////////////////
-	//for reviews
+	
+	//해당 선생님에게 달린 review목록
 	@Default
-	@OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "rteacher",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Review> reviews = new ArrayList<Review>();
 
 	public void addReview(final Review review) {
@@ -115,7 +112,6 @@ public class Teacher {
 		reviews.remove(review);
 		review.setTeacher(null);
 	}
-	////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
 	public Teacher(User userCode, String intro, String expertise, Long price, String profile,
