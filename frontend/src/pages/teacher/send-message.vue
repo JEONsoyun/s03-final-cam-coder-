@@ -31,7 +31,7 @@
           v-model="message.content"
         />
       </div>
-      <c-button @click="onSendClick" type="gradient"> 문의하기 </c-button>
+      <c-button @click="onSendClick" type="gradient">문의하기 </c-button>
     </div>
   </c-main-layout>
 </template>
