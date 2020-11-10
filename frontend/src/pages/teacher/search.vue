@@ -29,12 +29,12 @@
                         </div>
                         <div class="d-flex teacher-search-page__item-bottom">
                           <div class="d-flex flex-grow-0 align-center">
-                            <v-icon color="#ff4a62">favorite</v-icon>
+                            <v-icon color="#ff4a62" style="margin-right: 2px;">favorite</v-icon>
                             {{item.likeCnt}}
                           </div>
                           <div class="d-flex" />
                           <div class="d-flex flex-grow-0 align-center">
-                            <v-icon color="#4e41ff">account_circle</v-icon>
+                            <v-icon color="#4e41ff" style="margin-right: 2px;">account_circle</v-icon>
                             {{item.studentCnt}}
                           </div>
                         </div>

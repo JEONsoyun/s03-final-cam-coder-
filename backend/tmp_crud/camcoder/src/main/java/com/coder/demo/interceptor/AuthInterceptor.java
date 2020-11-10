@@ -27,7 +27,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 		String token = authExtractor.extract(request, "Bearer");
 		System.out.println(">>> interceptor.preHandle 호출");
 		if (StringUtils.isEmpty(token)) {
-			throw new InvalidAuthenticationException("로그인이 필요합니다.");
+			return true;
         }
 		
 		if(!jwtTokenProvider.validateToken(token)) {  // 토큰의 유효성 검증
