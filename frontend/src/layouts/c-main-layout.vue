@@ -19,7 +19,7 @@
           {{ item.text }}
         </div>
         <div class="d-flex" />
-        <template v-if="isLoggedIn == null">
+        <template v-if="isLoggedIn">
           <c-button
             @click="$router.push('/signup')"
             class="flex-grow-0"
@@ -42,7 +42,7 @@
               class="d-flex align-center"
               style="font-size: 14px; font-weight: 800"
             >
-              <div>{{ $store.state.USER }}</div>
+              <div>{{ $store.state.USER.userName }}</div>
 
               <v-icon style="margin-bottom: 2px">keyboard_arrow_right</v-icon>
             </div>
@@ -93,6 +93,7 @@ export default {
     },
   },
   created() {
+    console.dir(this.$store.state.USER);
     if (this.$route.path.match(/^\/teacher/) != null) {
       this.selectedId = 0;
     } else if (this.$route.path.match(/^\/mypage/) != null) {

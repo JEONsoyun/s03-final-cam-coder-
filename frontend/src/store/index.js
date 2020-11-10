@@ -35,7 +35,7 @@ export default new Vuex.Store({
       state.AUTHTOKEN = null;
       state.config = null;
       state.ISLOGGEDIN= null;
-      localStorage.setItem('token', null);
+      localStorage.removeItem('token');
     }
 
   },
