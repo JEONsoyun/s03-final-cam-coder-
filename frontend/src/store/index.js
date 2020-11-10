@@ -25,17 +25,17 @@ export default new Vuex.Store({
       state.ISSKIP = val
     },
     SET_AUTHTOKEN(state, val) {
-      state.AUTHTOKEN = val,
-      state.config.headers.Authorization = `Bearer `+val
-      state.ISLOGGEDIN= true
-      localStorage.setItem('token', val)
+      state.AUTHTOKEN = val;
+      state.config.headers.Authorization = `Bearer `+val;
+      state.ISLOGGEDIN= true;
+      localStorage.setItem('token', val);
     },
     LOGOUT(state){
-      state.USER = null
-      state.AUTHTOKEN = null
-      state.config = null
-      state.ISLOGGEDIN= null
-      localStorage.clear();
+      state.USER = null;
+      state.AUTHTOKEN = null;
+      state.config = null;
+      state.ISLOGGEDIN= null;
+      localStorage.setItem('token', null);
     }
 
   },

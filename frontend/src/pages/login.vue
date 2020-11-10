@@ -58,24 +58,16 @@ export default {
   methods: {
     async onLoginClick() {
       try {
-        console.log(this.data);
-        console.log(this.data.id);
+        console.log(this.data.id + ' 아이디는 보임');
         await this.$api.login(this.data).then((res) => {
-          console.log(res.data);
-          //console.log(res.data.token);
+          console.log(res.data + '데이터도 받아옴');
+          console.log(res.data.token);
           this.$store.commit('SET_AUTHTOKEN', res.data.token);
-          console.log(this.$store.state.AUTHTOKEN);
+          console.log('이거시 로그인 성공' + this.$store.state.AUTHTOKEN);
           console.log(this.$store.state.config);
-          uploadUser();
+          alert('로그인 성공');
+          location.href = '/';
         });
-
-        // //this.$router.push('/user');
-        // this.user = await this.$api.getMe(this.$store.state.config);
-        // console.log(this.user);
-        // this.$store.commit('USER', this.user);
-        // this.$store.commit('ISLOGGEDIN', true);
-        // alert('로그인 성공');
-        // location.href = '/';
       } catch (e) {
         alert('아이디 또는 비밀번호를 확인해주세요.');
       }
@@ -83,19 +75,21 @@ export default {
     onSignupClick() {
       this.$router.push('/signup');
     },
-    async uploadUser() {
-      console.log('UploadUser');
-      try {
-        this.user = await this.$api.getMe(this.$store.state.config);
-        console.log(this.user);
-        this.$store.commit('USER', this.user);
-        this.$store.commit('ISLOGGEDIN', true);
-        alert('로그인 성공');
-        location.href = '/';
-      } catch (e) {
-        alert('유저부르기 실패');
-      }
-    },
+    // async uploadUser() {
+    //   console.log('UploadUser');
+    //   try {
+    //     this.user = await this.$api.getMe(this.$store.state.config);
+    //     console.log(this.user);
+    //     this.$store.commit('USER', this.user);
+    //     // this.$store.commit('ISLOGGEDIN', true);
+    //     // console.log('여기까지됨');
+    //     // console.dir(this.$store.USER);
+    //     // console.log('여기도됨~~~~~');
+    //     alert('로그인 성공');
+    //   } catch (e) {
+    //     alert('유저부르기 실패');
+    //   }
+    // },
   },
 };
 </script>

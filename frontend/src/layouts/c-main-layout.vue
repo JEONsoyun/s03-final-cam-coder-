@@ -42,7 +42,7 @@
               class="d-flex align-center"
               style="font-size: 14px; font-weight: 800"
             >
-              <div>{{ userName }}</div>
+              <div>{{ $store.state.USER }}</div>
 
               <v-icon style="margin-bottom: 2px">keyboard_arrow_right</v-icon>
             </div>
@@ -93,21 +93,23 @@ export default {
     },
   },
   created() {
-    try {
-      console.log(this.$store.state.ISLOGGEDIN);
-      this.isLoggedIn = this.$store.state.ISLOGGEDIN;
-      console.log(this.$store.state.USER);
-      this.userName = this.$store.state.USER.userName;
-      console.log(this.userName);
-    } catch (e) {
-      (this.isLoggedIn = null), (this.userName = null);
-    }
-
     if (this.$route.path.match(/^\/teacher/) != null) {
       this.selectedId = 0;
     } else if (this.$route.path.match(/^\/mypage/) != null) {
       this.selectedId = 1;
     }
+  },
+  mounted() {
+    console.log(this.$store.state);
+    // try {
+    //   console.log(this.$store.state.ISLOGGEDIN);
+    //   this.isLoggedIn = this.$store.state.ISLOGGEDIN;
+    //   console.log(this.$store.state.USER);
+    //   this.userName = this.$store.state.USER.userName;
+    //   console.log(this.userName);
+    // } catch (e) {
+    //   (this.isLoggedIn = null), (this.userName = null);
+    // }
   },
 };
 </script>

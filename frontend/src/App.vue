@@ -20,7 +20,7 @@ export default {
     try {
       console.log('이거 실행되나?');
       this.user = await this.$api.getMe(this.$store.state.config);
-      console.log(this.user);
+      console.log('***', this.user);
       this.$store.commit('USER', this.user);
       this.$store.commit('ISLOGGEDIN', true);
     } catch (e) {
