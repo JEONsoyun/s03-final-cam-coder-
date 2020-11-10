@@ -208,12 +208,14 @@ export default {
     async onSearchClick() {
       try {
         console.log('선생님', this.teachers);
-        this.teachers = await this.$api.searchTeacher(
+        console.log('선생님키워드', this.keyword);
+        let tmp = await this.$api.searchTeacher(
           {
             keyword: this.keyword,
           },
           this.$store.state.config
         );
+        this.teachers = tmp;
         console.log(this.teachers);
       } catch (e) {
         console.log('선생님 로딩 실패');

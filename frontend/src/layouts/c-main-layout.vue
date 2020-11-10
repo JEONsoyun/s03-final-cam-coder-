@@ -42,7 +42,9 @@
               class="d-flex align-center"
               style="font-size: 14px; font-weight: 800"
             >
-              <div>{{ $store.state.USER.userName }}</div>
+              <div v-if="$store.state.USER">
+                {{ $store.state.USER.userName }}
+              </div>
 
               <v-icon style="margin-bottom: 2px">keyboard_arrow_right</v-icon>
             </div>
