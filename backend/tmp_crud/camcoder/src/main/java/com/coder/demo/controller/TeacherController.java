@@ -24,7 +24,6 @@ public class TeacherController {
 	@Autowired
 	TeacherService tservice;
 	
-	
 	@GetMapping(value = "/teachers/all")
 	public List<Teacher> selectAll() { // select
 		return tservice.selectAll(); // List -> json(by jackson)

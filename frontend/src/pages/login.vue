@@ -11,7 +11,7 @@
         <div class="login-page-container">
           <div class="login-page-id">
             <v-text-field
-              label="이메일 입력"
+              label="아이디 입력"
               v-model="data.id"
               single-line
               solo

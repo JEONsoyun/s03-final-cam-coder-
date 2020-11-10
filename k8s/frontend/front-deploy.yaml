@@ -16,15 +16,22 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: wlgh325/camcoder-vuejs:0.2
+          image: wlgh325/camcoder-vuejs:0.3
           resources:
             requests:
               cpu: 100m
               memory: 300Mi
           imagePullPolicy: Always
           ports:
-            - name: frontend-port
-              containerPort: 80
+          - name: frontend-port
+            containerPort: 80
+          volumeMounts:
+          - name: front-persistent-storage
+            mountPath: /etc/nginx/conf.d
+      volumes:
+      - name: front-persistent-storage
+        persistentVolumeClaim:
+          claimName: front-pv-claim
 ---
 apiVersion: v1
 kind: Service
@@ -39,3 +46,4 @@ spec:
       targetPort: frontend-port
   selector:
     app: frontend
+
