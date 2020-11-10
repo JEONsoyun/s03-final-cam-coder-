@@ -36,7 +36,6 @@ export default {
     //     this.$store.commit('USER', {});
     //   }
     // }
-
     // window.$root = this;
   },
 };
@@ -53,6 +52,16 @@ export default {
 
 span {
   margin: 0 !important;
+}
+
+.ellipsis {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+textarea:focus {
+  outline: 0 !important;
 }
 
 .mobile-layout-container {
