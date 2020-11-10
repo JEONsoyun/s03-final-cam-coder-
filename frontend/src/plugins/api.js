@@ -39,8 +39,11 @@ export default {
     async sortTeacher(data,config){
         return (await axios.post(`${baseURL}/teachers/sorted`, data,config)).data
     },
-    async searchTeacher(data){
-        return (await axios.post(`${baseURL}/teachers/search`, data)).data
+    async searchTeacher(data,config){
+        return (await axios.post(`${baseURL}/teachers/search`, data,config)).data
+    },
+    async teacherAll(){
+        return (await axios.get(`${baseURL}/teachers/all`)).data
     },
     // Tutorings api
     async postTutoring(data,config){
