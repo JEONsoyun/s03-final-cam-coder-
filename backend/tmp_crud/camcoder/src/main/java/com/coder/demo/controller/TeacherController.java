@@ -28,6 +28,10 @@ public class TeacherController {
 	public List<Teacher> selectAll() { // select
 		return tservice.selectAll(); // List -> json(by jackson)
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2c8a4aa0762f9d959b7d0178ec17fa1342b1f379
 	@PostMapping(value = "/teachers")
 	public String insert(@Valid @RequestBody RegisterRequest register, HttpServletRequest request) throws Exception{
 		String id = (String)(request.getAttribute("loginUserId"));
