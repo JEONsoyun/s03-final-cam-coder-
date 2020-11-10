@@ -12,6 +12,7 @@ function MediaHandler() {
    * @param data
    */
   function setVideoStream(data) {
+    console.log('setVideoStream', data);
     const type = data.type;
     const targetEl = data.el;
     const stream = data.stream;

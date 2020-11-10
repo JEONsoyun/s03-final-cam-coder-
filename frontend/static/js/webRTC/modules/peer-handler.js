@@ -64,10 +64,23 @@ function PeerHandler(options) {
    */
   function getUserMedia(mediaOption, callback, isOffer) {
     console.log('getUserMedia');
+    var promise = null;
 
-    navigator.mediaDevices
-      .getUserMedia(mediaOption)
-      .then(function(stream) {
+    if (!localStream) {
+      if (options.type == 'displayMedia') {
+        promise = navigator.mediaDevices.getDisplayMedia({
+          video: {
+            width: 1980, // 최대 너비
+            height: 1080, // 최대 높이
+            frameRate: 10, // 최대 프레임
+          },
+        });
+      } else {
+        promise = navigator.mediaDevices.getUserMedia(mediaOption);
+      }
+
+      promise.then(function(stream) {
+        console.log('stream!', stream, callback, isOffer);
         localStream = stream;
         callback && callback(localStream);
 
@@ -79,6 +92,18 @@ function PeerHandler(options) {
       .catch(function(error) {
         console.error('Error getUserMedia', error);
       });
+    } else {
+      if (isOffer) {
+        createPeerConnection();
+        createOffer();
+      }
+    }
+  }
+
+  function resetLocalConnection() {
+    console.log('resetLocalConnection');
+    createPeerConnection();
+    createOffer();
   }
 
   /**
@@ -287,7 +312,7 @@ function PeerHandler(options) {
    * @param data
    */
   function signaling(data) {
-    console.log('onmessage', data);
+    console.log('signaling', data.sdp, data);
 
     const msg = data;
     const sdp = msg.sdp || null;
@@ -295,11 +320,13 @@ function PeerHandler(options) {
     // 접속자가 보내온 offer처리
     if (sdp) {
       if (sdp.type === 'offer') {
+        console.log('receive offer!')
         createPeerConnection();
         createAnswer(msg);
 
         // offer에 대한 응답 처리
       } else if (sdp.type === 'answer') {
+        console.log('receive answer!', peer.connectionState, peer.iceGatheringState, peer.iceConnectionState)
         peer.setRemoteDescription(new RTCSessionDescription(msg.sdp));
       }
 
@@ -322,6 +349,7 @@ function PeerHandler(options) {
    */
   this.getUserMedia = getUserMedia;
   this.signaling = signaling;
+  this.resetLocalConnection = resetLocalConnection;
 }
 
 inherit(EventEmitter, PeerHandler);
