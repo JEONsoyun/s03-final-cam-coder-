@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: rtc
-          image: wlgh325/camcoder-node:0.2
+          image: wlgh325/camcoder-node:0.39
           resources:
             requests:
               cpu: 100m

@@ -4,7 +4,7 @@ metadata:
   name: node-ingress
   namespace: ns-node
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+#nginx.ingress.kubernetes.io/rewrite-target: /
     kubernetes.io/ingress.class: "nginx"
 spec:
   tls:
@@ -15,7 +15,15 @@ spec:
   - host: k3a110.p.ssafy.io
     http:
       paths:
-      - path: /rtc
+      - path: /displayMedia
+        backend:
+          serviceName: node-svc
+          servicePort: 3000
+      - path: /userMedia
+        backend:
+          serviceName: node-svc
+          servicePort: 3000
+      - path: /socket.io/
         backend:
           serviceName: node-svc
           servicePort: 3000
