@@ -7,14 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "messages")
 @EntityScan(basePackages = {"com.coder.demo.vo"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Message implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,8 +28,17 @@ public class Message implements Serializable{
 	
 	private Date sendDate;
 	private String content;
-	private Long sender;	
-	private Long receiver;
+	
+	//private Long sender;	
+	@ManyToOne
+	@JoinColumn(name="sender")
+	private User sender;
+	
+	//private Long receiver;
+	@ManyToOne
+	@JoinColumn(name="receiver")
+	private User receiver;
+	
 	private Byte isRead;
 	
 	@PrePersist
@@ -31,17 +46,18 @@ public class Message implements Serializable{
 		this.sendDate = new Date();
 	}
 	
-	public Message(String content, Long sender, Long receiver) {
+	/*public Message(String content, Long sender, Long receiver) {
 		this.content = content;
 		this.sender = sender;
 		this.receiver = receiver;
 		this.isRead = 0;
-	}
-
-	@Override
-	public String toString() {
-		return "Message [messageCode=" + messageCode + ", sendDate=" + sendDate + ", content=" + content + ", sender="
-				+ sender + ", receiver=" + receiver + ", isRead=" + isRead + "]";
+	}*/
+	
+	public Message(String content, User sender, User receiver) {
+		this.content = content;
+		this.sender = sender;
+		this.receiver = receiver;
+		this.isRead = 0;
 	}
 
 	public Message() {
@@ -66,7 +82,7 @@ public class Message implements Serializable{
 		this.content = content;
 	}
 
-	public Long getSender() {
+	/*public Long getSender() {
 		return sender;
 	}
 
@@ -83,16 +99,30 @@ public class Message implements Serializable{
 
 	public void setReceiver(Long receiver) {
 		this.receiver = receiver;
+	}*/
+	
+	public void setIsRead(Byte isRead) {
+		this.isRead = isRead;
 	}
-
 
 	public Byte getIsRead() {
 		return isRead;
 	}
 
+	public User getSender() {
+		return sender;
+	}
 
-	public void setIsRead(Byte isRead) {
-		this.isRead = isRead;
+	public void setSender(User sender) {
+		this.sender = sender;
+	}
+
+	public User getReceiver() {
+		return receiver;
+	}
+
+	public void setReceiver(User receiver) {
+		this.receiver = receiver;
 	}
 
 }
