@@ -5,22 +5,24 @@ const spawn = require('child_process').spawn;
 
 exports.build = (req, res, next) => {
     var code = req.body.code;   // client에서 보낸 코드
-    var source = code.split(/\r\n|\r\n/).join("\n");    // 개행 처리
-    var file='test.c';
+    const source = code.split(/\r\n|\r\n/).join("\n");    // 개행 처리
     var errData = '';
+    const date = Date.now();
+    const file = date + '.c';
+    var removeFileList = [];
 
     // 파일로 코드 저장
     fs.writeFile(file,source,'utf8',function(error) {
-        console.log('write end');
+        debug("make file: " + file);
     });
 
     // gcc를 이용해 compile
     var compile = spawn('gcc',[file]);
     compile.stdout.on('data', (data) => {
-        console.log('stdout: '+ data);
+        debug("stdout: " + data);
     });
     compile.stderr.on('data', (data) => {
-        console.log("Error: ", String(data));
+        debug("stderr: " + data);
         errData += String(data);
     });
 
@@ -30,38 +32,39 @@ exports.build = (req, res, next) => {
         if(code == 0) {
             // 컴파일 결과 나온 실행파일을 실행시켜 나오는 결과값을 전달
             var run = spawn('./a.exe',[]);
-            run.stdout.on('data', (output) => { 
-                console.log('컴파일 완료');
-                var responseData = {'result':'ok','output': output.toString('utf8')};
-                console.log(responseData);
+            run.stdout.on('data', (data) => { 
+                var responseData = {'result':'ok','output': data.toString('utf8')};
                 res.json(responseData);
             });
-            run.stderr.on('data', (output) => {
-                console.log(String(output));
+            run.stderr.on('data', (data) => {
+                console.log(String(data));
             });
-            run.on('close', (output) => {
-                console.log('stdout: ' + output);
+            run.on('close', (code) => {
+                debug("compile process exited with code ${code}")
             });
+            removeFileList.push(file, 'a.exe');
         }
         else{
             var responseData = {'result': 'error', 'output':errData.toString('utf-8')};
             res.json(responseData);
-            console.log('process error');
+            debug("run Process Error");
+            removeFileList.push(file);
         }
 
-        var remove = spawn('rm',['a.exe', 'test.c']);
-        remove.stdout.on('data', (output) => { 
-            console.log('컴파일 완료');
-            var responseData = {'result':'ok','output': output.toString('utf8')};
-            console.log(responseData);
-            res.json(responseData);
+        // 무조건 파일 제거
+        var remove = spawn('rm', removeFileList);
+        remove.stdout.on('data', (data) => { 
+            debug("rm stdout: " + data)
         });
-        remove.stderr.on('data', (output) => {
-            console.log(String(output));
+        remove.stderr.on('data', (data) => {
+            debug("rm stderr: " + String(data))
         });
-        remove.on('close', (output) => {
-            console.log('stdout: ' + output);
-        }); 
+        remove.on('close', (code) => {
+            if(code == 0)
+                debug("Success: " + file + " removed")
+            else
+                debug("Err: remove process");
+        });
     });
 }
 
