@@ -19,7 +19,12 @@
                 </div>
                 <div>원하는 수업에 대해 문의해보세요!</div>
               </div>
-              <c-button class="flex-grow-0" type="gradient">문의하기</c-button>
+              <c-button
+                @click="onMessageClick"
+                class="flex-grow-0"
+                type="gradient"
+                >문의하기</c-button
+              >
             </div>
           </div>
         </div>
@@ -34,7 +39,7 @@
                 {{ SAMPLE_DATA.user.userName }}
               </div>
               <div class="d-flex" />
-              <div @click="onFavoriteClick" style="cursor:pointer">
+              <div @click="onFavoriteClick" style="cursor: pointer">
                 <v-icon v-if="isSelected" size="36" color="#fb8805"
                   >favorite</v-icon
                 >
@@ -68,6 +73,30 @@
             class="teacher-detail-page__content-box"
             v-html="SAMPLE_DATA.intro"
           ></div>
+          <div style="font-weight: 800; font-size: 18px; margin: 40px 0 20px 0">
+            선생님 리뷰
+          </div>
+          <div
+            class="teacher-detail-page__review"
+            v-for="(item, ri) in SAMPLE_DATA2"
+            :key="`review-${ri}`"
+          >
+            <div class="d-flex align-center">
+              <div
+                v-if="SAMPLE_DATA"
+                class="d-flex flex-grow-0 flex-shrink-0 teacher-detail-page__review-profile"
+                :style="`background-image:url(${item.student.userProfile})`"
+              />
+              <div style="font-weight:800;font-size:18px">{{ item.student.userId }}</div>
+              <div class="d-flex" />
+              <div style="color:#666;font-size:14px">
+                {{ $moment(item.evaluationDate).format('YYYY.MM.DD hh:mm') }}
+              </div>
+            </div>
+            <div class="teacher-detail-page__review-text">
+              {{ item.evaluationContent }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -101,11 +130,130 @@ export default {
       avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
       studentCnt: 3,
     },
+    SAMPLE_DATA2: [
+      {
+        reviewCode: 6,
+        tutoringCode: 7,
+        evaluationContent: '이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.',
+        evaluationDate: '2020-11-02T06:57:48.000+00:00',
+        student: {
+          id: 1,
+          userCode: 16,
+          userId: 'studenta',
+          userPw:
+            '$2a$10$q4esBwQfUamOVv4kFCkSiuXdBCEAJeNWwzpFRUJ/o39x828XeUxEG',
+          userName: 'namea',
+          userProfile: '/static/images/user.png',
+          joinDate: '2020-10-29T01:07:45.000+00:00',
+        },
+        teacher: {
+          id: 2,
+          teacherCode: 1,
+          user: {
+            id: 3,
+            userCode: 3,
+            userId: 'teacher0',
+            userPw: '1234',
+            userName: '야근이싫은개발자',
+            userProfile: null,
+            joinDate: '2020-10-27T01:46:43.000+00:00',
+          },
+          intro:
+            '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
+          expertise:
+            'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
+          price: 20000,
+          profile: null,
+          likeCnt: 1,
+          avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
+          studentCnt: 1,
+        },
+      },
+      {
+        reviewCode: 6,
+        tutoringCode: 7,
+        evaluationContent: '이해하기 쉬운 예시를 많이 들어주십니다.',
+        evaluationDate: '2020-11-02T06:57:48.000+00:00',
+        student: {
+          id: 1,
+          userCode: 16,
+          userId: 'studenta',
+          userPw:
+            '$2a$10$q4esBwQfUamOVv4kFCkSiuXdBCEAJeNWwzpFRUJ/o39x828XeUxEG',
+          userName: 'namea',
+          userProfile: '/static/images/user.png',
+          joinDate: '2020-10-29T01:07:45.000+00:00',
+        },
+        teacher: {
+          id: 2,
+          teacherCode: 1,
+          user: {
+            id: 3,
+            userCode: 3,
+            userId: 'teacher0',
+            userPw: '1234',
+            userName: '야근이싫은개발자',
+            userProfile: null,
+            joinDate: '2020-10-27T01:46:43.000+00:00',
+          },
+          intro:
+            '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
+          expertise:
+            'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
+          price: 20000,
+          profile: null,
+          likeCnt: 1,
+          avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
+          studentCnt: 1,
+        },
+      },
+      {
+        reviewCode: 6,
+        tutoringCode: 7,
+        evaluationContent: '이해하기 쉬운 예시를 많이 들어주십니다.',
+        evaluationDate: '2020-11-02T06:57:48.000+00:00',
+        student: {
+          id: 1,
+          userCode: 16,
+          userId: 'studenta',
+          userPw:
+            '$2a$10$q4esBwQfUamOVv4kFCkSiuXdBCEAJeNWwzpFRUJ/o39x828XeUxEG',
+          userName: 'namea',
+          userProfile: '/static/images/user.png',
+          joinDate: '2020-10-29T01:07:45.000+00:00',
+        },
+        teacher: {
+          id: 2,
+          teacherCode: 1,
+          user: {
+            id: 3,
+            userCode: 3,
+            userId: 'teacher0',
+            userPw: '1234',
+            userName: '야근이싫은개발자',
+            userProfile: null,
+            joinDate: '2020-10-27T01:46:43.000+00:00',
+          },
+          intro:
+            '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
+          expertise:
+            'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
+          price: 20000,
+          profile: null,
+          likeCnt: 1,
+          avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
+          studentCnt: 1,
+        },
+      },
+    ],
   }),
   methods: {
     onFavoriteClick() {
       this.isSelected = !this.isSelected;
-    }
+    },
+    onMessageClick() {
+      this.$router.push(`/teacher/send-message/${this.teacherId}`);
+    },
   },
   async created() {
     this.teacherId = this.$route.params.id;
@@ -191,5 +339,28 @@ export default {
   margin-top: 16px;
   padding: 32px;
   background: rgb(250, 250, 250);
+}
+
+.teacher-detail-page__review {
+  margin-bottom: 16px;
+  padding: 32px;
+  letter-spacing: -0.48px;
+  border-radius: 10px;
+  background: #fff1e2;
+}
+
+.teacher-detail-page__review-profile {
+  width: 36px;
+  height: 36px;
+  margin-right: 12px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center center;
+  border: solid 1px #ccc;
+}
+
+.teacher-detail-page__review-text {
+  margin-top: 12px;
+  padding: 0 47px;
 }
 </style>

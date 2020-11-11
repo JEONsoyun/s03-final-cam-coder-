@@ -31,7 +31,10 @@
             :key="`teacher-${ti}`"
             class="d-flex flex-column teacher-search-page__item-container"
           >
-            <div class="d-flex flex-column teacher-search-page__item">
+            <div
+              @click="onItemClick(item)"
+              class="d-flex flex-column teacher-search-page__item"
+            >
               <div
                 class="d-flex flex-shrink-0 teacher-search-page__profile-image"
               >
@@ -218,6 +221,9 @@ export default {
     },
     onMoreClick() {
       alert('더 불러올 데이터가 없습니다.');
+    },
+    onItemClick(item) {
+      this.$router.push(`/teacher/detail/${item.user.userCode}`);
     },
   },
   async created() {
