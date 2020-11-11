@@ -1,5 +1,5 @@
 <template>
-  <c-mypage-layout title="나의 관심 선생님 목록">
+  <c-mypage-layout title="관심 선생님 목록">
     <div class="d-flex mypage-student-like-page__content">
       <div
         v-for="(item, ti) in SAMPLE_DATA"

@@ -1,13 +1,22 @@
 <template>
   <c-mypage-layout title="학생 메뉴">
     <div class="d-flex flex-grow-0" style="padding: 16px">
-      <div @click="$router.push('/mypage/student/tutoring')" class="d-flex justify-center align-center mypage-student-page__menu">
-        <img class="mypage-student-page__image" src="/static/images/status.png" />
+      <div
+        @click="$router.push('/mypage/student/tutoring')"
+        class="d-flex justify-center align-center mypage-student-page__menu"
+      >
+        <img
+          class="mypage-student-page__image"
+          src="/static/images/status.png"
+        />
         <div class="mypage-student-page__text">나의 과외 현황</div>
       </div>
-      <div @click="$router.push('/mypage/student/like')" class="d-flex justify-center align-center mypage-student-page__menu">
+      <div
+        @click="$router.push('/mypage/student/like')"
+        class="d-flex justify-center align-center mypage-student-page__menu"
+      >
         <img class="mypage-student-page__image" src="/static/images/like.png" />
-        <div class="mypage-student-page__text">관심 강사 목록</div>
+        <div class="mypage-student-page__text">관심 선생님 목록</div>
       </div>
     </div>
   </c-mypage-layout>
@@ -37,6 +46,7 @@ export default {
   padding: 16px;
   border: solid 1px #eaeaea;
   cursor: pointer;
+  width: 100px;
 }
 
 .mypage-student-page__menu:last-child {

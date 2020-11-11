@@ -1,5 +1,5 @@
 <template>
-  <c-mypage-layout title="나의 과외 현황">
+  <c-mypage-layout title="나의 수업 현황">
     <div class="mypage-teacher-tutoring-page">
       <div
         class="d-flex mypage-teacher-tutoring-page__box"
