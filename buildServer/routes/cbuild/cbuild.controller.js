@@ -48,6 +48,20 @@ exports.build = (req, res, next) => {
             res.json(responseData);
             console.log('process error');
         }
+
+        var remove = spawn('rm',['a.exe', 'test.c']);
+        remove.stdout.on('data', (output) => { 
+            console.log('컴파일 완료');
+            var responseData = {'result':'ok','output': output.toString('utf8')};
+            console.log(responseData);
+            res.json(responseData);
+        });
+        remove.stderr.on('data', (output) => {
+            console.log(String(output));
+        });
+        remove.on('close', (output) => {
+            console.log('stdout: ' + output);
+        }); 
     });
 }
 
