@@ -1,54 +1,237 @@
 <template>
   <c-mypage-layout title="나의 과외 현황">
-    <div style="padding: 16px">
-      <div class="d-flex flex-column message-index-page">
-        <div class="d-flex flex-column message-index-page__title">
-          <div
-            class="d-flex"
-            style="font-weight: bold; font-size: 30px; margin-bottom: 20px"
-          >
-            나의 과외 목록
+    <div class="mypage-student-tutoring-page">
+      <div
+        class="d-flex mypage-student-tutoring-page__box"
+        v-for="(item, mi) in SAMPLE_DATA"
+        :key="`item-${mi}`"
+      >
+        <div
+          class="d-flex flex-grow-0 flex-shrink-0 mypage-student-tutoring-page__profile"
+          :style="`background-image:url(${item.teacher.profile})`"
+        />
+        <div class="d-flex flex-column" style="width: 100%; height: 100%">
+          <div class="d-flex">
+            <div>
+              <div
+                v-if="item.status == 0"
+                class="mypage-student-tutoring-page__tag mypage-student-tutoring-page__tag-0"
+              >
+                수락
+              </div>
+              <div
+                v-if="item.status == 1"
+                class="mypage-student-tutoring-page__tag mypage-student-tutoring-page__tag-1"
+              >
+                요청
+              </div>
+              <div
+                v-if="item.status == 2"
+                class="mypage-student-tutoring-page__tag mypage-student-tutoring-page__tag-2"
+              >
+                완료
+              </div>
+              <div
+                v-if="item.status == 3"
+                class="mypage-student-tutoring-page__tag mypage-student-tutoring-page__tag-3"
+              >
+                취소
+              </div>
+            </div>
+            <div class="d-flex" />
           </div>
-        </div>
-        <div class="d-flex flex-row flex-wrap message-list">
-          <div class="d-flex align-center flex-grow-0 list">
-            <div class="d-flex" style="width: 120px">
-              <img
-                style="width: 120px"
-                src="https://kimstudy.com/Resources/images/tutor.png"
-              />
+          <div class="d-flex flex-grow-0">
+            <div class="d-flex mypage-student-tutoring-page__name">
+              {{ item.teacher.user.userName }}
             </div>
-            <div class="d-flex" style="font-weight: bold; font-size: 18px">
-              한국에서 영어 유학
+            <div class="d-flex flex-grow-0 mypage-student-tutoring-page__date">
+              {{ $moment(item.requestDate).format('YYYY.MM.DD hh:mm') }}
             </div>
-            <div class="d-flex">과외 상태 (요청중, 수락, 완료, 취소)</div>
-            <div
-              class="d-flex justify-center align-center flex-grow-1 enter_button"
-            >
-              입장하기
-            </div>
-            <div
-              class="d-flex justify-center align-center flex-grow-1 cancel_button"
-            >
-              취소하기
-            </div>
+          </div>
+          <div
+            class="d-flex mypage-student-tutoring-page__content"
+            style="margin-top: 4px"
+          >
+            과외 일자:
+            {{ $moment(item.startDate).format('YYYY.MM.DD hh:mm') }} ~
+            {{ $moment(item.endDate).format('YYYY.MM.DD hh:mm') }}
+          </div>
+          <div class="d-flex">
+            <div class="d-flex" />
+            <c-button
+              v-if="getType(item)"
+              :type="getType(item)"
+              class="flex-grow-0"
+            />
           </div>
         </div>
       </div>
-      <div>{{ this.user }}</div>
-      <div>{{ this.tutorings }}</div>
     </div>
   </c-mypage-layout>
 </template>
 
 <script>
 export default {
-  name: "mypage-student-tutoring-page",
+  name: 'mypage-student-tutoring-page',
   data: () => ({
     user: {},
     tutorings: [],
+    SAMPLE_DATA: [
+      {
+        id: 1,
+        tutoringCode: 7,
+        teacher: {
+          id: 2,
+          teacherCode: 1,
+          user: {
+            id: 3,
+            userCode: 3,
+            userId: 'teacher0',
+            userPw: '1234',
+            userName: '야근이싫은개발자',
+            userProfile: null,
+            joinDate: '2020-10-27T01:46:43.000+00:00',
+          },
+          intro:
+            '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
+          expertise:
+            'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
+          price: 20000,
+          profile: '/static/images/user.png',
+          likeCnt: 1,
+          avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
+          studentCnt: 1,
+        },
+        student: {
+          id: 4,
+          userCode: 16,
+          userId: 'studenta',
+          userPw:
+            '$2a$10$q4esBwQfUamOVv4kFCkSiuXdBCEAJeNWwzpFRUJ/o39x828XeUxEG',
+          userName: 'namea',
+          userProfile: 'i like math',
+          joinDate: '2020-10-29T01:07:45.000+00:00',
+        },
+        startDate: '2012-04-23 18:25:44',
+        endDate: '2013-04-23 18:25:44',
+        status: 0,
+        roomNum: 1,
+        requestDate: '2020-10-30T09:31:39.000+00:00',
+      },
+      {
+        id: 5,
+        tutoringCode: 8,
+        teacher: {
+          id: 6,
+          teacherCode: 2,
+          user: {
+            id: 7,
+            userCode: 6,
+            userId: 'teacher1',
+            userPw: '1234',
+            userName: '뭘또이런걸다',
+            userProfile: null,
+            joinDate: '2020-10-27T02:18:23.000+00:00',
+          },
+          intro:
+            '현직 6년차 대리 개발자 입니다. ^^. 컴퓨터 공학과에서 배우는 개론부터 실무가지 전반적인 지식을 정리할 수 있습니다. 개념적인 구조와 역사<br> 또는, C계열이나 Java계열(Android포함), Arduino같은 마이크로콘트롤러까지 다양한 분야를 포괄합니다.',
+          expertise:
+            'C,C++,컴퓨터공학, C#, Java, 프로그래밍 과목을 수업합니다.',
+          price: 20000,
+          profile: '/static/images/user.png',
+          likeCnt: 0,
+          avaliableTime:
+            '현직 개발자이므로 근무시간 외 가능합니다. <br> 평일과 오후6시 이후와 주말 상시입니다.',
+          studentCnt: 1,
+        },
+        student: 4,
+        startDate: '2020-10-23 18:25:44',
+        endDate: '2020-11-23 18:25:44',
+        status: 1,
+        roomNum: 2,
+        requestDate: '2020-10-30T09:34:02.000+00:00',
+      },
+      {
+        id: 5,
+        tutoringCode: 8,
+        teacher: {
+          id: 6,
+          teacherCode: 2,
+          user: {
+            id: 7,
+            userCode: 6,
+            userId: 'teacher1',
+            userPw: '1234',
+            userName: '뭘또이런걸다',
+            userProfile: null,
+            joinDate: '2020-10-27T02:18:23.000+00:00',
+          },
+          intro:
+            '현직 6년차 대리 개발자 입니다. ^^. 컴퓨터 공학과에서 배우는 개론부터 실무가지 전반적인 지식을 정리할 수 있습니다. 개념적인 구조와 역사<br> 또는, C계열이나 Java계열(Android포함), Arduino같은 마이크로콘트롤러까지 다양한 분야를 포괄합니다.',
+          expertise:
+            'C,C++,컴퓨터공학, C#, Java, 프로그래밍 과목을 수업합니다.',
+          price: 20000,
+          profile: '/static/images/user.png',
+          likeCnt: 0,
+          avaliableTime:
+            '현직 개발자이므로 근무시간 외 가능합니다. <br> 평일과 오후6시 이후와 주말 상시입니다.',
+          studentCnt: 1,
+        },
+        student: 4,
+        startDate: '2020-10-23 18:25:44',
+        endDate: '2020-11-23 18:25:44',
+        status: 2,
+        roomNum: 2,
+        requestDate: '2020-10-30T09:34:02.000+00:00',
+      },
+      {
+        id: 5,
+        tutoringCode: 8,
+        teacher: {
+          id: 6,
+          teacherCode: 2,
+          user: {
+            id: 7,
+            userCode: 6,
+            userId: 'teacher1',
+            userPw: '1234',
+            userName: '뭘또이런걸다',
+            userProfile: null,
+            joinDate: '2020-10-27T02:18:23.000+00:00',
+          },
+          intro:
+            '현직 6년차 대리 개발자 입니다. ^^. 컴퓨터 공학과에서 배우는 개론부터 실무가지 전반적인 지식을 정리할 수 있습니다. 개념적인 구조와 역사<br> 또는, C계열이나 Java계열(Android포함), Arduino같은 마이크로콘트롤러까지 다양한 분야를 포괄합니다.',
+          expertise:
+            'C,C++,컴퓨터공학, C#, Java, 프로그래밍 과목을 수업합니다.',
+          price: 20000,
+          profile: '/static/images/user.png',
+          likeCnt: 0,
+          avaliableTime:
+            '현직 개발자이므로 근무시간 외 가능합니다. <br> 평일과 오후6시 이후와 주말 상시입니다.',
+          studentCnt: 1,
+        },
+        student: 4,
+        startDate: '2020-10-23 18:25:44',
+        endDate: '2020-11-23 18:25:44',
+        status: 3,
+        roomNum: 2,
+        requestDate: '2020-10-30T09:34:02.000+00:00',
+      },
+    ],
   }),
-  methods: {},
+  methods: {
+    getType(item) {
+      if (item.status == 1) {
+        return 'cancel';
+      } else if (item.status == 0) {
+        // TODO: 현재 날짜가 과외 날짜 안에 포함될 때 조건 걸기
+        // 현재는 그냥 수락하면 다 방 입장하는걸로 되어있음
+        return 'enter';
+      } else {
+        return '';
+      }
+    },
+  },
   async created() {
     console.log(this.$store.state.config);
     try {
@@ -62,43 +245,72 @@ export default {
 </script>
 
 <style>
-.message-index-page {
+.mypage-student-tutoring-page {
+}
+
+.mypage-student-tutoring-page__box {
   padding: 16px;
-  width: 100%;
-  border-style: solid;
-  border-color: #eaeaea;
-  border-width: 1px;
+  border: solid 1px #eaeaea;
+  border-bottom: none;
 }
-.message-list {
-  width: 100%;
+
+.mypage-student-tutoring-page__box:last-child {
+  border-bottom: solid 1px #eaeaea;
 }
-.list {
-  width: 100%;
-  border-style: solid;
-  border-color: #eaeaea;
-  border-width: 1px;
-  height: 120px;
+
+.mypage-student-tutoring-page__profile {
+  margin: 12px;
+  width: 48px;
+  height: 48px;
+  margin-right: 28px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center center;
 }
-.enter_button {
-  background-color: #fb8805;
-  box-shadow: 5px;
-  color: white;
-  cursor: pointer;
-  border-radius: 4px;
-  height: 30px;
-  width: 20px;
-  margin-top: 90px;
-  margin-left: 10px;
+
+.mypage-student-tutoring-page__tag {
+  padding: 0 6px;
+  font-size: 12px;
+  letter-spacing: -0.32px;
+  border-radius: 2px;
+  border: solid 1px #333;
+  margin-bottom: 8px;
+  font-weight: 800;
 }
-.cancel_button {
-  background-color: #fb8805;
-  box-shadow: 5px;
-  color: white;
-  cursor: pointer;
-  border-radius: 4px;
-  height: 30px;
-  width: 20px;
-  margin-top: 90px;
-  margin-left: 10px;
+
+.mypage-student-tutoring-page__tag-0 {
+  color: rgb(18, 211, 0);
+  border-color: rgb(18, 211, 0);
+}
+
+.mypage-student-tutoring-page__tag-1 {
+  color: rgb(231, 189, 0);
+  border-color: rgb(231, 189, 0);
+}
+
+.mypage-student-tutoring-page__tag-2 {
+  color: rgb(0, 89, 255);
+  border-color: rgb(0, 89, 255);
+}
+
+.mypage-student-tutoring-page__tag-3 {
+  color: rgb(129, 129, 129);
+  border-color: rgb(129, 129, 129);
+}
+
+.mypage-student-tutoring-page__name {
+  font-weight: 800;
+  font-size: 14px;
+  color: #333;
+}
+
+.mypage-student-tutoring-page__date {
+  font-size: 12px;
+  color: #999;
+}
+
+.mypage-student-tutoring-page__content {
+  letter-spacing: -0.32px;
+  color: #555;
 }
 </style>
