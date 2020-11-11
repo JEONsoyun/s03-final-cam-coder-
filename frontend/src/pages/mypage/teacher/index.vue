@@ -11,6 +11,16 @@
         />
         <div class="mypage-teacher-page__text">나의 수업 현황</div>
       </div>
+      <div
+        @click="$router.push('/mypage/teacher/edit')"
+        class="d-flex justify-center align-center mypage-teacher-page__menu"
+      >
+        <img
+          class="mypage-teacher-page__image"
+          src="/static/images/edit.png"
+        />
+        <div class="mypage-teacher-page__text">선생님 프로필 수정</div>
+      </div>
     </div>
   </c-mypage-layout>
 </template>
@@ -29,6 +39,7 @@ export default {
   padding: 16px;
   border: solid 1px #eaeaea;
   cursor: pointer;
+  width: 100px;
 }
 
 /* .mypage-teacher-page__menu:last-child {
