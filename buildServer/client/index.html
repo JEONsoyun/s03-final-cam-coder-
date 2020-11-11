@@ -14,14 +14,15 @@
         <option value="java"> Java </option>
     </select>
     <p>
-        <textarea name="code" style="resize:none; width:400px; height:300px;"></textarea>
+        <textarea id="code" style="resize:none; width:400px; height:300px;"></textarea>
     </p>
     <p>
-        <input type="text" name="output" style="resize:none; width:400px; height:50px;" readonly="readonly">
+        <textarea id="output" style="resize:none; width:400px; height:50px; overflow: visible" readonly="readonly"></textarea>
     </p>
     <p>
         <button type="button" class="btnBuild" onclick="btn_build()">Build</button>
     </p>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="/js/index.js"></script>
 </body>
 </html>

@@ -19,8 +19,8 @@ app.get('/', (request, response) => {
 })
 
 // router 등록
-// const routes = require('./routes');
-// app.use('/api', routes);
+const routes = require('./routes');
+app.use('/', routes);
 
 // body-parser
 app.use(express.json());
