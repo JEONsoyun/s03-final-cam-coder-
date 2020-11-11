@@ -21,7 +21,10 @@
         v-for="(item, mi) in SAMPLE_DATA"
         :key="`message-${mi}`"
       >
-        <div class="d-flex flex-grow-1 flex-shrink-0 mypage-message-detail-page__blank" v-if="me == item.receiver" />
+        <div
+          class="d-flex flex-grow-1 flex-shrink-0 mypage-message-detail-page__blank"
+          v-if="me == item.receiver"
+        />
         <div class="d-flex flex-column">
           <div class="d-flex mypage-message-detail-page__date">
             <div class="d-flex" v-if="me == item.receiver" />
@@ -38,7 +41,24 @@
             {{ item.content }}
           </div>
         </div>
-        <div class="d-flex flex-grow-1 flex-shrink-0 mypage-message-detail-page__blank mypage-message-detail-page__blank" v-if="me == item.sender" />
+        <div
+          class="d-flex flex-grow-1 flex-shrink-0 mypage-message-detail-page__blank mypage-message-detail-page__blank"
+          v-if="me == item.sender"
+        />
+      </div>
+      <div class="d-flex mypage-message-detail-page__input-container">
+        <v-text-field
+          class="mypage-message-detail-page__input"
+          v-model="input"
+          dense
+          hide-details
+          solo
+          flat
+          outlined
+        ></v-text-field>
+        <c-button @click="onMessageButtonClick" class="flex-grow-0" type="gradient" style="height:48px"
+          >쪽지 보내기</c-button
+        >
       </div>
     </div>
   </c-mypage-layout>
@@ -48,6 +68,8 @@ export default {
   name: 'mypage-message-detail-page',
   data: () => ({
     me: 15,
+    userId: 1,
+    input: '',
     messages: [],
     anotherUser: '',
     SAMPLE_DATA: [
@@ -79,7 +101,11 @@ export default {
       },
     ],
   }),
-  methods: {},
+  methods: {
+    onMessageButtonClick() {
+      this.$router.push(`/teacher/send-message/${this.userId}`);
+    },
+  },
   async created() {
     console.log(this.$store.state.config);
     try {
@@ -97,6 +123,23 @@ export default {
 </script>
 
 <style>
+.mypage-message-detail-page__input input {
+  padding: 0 !important;
+}
+.mypage-message-detail-page__input .v-input__control {
+  height: 48px !important;
+}
+
+.mypage-message-detail-page__input .v-text-field__slot {
+  height: 48px;
+  font-size: 16px;
+  color: #8a8a8a !important;
+}
+.mypage-message-detail-page__input fieldset {
+  border-color: #fb8805 !important;
+  height: 52px;
+}
+
 .mypage-message-detail-page {
 }
 
@@ -149,5 +192,9 @@ export default {
 
 .mypage-message-detail-page__right {
   background: rgba(187, 224, 255, 0.6);
+}
+
+.mypage-message-detail-page__input-container {
+  margin-top: 80px;
 }
 </style>
