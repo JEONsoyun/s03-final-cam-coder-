@@ -27,22 +27,11 @@
         </div>
         <div class="d-flex teacher-search-page__content">
           <div
-<<<<<<< HEAD
             v-for="(item, ti) in teachers"
             :key="`teacher-${ti}`"
             class="d-flex flex-column teacher-search-page__item-container"
           >
             <div class="d-flex flex-column teacher-search-page__item">
-=======
-            v-for="(item, ti) in SAMPLE_DATA"
-            :key="`teacher-${ti}`"
-            class="d-flex flex-column teacher-search-page__item-container"
-          >
-            <div
-              @click="onItemClick(item)"
-              class="d-flex flex-column teacher-search-page__item"
-            >
->>>>>>> e34c70ef2547435ac67d1c9b5db4b58e8aa19bc1
               <div
                 class="d-flex flex-shrink-0 teacher-search-page__profile-image"
               >
@@ -56,24 +45,16 @@
                 </div>
                 <div class="d-flex teacher-search-page__item-bottom">
                   <div class="d-flex flex-grow-0 align-center">
-<<<<<<< HEAD
-                    <v-icon color="#ff4a62">favorite</v-icon>
-=======
                     <v-icon color="#ff4a62" style="margin-right: 2px"
                       >favorite</v-icon
                     >
->>>>>>> e34c70ef2547435ac67d1c9b5db4b58e8aa19bc1
                     {{ item.likeCnt }}
                   </div>
                   <div class="d-flex" />
                   <div class="d-flex flex-grow-0 align-center">
-<<<<<<< HEAD
-                    <v-icon color="#4e41ff">account_circle</v-icon>
-=======
                     <v-icon color="#4e41ff" style="margin-right: 2px"
                       >account_circle</v-icon
                     >
->>>>>>> e34c70ef2547435ac67d1c9b5db4b58e8aa19bc1
                     {{ item.studentCnt }}
                   </div>
                 </div>
@@ -245,14 +226,10 @@ export default {
       }
     },
     onMoreClick() {
-<<<<<<< HEAD
-      this.teachers = alert('더 불러올 데이터가 없습니다.');
-=======
       alert('더 불러올 데이터가 없습니다.');
     },
     onItemClick(item) {
       this.$router.push(`/teacher/detail/${item.user.userCode}`);
->>>>>>> e34c70ef2547435ac67d1c9b5db4b58e8aa19bc1
     },
   },
   async created() {
