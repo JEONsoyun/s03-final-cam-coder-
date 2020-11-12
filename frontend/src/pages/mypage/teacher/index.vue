@@ -42,10 +42,10 @@ export default {
   width: 100px;
 }
 
-/* .mypage-teacher-page__menu:last-child {
+.mypage-teacher-page__menu:last-child {
   padding: 16px;
   border-left: 0;
-} */
+}
 
 .mypage-teacher-page__menu:hover {
   background: linear-gradient(to right, #eea849, #f46b45);

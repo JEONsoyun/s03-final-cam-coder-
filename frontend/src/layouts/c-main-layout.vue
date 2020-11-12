@@ -19,7 +19,7 @@
           {{ item.text }}
         </div>
         <div class="d-flex" />
-        <template v-if="true">
+        <template v-if="false">
           <c-button
             @click="$router.push('/signup')"
             class="flex-grow-0"
