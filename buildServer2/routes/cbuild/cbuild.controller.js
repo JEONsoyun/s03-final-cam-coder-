@@ -4,6 +4,7 @@ const spawn = require('child_process').spawn;
 const Docker = require('dockerode');
 const util = require('util');
 const writeFile = util.promisify(fs.writeFile);
+const readFile = util.promisify(fs.readFile);
 
 var socket = process.env.DOCKER_SOCKET || '/var/run/docker.sock';
 var docker = new Docker({ socketPath: socket});
@@ -41,32 +42,26 @@ exports.build = (req, res, next) => {
 				var output = data[0]; // {Error: '', StatusCode: ''}
 				var container = data[1];
 				var statusCode = output.StatusCode;
-				console.log('status: ', statusCode);
 	
-			// 정상	
-			/*
-			if(statusCode == 0){
-				var responseData = {'result': 'ok', 'output': data.toString('utf8')};
-				res.json(responseData);
-			}
-			*/
-	
-			// c code file 읽기
-			/*
-			fs.readFile('/home/test/' + cfile, (err, data) => {
-				if(err) throw err;
-				console.log(data);
-	
-				var responseData = {'result': 'ok', 'output': data.toString('utf8')};
-				res.json(responseData);
-			});
-			*/
+				// 정상이면 outfile 읽기
+				if(statusCode == 0){
+					console.log(statusCode);
+					readFile("/home/test/" + outfile, "utf-8")
+						.then( file => {
+							var responseData = {'result': 'ok', 'output': file};
+							res.json(responseData);
+						})
+						.catch( err => {
+							console.log(err);
+						});
+				}
+
 				return container.remove();
-				}).then( (data) => {
-					console.log('container removed');
-				}).catch( (err) => {
-					console.log("Err: ", err);
-				});
+			}).then( (data) => {
+				console.log('container removed');
+			}).catch( (err) => {
+				console.log("Err: ", err);
+			});
 		})
 		.catch(err => {
 			console.log(err);
