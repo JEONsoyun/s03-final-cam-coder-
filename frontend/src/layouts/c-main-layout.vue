@@ -1,5 +1,9 @@
 <template>
+<<<<<<< HEAD
   <div class="d-flex flex-column c-main-layout">
+=======
+  <div class="d-flex flex-column c-main-layout" :class="{'c-main-layout--white': background == 'white'}">
+>>>>>>> e34c70ef2547435ac67d1c9b5db4b58e8aa19bc1
     <div class="c-main-layout__header-container">
       <div class="c-main-layout__header">
         <div
@@ -19,7 +23,11 @@
           {{ item.text }}
         </div>
         <div class="d-flex" />
+<<<<<<< HEAD
         <template v-if="isLoggedIn">
+=======
+        <template v-if="false">
+>>>>>>> e34c70ef2547435ac67d1c9b5db4b58e8aa19bc1
           <c-button
             @click="$router.push('/signup')"
             class="flex-grow-0"
@@ -31,7 +39,11 @@
             >로그인</c-button
           >
         </template>
+<<<<<<< HEAD
         <template v-else>
+=======
+        <template v-if="true">
+>>>>>>> e34c70ef2547435ac67d1c9b5db4b58e8aa19bc1
           <div
             @click="$router.push('/mypage/student')"
             class="d-flex flex-grow-0 align-center"
@@ -42,10 +54,14 @@
               class="d-flex align-center"
               style="font-size: 14px; font-weight: 800"
             >
+<<<<<<< HEAD
               <div v-if="$store.state.USER">
                 {{ $store.state.USER.userName }}
               </div>
 
+=======
+              <div>사용자</div>
+>>>>>>> e34c70ef2547435ac67d1c9b5db4b58e8aa19bc1
               <v-icon style="margin-bottom: 2px">keyboard_arrow_right</v-icon>
             </div>
           </div>
@@ -76,6 +92,9 @@
 
 <script>
 export default {
+  props: {
+    background: { type: String, default: '' },
+  },
   data: () => ({
     isLoggedIn: null,
     selectedId: null,
@@ -95,13 +114,17 @@ export default {
     },
   },
   created() {
+<<<<<<< HEAD
     console.dir(this.$store.state.USER);
+=======
+>>>>>>> e34c70ef2547435ac67d1c9b5db4b58e8aa19bc1
     if (this.$route.path.match(/^\/teacher/) != null) {
       this.selectedId = 0;
     } else if (this.$route.path.match(/^\/mypage/) != null) {
       this.selectedId = 1;
     }
   },
+<<<<<<< HEAD
   mounted() {
     console.log(this.$store.state);
     // try {
@@ -114,6 +137,8 @@ export default {
     //   (this.isLoggedIn = null), (this.userName = null);
     // }
   },
+=======
+>>>>>>> e34c70ef2547435ac67d1c9b5db4b58e8aa19bc1
 };
 </script>
 
@@ -122,6 +147,13 @@ export default {
   width: 100%;
   background-color: #f6f7f7;
   min-height: 100vh;
+<<<<<<< HEAD
+=======
+}
+
+.c-main-layout--white {
+    background-color: #fff;
+>>>>>>> e34c70ef2547435ac67d1c9b5db4b58e8aa19bc1
 }
 
 .c-main-layout__header-container {
@@ -171,6 +203,10 @@ export default {
 
 .c-main-layout__footer-content-container {
   width: 100%;
+<<<<<<< HEAD
+=======
+  background-color: #f6f7f7;
+>>>>>>> e34c70ef2547435ac67d1c9b5db4b58e8aa19bc1
   border-top: 1px solid #eaeaea;
 }
 

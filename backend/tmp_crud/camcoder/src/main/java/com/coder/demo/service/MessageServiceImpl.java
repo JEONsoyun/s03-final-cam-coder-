@@ -34,9 +34,9 @@ public class MessageServiceImpl implements MessageService {
 		HashSet check = new HashSet<Long>();
 		
 		for(Message now : list) {
-			long num = now.getReceiver();
+			long num = now.getReceiver().getUserCode();
 			if(num == scode) {
-				num = now.getSender();
+				num = now.getSender().getUserCode();
 			}
 			
 			if(!check.isEmpty()) {
@@ -65,10 +65,12 @@ public class MessageServiceImpl implements MessageService {
 	public void insert(MessageRequest m, String sender) throws Exception{
 		//sender, receiver code값 찾기
 		User receiver = Optional.ofNullable(userdao.findByUserCode(Long.parseLong(m.getReceiver()))).orElseThrow(NotExistIdException::new);
-		Long scode = userdao.findByUserId(sender).getUserCode();
-		Long rcode = receiver.getUserCode();
+		User senduser = Optional.ofNullable(userdao.findByUserId(sender)).orElseThrow(NotExistIdException::new);
+		//Long scode = userdao.findByUserId(sender).getUserCode();
+		//Long rcode = receiver.getUserCode();
 		
-		messagedao.save(new Message(m.getContent(), scode, rcode));
+		//messagedao.save(new Message(m.getContent(), scode, rcode));
+		messagedao.save(new Message(m.getContent(), senduser, receiver));
 	}
 
 }
