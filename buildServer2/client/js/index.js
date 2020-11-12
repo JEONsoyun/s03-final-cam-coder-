@@ -1,5 +1,5 @@
 function btn_build(){
-    var url = "http://localhost:3000/cbuild"
+    var url = "http://k3a110.p.ssafy.io:8081/cbuild"
     var code = document.querySelector("#code").value;
     var data = {'code': code};
     data = JSON.stringify(data);
