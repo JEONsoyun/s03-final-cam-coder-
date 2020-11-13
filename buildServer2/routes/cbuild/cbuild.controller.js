@@ -10,14 +10,14 @@ var socket = process.env.DOCKER_SOCKET || '/var/run/docker.sock';
 var docker = new Docker({ socketPath: socket});
 var stream = require('stream');
 
-const buildFilePath ='/home/ubuntu/test';
+const buildFilePath ='/home/ubuntu/dist';
 
 var options = {
 	'Volumes': {
-		'/home/test/': {}
+		'/home/dist/': {}
 	},
 	'HostConfig': {
-		'Binds': [buildFilePath + ':/home/test']
+		'Binds': [buildFilePath + ':/home/dist']
 	},
     'AttachStdout': true,
 	'AttachStderr': true
@@ -29,9 +29,9 @@ exports.build = (req, res, next) => {
 	const source = code.split(/\r\n|\r\n/).join("\n");    // 개행 처리
 	const date = Date.now();
 	var file = date + "";
-	var filePath = "/home/test/";
+	var filePath = "/home/dist/";
 	const outfile = date + ".txt";
-	const outfilePath = "/home/test/" + outfile;
+	const outfilePath = "/home/dist/" + outfile;
 	var command = "";
 	var image = "";
 	
@@ -50,11 +50,17 @@ exports.build = (req, res, next) => {
 	else if(lang == "java"){
 		file += ".java";
 		filePath += file;
-		image = "java:8";
+		image = "java:latest";
+	}
+	else if(lang == "python37"){
+		file += ".py";
+		filePath += file;
+		image = "python:3.7-alpine";
+		command = "python " + filePath + " > " + outfilePath + " 2>&1";
 	}
 
 	// 파일로 코드 저장
-	writeFile("/home/test/" + file, source)
+	writeFile(filePath, source)
 		.then( () => {
 			// 이미지를 바탕으로 컨테이너를 띄우고
 			// 컨테이너에서 빌드한 결과를 파일로 저장
