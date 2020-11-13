@@ -53,8 +53,10 @@ Vue.component('c-mypage-layout', CMypageLayout)
 
 // Component
 import CButton from './components/common/c-button'
+import CDialog from './components/common/c-dialog'
 
 Vue.component('c-button', CButton)
+Vue.component('c-dialog', CDialog)
 
 // HTML 태그 제거용
 Vue.filter('striphtml', function (value) {
