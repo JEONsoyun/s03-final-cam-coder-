@@ -96,6 +96,11 @@ export default {
       this.$router.push('/');
     },
     onItemClick(item) {
+      if (item.id == 1 && !this.$store.state.ISLOGGEDIN) {
+        alert('로그인이 필요합니다.');
+        this.$router.push('/login');
+        return;
+      }
       this.$router.push(item.path);
       this.selectedId = item.id;
     },
