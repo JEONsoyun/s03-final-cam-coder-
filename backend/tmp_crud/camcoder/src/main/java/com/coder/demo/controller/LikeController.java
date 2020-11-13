@@ -26,8 +26,7 @@ public class LikeController {
 	
 	@PostMapping(value="/likes")
 	public String insert(@RequestBody LikeRequest like, HttpServletRequest request) throws Exception{
-		likeService.insert(like, (String)(request.getAttribute("loginUserId")));
-		return "좋아요 완료";
+		return likeService.insert(like, (String)(request.getAttribute("loginUserId")));
 	}
 	
 	//유저가 좋아요한 목록

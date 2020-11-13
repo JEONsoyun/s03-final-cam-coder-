@@ -56,7 +56,7 @@ public class ReviewServiceImpl implements ReviewService {
 			String content = Optional.of(review).map(TutorRegistRequest::getContent).orElse("");
 			Review rv = new Review(tutoring_code, content, student, tc);
 
-//			tc.addReview(rv);
+			tc.addReview(rv);
 			//student.addReview(rv);
 			reviewdao.save(rv);
 		}catch(DataAccessException ex) {

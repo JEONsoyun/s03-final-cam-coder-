@@ -36,9 +36,9 @@ public class LikeServiceImpl implements LikeService {
 		Like like = Optional.ofNullable(likedao.findByTeacherCodeAndUserCode(tcode, ucode)).orElseThrow(NotExistIdException::new);
 
 		//likeCnt 감소
-//		tc.deleteLike(like);
-		//tdao.save(tc);
-
+		tc.deleteLike(like);
+		tdao.save(tc);
+		
 		likedao.deleteById(like.getLikeCode());
 	}
 
@@ -49,19 +49,28 @@ public class LikeServiceImpl implements LikeService {
 	}
 
 	@Override
-	public void insert(LikeRequest like, String userid) throws Exception{
+	public String insert(LikeRequest like, String userid) throws Exception{
 		long ucode = Optional.ofNullable(userdao.findByUserId(userid)).map(User::getUserCode).orElseThrow(NotExistIdException::new);
 
 		long tcode = like.getTeacher();
+		System.out.println(tdao.findByTeacherCode(tcode));
 		Teacher tc = Optional.ofNullable(tdao.findByTeacherCode(tcode)).orElseThrow(NotExistIdException::new);
-
-		boolean check = Optional.ofNullable(likedao.findByTeacherCodeAndUserCode(tcode, ucode)).isPresent();
-
-		if(!check) {
+		System.out.println(tc);
+		
+		Optional<Like> check = Optional.ofNullable(likedao.findByTeacherCodeAndUserCode(tcode, ucode));
+		
+		if(check.isEmpty()) {
 			Like now = new Like(ucode, tc);
 			//likeCnt 증가
-//			tc.addLike(now);
+			tc.addLike(now);
 			tdao.save(tc);
+			likedao.save(now);
+			return "success";
+		}else {
+			tc.deleteLike(check.get());
+			tdao.save(tc);
+			likedao.deleteById(check.get().getLikeCode());
+			return "fail";
 		}
 	}	
 

@@ -47,30 +47,30 @@ public class User {
 //	@OneToMany(mappedBy = "tstudent",cascade = CascadeType.ALL, orphanRemoval = true)
 //	private List<Tutoring> tutors = new ArrayList<Tutoring>();
 
-//	public void addTutor(final Tutoring tutor) {
+	public void addTutor(final Tutoring tutor) {
 //		tutors.add(tutor);
-//		tutor.setStudent(this);
-//	}
-//
-//	public void deleteTutor(final Tutoring tutor) {
+		tutor.setStudent(this);
+	}
+
+	public void deleteTutor(final Tutoring tutor) {
 //		tutors.remove(tutor);
-//		tutor.setStudent(null);
-//	}
+		tutor.setStudent(null);
+	}
 
 //	//자신이 작성한 모든 리뷰 목록
 //	@Default
 //	@OneToMany(mappedBy = "rstudent",cascade = CascadeType.ALL, orphanRemoval = true)
 //	private List<Review> reviews = new ArrayList<Review>();
 
-//	public void addReview(final Review review) {
+	public void addReview(final Review review) {
 //		reviews.add(review);
-//		review.setStudent(this);
-//	}
-//
-//	public void deleteReview(final Review review) {
+		review.setStudent(this);
+	}
+
+	public void deleteReview(final Review review) {
 //		reviews.remove(review);
-//		review.setStudent(null);
-//	}
+		review.setStudent(null);
+	}
 	
 
 	@PrePersist
