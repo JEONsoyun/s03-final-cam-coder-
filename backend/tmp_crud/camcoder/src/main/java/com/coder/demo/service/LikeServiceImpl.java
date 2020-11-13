@@ -54,7 +54,11 @@ public class LikeServiceImpl implements LikeService {
 
 		long tcode = like.getTeacher();
 		System.out.println(tdao.findByTeacherCode(tcode));
-		Teacher tc = Optional.ofNullable(tdao.findByTeacherCode(tcode)).orElseThrow(NotExistIdException::new);
+		Teacher tc = tdao.findById(tcode).get();
+		if(tc==null) {
+			return "fail";
+		}
+		//Teacher tc = Optional.ofNullable(tdao.findByTeacherCode(tcode)).orElseThrow(NotExistIdException::new);
 		System.out.println(tc);
 		
 		Optional<Like> check = Optional.ofNullable(likedao.findByTeacherCodeAndUserCode(tcode, ucode));
@@ -67,10 +71,11 @@ public class LikeServiceImpl implements LikeService {
 			likedao.save(now);
 			return "success";
 		}else {
+			
 			tc.deleteLike(check.get());
 			tdao.save(tc);
 			likedao.deleteById(check.get().getLikeCode());
-			return "fail";
+			return "remove";
 		}
 	}	
 

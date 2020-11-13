@@ -73,7 +73,7 @@ public class Teacher {
 	public void deleteLike(final Like like) {
 		//likes.remove(like);
 		this.likeCnt.decrementAndGet();
-		like.setTeacher(null);
+		//like.setTeacher(null);
 	}
 
 //	//해당 선생님의 tutoring 목록
@@ -190,4 +190,12 @@ public class Teacher {
 		this.studentCnt = studentCnt;
 	}
 
+	@Override
+	public String toString() {
+		return "Teacher [teacherCode=" + teacherCode + ", user=" + user + ", intro=" + intro + ", expertise="
+				+ expertise + ", price=" + price + ", profile=" + profile + ", likeCnt=" + likeCnt + ", avaliableTime="
+				+ avaliableTime + ", studentCnt=" + studentCnt + "]";
+	}
+
+	
 }
