@@ -37,14 +37,15 @@
             >
               <div
                 class="d-flex flex-shrink-0 teacher-search-page__profile-image"
-              >
-                {{ item.user.userProfile }}
-              </div>
+                :style="`background-image: url(${item.user.userProfile})`"
+              />
               <div class="d-flex flex-column teacher-search-page__item-content">
                 <div style="font-weight: 800">{{ item.user.userName }}</div>
-                <div class="d-flex flex-grow-1 flex-column">
-                  <div>{{ item.expertise }}</div>
-                  <div>{{ item.avaliableTime }}</div>
+                <div class="d-flex flex-grow-1 flex-column" style="height: 90px">
+                  <div class="ellipsis" style="margin: 8px 0">
+                    {{ item.expertise }}
+                  </div>
+                  <div v-html="item.avaliableTime" class="ellipsis" />
                 </div>
                 <div class="d-flex teacher-search-page__item-bottom">
                   <div class="d-flex flex-grow-0 align-center">
@@ -319,7 +320,9 @@ export default {
 .teacher-search-page__profile-image {
   width: 100%;
   height: 180px;
-  background: #dfdfdf;
+  background-size: cover;
+  background-position: center center;
+  border-bottom: solid 1px #fb8805;
 }
 
 .teacher-search-page__item-content {
