@@ -29,9 +29,11 @@ exports.build = (req, res, next) => {
 	const date = Date.now();
 	const cfile = date + ".c";
 	const outfile = date  + ".txt";
-	const command = "gcc -o myapp " + "/home/test/" + cfile + " && ./myapp > /home/test/" + outfile;
+	const cfilePath = "/home/test/" + cfile;
+	const outfilePath = "/home/test/" + outfile;
+	const command = "(gcc -o myapp " + cfilePath + " > " + outfilePath + " 2>&1 )  && ./myapp > " + outfilePath;
 	//var removeFileList = [];
-
+	
     console.log("hello post /cbuild");
     // 파일로 코드 저장
     writeFile("/home/test/" + cfile, source)
@@ -42,19 +44,17 @@ exports.build = (req, res, next) => {
 				var output = data[0]; // {Error: '', StatusCode: ''}
 				var container = data[1];
 				var statusCode = output.StatusCode;
-	
-				// 정상이면 outfile 읽기
-				if(statusCode == 0){
-					console.log(statusCode);
-					readFile("/home/test/" + outfile, "utf-8")
-						.then( file => {
-							var responseData = {'result': 'ok', 'output': file};
-							res.json(responseData);
-						})
-						.catch( err => {
-							console.log(err);
-						});
-				}
+
+				// 정상 컴파일
+				readFile(outfilePath, "utf-8")
+					.then( file => {
+						var responseData = {'output': file};
+						console.log(responseData);
+						res.json(responseData);
+					})
+					.catch( err => {
+						console.log(err);
+					});
 
 				return container.remove();
 			}).then( (data) => {
