@@ -8,15 +8,24 @@
         :key="`item-${mi}`"
       >
         <div
+          v-if="$store.state.USER.userCode == item.sender.userCode"
+          class="d-flex flex-grow-0 flex-shrink-0 mypage-message-page__profile"
+          :style="`background-image:url(${item.receiver.userProfile})`"
+        />
+        <div
+          v-else
           class="d-flex flex-grow-0 flex-shrink-0 mypage-message-page__profile"
           :style="`background-image:url(${item.sender.userProfile})`"
         />
         <div class="d-flex flex-column" style="width: 100%; height: 100%">
           <div class="d-flex flex-grow-0">
-            <div class="d-flex mypage-message-page__name">
-              {{ item.sender.userName }}
+            <div
+              v-if="$store.state.USER.userCode == item.sender.userCode"
+              class="d-flex mypage-message-page__name"
+            >
+              {{ item.receiver.userName }}
             </div>
-            <div class="d-flex mypage-message-page__name">
+            <div v-else class="d-flex mypage-message-page__name">
               {{ item.sender.userName }}
             </div>
             <div class="d-flex flex-grow-0 mypage-message-page__date">
@@ -65,12 +74,13 @@ export default {
   methods: {
     onMessageClick(item) {
       let user;
-      if (this.me == item.sender) {
+      if (this.$store.state.USER.userCode == item.sender.userCode) {
         user = item.receiver;
       } else {
         user = item.sender;
       }
-      this.$router.push(`/mypage/message/${user}`);
+      console.log(user);
+      this.$router.push(`/mypage/message/${user.userCode}`);
     },
   },
   async created() {

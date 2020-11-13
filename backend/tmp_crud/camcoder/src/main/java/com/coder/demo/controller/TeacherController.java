@@ -76,9 +76,9 @@ public class TeacherController {
 		//null이면 무슨 값으로 넣어주지 일단은 "-1" -> 전체다 보이게함
 		String keyword = Optional.ofNullable(register).map(RegisterRequest::getKeywords).orElse("-1");
 		
-		if(keyword.equals("-1")) {
-			return tservice.selectAll();
-		}
+//		if(keyword.equals("-1")) {
+//			return tservice.selectAll();
+//		}
 		return tservice.contain(keyword);
 	}
 	
