@@ -25,57 +25,76 @@ var options = {
 
 exports.build = (req, res, next) => {
 	var code = req.body.code;   // client에서 보낸 코드
+	var lang = req.body.lang;
 	const source = code.split(/\r\n|\r\n/).join("\n");    // 개행 처리
 	const date = Date.now();
-	const cfile = date + ".c";
-	const outfile = date  + ".txt";
-	const cfilePath = "/home/test/" + cfile;
+	var file = date + "";
+	var filePath = "/home/test/";
+	const outfile = date + ".txt";
 	const outfilePath = "/home/test/" + outfile;
-	const command = "(gcc -o myapp " + cfilePath + " > " + outfilePath + " 2>&1 )  && ./myapp > " + outfilePath;
-	//var removeFileList = [];
+	var command = "";
+	var image = "";
 	
-    console.log("hello post /cbuild");
-    // 파일로 코드 저장
-    writeFile("/home/test/" + cfile, source)
+	if(lang == "c"){
+		file += ".c";
+		filePath += file;
+		image = "gcc:latest";
+		command = "(gcc -o myapp " + filePath + " > " + outfilePath + " 2>&1 )  && ./myapp > " + outfilePath;
+	}
+	else if(lang == "cpp"){
+		file += ".cpp";
+		filePath += file;
+		image = "gcc:latest";
+		command = "(g++ -o myapp " + filePath + " > " + outfilePath + " 2>&1 )  && ./myapp > " + outfilePath;
+	}
+	else if(lang == "java"){
+		file += ".java";
+		filePath += file;
+		image = "java:8";
+	}
+
+	// 파일로 코드 저장
+	writeFile("/home/test/" + file, source)
 		.then( () => {
 			// 이미지를 바탕으로 컨테이너를 띄우고
 			// 컨테이너에서 빌드한 결과를 파일로 저장
-			docker.run('gcc:latest', ['sh', '-c', command], process.stdout, options).then( (data) => {
-				var output = data[0]; // {Error: '', StatusCode: ''}
-				var container = data[1];
-				var statusCode = output.StatusCode;
+			docker.run(image, ['sh', '-c', command], process.stdout, options)
+				.then( (data) => {
+					var output = data[0]; // {Error: '', StatusCode: ''}
+					var container = data[1];
+					var statusCode = output.StatusCode;
 
-				// 정상 컴파일
-				readFile(outfilePath, "utf-8")
-					.then( file => {
-						var responseData = {'output': file};
-						res.json(responseData);
-					})
-					.catch( err => {
-						console.log(err);
+					// 정상 컴파일
+					readFile(outfilePath, "utf-8")
+						.then( file => {
+							var responseData = {'output': file};
+							res.json(responseData);
+						})
+						.catch( err => {
+							console.log(err);
+						});
+
+					return container.remove();
+				}).then( (data) => {
+					// file 삭제
+					var remove = spawn('rm', [filePath, outfilePath]);
+					remove.stdout.on('data', (data) => {
+						debug("rm stdout: " + String(data));
+					});
+					remove.stderr.on('data', (data) => {
+						debug("rm stderr: " + String(data));
+					});
+					remove.on('close', (code) => {
+						if(code == 0)
+							debug("Success: remove process");
+						else
+							debug("Err: remove process");
 					});
 
-				return container.remove();
-			}).then( (data) => {
-				// file 삭제
-				var remove = spawn('rm', [cfilePath, outfilePath]);
-				remove.stdout.on('data', (data) => {
-					debug("rm stdout: " + String(data));
+					debug('container removed');
+				}).catch( (err) => {
+					debug("Err: ", err);
 				});
-				remove.stderr.on('data', (data) => {
-					debug("rm stderr: " + String(data));
-				});
-				remove.on('close', (code) => {
-					if(code == 0)
-						debug("Success: remove process");
-					else
-						debug("Err: remove process");
-				});
-
-				debug('container removed');
-			}).catch( (err) => {
-				debug("Err: ", err);
-			});
 		})
 		.catch(err => {
 			console.log(err);
