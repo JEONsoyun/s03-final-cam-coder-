@@ -13,7 +13,7 @@
               >
                 <div>
                   <span style="color: #fb8805; font-weight: 800">{{
-                    SAMPLE_DATA.user.userName
+                    teacher.user.userName
                   }}</span>
                   <span>선생님에게</span>
                 </div>
@@ -31,12 +31,12 @@
         <div class="d-flex teacher-detail-page__box">
           <div
             class="d-flex flex-grow-0 flex-shrink-0 teacher-detail-page__profile"
-            :style="`background-image:url(${SAMPLE_DATA.profile})`"
+            :style="`background-image:url(${teacher.profile})`"
           />
           <div class="d-flex flex-column teacher-detail-page__intro">
             <div class="d-flex">
               <div style="font-weight: 800; font-size: 24px">
-                {{ SAMPLE_DATA.user.userName }}
+                {{ teacher.user.userName }}
               </div>
               <div class="d-flex" />
               <div @click="onFavoriteClick" style="cursor: pointer">
@@ -48,21 +48,21 @@
                 >
               </div>
             </div>
-            <div class="d-flex">{{ SAMPLE_DATA.expertise }}</div>
-            <div class="d-flex">{{ SAMPLE_DATA.avaliableTime }}</div>
+            <div class="d-flex">{{ teacher.expertise }}</div>
+            <div class="d-flex">{{ teacher.avaliableTime }}</div>
             <div class="d-flex flex-grow-0" style="font-weight: 800">
               <div class="d-flex flex-grow-0 align-center">
                 <v-icon color="#ff4a62" style="margin-right: 2px"
                   >favorite</v-icon
                 >
-                {{ SAMPLE_DATA.likeCnt }}
+                {{ teacher.likeCnt }}
               </div>
               <div class="d-flex" />
               <div class="d-flex flex-grow-0 align-center">
                 <v-icon color="#4e41ff" style="margin-right: 2px"
                   >account_circle</v-icon
                 >
-                {{ SAMPLE_DATA.studentCnt }}
+                {{ teacher.studentCnt }}
               </div>
             </div>
           </div>
@@ -71,7 +71,7 @@
           <div style="font-weight: 800; font-size: 18px">선생님 소개</div>
           <div
             class="teacher-detail-page__content-box"
-            v-html="SAMPLE_DATA.intro"
+            v-html="teacher.intro"
           ></div>
           <div style="font-weight: 800; font-size: 18px; margin: 40px 0 20px 0">
             선생님 리뷰
@@ -83,13 +83,15 @@
           >
             <div class="d-flex align-center">
               <div
-                v-if="SAMPLE_DATA"
+                v-if="teacher"
                 class="d-flex flex-grow-0 flex-shrink-0 teacher-detail-page__review-profile"
                 :style="`background-image:url(${item.student.userProfile})`"
               />
-              <div style="font-weight:800;font-size:18px">{{ item.student.userId }}</div>
+              <div style="font-weight: 800; font-size: 18px">
+                {{ item.student.userId }}
+              </div>
               <div class="d-flex" />
-              <div style="color:#666;font-size:14px">
+              <div style="color: #666; font-size: 14px">
                 {{ $moment(item.evaluationDate).format('YYYY.MM.DD hh:mm') }}
               </div>
             </div>
@@ -134,7 +136,8 @@ export default {
       {
         reviewCode: 6,
         tutoringCode: 7,
-        evaluationContent: '이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.',
+        evaluationContent:
+          '이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.',
         evaluationDate: '2020-11-02T06:57:48.000+00:00',
         student: {
           id: 1,
