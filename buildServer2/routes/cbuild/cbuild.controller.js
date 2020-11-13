@@ -49,7 +49,6 @@ exports.build = (req, res, next) => {
 				readFile(outfilePath, "utf-8")
 					.then( file => {
 						var responseData = {'output': file};
-						console.log(responseData);
 						res.json(responseData);
 					})
 					.catch( err => {
@@ -58,18 +57,29 @@ exports.build = (req, res, next) => {
 
 				return container.remove();
 			}).then( (data) => {
-				console.log('container removed');
+				// file 삭제
+				var remove = spawn('rm', [cfilePath, outfilePath]);
+				remove.stdout.on('data', (data) => {
+					debug("rm stdout: " + String(data));
+				});
+				remove.stderr.on('data', (data) => {
+					debug("rm stderr: " + String(data));
+				});
+				remove.on('close', (code) => {
+					if(code == 0)
+						debug("Success: remove process");
+					else
+						debug("Err: remove process");
+				});
+
+				debug('container removed');
 			}).catch( (err) => {
-				console.log("Err: ", err);
+				debug("Err: ", err);
 			});
 		})
 		.catch(err => {
 			console.log(err);
 		});
-
-	// 결과파일 읽기
-
-	// file 삭제
 }
 
 exports.test = (req, res, next) => {
