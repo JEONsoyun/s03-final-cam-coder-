@@ -40,7 +40,7 @@ export default {
         return (await axios.post(`${baseURL}/teachers/sorted`, data,config)).data
     },
     async searchTeacher(data,config){
-        return (await axios.post(`${baseURL}/teachers/search`, data,config)).data
+        return (await axios.post(`${baseURL}/teachers/search`, data,config))
     },
     async teacherAll(){
         return (await axios.get(`${baseURL}/teachers/all`)).data
@@ -62,14 +62,17 @@ export default {
         return  (await axios.put(`${baseURL}/tutorings/${data.tutorings_id}`,config)).data
     },
     // like api 
-    async postLike(data){
-        return  (await axios.post(`${baseURL}/likes`,data))
+    async postLike(data,config){
+        return  (await axios.post(`${baseURL}/likes`,data,config)).data
     },
     async getLike(config){
         return  (await axios.get(`${baseURL}/likes`,config)).data
     },
     async deleteLike(like_id){
         return  (await axios.delete(`${baseURL}/likes/${like_id}`))
+    },
+    async isLike(teacherCode, config){
+        return (await axios.get(`${baseURL}/likes/${teacherCode}`,config)).data
     },
     // review api
     async postReview(data){

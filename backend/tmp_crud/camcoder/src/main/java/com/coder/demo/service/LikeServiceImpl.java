@@ -68,10 +68,16 @@ public class LikeServiceImpl implements LikeService {
 			return "success";
 		}else {
 			tc.deleteLike(check.get());
-			tdao.save(tc);
 			likedao.deleteById(check.get().getLikeCode());
-			return "fail";
+			tdao.save(tc);
+			return "remove";
 		}
+	}
+
+	@Override
+	public boolean isLike(Long code, String userid) throws Exception{
+		long ucode = Optional.ofNullable(userdao.findByUserId(userid)).map(User::getUserCode).orElseThrow(NotExistIdException::new);
+		return (likedao.findByTeacherCodeAndUserCode(code, ucode)!=null)? true: false;
 	}	
 
 }

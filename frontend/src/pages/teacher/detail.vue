@@ -251,12 +251,18 @@ export default {
     ],
   }),
   methods: {
-    onFavoriteClick() {
-      this.isSelected = !this.isSelected;
-      let data = {
-        teacher: this.teacher.teacherCode,
-      };
-      this.$api.postLike();
+    async onFavoriteClick() {
+      try {
+        let data = {
+          teacher: this.teacher.teacherCode,
+        };
+        console.log(data);
+        let result = await this.$api.postLike(data, this.$store.state.config);
+        console.log(result);
+        this.isSelected = !this.isSelected;
+      } catch (e) {
+        alert('잘못된 접근입니다.');
+      }
     },
     onMessageClick() {
       this.$router.push(`/teacher/send-message/${this.teacherId}`);
@@ -275,8 +281,10 @@ export default {
         this.teacherId,
         this.$store.state.config
       );
+      this.isSelected = await this.$api.isLike(this.teacherId);
     } catch (e) {
       console.log('선생님 로딩 실패');
+      alert('잘못된 접근입니다.');
     }
   },
 };
