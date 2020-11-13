@@ -35,4 +35,5 @@ public class MessageController {
 	public List<Message> selectAll(HttpServletRequest request) {
 		return mservice.selectAll(((String)request.getAttribute("loginUserId")));
 	}
+	
 }

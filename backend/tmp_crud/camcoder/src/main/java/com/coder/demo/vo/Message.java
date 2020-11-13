@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name = "messages")
 @EntityScan(basePackages = {"com.coder.demo.vo"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Message implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

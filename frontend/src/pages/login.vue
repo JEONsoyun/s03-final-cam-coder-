@@ -58,13 +58,13 @@ export default {
   methods: {
     async onLoginClick() {
       try {
-        console.log(this.data.id + ' 아이디는 보임');
+        console.log(this.$store.state.config);
         await this.$api.login(this.data).then((res) => {
-          console.log(res.data + '데이터도 받아옴');
-          console.log(res.data.token);
+          // console.log(res.data + '데이터도 받아옴');
+          // console.log(res.data.token);
           this.$store.commit('SET_AUTHTOKEN', res.data.token);
-          console.log('이거시 로그인 성공' + this.$store.state.AUTHTOKEN);
-          console.log(this.$store.state.config);
+          //console.log('이거시 로그인 성공' + this.$store.state.AUTHTOKEN);
+          //console.log(this.$store.state.config);
           alert('로그인 성공');
           location.href = '/';
         });

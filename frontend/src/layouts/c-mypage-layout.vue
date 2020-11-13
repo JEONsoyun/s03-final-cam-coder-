@@ -36,7 +36,8 @@
               @click="$router.push('/mypage/edit')"
               class="d-flex flex-grow-0 flex-shrink-0 align-center c-mypage-layout__profile-text"
             >
-              테스트
+              <template v-if="$store.state.USER == ''">테스트</template>
+              <template v-else>{{ $store.state.USER.userName }}</template>
               <span style="font-weight: 400"
                 >님 <v-icon size="28">keyboard_arrow_right</v-icon></span
               >

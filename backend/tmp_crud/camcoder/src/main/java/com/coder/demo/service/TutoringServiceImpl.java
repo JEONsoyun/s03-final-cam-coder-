@@ -53,8 +53,8 @@ public class TutoringServiceImpl implements TutoringService {
 			Tutoring now = new Tutoring(starttime, endtime, 1, 0);
 
 			//studentCnt 증가
-			tc.addTutor(now);
-			student.addTutor(now);
+//			tc.addTutor(now);
+			//student.addTutor(now);
 
 			tutoringdao.save(now);
 
@@ -87,7 +87,7 @@ public class TutoringServiceImpl implements TutoringService {
 				if(type == 1 && (now.getStatus() == 1)) {
 					now.setStatus(0);
 					//studentCnt 증가
-					tc.setTutor(now);
+//					tc.setTutor(now);
 				}else if(type == 2 && (now.getStatus() == 0)){
 					now.setStatus(2);//완료
 				}else if(type == 3 && (now.getStatus() == 1)) {

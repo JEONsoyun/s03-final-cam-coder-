@@ -35,10 +35,10 @@
               <div
                 class="d-flex flex-shrink-0 teacher-search-page__profile-image"
               >
-                {{ item.userProfile }}
+                {{ item.user.userProfile }}
               </div>
               <div class="d-flex flex-column teacher-search-page__item-content">
-                <div style="font-weight: 800">userName {{ item.userName }}</div>
+                <div style="font-weight: 800">{{ item.user.userName }}</div>
                 <div class="d-flex flex-grow-1 flex-column">
                   <div>{{ item.expertise }}</div>
                   <div>{{ item.avaliableTime }}</div>

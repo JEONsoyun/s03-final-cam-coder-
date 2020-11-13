@@ -3,7 +3,7 @@
     <div class="mypage-student-tutoring-page">
       <div
         class="d-flex mypage-student-tutoring-page__box"
-        v-for="(item, mi) in SAMPLE_DATA"
+        v-for="(item, mi) in tutorings"
         :key="`item-${mi}`"
       >
         <div
@@ -235,8 +235,10 @@ export default {
   async created() {
     console.log(this.$store.state.config);
     try {
-      this.user = await this.$api.getMe(this.$store.state.config);
-      this.tutorings = this.user.tutors;
+      //this.user = await this.$api.getMe(this.$store.state.config);
+      this.tutorings = await this.$api.getStudentTutoring(
+        this.$store.state.config
+      );
     } catch (e) {
       console.log('잘못된 접근입니다. 로딩 실패');
     }

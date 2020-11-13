@@ -28,7 +28,7 @@ import lombok.Setter;
 @Entity
 @Table(name="users")
 @EntityScan(basePackages = {"com.coder.demo.vo"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -43,34 +43,34 @@ public class User {
 	private Date joinDate;
 
 	//자신이 학생으로 등록된 튜터링 목록
-	@Default
-	@OneToMany(mappedBy = "tstudent",cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Tutoring> tutors = new ArrayList<Tutoring>();
+//	@Default
+//	@OneToMany(mappedBy = "tstudent",cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<Tutoring> tutors = new ArrayList<Tutoring>();
 
-	public void addTutor(final Tutoring tutor) {
-		tutors.add(tutor);
-		tutor.setStudent(this);
-	}
+//	public void addTutor(final Tutoring tutor) {
+//		tutors.add(tutor);
+//		tutor.setStudent(this);
+//	}
+//
+//	public void deleteTutor(final Tutoring tutor) {
+//		tutors.remove(tutor);
+//		tutor.setStudent(null);
+//	}
 
-	public void deleteTutor(final Tutoring tutor) {
-		tutors.remove(tutor);
-		tutor.setStudent(null);
-	}
+//	//자신이 작성한 모든 리뷰 목록
+//	@Default
+//	@OneToMany(mappedBy = "rstudent",cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<Review> reviews = new ArrayList<Review>();
 
-	//자신이 작성한 모든 리뷰 목록
-	@Default
-	@OneToMany(mappedBy = "rstudent",cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Review> reviews = new ArrayList<Review>();
-
-	public void addReview(final Review review) {
-		reviews.add(review);
-		review.setStudent(this);
-	}
-
-	public void deleteReview(final Review review) {
-		reviews.remove(review);
-		review.setStudent(null);
-	}
+//	public void addReview(final Review review) {
+//		reviews.add(review);
+//		review.setStudent(this);
+//	}
+//
+//	public void deleteReview(final Review review) {
+//		reviews.remove(review);
+//		review.setStudent(null);
+//	}
 	
 
 	@PrePersist

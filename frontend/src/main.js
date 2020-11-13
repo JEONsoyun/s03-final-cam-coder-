@@ -75,7 +75,7 @@ new Vue({
   created () { 
     let token = localStorage.getItem('token')
     if (token) {
-      console.log(token)
+      //console.log(token)
      this.$store.commit('SET_AUTHTOKEN', token) 
     } },
 })

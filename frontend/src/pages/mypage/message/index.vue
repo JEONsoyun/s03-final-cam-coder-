@@ -4,16 +4,21 @@
       <div
         @click="onMessageClick(item)"
         class="d-flex align-center mypage-message-page__box"
-        v-for="(item, mi) in SAMPLE_DATA"
+        v-for="(item, mi) in messages"
         :key="`item-${mi}`"
       >
         <div
           class="d-flex flex-grow-0 flex-shrink-0 mypage-message-page__profile"
-          :style="`background-image:url(${item.profile})`"
+          :style="`background-image:url(${item.sender.userProfile})`"
         />
         <div class="d-flex flex-column" style="width: 100%; height: 100%">
           <div class="d-flex flex-grow-0">
-            <div class="d-flex mypage-message-page__name">사용자이름</div>
+            <div class="d-flex mypage-message-page__name">
+              {{ item.sender.userName }}
+            </div>
+            <div class="d-flex mypage-message-page__name">
+              {{ item.sender.userName }}
+            </div>
             <div class="d-flex flex-grow-0 mypage-message-page__date">
               {{ $moment(item.sendDate).format('YYYY.MM.DD hh:mm') }}
             </div>
@@ -35,6 +40,7 @@ export default {
   name: 'mypage-message-page',
   data: () => ({
     me: 15,
+    messages: [],
     SAMPLE_DATA: [
       {
         messageCode: 13,
@@ -66,6 +72,16 @@ export default {
       }
       this.$router.push(`/mypage/message/${user}`);
     },
+  },
+  async created() {
+    //console.log(this.$store.state.config);
+    try {
+      let tmp = await this.$api.getMessage(this.$store.state.config);
+      this.messages = tmp;
+      console.log(this.messages);
+    } catch (e) {
+      console.log('잘못된 접근입니다. 로딩 실패');
+    }
   },
 };
 </script>

@@ -22,7 +22,7 @@
           {{ item.text }}
         </div>
         <div class="d-flex" />
-        <template v-if="isLoggedIn">
+        <template v-if="$store.state.ISLOGGEDIN == null">
           <c-button
             @click="$router.push('/signup')"
             class="flex-grow-0"
@@ -101,7 +101,7 @@ export default {
     },
   },
   created() {
-    console.dir(this.$store.state.USER);
+    //console.dir(this.$store.state.USER);
     if (this.$route.path.match(/^\/teacher/) != null) {
       this.selectedId = 0;
     } else if (this.$route.path.match(/^\/mypage/) != null) {
@@ -109,7 +109,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$store.state);
+    // console.log(this.$store.state);
     // try {
     //   console.log(this.$store.state.ISLOGGEDIN);
     //   this.isLoggedIn = this.$store.state.ISLOGGEDIN;

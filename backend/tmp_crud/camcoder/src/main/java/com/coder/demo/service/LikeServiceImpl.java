@@ -36,7 +36,7 @@ public class LikeServiceImpl implements LikeService {
 		Like like = Optional.ofNullable(likedao.findByTeacherCodeAndUserCode(tcode, ucode)).orElseThrow(NotExistIdException::new);
 
 		//likeCnt 감소
-		tc.deleteLike(like);
+//		tc.deleteLike(like);
 		//tdao.save(tc);
 
 		likedao.deleteById(like.getLikeCode());
@@ -60,7 +60,7 @@ public class LikeServiceImpl implements LikeService {
 		if(!check) {
 			Like now = new Like(ucode, tc);
 			//likeCnt 증가
-			tc.addLike(now);
+//			tc.addLike(now);
 			tdao.save(tc);
 		}
 	}	
