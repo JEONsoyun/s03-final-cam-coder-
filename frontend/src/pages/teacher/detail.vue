@@ -253,6 +253,10 @@ export default {
   methods: {
     onFavoriteClick() {
       this.isSelected = !this.isSelected;
+      let data = {
+        teacher: this.teacher.teacherCode,
+      };
+      this.$api.postLike();
     },
     onMessageClick() {
       this.$router.push(`/teacher/send-message/${this.teacherId}`);
