@@ -145,6 +145,7 @@
           <div style="font-weight: 800; font-size: 18px; margin: 40px 0 20px 0">
             선생님 리뷰
           </div>
+          <template v-if="reviews != null && reviews.length != 0">
           <div
             class="teacher-detail-page__review"
             v-for="(item, ri) in reviews"
@@ -168,6 +169,10 @@
               {{ item.evaluationContent }}
             </div>
           </div>
+          </template>
+          <template v-else>
+            <c-empty content="작성된 리뷰" />
+          </template>
         </div>
       </div>
     </div>
