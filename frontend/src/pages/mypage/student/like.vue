@@ -59,6 +59,7 @@ export default {
 
 <style>
 .mypage-student-like-page__content {
+  width: 728px;
   margin-top: -12px;
   flex-wrap: wrap;
 }
