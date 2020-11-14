@@ -30,8 +30,14 @@
             class="d-flex flex-column flex-grow-0 flex-shrink-0 align-center c-mypage-layout__content-left"
           >
             <div
+              v-if="$store.state.USER"
               class="d-flex flex-grow-0 flex-shrink-0 c-mypage-layout__profile-image"
-            ></div>
+              :style="`background-image:url(${
+                $store.state.USER.userProfile
+                  ? $store.state.USER.userProfile
+                  : '/static/images/user.png'
+              })`"
+            />
             <div
               @click="$router.push('/mypage/edit')"
               class="d-flex flex-grow-0 flex-shrink-0 align-center c-mypage-layout__profile-text"
@@ -232,12 +238,11 @@ export default {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-image: url('/static/images/user.png');
   background-size: cover;
   background-position: center center;
   border: solid 3px #ccc;
-  opacity: 0.7;
 }
+
 .c-mypage-layout__profile-text {
   cursor: pointer;
   margin-right: -24px;
