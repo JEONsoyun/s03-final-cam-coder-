@@ -22,7 +22,6 @@ export default {
     async updateUser(data,config){
         return (await axios.put((`${baseURL}/teachers`, data,config)))
     },
-    //이거 accounts 붙이는 건가 아닌건가 모르겠네
     // teacher api 
     async updateTeacher(data,config){
         return (await axios.put(`${baseURL}/teachers`,data,config))
@@ -44,6 +43,9 @@ export default {
     },
     async teacherAll(){
         return (await axios.get(`${baseURL}/teachers/all`)).data
+    },
+    async getTeacherMe(config){
+        return (await axios.get(`${baseURL}/teachers/me`,config)).data 
     },
     // Tutorings api
     async postTutoring(data,config){
@@ -77,6 +79,9 @@ export default {
     // review api
     async postReview(data){
         return  (await axios.post(`${baseURL}/reviews`,data))
+    },
+    async getTeacherReview(data,config){
+        return (await axios.get(`${baseURL}/reviews/${data}`,config)).data;
     },
     async getReview(){
         return  (await axios.get(`${baseURL}/reviews`)).data

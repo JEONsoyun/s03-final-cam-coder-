@@ -78,4 +78,9 @@ public class Like{
 		this.likeTeacher = teacher;
 	}
 
+	@Override
+	public String toString() {
+		return "Like [likeCode=" + likeCode + ", userCode=" + userCode + ", likeDate=" + likeDate + ", likeTeacher="
+				+ likeTeacher + "]";
+	}
 }
