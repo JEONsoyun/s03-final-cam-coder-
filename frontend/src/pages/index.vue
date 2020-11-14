@@ -46,7 +46,7 @@
           </div>
         </div>
     </div>
-    <div class="main-page__content-container">
+    <div v-if="!$store.state.ISLOGGEDIN" class="main-page__content-container">
       <div class="d-flex flex-column align-center main-page__content">
         <div style="font-size: 20px;color:#777;font-weight:800">
         1분안에 내게 딱 맞는 과외 선생님 또는 학생을 찾아볼 수 있어요.
