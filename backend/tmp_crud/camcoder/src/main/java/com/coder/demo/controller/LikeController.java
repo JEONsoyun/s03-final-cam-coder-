@@ -34,7 +34,11 @@ public class LikeController {
 	public List<Like> selectAll(HttpServletRequest request) throws Exception{
 		return likeService.selectMine((String)(request.getAttribute("loginUserId")));
 	}
-	
+	@GetMapping(value="/likes/{Code}")
+	public boolean isLike(@PathVariable Long Code, HttpServletRequest request) throws Exception{
+		//likeService.isLike(Code, (String)(request.getAttribute("loginUserId")));
+		return likeService.isLike(Code, (String)(request.getAttribute("loginUserId")));
+	}
 	@DeleteMapping(value="/likes/{Code}")
 	public String deleteLike(@PathVariable Long Code, HttpServletRequest request) throws Exception{
 		likeService.delete(Code, (String)(request.getAttribute("loginUserId")));

@@ -1,6 +1,11 @@
 <template>
   <c-mypage-layout title="쪽지 보기">
-    <div class="mypage-message-detail-page">
+    <div
+      v-if="
+        messages && messages[0] && messages[0].receiver && messages[0].sender
+      "
+      class="mypage-message-detail-page"
+    >
       <div class="d-flex align-center mypage-message-detail-page__info">
         <div
           @click="$router.go(-1)"
@@ -10,32 +15,36 @@
           <v-icon size="28">keyboard_arrow_left</v-icon>
         </div>
         <div
-          v-if="SAMPLE_DATA"
+          v-if="messages && messages[0]"
           class="d-flex flex-grow-0 flex-shrink-0 mypage-message-detail-page__profile"
-          :style="`background-image:url(${SAMPLE_DATA[0].profile})`"
+          :style="`background-image:url(${messages[0].profile})`"
         />
-        <div class="d-flex mypage-message-detail-page__name">사용자이름</div>
+        <div
+          v-if="me != messages[0].receiver.userCode"
+          class="d-flex mypage-message-detail-page__name"
+        >
+          {{ messages[0].receiver.userName }}
+        </div>
+        <div v-else class="d-flex mypage-message-detail-page__name">
+          {{ messages[0].sender.userName }}
+        </div>
       </div>
-      <div
-        class="d-flex"
-        v-for="(item, mi) in SAMPLE_DATA"
-        :key="`message-${mi}`"
-      >
+      <div class="d-flex" v-for="(item, mi) in messages" :key="`message-${mi}`">
         <div
           class="d-flex flex-grow-1 flex-shrink-0 mypage-message-detail-page__blank"
-          v-if="me == item.receiver"
+          v-if="me != item.receiver.userCode"
         />
         <div class="d-flex flex-column">
           <div class="d-flex mypage-message-detail-page__date">
-            <div class="d-flex" v-if="me == item.receiver" />
+            <div class="d-flex" v-if="me != item.receiver.userCode" />
             {{ $moment(item.sendDate).format('YYYY.MM.DD hh:mm') }}
-            <div class="d-flex" v-if="me == item.sender" />
+            <div class="d-flex" v-if="me != item.sender.userCode" />
           </div>
           <div
             class="mypage-message-detail-page__message"
             :class="{
-              'mypage-message-detail-page__left': me == item.receiver,
-              'mypage-message-detail-page__right': me == item.sender,
+              'mypage-message-detail-page__left': me != item.receiver.userCode,
+              'mypage-message-detail-page__right': me != item.sender.userCode,
             }"
           >
             {{ item.content }}
@@ -43,7 +52,7 @@
         </div>
         <div
           class="d-flex flex-grow-1 flex-shrink-0 mypage-message-detail-page__blank mypage-message-detail-page__blank"
-          v-if="me == item.sender"
+          v-if="me != item.sender"
         />
       </div>
       <div class="d-flex mypage-message-detail-page__input-container">
@@ -56,7 +65,11 @@
           flat
           outlined
         ></v-text-field>
-        <c-button @click="onMessageButtonClick" class="flex-grow-0" type="gradient" style="height:48px"
+        <c-button
+          @click="onMessageButtonClick"
+          class="flex-grow-0"
+          type="gradient"
+          style="height: 48px"
           >쪽지 보내기</c-button
         >
       </div>
@@ -67,7 +80,7 @@
 export default {
   name: 'mypage-message-detail-page',
   data: () => ({
-    me: 15,
+    me: 0,
     userId: 1,
     input: '',
     messages: [],
@@ -118,6 +131,11 @@ export default {
     } catch (e) {
       console.log('잘못된 접근입니다. 로딩 실패');
     }
+
+    let user = this.$store.state.USER;
+    this.me = user.userCode;
+    console.log('나다', this.me);
+    console.log('메시지다', this.messages);
   },
 };
 </script>

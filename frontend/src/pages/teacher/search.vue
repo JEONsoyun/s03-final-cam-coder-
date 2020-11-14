@@ -15,7 +15,7 @@
             outlined
             label="키워드를 입력해주세요."
             v-model="keyword"
-            @keydown.enter="onSearchClick"
+            @keydown.enter="onSearchClick(keyword)"
           ></v-text-field>
           <c-button
             @click="onSearchClick"
@@ -36,15 +36,25 @@
               @click="onItemClick(item)"
             >
               <div
+                v-if="item.user.userProfile != null"
                 class="d-flex flex-shrink-0 teacher-search-page__profile-image"
-              >
-                {{ item.user.userProfile }}
-              </div>
+                :style="`background-image: url(${item.user.userProfile})`"
+              />
+              <div
+                v-else
+                class="d-flex flex-shrink-0 teacher-search-page__profile-image"
+                :style="`background-image: url('/static/images/user.png')`"
+              />
               <div class="d-flex flex-column teacher-search-page__item-content">
                 <div style="font-weight: 800">{{ item.user.userName }}</div>
-                <div class="d-flex flex-grow-1 flex-column">
-                  <div>{{ item.expertise }}</div>
-                  <div>{{ item.avaliableTime }}</div>
+                <div
+                  class="d-flex flex-grow-1 flex-column"
+                  style="height: 90px"
+                >
+                  <div class="ellipsis" style="margin: 8px 0">
+                    {{ item.expertise }}
+                  </div>
+                  <div v-html="item.avaliableTime" class="ellipsis" />
                 </div>
                 <div class="d-flex teacher-search-page__item-bottom">
                   <div class="d-flex flex-grow-0 align-center">
@@ -88,6 +98,9 @@ export default {
     //   sorttype: null,
     // },
     keyword: '',
+    data: {
+      keywords: this.keyword,
+    },
     SAMPLE_DATA: [
       {
         teacherCode: 1,
@@ -212,16 +225,15 @@ export default {
     ],
   }),
   methods: {
-    async onSearchClick() {
+    async onSearchClick(keyword) {
       try {
         console.log('선생님', this.teachers);
         console.log('선생님키워드', this.keyword);
-        let tmp = await this.$api.searchTeacher(
-          {
-            keyword: this.keyword,
-          },
-          this.$store.state.config
-        );
+        let data = {
+          keywords: keyword,
+        };
+        console.log(data);
+        let tmp = await this.$api.searchTeacher(data, this.$store.state.config);
         this.teachers = tmp;
         console.log(this.teachers);
       } catch (e) {
@@ -240,7 +252,7 @@ export default {
       console.log('선생님', this.teachers);
       this.teachers = await this.$api.sortTeacher(
         {
-          keyword: this.keyword,
+          keywords: this.keyword,
         },
 
         this.$store.state.config
@@ -319,7 +331,9 @@ export default {
 .teacher-search-page__profile-image {
   width: 100%;
   height: 180px;
-  background: #dfdfdf;
+  background-size: cover;
+  background-position: center center;
+  border-bottom: solid 1px #fb8805;
 }
 
 .teacher-search-page__item-content {

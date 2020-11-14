@@ -2,15 +2,22 @@
   <c-mypage-layout title="선생님 정보 수정">
     <div class="mypage-teacher-edit-page">
       <div class="d-flex align-center mypage-teacher-edit-page__row">
-        <div class="d-flex flex-shrink-0 mypage-teacher-edit-page__label">소개</div>
+        <div class="d-flex flex-shrink-0 mypage-teacher-edit-page__label">
+          소개
+        </div>
         <div class="mypage-teacher-edit-page__textarea-container">
-          <textarea style="width: 100%;height:100px;" v-model="data.intro" />
+          <textarea style="width: 100%; height: 100px" v-model="data.intro" />
         </div>
       </div>
       <div class="d-flex align-center mypage-teacher-edit-page__row">
-        <div class="d-flex flex-shrink-0 mypage-teacher-edit-page__label">경력</div>
+        <div class="d-flex flex-shrink-0 mypage-teacher-edit-page__label">
+          경력
+        </div>
         <div class="mypage-teacher-edit-page__textarea-container">
-          <textarea style="width: 100%;height:100px" v-model="data.expertise" />
+          <textarea
+            style="width: 100%; height: 100px"
+            v-model="data.expertise"
+          />
         </div>
       </div>
       <div class="d-flex align-center mypage-teacher-edit-page__row">
@@ -48,15 +55,21 @@
           flat
           outlined
         ></v-text-field>
-      </div>      
-      <c-button class="flex-grow-0" style="margin-top: 60px;" @click="onUpdateTeacher">수정하기</c-button>
+      </div>
+      <c-button
+        class="flex-grow-0"
+        style="margin-top: 60px"
+        @click="onUpdateTeacher"
+        >수정하기</c-button
+      >
     </div>
   </c-mypage-layout>
 </template>
 <script>
 export default {
-  name: "mypage-teacher-edit-page",
+  name: 'mypage-teacher-edit-page',
   data: () => ({
+    teacher: {},
     data: {
       intro: '재미있는 자료구조 수업입니다.',
       expertise: 'OO대학교에서 자료구조 수업을 A+로 완료하였습니다.',
@@ -67,17 +80,23 @@ export default {
   }),
   methods: {
     async onUpdateTeacher() {
-      // try {
-      //   console.log(this.$store.state.config);
-      //   await this.$api.updateTeacher(this.data, this.$store.state.config);
-      //   alert('정보변경 성공');
-      // } catch (e) {
-      //   alert('정보변경 실패.');
-      // }
+      try {
+        console.log(this.$store.state.config);
+        await this.$api.updateTeacher(this.data, this.$store.state.config);
+        alert('정보변경 성공');
+      } catch (e) {
+        alert('정보변경 실패.');
+      }
     },
   },
   async created() {
-    //? 불러올 무언가 없다...
+    try {
+      this.teacher = await this.$api.getTeacherMe(this.$store.state.config);
+      console.log(this.teacher);
+      this.data = this.teacher;
+    } catch (e) {
+      alert('잘못된 접근입니다.');
+    }
   },
 };
 </script>
@@ -99,7 +118,7 @@ export default {
   color: #8a8a8a !important;
 }
 .mypage-teacher-edit-page-input fieldset {
-  border-color:  #fb8805 !important;
+  border-color: #fb8805 !important;
   height: 46px;
 }
 
