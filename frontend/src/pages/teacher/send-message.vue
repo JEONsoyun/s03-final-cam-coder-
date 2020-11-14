@@ -73,12 +73,13 @@ export default {
         console.log(this.message);
         console.log(this.$store.state.config);
         await this.$api.sendMessage(this.message, this.$store.state.config);
-        alert('메시지 전송 성공');
+        alert('쪽지를 전송했습니다.');
         console.log(this.teacher.user.userCode);
         let url = '/mypage/message/' + this.teacher.user.userCode;
         location.href = url;
       } catch (e) {
-        alert('메시지 전송 실패.');
+        alert('쪽지 전송에 실패했습니다.');
+        console.error(e);
       }
     },
   },
