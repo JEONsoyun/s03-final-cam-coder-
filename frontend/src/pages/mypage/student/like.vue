@@ -2,22 +2,27 @@
   <c-mypage-layout title="관심 선생님 목록">
     <div class="d-flex mypage-student-like-page__content">
       <div
-        v-for="(item, ti) in SAMPLE_DATA"
+        v-for="(item, ti) in likes"
         :key="`teacher-${ti}`"
         class="d-flex flex-column mypage-student-like-page__item-container"
       >
         <div class="d-flex flex-column mypage-student-like-page__item">
           <div
+            v-if="item.teacher.user.userProfile != null"
             class="d-flex flex-shrink-0 mypage-student-like-page__profile-image"
-          >
-            {{ item.userProfile }}
-          </div>
+            :style="`background-image: url(${item.teacher.user.userProfile})`"
+          />
+          <div
+            v-else
+            class="d-flex flex-shrink-0 mypage-student-like-page__profile-image"
+            :style="`background-image: url('/static/images/user.png')`"
+          />
           <div
             class="d-flex flex-column mypage-student-like-page__item-content"
           >
-            <div style="font-weight: 800">userName {{ item.userName }}</div>
+            <div style="font-weight: 800">{{ item.teacher.user.userName }}</div>
             <div class="d-flex flex-grow-1 flex-column">
-              <div class="ellipsis">{{ item.expertise }}</div>
+              <div class="ellipsis">{{ item.teacher.expertise }}</div>
             </div>
           </div>
         </div>
@@ -196,6 +201,8 @@ export default {
   width: 100%;
   height: 180px;
   background: #dfdfdf;
+  background-size: cover;
+  background-position: center center;
 }
 
 .mypage-student-like-page__item-content {
