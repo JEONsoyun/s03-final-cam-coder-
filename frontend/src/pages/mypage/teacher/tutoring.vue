@@ -3,12 +3,18 @@
     <div class="mypage-teacher-tutoring-page">
       <div
         class="d-flex mypage-teacher-tutoring-page__box"
-        v-for="(item, mi) in SAMPLE_DATA"
+        v-for="(item, mi) in tutorings"
         :key="`item-${mi}`"
       >
         <div
+          v-if="item.student.userProfile != null"
           class="d-flex flex-grow-0 flex-shrink-0 mypage-teacher-tutoring-page__profile"
-          :style="`background-image:url(${item.teacher.profile})`"
+          :style="`background-image:url(${item.student.userProfile})`"
+        />
+        <div
+          v-else
+          class="d-flex flex-grow-0 flex-shrink-0 mypage-teacher-tutoring-page__profile"
+          :style="`background-image:url('/static/images/user.png')`"
         />
         <div class="d-flex flex-column" style="width: 100%; height: 100%">
           <div class="d-flex">
@@ -42,7 +48,7 @@
           </div>
           <div class="d-flex flex-grow-0">
             <div class="d-flex mypage-teacher-tutoring-page__name">
-              {{ item.teacher.user.userName }}
+              {{ item.student.userName }}
             </div>
             <div class="d-flex flex-grow-0 mypage-teacher-tutoring-page__date">
               {{ $moment(item.requestDate).format('YYYY.MM.DD hh:mm') }}
@@ -67,7 +73,7 @@
               v-if="item.status == 1"
               type="cancel"
               class="flex-grow-0"
-              style="margin-left: 8px;"
+              style="margin-left: 8px"
             />
           </div>
         </div>
@@ -239,10 +245,10 @@ export default {
     },
   },
   async created() {
-    console.log(this.$store.state.config);
     try {
-      this.user = await this.$api.getMe(this.$store.state.config);
-      this.tutorings = this.user.tutors;
+      this.tutorings = await this.$api.getTeacherTutoring(
+        this.$store.state.config
+      );
     } catch (e) {
       console.log('잘못된 접근입니다. 로딩 실패');
     }
