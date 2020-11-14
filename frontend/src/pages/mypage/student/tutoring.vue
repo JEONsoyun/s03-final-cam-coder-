@@ -113,8 +113,6 @@ export default {
           data,
           this.$store.state.config
         );
-
-        this.getTutoring();
       } catch (e) {
         console.error(e);
       }
@@ -126,6 +124,7 @@ export default {
           status: 3,
         };
         this.updateStatus(item.tutoringCode, data);
+        this.getTutoring();
       } else if (item.status == 0) {
         confirm('입장하시겠습니까?');
         window.open(`/room?tutoringCode=${item.tutoringCode}`);
@@ -137,10 +136,25 @@ export default {
     console.log(this.tutorings);
     let today = this.$moment();
     for (let tutoring of this.tutorings) {
-      if (tutoring.status == 0 && today.isAfter(tutoring.endDate)) {
+      if (tutoring.status == 2 || tutoring.status == 3) {
+        continue;
+      }
+      console.log(today.isAfter(tutoring.endDate), tutoring.endDate);
+      if (
+        today.isAfter(tutoring.endDate) &&
+        today.isAfter(tutoring.startDate)
+      ) {
         console.log(tutoring);
+        let data = {};
+        if (tutoring.status == 1) {
+          data.status = 3;
+        } else if (tutoring.status == 0) {
+          data.status = 2;
+        }
+        await this.updateStatus(tutoring.tutoringCode, data);
       }
     }
+    this.getTutoring();
   },
 };
 </script>

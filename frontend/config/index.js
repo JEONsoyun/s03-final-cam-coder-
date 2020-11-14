@@ -15,8 +15,8 @@ module.exports = {
       '/api': {
         secure: false,        
         target: URL,
-        changeOrigin: true,
-      },
+        
+      },changeOrigin: true,
       '/imageFile': {
         target: URL,
       },

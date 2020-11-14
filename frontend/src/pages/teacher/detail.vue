@@ -118,7 +118,7 @@
               </div>
             </div>
             <div class="d-flex">{{ teacher.expertise }}</div>
-            <div class="d-flex">{{ teacher.avaliableTime }}</div>
+            <div class="d-flex" v-html="teacher.avaliableTime"></div>
             <div class="d-flex flex-grow-0" style="font-weight: 800">
               <div class="d-flex flex-grow-0 align-center">
                 <v-icon color="#ff4a62" style="margin-right: 2px"
@@ -447,6 +447,7 @@ export default {
 }
 
 .teacher-detail-page__intro {
+  width: 100%;
   padding: 32px;
   border: solid 1px #eaeaea;
 }
