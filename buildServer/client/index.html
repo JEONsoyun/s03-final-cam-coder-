@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Server</title>
+</head>
+<body>
+    <label for="lang-select">Choose a language:</label>
+    <select name="language" id="lang-select">
+        <option value="">--Please choose an option--</option>
+        <option value="c"> C </option>
+        <option value="cpp"> C++ </option>
+        <option value="java"> Java </option>
+    </select>
+    <p>
+        <textarea id="code" style="resize:none; width:400px; height:300px;"></textarea>
+    </p>
+    <p>
+        <textarea id="output" style="resize:none; width:400px; height:50px; overflow: visible" readonly="readonly"></textarea>
+    </p>
+    <p>
+        <button type="button" class="btnBuild" onclick="btn_build()">Build</button>
+    </p>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+</body>
+</html>
