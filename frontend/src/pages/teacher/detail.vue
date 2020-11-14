@@ -34,7 +34,7 @@
                 >과외 신청하기</c-button
               >
               <v-dialog
-              style="z-index:9999"
+                style="z-index: 9999"
                 content-class="teacher-detail-page__dialog"
                 v-model="isFormVisible"
                 :overlay-opacity="0.75"
@@ -59,11 +59,24 @@
                       <v-spacer></v-spacer>
                     </v-date-picker>
                   </div>
-                  <div class="d-flex justify-center" style="padding:32px 0 8px 0;font-size:18px;border-top:solid 1px #fb8805">
-                    
-                  </div>
-                  <div class="d-flex justify-center" style="margin-bottom:32px;font-weight:800;font-size:18px">
-                    {{ dates[0] ? dates[0] : "과외 날짜를 선택해주세요." }}{{ dates[1] ? ' ~ ' + dates[1] : '' }}
+                  <div
+                    class="d-flex justify-center"
+                    style="
+                      padding: 32px 0 8px 0;
+                      font-size: 18px;
+                      border-top: solid 1px #fb8805;
+                    "
+                  ></div>
+                  <div
+                    class="d-flex justify-center"
+                    style="
+                      margin-bottom: 32px;
+                      font-weight: 800;
+                      font-size: 18px;
+                    "
+                  >
+                    {{ dates[0] ? dates[0] : '과외 날짜를 선택해주세요.'
+                    }}{{ dates[1] ? ' ~ ' + dates[1] : '' }}
                   </div>
                   <v-card-actions>
                     <c-button @click="onCancelClick" type="white"
@@ -80,8 +93,14 @@
         </div>
         <div class="d-flex teacher-detail-page__box">
           <div
+            v-if="teacher.profile != null"
             class="d-flex flex-grow-0 flex-shrink-0 teacher-detail-page__profile"
             :style="`background-image:url(${teacher.profile})`"
+          />
+          <div
+            v-else
+            class="d-flex flex-grow-0 flex-shrink-0 teacher-detail-page__profile"
+            :style="`background-image:url('/static/images/user.png')`"
           />
           <div class="d-flex flex-column teacher-detail-page__intro">
             <div class="d-flex">
@@ -128,7 +147,7 @@
           </div>
           <div
             class="teacher-detail-page__review"
-            v-for="(item, ri) in SAMPLE_DATA2"
+            v-for="(item, ri) in reviews"
             :key="`review-${ri}`"
           >
             <div class="d-flex align-center">
@@ -161,6 +180,7 @@ export default {
   data: () => ({
     teacherId: 0,
     teacher: {},
+    reviews: [],
     isSelected: false,
     isFormVisible: false,
     SAMPLE_DATA: {
@@ -312,7 +332,13 @@ export default {
         console.log(data);
         let result = await this.$api.postLike(data, this.$store.state.config);
         console.log(result);
+
         this.isSelected = !this.isSelected;
+        if (this.isSelected) {
+          this.teacher.likeCnt += 1;
+        } else {
+          this.teacher.likeCnt -= 1;
+        }
       } catch (e) {
         alert('잘못된 접근입니다.');
       }
@@ -330,7 +356,6 @@ export default {
     onPostClick() {
       this.isFormVisible = false;
       // TODO: 과외 신청 보내는 api
-      
 
       this.dates = [];
     },
@@ -348,11 +373,29 @@ export default {
         this.teacherId,
         this.$store.state.config
       );
-      this.isSelected = await this.$api.isLike(this.teacherId);
     } catch (e) {
       console.log('선생님 로딩 실패');
       alert('잘못된 접근입니다.');
     }
+
+    try {
+      this.isSelected = await this.$api.isLike(
+        this.teacherId,
+        this.$store.state.config
+      );
+      console.log(this.isSelected, '좋아요 했나 확인');
+    } catch (e) {
+      console.error(e);
+    }
+    try {
+      this.reviews = await this.$api.getTeacherReview(
+        this.teacherId,
+        this.$store.state.config
+      );
+    } catch (e) {
+      alert('리뷰로딩 실패');
+    }
+    console.log(this.teacher);
   },
 };
 </script>

@@ -80,6 +80,9 @@ export default {
     async postReview(data){
         return  (await axios.post(`${baseURL}/reviews`,data))
     },
+    async getTeacherReview(data,config){
+        return (await axios.get(`${baseURL}/reviews/${data}`,config)).data;
+    },
     async getReview(){
         return  (await axios.get(`${baseURL}/reviews`)).data
     },
