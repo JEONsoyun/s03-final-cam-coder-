@@ -367,7 +367,10 @@ export default {
       this.tutoringData.teacher_code = this.teacherId;
       console.log(this.tutoringData);
       try {
-        await this.$api.postTutoring(this.data, config);
+        await this.$api.postTutoring(
+          this.tutoringData,
+          this.$store.state.config
+        );
         alert('과외 요청 성공');
       } catch (e) {
         alert('과외 요청 실패');
