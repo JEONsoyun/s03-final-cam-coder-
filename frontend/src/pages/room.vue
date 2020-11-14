@@ -1,5 +1,7 @@
 <template>
   <div class="d-flex flex-column" style="width: 100%; height: 100%">
+
+    <!-- 상단 카메라/에디터 -->
     <div class="d-flex">
       <div class="d-flex flex-column room-page__camera">
         <video width="200" id="remote-video" autoplay />
@@ -15,7 +17,26 @@
         style="min-width: 500px"
       >
         <div class="d-flex flex-grow-1 flex-column room-page__code-editor">
-          <div class="d-flex flex-grow-0">
+
+          <label for="lang-select">Choose a language:</label>
+          <select v-model="language">
+            <option value="">--Please choose an option--</option>
+            <option value="c"> C </option>
+            <option value="cpp"> C++ </option>
+            <option value="java"> Java </option>
+            <option value="python37"> Python 3.7</option>
+          </select>
+          <p>
+            <div id="monaco" style="height:50vh"></div>
+          </p>
+          <p>
+              <textarea ref="output" style="resize:none; width:400px; height:50px; overflow: visible" readonly="readonly"></textarea>
+          </p>
+          <p>
+              <button type="button" class="btnBuild" @click="executeBuild">Build</button>
+          </p>
+        
+          <!-- <div class="d-flex flex-grow-0">
             <div class="d-flex" />
             <div>언어</div>
           </div>
@@ -23,11 +44,13 @@
           <div class="d-flex flex-grow-0">
             <div class="d-flex" />
             <c-button class="flex-grow-0">run</c-button>
-          </div>
+          </div> -->
         </div>
         <div class="d-flex flex-grow-1 room-page__console"></div>
       </div>
     </div>
+
+    <!-- 하단바 부분 -->
     <div
       class="d-flex flex-grow-0 align-center justify-center room-page__footer"
     >
@@ -61,6 +84,8 @@
 </template>
 
 <script>
+import * as monaco from 'monaco-editor';
+
 export default {
   name: 'room-page',
   data: () => ({
@@ -69,6 +94,8 @@ export default {
     webRTC: {},
     displayRTC: {},
     isShared: false,
+    editor: null,
+    language: 'c',
   }),
   methods: {
     initRoomToken() {
@@ -85,8 +112,38 @@ export default {
     onCloseClick() {
       window.close();
     },
+    executeBuild() {
+      const url = "http://k3a110.p.ssafy.io:8081/cbuild"
+      const code = this.editor.getValue();
+      const lang = this.language;
+      const data = JSON.stringify({ code, lang });
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', url, true);
+      xhr.setRequestHeader('Content-type', 'application/json');
+      xhr.send(data);
+      xhr.addEventListener('load', () => {
+          const result = JSON.parse(xhr.responseText);
+          this.$refs.output.value = result.output;
+      });
+    },
+    initEditor() {
+      this.editor = monaco.editor.create(document.getElementById('monaco'), {
+        theme: 'vs-dark',
+        fontFamily: 'Nanum Gothic Coding',
+        automaticLayout: true,
+        language: 'c',
+        value: [
+        '#include <stdio.h>',
+        'void main() {',
+        '}'
+        ].join('\n')
+      });
+    },
   },
   mounted() {
+    // 에디터 초기화
+    this.initEditor();
+
     // 방 초기화
     if (!this.$route.hash) {
       this.initRoomToken();
