@@ -13,7 +13,7 @@
               >
                 <div>
                   <span style="color: #fb8805; font-weight: 800">{{
-                    teacher.user.userName
+                    teacher.user && teacher.user.userName
                   }}</span>
                   <span>선생님에게</span>
                 </div>
@@ -23,8 +23,58 @@
                 @click="onMessageClick"
                 class="flex-grow-0"
                 type="gradient"
+                style="margin-bottom: 8px"
                 >문의하기</c-button
               >
+              <c-button
+                @click="onTutoringClick"
+                @click2="isFormVisible = false"
+                class="flex-grow-0"
+                type="white"
+                >과외 신청하기</c-button
+              >
+              <v-dialog
+              style="z-index:9999"
+                content-class="teacher-detail-page__dialog"
+                v-model="isFormVisible"
+                :overlay-opacity="0.75"
+                width="500"
+                @click:outside="isFormVisible = false"
+              >
+                <v-card>
+                  <div
+                    class="d-flex justify-center teacher-detail-page__dialog-content"
+                  >
+                    {{ teacher.user && teacher.user.userName }} 선생님에게 과외
+                    신청합니다.
+                  </div>
+                  <div class="d-flex justify-center" style="margin-top: 32px">
+                    <v-date-picker
+                      class="s-tour-search-date-picker"
+                      v-model="dates"
+                      range
+                      no-title
+                      :day-format="(d) => $moment(d).format('D')"
+                    >
+                      <v-spacer></v-spacer>
+                    </v-date-picker>
+                  </div>
+                  <div class="d-flex justify-center" style="padding:32px 0 8px 0;font-size:18px;border-top:solid 1px #fb8805">
+                    
+                  </div>
+                  <div class="d-flex justify-center" style="margin-bottom:32px;font-weight:800;font-size:18px">
+                    {{ dates[0] ? dates[0] : "과외 날짜를 선택해주세요." }}{{ dates[1] ? ' ~ ' + dates[1] : '' }}
+                  </div>
+                  <v-card-actions>
+                    <c-button @click="onCancelClick" type="white"
+                      >취소</c-button
+                    >
+                    <c-button @click="onPostClick" style="margin-left: 8px"
+                      >신청</c-button
+                    >
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </div>
           </div>
         </div>
@@ -36,7 +86,7 @@
           <div class="d-flex flex-column teacher-detail-page__intro">
             <div class="d-flex">
               <div style="font-weight: 800; font-size: 24px">
-                {{ teacher.user.userName }}
+                {{ teacher.user && teacher.user.userName }}
               </div>
               <div class="d-flex" />
               <div @click="onFavoriteClick" style="cursor: pointer">
@@ -112,6 +162,7 @@ export default {
     teacherId: 0,
     teacher: {},
     isSelected: false,
+    isFormVisible: false,
     SAMPLE_DATA: {
       teacherCode: 1,
       user: {
@@ -249,6 +300,8 @@ export default {
         },
       },
     ],
+    formdata: {},
+    dates: [],
   }),
   methods: {
     async onFavoriteClick() {
@@ -266,6 +319,20 @@ export default {
     },
     onMessageClick() {
       this.$router.push(`/teacher/send-message/${this.teacherId}`);
+    },
+    onTutoringClick() {
+      this.isFormVisible = true;
+    },
+    onCancelClick() {
+      this.isFormVisible = false;
+      this.dates = [];
+    },
+    onPostClick() {
+      this.isFormVisible = false;
+      // TODO: 과외 신청 보내는 api
+      
+
+      this.dates = [];
     },
   },
   async created() {
@@ -377,5 +444,23 @@ export default {
 .teacher-detail-page__review-text {
   margin-top: 12px;
   padding: 0 47px;
+}
+
+.teacher-detail-page__dialog {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333 !important;
+}
+
+.teacher-detail-page__dialog-content {
+  padding: 32px 16px;
+  font-size: 18px;
+  letter-spacing: -0.48px;
+}
+
+.teacher-detail-page__dialog-headline {
+  color: #fb8805;
+  font-size: 18px;
+  margin-left: 4px;
 }
 </style>
