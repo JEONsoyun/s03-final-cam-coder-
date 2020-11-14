@@ -51,11 +51,9 @@ public class TutoringServiceImpl implements TutoringService {
 			Date endtime = Optional.of(regist).map(TutorRegistRequest::getEnd).orElse(new Date());
 
 			Tutoring now = new Tutoring(starttime, endtime, 1, 0);
-
-			//studentCnt 증가
-//			tc.addTutor(now);
-			//student.addTutor(now);
-
+			
+			now.setTeacher(tc);
+			now.setStudent(student);
 			tutoringdao.save(now);
 
 		}catch(DataAccessException ex) {
