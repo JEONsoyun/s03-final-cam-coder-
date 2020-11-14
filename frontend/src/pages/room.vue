@@ -1,5 +1,6 @@
 <template>
   <div class="d-flex flex-column" style="width: 100%; height: 100%">
+    <!-- 상단 카메라/에디터 -->
     <div class="d-flex">
       <div class="d-flex flex-column room-page__camera">
         <video width="200" id="remote-video" autoplay />
@@ -15,7 +16,36 @@
         style="min-width: 500px"
       >
         <div class="d-flex flex-grow-1 flex-column room-page__code-editor">
-          <div class="d-flex flex-grow-0">
+          <label for="lang-select">Choose a language:</label>
+          <select v-model="language">
+            <option value="">--Please choose an option--</option>
+            <option value="c">C</option>
+            <option value="cpp">C++</option>
+            <option value="java">Java</option>
+            <option value="python37">Python 3.7</option>
+          </select>
+
+          <div id="monaco" style="height: 50vh"></div>
+
+          <p>
+            <textarea
+              ref="output"
+              style="
+                resize: none;
+                width: 400px;
+                height: 50px;
+                overflow: visible;
+              "
+              readonly="readonly"
+            ></textarea>
+          </p>
+          <p>
+            <button type="button" class="btnBuild" @click="executeBuild">
+              Build
+            </button>
+          </p>
+
+          <!-- <div class="d-flex flex-grow-0">
             <div class="d-flex" />
             <div>언어</div>
           </div>
@@ -23,11 +53,13 @@
           <div class="d-flex flex-grow-0">
             <div class="d-flex" />
             <c-button class="flex-grow-0">run</c-button>
-          </div>
+          </div> -->
         </div>
         <div class="d-flex flex-grow-1 room-page__console"></div>
       </div>
     </div>
+
+    <!-- 하단바 부분 -->
     <div
       class="d-flex flex-grow-0 align-center justify-center room-page__footer"
     >
@@ -61,6 +93,8 @@
 </template>
 
 <script>
+import * as monaco from 'monaco-editor';
+
 export default {
   name: 'room-page',
   data: () => ({
@@ -70,10 +104,12 @@ export default {
     displayRTC: {},
     isShared: false,
     tutoringCode: null,
+    editor: null,
+    language: 'c',
   }),
   methods: {
     initRoomToken() {
-      const hash = (this.tutoringCode)
+      const hash = this.tutoringCode
         .toString(32)
         .toUpperCase()
         .replace(/\./g, '-');
@@ -81,14 +117,39 @@ export default {
       this.$router.push({
         path: this.$route.pash,
         hash,
-      })
+      });
     },
     onCloseClick() {
       window.close();
     },
+    executeBuild() {
+      const url = 'http://k3a110.p.ssafy.io:8081/cbuild';
+      const code = this.editor.getValue();
+      const lang = this.language;
+      const data = JSON.stringify({ code, lang });
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', url, true);
+      xhr.setRequestHeader('Content-type', 'application/json');
+      xhr.send(data);
+      xhr.addEventListener('load', () => {
+        const result = JSON.parse(xhr.responseText);
+        this.$refs.output.value = result.output;
+      });
+    },
+    initEditor() {
+      this.editor = monaco.editor.create(document.getElementById('monaco'), {
+        theme: 'vs-dark',
+        fontFamily: 'Nanum Gothic Coding',
+        automaticLayout: true,
+        language: 'c',
+        value: ['#include <stdio.h>', 'void main() {', '}'].join('\n'),
+      });
+    },
   },
   mounted() {
     this.tutoringCode = this.$route.query.tutoringCode;
+    // 에디터 초기화
+    this.initEditor();
 
     // 방 초기화
     if (!this.$route.hash) {
@@ -126,9 +187,13 @@ export default {
       remoteVideoId: 'screen-remote-video',
       videoEnabledOnStart: true,
     });
-    
+
     document.querySelector('#btn-start').onclick = () => {
-      this.displayRTC.peerHandler.getUserMedia(null, this.displayRTC.onLocalStream, true);
+      this.displayRTC.peerHandler.getUserMedia(
+        null,
+        this.displayRTC.onLocalStream,
+        true
+      );
     };
   },
 };
@@ -141,11 +206,16 @@ function initMedia(vue, options) {
   let remoteUserId;
   let isOffer;
 
-  const socket = io("k3a110.p.ssafy.io" + options.namespace);
+  const socket = io('k3a110.p.ssafy.io' + options.namespace);
   const mediaHandler = new MediaHandler();
-  const peerHandler = new PeerHandler(Object.assign({
-    send: send,
-  }, options));
+  const peerHandler = new PeerHandler(
+    Object.assign(
+      {
+        send: send,
+      },
+      options
+    )
+  );
   const animationTime = 500;
   const isSafari = DetectRTC.browser.isSafari;
   const isMobile = DetectRTC.isMobileDevice;
@@ -331,12 +401,12 @@ function initMedia(vue, options) {
   }
 
   function onScreenInfoReceived(mediaInfo) {
-      console.log('onScreenInfoReceived');
+    console.log('onScreenInfoReceived');
   }
 
   function onScreenEnded() {
-      // TODO 종료
-      console.log('onScreenEnded');
+    // TODO 종료
+    console.log('onScreenEnded');
   }
 
   /**
@@ -363,8 +433,6 @@ function initMedia(vue, options) {
   initialize();
   return { peerHandler, mediaOption, onLocalStream, mediaHandler };
 }
-
-
 </script>
 
 <style>
