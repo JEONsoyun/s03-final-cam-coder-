@@ -135,20 +135,26 @@ export default {
     async onStateClick(item, type) {
       if (item.status == 1) {
         if (type == 'cancel') {
-          confirm('취소하시겠습니까?');
+          if (!confirm('취소하시겠습니까?')) {
+            return;
+          }
           let data = {
             status: 3,
           };
           this.updateStatus(item.tutoringCode, data);
         } else {
-          confirm('수락하시겠습니까?');
+          if (!confirm('수락하시겠습니까?')) {
+            return;
+          }
           let data = {
             status: 0,
           };
           this.updateStatus(item.tutoringCode, data);
         }
       } else if (item.status == 0) {
-        confirm('입장하시겠습니까?');
+        if (!confirm('입장하시겠습니까?')) {
+          return;
+        }
         window.open(`/room?tutoringCode=${item.tutoringCode}`);
       }
     },

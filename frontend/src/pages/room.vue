@@ -120,7 +120,9 @@ export default {
       });
     },
     onCloseClick() {
-      window.close();
+      if (confirm('수업에서 나가시겠습니까?')) {
+        location.href = `/review/${this.tutoringCode}`;
+      }
     },
     executeBuild() {
       const url = 'http://k3a110.p.ssafy.io:8081/cbuild';
@@ -148,6 +150,10 @@ export default {
   },
   mounted() {
     this.tutoringCode = this.$route.query.tutoringCode;
+    if (this.$route.fullPath == '/room') {
+      alert('잘못 된 접근입니다.');
+      this.$router.push('/');
+    }
     // 에디터 초기화
     this.initEditor();
 

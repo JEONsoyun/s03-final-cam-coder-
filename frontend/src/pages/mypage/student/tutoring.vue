@@ -119,15 +119,18 @@ export default {
     },
     onStateClick(item) {
       if (item.status == 1) {
-        confirm('취소하시겠습니까?');
+        if (!confirm('취소하시겠습니까?')) {
+          return;
+        }
         let data = {
           status: 3,
         };
         this.updateStatus(item.tutoringCode, data);
         this.getTutoring();
       } else if (item.status == 0) {
-        confirm('입장하시겠습니까?');
-        window.open(`/room?tutoringCode=${item.tutoringCode}`);
+        if (confirm('입장하시겠습니까?')) {
+          window.open(`/room?tutoringCode=${item.tutoringCode}`);
+        }
       }
     },
   },
