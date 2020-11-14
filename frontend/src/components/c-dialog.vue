@@ -43,19 +43,5 @@ export default {
 <style scoped>
 .c-dialog {
 }
-.c-dialog__logo {
-  width: 32px;
-  height: 32px;
-}
 
-.c-dialog__headline {
-  color: #fb8805;
-  font-size: 18px;
-  margin-left: 4px;
-}
-
-.c-dialog__button {
-  color: #fb8805;
-  font-weight: bold;
-}
 </style>

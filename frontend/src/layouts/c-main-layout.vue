@@ -40,7 +40,15 @@
             class="d-flex flex-grow-0 align-center"
             style="cursor: pointer"
           >
-            <div class="c-main-layout__profile" />
+            <div
+              v-if="$store.state.USER"
+              class="d-flex flex-grow-0 flex-shrink-0 c-main-layout__profile"
+              :style="`background-image:url(${
+                $store.state.USER.userProfile
+                  ? $store.state.USER.userProfile
+                  : '/static/images/user.png'
+              })`"
+            />
             <div
               class="d-flex align-center"
               style="font-size: 14px; font-weight: 800"
@@ -177,11 +185,9 @@ export default {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-image: url('/static/images/user.png');
   background-size: cover;
   background-position: center center;
   border: solid 1px #aaa;
-  opacity: 0.7;
 }
 
 .c-main-layout__footer-content-container {
