@@ -246,7 +246,7 @@ export default {
       }
     },
     async onStateClick(item, status) {
-      console.log(status);
+      // console.log(status);
       if (status == 3) {
         let data = {
           status: 3,
@@ -258,7 +258,7 @@ export default {
             this.$store.state.config
           );
           alert('취소되었습니다');
-          console.log(this.$store.state.config);
+          // console.log(this.$store.state.config);
           try {
             //this.user = await this.$api.getMe(this.$store.state.config);
             this.tutorings = await this.$api.getTeacherTutoring(
@@ -274,6 +274,7 @@ export default {
         let data = {
           status: 0,
         };
+        // console.log(data);
         try {
           await this.$api.updateTutoring(
             item.tutoringCode,
@@ -281,7 +282,7 @@ export default {
             this.$store.state.config
           );
           alert('수락되었습니다');
-          console.log(this.$store.state.config);
+          // console.log(this.$store.state.config);
           try {
             //this.user = await this.$api.getMe(this.$store.state.config);
             this.tutorings = await this.$api.getTeacherTutoring(
