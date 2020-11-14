@@ -37,10 +37,14 @@
             >
               <div
                 class="d-flex flex-shrink-0 teacher-search-page__profile-image"
-                :style="`background-image: url(${item.user.userProfile})`"
+                :style="`background-image: url(${
+                  item.user ? item.user.userProfile : '/static/images/user.png'
+                })`"
               />
               <div class="d-flex flex-column teacher-search-page__item-content">
-                <div style="font-weight: 800">{{ item.user.userName }}</div>
+                <div style="font-weight: 800">
+                  {{ item.user ? item.user.userName : '' }}
+                </div>
                 <div
                   class="d-flex flex-grow-1 flex-column"
                   style="height: 90px"
@@ -93,145 +97,20 @@ export default {
     // },
     keyword: '',
     data: {
-      keywords: this.keyword,
+      keywords: '',
     },
-    SAMPLE_DATA: [
-      {
-        teacherCode: 1,
-        user: {
-          userCode: 3,
-          userId: 'teacher0',
-          userPw: '1234',
-          userName: '야근이싫은개발자',
-          userProfile: null,
-          joinDate: '2020-10-27T01:46:43.000+00:00',
-        },
-        intro:
-          '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-        expertise:
-          'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-        price: 20000,
-        profile: null,
-        likeCnt: 2,
-        avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-        studentCnt: 3,
-      },
-      {
-        teacherCode: 1,
-        user: {
-          userCode: 3,
-          userId: 'teacher0',
-          userPw: '1234',
-          userName: '야근이싫은개발자',
-          userProfile: null,
-          joinDate: '2020-10-27T01:46:43.000+00:00',
-        },
-        intro:
-          '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-        expertise:
-          'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-        price: 20000,
-        profile: null,
-        likeCnt: 2,
-        avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-        studentCnt: 3,
-      },
-      {
-        teacherCode: 1,
-        user: {
-          userCode: 3,
-          userId: 'teacher0',
-          userPw: '1234',
-          userName: '야근이싫은개발자',
-          userProfile: null,
-          joinDate: '2020-10-27T01:46:43.000+00:00',
-        },
-        intro:
-          '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-        expertise:
-          'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-        price: 20000,
-        profile: null,
-        likeCnt: 2,
-        avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-        studentCnt: 3,
-      },
-      {
-        teacherCode: 1,
-        user: {
-          userCode: 3,
-          userId: 'teacher0',
-          userPw: '1234',
-          userName: '야근이싫은개발자',
-          userProfile: null,
-          joinDate: '2020-10-27T01:46:43.000+00:00',
-        },
-        intro:
-          '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-        expertise:
-          'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-        price: 20000,
-        profile: null,
-        likeCnt: 2,
-        avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-        studentCnt: 3,
-      },
-      {
-        teacherCode: 1,
-        user: {
-          userCode: 3,
-          userId: 'teacher0',
-          userPw: '1234',
-          userName: '야근이싫은개발자',
-          userProfile: null,
-          joinDate: '2020-10-27T01:46:43.000+00:00',
-        },
-        intro:
-          '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-        expertise:
-          'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-        price: 20000,
-        profile: null,
-        likeCnt: 2,
-        avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-        studentCnt: 3,
-      },
-      {
-        teacherCode: 1,
-        user: {
-          userCode: 3,
-          userId: 'teacher0',
-          userPw: '1234',
-          userName: '야근이싫은개발자',
-          userProfile: null,
-          joinDate: '2020-10-27T01:46:43.000+00:00',
-        },
-        intro:
-          '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-        expertise:
-          'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-        price: 20000,
-        profile: null,
-        likeCnt: 2,
-        avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-        studentCnt: 3,
-      },
-    ],
   }),
   methods: {
     async onSearchClick(keyword) {
       try {
-        console.log('선생님', this.teachers);
-        console.log('선생님키워드', this.keyword);
         let data = {
-          keywords: keyword,
+          keywords: this.keyword,
         };
         console.log(data);
         let tmp = await this.$api.searchTeacher(data, this.$store.state.config);
-        this.teachers = tmp;
-        console.log(this.teachers);
+        this.teachers = tmp.data;
       } catch (e) {
-        console.log('선생님 로딩 실패');
+        console.error(e);
       }
     },
     onMoreClick() {
@@ -243,7 +122,6 @@ export default {
   },
   async created() {
     try {
-      console.log('선생님', this.teachers);
       this.teachers = await this.$api.sortTeacher(
         {
           keywords: this.keyword,
@@ -251,9 +129,8 @@ export default {
 
         this.$store.state.config
       );
-      //console.log(this.teachers);
     } catch (e) {
-      console.log('선생님 로딩 실패');
+      console.error(e);
     }
   },
 };
