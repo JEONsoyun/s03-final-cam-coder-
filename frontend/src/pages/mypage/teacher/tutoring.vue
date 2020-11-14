@@ -65,11 +65,13 @@
           <div class="d-flex">
             <div class="d-flex" />
             <c-button
+              @click="onStateClick(item, 0)"
               v-if="getType(item)"
               :type="getType(item)"
               class="flex-grow-0"
             />
             <c-button
+              @click="onStateClick(item, 3)"
               v-if="item.status == 1"
               type="cancel"
               class="flex-grow-0"
@@ -241,6 +243,56 @@ export default {
         return 'enter';
       } else {
         return '';
+      }
+    },
+    async onStateClick(item, status) {
+      console.log(status);
+      if (status == 3) {
+        let data = {
+          status: 3,
+        };
+        try {
+          await this.$api.updateTutoring(
+            item.tutoringCode,
+            data,
+            this.$store.state.config
+          );
+          alert('취소되었습니다');
+          console.log(this.$store.state.config);
+          try {
+            //this.user = await this.$api.getMe(this.$store.state.config);
+            this.tutorings = await this.$api.getTeacherTutoring(
+              this.$store.state.config
+            );
+          } catch (e) {
+            console.log('잘못된 접근입니다. 로딩 실패');
+          }
+        } catch (e) {
+          alert('취소 실패 ');
+        }
+      } else if (status == 0) {
+        let data = {
+          status: 0,
+        };
+        try {
+          await this.$api.updateTutoring(
+            item.tutoringCode,
+            data,
+            this.$store.state.config
+          );
+          alert('수락되었습니다');
+          console.log(this.$store.state.config);
+          try {
+            //this.user = await this.$api.getMe(this.$store.state.config);
+            this.tutorings = await this.$api.getTeacherTutoring(
+              this.$store.state.config
+            );
+          } catch (e) {
+            console.log('잘못된 접근입니다. 로딩 실패');
+          }
+        } catch (e) {
+          alert('수락 실패 ');
+        }
       }
     },
   },
