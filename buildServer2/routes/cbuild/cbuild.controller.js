@@ -26,7 +26,7 @@ var options = {
 exports.build = (req, res, next) => {
 	var code = req.body.code;   // client에서 보낸 코드
 	var lang = req.body.lang;
-	const source = code.split(/\r\n|\r\n/).join("\n");    // 개행 처리
+	var source = code.split(/\r\n|\r\n/).join("\n");    // 개행 처리
 	const date = Date.now();
 	var file = date + "";
 	var filePath = "/home/dist/";
@@ -48,9 +48,10 @@ exports.build = (req, res, next) => {
 		command = "(g++ -o myapp " + filePath + " > " + outfilePath + " 2>&1 )  && ./myapp > " + outfilePath;
 	}
 	else if(lang == "java"){
-		file += ".java";
+		file = "d" + file + ".java";
 		filePath += file;
-		image = "java:latest";
+		image = "openjdk:16-jdk-slim";
+		source = changeCode(source, "d"+date);
 	}
 	else if(lang == "python37"){
 		file += ".py";
@@ -109,4 +110,55 @@ exports.build = (req, res, next) => {
 
 exports.test = (req, res, next) => {
     return res.status(200).send('Arrived');
+}
+
+function changeCode(code, name) {
+    let rexPackage = new RegExp('package');
+    let rexClass = new RegExp('class .*');
+    let rexPsvm = new RegExp('public static void main');
+    let classStack = [];
+    let lines = code.trim().split('\n');
+    if (rexPackage.test(lines[0])) {
+        lines = lines.slice(1, lines.length)
+    }
+    for (let i = 0; i < lines.length; i++) {
+        if (rexPsvm.test(lines[i])) {
+            let line = classStack[0].line;
+            while (!rexClass.test(lines[line])) {
+                line--;
+            }
+            let checkClass = false
+            let arr = lines[line].split(' ');
+            for (let idx = 0; idx < arr.length; idx++) {
+                if (checkClass) {
+                    if (arr[idx][arr[idx].length - 1] === '{') {
+                        name += ' {'
+                    }
+                    arr[idx] = name;
+                    break
+                } else if (arr[idx] === 'class') {
+                    checkClass = true
+                }
+            }
+            lines[line] = arr.join(' ');
+            break;
+        }
+        let chars = lines[i].split('');
+        for (let char of chars) {
+            if (char === '{') {
+                if (classStack.length === 0) {
+                    classStack.push({ 'line': i, 'count': 1 })
+                } else {
+                    classStack[classStack.length - 1].count++
+                }
+            } else if (char === '}') {
+                if (classStack[classStack.length - 1].count === 1) {
+                    classStack.pop()
+                } else {
+                    classStack[classStack.length - 1].count--
+                }
+            }
+        }
+    }
+    return lines.join('\n').trim()
 }
