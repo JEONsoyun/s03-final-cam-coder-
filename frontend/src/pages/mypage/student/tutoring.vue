@@ -90,10 +90,34 @@ export default {
         return '';
       }
     },
-    onStateClick(item) {
+    async onStateClick(item) {
       if (item.status == 1) {
-        console.log('나는 취소하기다.')
+        console.log('나는 취소하기다.');
         // TODO: 취소하는 api
+        let data = {
+          status: 3,
+        };
+        console.log(item.tutoringCode);
+        console.log(data);
+        try {
+          await this.$api.updateTutoring(
+            item.tutoringCode,
+            data,
+            this.$store.state.config
+          );
+          alert('취소되었습니다');
+          console.log(this.$store.state.config);
+          try {
+            //this.user = await this.$api.getMe(this.$store.state.config);
+            this.tutorings = await this.$api.getStudentTutoring(
+              this.$store.state.config
+            );
+          } catch (e) {
+            console.log('잘못된 접근입니다. 로딩 실패');
+          }
+        } catch (e) {
+          alert('취소 실패 ');
+        }
       } else if (item.status == 0) {
         // TODO: 방 입장하는 기능
       }
