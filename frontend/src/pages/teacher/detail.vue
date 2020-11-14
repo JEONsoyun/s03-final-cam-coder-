@@ -97,16 +97,12 @@
             class="d-flex flex-grow-0 flex-shrink-0 teacher-detail-page__profile"
             :style="`background-image:url(${teacher.profile})`"
           />
-<<<<<<< HEAD
           <div
             v-else
             class="d-flex flex-grow-0 flex-shrink-0 teacher-detail-page__profile"
             :style="`background-image:url('/static/images/user.png')`"
           />
           <div class="d-flex flex-column teacher-detail-page__intro">
-=======
-          <div class="d-flex flex-column teacher-detail-page__intro" style="width:100%">
->>>>>>> 6f4df17eadd3f8cdb63b77f7b79f3f330ff5c334
             <div class="d-flex">
               <div style="font-weight: 800; font-size: 24px">
                 {{ teacher.user && teacher.user.userName }}
