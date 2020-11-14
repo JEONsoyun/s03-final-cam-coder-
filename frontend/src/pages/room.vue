@@ -19,34 +19,28 @@
         <div class="d-flex flex-grow-1 flex-column room-page__code-editor">
 
           <label for="lang-select">Choose a language:</label>
-          <select v-model="language">
+          <select v-model="language" style="background: white;">
             <option value="">--Please choose an option--</option>
             <option value="c"> C </option>
             <option value="cpp"> C++ </option>
             <option value="java"> Java </option>
-            <option value="python37"> Python 3.7</option>
+            <option value="python"> Python 3.7</option>
           </select>
-          <p>
-            <div id="monaco" style="height:50vh"></div>
-          </p>
-          <p>
-              <textarea ref="output" style="resize:none; width:400px; height:50px; overflow: visible" readonly="readonly"></textarea>
-          </p>
-          <p>
-              <button type="button" class="btnBuild" @click="executeBuild">Build</button>
-          </p>
-        
+          <div id="monaco" style="height:50vh"></div>
           <!-- <div class="d-flex flex-grow-0">
             <div class="d-flex" />
             <div>언어</div>
           </div>
           <div class="d-flex">editor</div>
+          -->
           <div class="d-flex flex-grow-0">
             <div class="d-flex" />
-            <c-button class="flex-grow-0">run</c-button>
-          </div> -->
+            <c-button class="flex-grow-0" @click="executeBuild">run</c-button>
+          </div>
         </div>
-        <div class="d-flex flex-grow-1 room-page__console"></div>
+        <div class="d-flex flex-grow-1 room-page__console">
+          <textarea ref="output" style="resize:none; width:400px; height:50px; overflow: visible" readonly="readonly"></textarea>
+        </div>
       </div>
     </div>
 
@@ -85,6 +79,31 @@
 
 <script>
 import * as monaco from 'monaco-editor';
+import ReconnectingWebSocket from 'reconnecting-websocket';
+import sharedb from 'sharedb/lib/client';
+import richText from 'rich-text';
+import Quill from 'quill';
+
+const BASE_CODE = {
+  c: `#include <stdio.h>
+int main() {
+  printf("Hello, world!");
+  return 0;
+}`,
+  java: `class Main {
+  public static void main(String[] args) {
+    System.out.println("Hello, world!");
+  }
+}`,
+  cpp: `#include <iostream>
+using namespace std;
+
+int main() {
+  cout << "Hello, world!" << endl;
+  return 0;
+}`,
+  python: `print("Hello, world!")`
+}
 
 export default {
   name: 'room-page',
@@ -96,7 +115,15 @@ export default {
     isShared: false,
     editor: null,
     language: 'c',
+    editorValueChangedByRemote: false,
   }),
+  watch: {
+    language() {
+      const model = monaco.editor.createModel('', this.language);
+      this.editor.setModel(model);
+      this.editor.setValue(BASE_CODE[this.language]);
+    },
+  },
   methods: {
     initRoomToken() {
       const hash = (Math.random() * new Date().getTime())
@@ -131,18 +158,60 @@ export default {
         theme: 'vs-dark',
         fontFamily: 'Nanum Gothic Coding',
         automaticLayout: true,
-        language: 'c',
-        value: [
-        '#include <stdio.h>',
-        'void main() {',
-        '}'
-        ].join('\n')
+        language: this.language,
+        value: BASE_CODE[this.language],
+      });
+    },
+    initRealtimeCodeSharing() {
+      sharedb.types.register(richText.type);
+
+      // Open WebSocket connection to ShareDB server
+      var socket = new ReconnectingWebSocket('ws://' + window.location.hostname + ':3000/realtime');
+      var connection = new sharedb.Connection(socket);
+      console.log(connection, '1234');
+
+      // For testing reconnection
+      window.disconnect = function() {
+        connection.close();
+      };
+      window.connect = function() {
+        var socket = new ReconnectingWebSocket('ws://' + window.location.hostname + ':3000/realtime');
+        connection.bindToSocket(socket);
+      };
+
+      // Create local Doc instance mapped to 'examples' collection document with id 'richtext'
+      var doc = connection.get('examples', 'richtext');
+      doc.on('error', err => { /* Ignore replay error. */ });
+      doc.subscribe((err) => {
+        if (err) throw err;
+
+        this.editor.onDidChangeModelContent(e => {
+          if (this.editorValueChangedByRemote) {
+            this.editorValueChangedByRemote = false;
+            return;
+          }
+          const content = this.editor.getValue();
+          doc.submitOp({
+            ops: [{
+              sr: content,
+            }]
+          }, { source: this });
+        });
+
+        doc.on('op', ({ ops }, source) => {
+          if (source === this) {
+            return;
+          }
+          this.editorValueChangedByRemote = true;
+          this.editor.setValue(ops[0].sr);
+        });
       });
     },
   },
   mounted() {
     // 에디터 초기화
     this.initEditor();
+    this.initRealtimeCodeSharing();
 
     // 방 초기화
     if (!this.$route.hash) {
@@ -446,6 +515,7 @@ function initMedia(vue, options) {
   background: rgb(49, 35, 29);
   height: 30%;
   padding: 16px;
+  background: white;
 }
 
 .room-page__footer {
