@@ -26,6 +26,9 @@ require('./controllers/route.js')(app);
 // Socket.io ======================================================================
 require('./controllers/socket.js')(http);
 
+// Realtime code sharing
+require('./controllers/realtime-code-share.js')(http);
+
 // Server listen
 http.listen(port, function() {
   console.log('WebRTC Lab server running at ' + config.webserver.host + ':' + port);
