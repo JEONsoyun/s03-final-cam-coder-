@@ -33,6 +33,7 @@
           {{ messages[0].sender.userName }}
         </div>
       </div>
+      <template v-if="messages != null && messages != 0">
       <div class="d-flex" v-for="(item, mi) in messages" :key="`message-${mi}`">
         <div
           class="d-flex flex-grow-1 flex-shrink-0 mypage-message-detail-page__blank"
@@ -64,6 +65,10 @@
           v-if="me != item.sender.userCode"
         />
       </div>
+      </template>
+      <template v-else>
+        <c-empty content="주고받은 쪽지" />
+      </template>
       <div class="d-flex mypage-message-detail-page__input-container">
         <v-text-field
           class="mypage-message-detail-page__input"
