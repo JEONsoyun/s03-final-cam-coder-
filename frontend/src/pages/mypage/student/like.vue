@@ -1,32 +1,39 @@
 <template>
   <c-mypage-layout title="관심 선생님 목록">
     <div class="d-flex mypage-student-like-page__content">
-      <div
-        v-for="(item, ti) in likes"
-        :key="`teacher-${ti}`"
-        class="d-flex flex-column mypage-student-like-page__item-container"
-      >
-        <div class="d-flex flex-column mypage-student-like-page__item">
-          <div
-            v-if="item.teacher.user.userProfile != null"
-            class="d-flex flex-shrink-0 mypage-student-like-page__profile-image"
-            :style="`background-image: url(${item.teacher.user.userProfile})`"
-          />
-          <div
-            v-else
-            class="d-flex flex-shrink-0 mypage-student-like-page__profile-image"
-            :style="`background-image: url('/static/images/user.png')`"
-          />
-          <div
-            class="d-flex flex-column mypage-student-like-page__item-content"
-          >
-            <div style="font-weight: 800">{{ item.teacher.user.userName }}</div>
-            <div class="d-flex flex-grow-1 flex-column">
-              <div class="ellipsis">{{ item.teacher.expertise }}</div>
+      <template v-if="likes != null && likes.length != 0">
+        <div
+          v-for="(item, ti) in likes"
+          :key="`teacher-${ti}`"
+          class="d-flex flex-column mypage-student-like-page__item-container"
+        >
+          <div class="d-flex flex-column mypage-student-like-page__item">
+            <div
+              v-if="item.teacher.user.userProfile != null"
+              class="d-flex flex-shrink-0 mypage-student-like-page__profile-image"
+              :style="`background-image: url(${item.teacher.user.userProfile})`"
+            />
+            <div
+              v-else
+              class="d-flex flex-shrink-0 mypage-student-like-page__profile-image"
+              :style="`background-image: url('/static/images/user.png')`"
+            />
+            <div
+              class="d-flex flex-column mypage-student-like-page__item-content"
+            >
+              <div style="font-weight: 800">
+                {{ item.teacher.user.userName }}
+              </div>
+              <div class="d-flex flex-grow-1 flex-column">
+                <div class="ellipsis">{{ item.teacher.expertise }}</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </template>
+      <template v-else>
+        <c-empty content="관심 설정한 선생님 데이터" style="width: 100%" />
+      </template>
     </div>
   </c-mypage-layout>
 </template>
@@ -37,128 +44,6 @@ export default {
   data: () => ({
     user: {},
     likes: [],
-    SAMPLE_DATA: [
-      {
-        teacherCode: 1,
-        user: {
-          userCode: 3,
-          userId: 'teacher0',
-          userPw: '1234',
-          userName: '야근이싫은개발자',
-          userProfile: null,
-          joinDate: '2020-10-27T01:46:43.000+00:00',
-        },
-        intro:
-          '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-        expertise:
-          'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-        price: 20000,
-        profile: null,
-        likeCnt: 2,
-        avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-        studentCnt: 3,
-      },
-      {
-        teacherCode: 1,
-        user: {
-          userCode: 3,
-          userId: 'teacher0',
-          userPw: '1234',
-          userName: '야근이싫은개발자',
-          userProfile: null,
-          joinDate: '2020-10-27T01:46:43.000+00:00',
-        },
-        intro:
-          '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-        expertise:
-          'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-        price: 20000,
-        profile: null,
-        likeCnt: 2,
-        avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-        studentCnt: 3,
-      },
-      {
-        teacherCode: 1,
-        user: {
-          userCode: 3,
-          userId: 'teacher0',
-          userPw: '1234',
-          userName: '야근이싫은개발자',
-          userProfile: null,
-          joinDate: '2020-10-27T01:46:43.000+00:00',
-        },
-        intro:
-          '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-        expertise:
-          'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-        price: 20000,
-        profile: null,
-        likeCnt: 2,
-        avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-        studentCnt: 3,
-      },
-      {
-        teacherCode: 1,
-        user: {
-          userCode: 3,
-          userId: 'teacher0',
-          userPw: '1234',
-          userName: '야근이싫은개발자',
-          userProfile: null,
-          joinDate: '2020-10-27T01:46:43.000+00:00',
-        },
-        intro:
-          '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-        expertise:
-          'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-        price: 20000,
-        profile: null,
-        likeCnt: 2,
-        avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-        studentCnt: 3,
-      },
-      {
-        teacherCode: 1,
-        user: {
-          userCode: 3,
-          userId: 'teacher0',
-          userPw: '1234',
-          userName: '야근이싫은개발자',
-          userProfile: null,
-          joinDate: '2020-10-27T01:46:43.000+00:00',
-        },
-        intro:
-          '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-        expertise:
-          'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-        price: 20000,
-        profile: null,
-        likeCnt: 2,
-        avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-        studentCnt: 3,
-      },
-      {
-        teacherCode: 1,
-        user: {
-          userCode: 3,
-          userId: 'teacher0',
-          userPw: '1234',
-          userName: '야근이싫은개발자',
-          userProfile: null,
-          joinDate: '2020-10-27T01:46:43.000+00:00',
-        },
-        intro:
-          '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-        expertise:
-          'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-        price: 20000,
-        profile: null,
-        likeCnt: 2,
-        avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-        studentCnt: 3,
-      },
-    ],
   }),
   methods: {},
   async created() {
