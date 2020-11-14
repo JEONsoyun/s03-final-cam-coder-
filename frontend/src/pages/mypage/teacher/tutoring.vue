@@ -68,41 +68,19 @@
             <div class="d-flex">
               <div class="d-flex" />
               <c-button
+                @click="onStateClick(item)"
                 v-if="getType(item)"
                 :type="getType(item)"
                 class="flex-grow-0"
               />
               <c-button
+                @click="onStateClick(item, 'cancel')"
                 v-if="item.status == 1"
                 type="cancel"
                 class="flex-grow-0"
                 style="margin-left: 8px"
               />
             </div>
-          </div>
-          <div
-            class="d-flex mypage-teacher-tutoring-page__content"
-            style="margin-top: 4px"
-          >
-            과외 날짜:
-            {{ $moment(item.startDate).format('YYYY.MM.DD hh:mm') }} ~
-            {{ $moment(item.endDate).format('YYYY.MM.DD hh:mm') }}
-          </div>
-          <div class="d-flex">
-            <div class="d-flex" />
-            <c-button
-              @click="onStateClick(item, 0)"
-              v-if="getType(item)"
-              :type="getType(item)"
-              class="flex-grow-0"
-            />
-            <c-button
-              @click="onStateClick(item, 3)"
-              v-if="item.status == 1"
-              type="cancel"
-              class="flex-grow-0"
-              style="margin-left: 8px"
-            />
           </div>
         </div>
       </template>
@@ -132,66 +110,76 @@ export default {
         return '';
       }
     },
-    async onStateClick(item, status) {
-      // console.log(status);
-      if (status == 3) {
-        let data = {
-          status: 3,
-        };
-        try {
-          await this.$api.updateTutoring(
-            item.tutoringCode,
-            data,
-            this.$store.state.config
-          );
-          alert('취소되었습니다');
-          // console.log(this.$store.state.config);
-          try {
-            //this.user = await this.$api.getMe(this.$store.state.config);
-            this.tutorings = await this.$api.getTeacherTutoring(
-              this.$store.state.config
-            );
-          } catch (e) {
-            console.log('잘못된 접근입니다. 로딩 실패');
+    async getTutoring() {
+      try {
+        this.tutorings = await this.$api.getTeacherTutoring(
+          this.$store.state.config
+        );
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async updateStatus(tutoringCode, data) {
+      try {
+        await this.$api.updateTutoring(
+          tutoringCode,
+          data,
+          this.$store.state.config
+        );
+
+        this.getTutoring();
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async onStateClick(item, type) {
+      if (item.status == 1) {
+        if (type == 'cancel') {
+          if (!confirm('취소하시겠습니까?')) {
+            return;
           }
-        } catch (e) {
-          alert('취소 실패 ');
-        }
-      } else if (status == 0) {
-        let data = {
-          status: 0,
-        };
-        // console.log(data);
-        try {
-          await this.$api.updateTutoring(
-            item.tutoringCode,
-            data,
-            this.$store.state.config
-          );
-          alert('수락되었습니다');
-          // console.log(this.$store.state.config);
-          try {
-            //this.user = await this.$api.getMe(this.$store.state.config);
-            this.tutorings = await this.$api.getTeacherTutoring(
-              this.$store.state.config
-            );
-          } catch (e) {
-            console.log('잘못된 접근입니다. 로딩 실패');
+          let data = {
+            status: 3,
+          };
+          this.updateStatus(item.tutoringCode, data);
+        } else {
+          if (!confirm('수락하시겠습니까?')) {
+            return;
           }
-        } catch (e) {
-          alert('수락 실패 ');
+          let data = {
+            status: 0,
+          };
+          this.updateStatus(item.tutoringCode, data);
         }
+      } else if (item.status == 0) {
+        if (!confirm('입장하시겠습니까?')) {
+          return;
+        }
+        window.open(`/room?tutoringCode=${item.tutoringCode}`);
       }
     },
   },
   async created() {
-    try {
-      this.tutorings = await this.$api.getTeacherTutoring(
-        this.$store.state.config
-      );
-    } catch (e) {
-      console.log('잘못된 접근입니다. 로딩 실패');
+    await this.getTutoring();
+    let today = this.$moment();
+    for (let tutoring of this.tutorings) {
+      if (tutoring.status == 2 || tutoring.status == 3) {
+        continue;
+      }
+      if (
+        today.isAfter(tutoring.endDate) &&
+        today.isAfter(tutoring.startDate)
+      ) {
+        let data = {};
+        if (tutoring.status == 1) {
+          data.status = 3;
+        } else if (tutoring.status == 0) {
+          data.status = 2;
+        }
+        await this.updateStatus(tutoring.tutoringCode, data);
+      }
     }
+    this.getTutoring();
   },
 };
 </script>

@@ -60,8 +60,8 @@ export default {
     async getTutoring(tutorings_id, config) {
         return (await axios.get(`${baseURL}/tutorings/${tutorings_id}`, config)).data
     },
-    async updateTutoring(tutoring_code,data, config) {
-        return (await axios.put(`${baseURL}/tutorings/${tutoring_code}`,data, config))
+    async updateTutoring(tutoring_code, data, config) {
+        return (await axios.put(`${baseURL}/tutorings/${tutoring_code}`, data, config))
     },
     // like api 
     async postLike(data, config) {
@@ -77,7 +77,7 @@ export default {
         return (await axios.get(`${baseURL}/likes/${teacherCode}`, config)).data
     },
     // review api
-    async postReview(data) {
+    async postReview(data, config) {
         return (await axios.post(`${baseURL}/reviews`, data, config))
     },
     async getTeacherReview(data, config) {

@@ -112,7 +112,6 @@ export default {
         let data = {
           keywords: this.keyword,
         };
-        console.log(data);
         let tmp = await this.$api.searchTeacher(data, this.$store.state.config);
         this.teachers = tmp.data;
       } catch (e) {

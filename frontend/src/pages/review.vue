@@ -7,7 +7,7 @@
       <div class="review-page__textarea-container">
         <textarea style="width: 100%; height: 300px" v-model="content" />
       </div>
-      <c-button @click="onPoistClick" type="gradient">리뷰 남기기</c-button>
+      <c-button @click="onPostClick" type="gradient">리뷰 남기기</c-button>
     </div>
   </c-main-layout>
 </template>
@@ -19,9 +19,8 @@ export default {
     content: '',
   }),
   methods: {
-    async onPoistClick() {
+    async onPostClick() {
       try {
-        console.log(this.$store.state.config);
         let data = {
           content: this.content,
           tutoring_code: this.tutoringId,
@@ -35,9 +34,10 @@ export default {
       }
     },
   },
-  async created() {
+  created() {
     this.tutoringId = this.$route.params.tutoringCode;
     console.log(this.tutoringId);
+    console.log(this.$router);
   },
 };
 </script>

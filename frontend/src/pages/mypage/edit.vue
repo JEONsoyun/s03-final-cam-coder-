@@ -80,13 +80,11 @@ export default {
       }
 
       try {
-        console.log(this.$store.state.config);
         let user = {};
         if (this.data.pw != null) {
           user.pw = this.data.pw;
         }
         user.name = this.data.userName;
-        console.log(user);
         await this.$api.updateUser(user, this.$store.state.config);
         alert('회원 정보를 변경했습니다.');
       } catch (e) {
@@ -98,7 +96,6 @@ export default {
   },
   async created() {
     await this.getMe();
-    console.log(this.data);
   },
 };
 </script>

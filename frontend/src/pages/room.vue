@@ -1,6 +1,5 @@
 <template>
   <div class="d-flex flex-column" style="width: 100%; height: 100%">
-
     <!-- 상단 카메라/에디터 -->
     <div class="d-flex">
       <div class="d-flex flex-column room-page__camera">
@@ -17,7 +16,6 @@
         style="min-width: 500px"
       >
         <div class="d-flex flex-grow-1 flex-column room-page__code-editor">
-
           <label for="lang-select">Choose a language:</label>
           <select v-model="language" style="background: white;">
             <option value="">--Please choose an option--</option>
@@ -113,6 +111,7 @@ export default {
     webRTC: {},
     displayRTC: {},
     isShared: false,
+    tutoringCode: null,
     editor: null,
     language: 'c',
     editorValueChangedByRemote: false,
@@ -126,7 +125,7 @@ export default {
   },
   methods: {
     initRoomToken() {
-      const hash = (Math.random() * new Date().getTime())
+      const hash = this.tutoringCode
         .toString(32)
         .toUpperCase()
         .replace(/\./g, '-');
@@ -134,13 +133,15 @@ export default {
       this.$router.push({
         path: this.$route.pash,
         hash,
-      })
+      });
     },
     onCloseClick() {
-      window.close();
+      if (confirm('수업에서 나가시겠습니까?')) {
+        location.href = `/review/${this.tutoringCode}`;
+      }
     },
     executeBuild() {
-      const url = "http://k3a110.p.ssafy.io:8081/cbuild"
+      const url = 'http://k3a110.p.ssafy.io:8081/cbuild';
       const code = this.editor.getValue();
       const lang = this.language;
       const data = JSON.stringify({ code, lang });
@@ -149,8 +150,8 @@ export default {
       xhr.setRequestHeader('Content-type', 'application/json');
       xhr.send(data);
       xhr.addEventListener('load', () => {
-          const result = JSON.parse(xhr.responseText);
-          this.$refs.output.value = result.output;
+        const result = JSON.parse(xhr.responseText);
+        this.$refs.output.value = result.output;
       });
     },
     initEditor() {
@@ -209,6 +210,11 @@ export default {
     },
   },
   mounted() {
+    this.tutoringCode = this.$route.query.tutoringCode;
+    if (this.$route.fullPath == '/room') {
+      alert('잘못 된 접근입니다.');
+      this.$router.push('/');
+    }
     // 에디터 초기화
     this.initEditor();
     this.initRealtimeCodeSharing();
@@ -249,9 +255,13 @@ export default {
       remoteVideoId: 'screen-remote-video',
       videoEnabledOnStart: true,
     });
-    
+
     document.querySelector('#btn-start').onclick = () => {
-      this.displayRTC.peerHandler.getUserMedia(null, this.displayRTC.onLocalStream, true);
+      this.displayRTC.peerHandler.getUserMedia(
+        null,
+        this.displayRTC.onLocalStream,
+        true
+      );
     };
   },
 };
@@ -264,12 +274,16 @@ function initMedia(vue, options) {
   let remoteUserId;
   let isOffer;
 
-  console.log('socket: ' + location.hostname + ':3001' + options.namespace);
-  const socket = io(location.hostname + ':3001' + options.namespace);
+  const socket = io('k3a110.p.ssafy.io' + options.namespace);
   const mediaHandler = new MediaHandler();
-  const peerHandler = new PeerHandler(Object.assign({
-    send: send,
-  }, options));
+  const peerHandler = new PeerHandler(
+    Object.assign(
+      {
+        send: send,
+      },
+      options
+    )
+  );
   const animationTime = 500;
   const isSafari = DetectRTC.browser.isSafari;
   const isMobile = DetectRTC.isMobileDevice;
@@ -455,12 +469,12 @@ function initMedia(vue, options) {
   }
 
   function onScreenInfoReceived(mediaInfo) {
-      console.log('onScreenInfoReceived');
+    console.log('onScreenInfoReceived');
   }
 
   function onScreenEnded() {
-      // TODO 종료
-      console.log('onScreenEnded');
+    // TODO 종료
+    console.log('onScreenEnded');
   }
 
   /**
@@ -487,8 +501,6 @@ function initMedia(vue, options) {
   initialize();
   return { peerHandler, mediaOption, onLocalStream, mediaHandler };
 }
-
-
 </script>
 
 <style>

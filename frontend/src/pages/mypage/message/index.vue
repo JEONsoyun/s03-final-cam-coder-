@@ -64,7 +64,6 @@ export default {
       } else {
         user = item.sender;
       }
-      console.log(user);
       this.$router.push(`/mypage/message/${user.userCode}`);
     },
   },
@@ -72,7 +71,6 @@ export default {
     try {
       let tmp = await this.$api.getMessage(this.$store.state.config);
       this.messages = tmp;
-      console.log(this.messages);
     } catch (e) {
       console.error(e);
     }

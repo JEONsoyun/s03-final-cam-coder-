@@ -97,49 +97,64 @@ export default {
         return '';
       }
     },
-    async onStateClick(item) {
+    async getTutoring() {
+      try {
+        this.tutorings = await this.$api.getStudentTutoring(
+          this.$store.state.config
+        );
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async updateStatus(tutoringCode, data) {
+      try {
+        await this.$api.updateTutoring(
+          tutoringCode,
+          data,
+          this.$store.state.config
+        );
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    onStateClick(item) {
       if (item.status == 1) {
-        console.log('나는 취소하기다.');
-        // TODO: 취소하는 api
+        if (!confirm('취소하시겠습니까?')) {
+          return;
+        }
         let data = {
           status: 3,
         };
-        console.log(item.tutoringCode);
-        console.log(data);
-        try {
-          await this.$api.updateTutoring(
-            item.tutoringCode,
-            data,
-            this.$store.state.config
-          );
-          alert('취소되었습니다');
-          console.log(this.$store.state.config);
-          try {
-            //this.user = await this.$api.getMe(this.$store.state.config);
-            this.tutorings = await this.$api.getStudentTutoring(
-              this.$store.state.config
-            );
-          } catch (e) {
-            console.log('잘못된 접근입니다. 로딩 실패');
-          }
-        } catch (e) {
-          alert('취소 실패 ');
-        }
+        this.updateStatus(item.tutoringCode, data);
+        this.getTutoring();
       } else if (item.status == 0) {
-        // TODO: 방 입장하는 기능
+        if (confirm('입장하시겠습니까?')) {
+          window.open(`/room?tutoringCode=${item.tutoringCode}`);
+        }
       }
     },
   },
   async created() {
-    console.log(this.$store.state.config);
-    try {
-      //this.user = await this.$api.getMe(this.$store.state.config);
-      this.tutorings = await this.$api.getStudentTutoring(
-        this.$store.state.config
-      );
-    } catch (e) {
-      console.log('잘못된 접근입니다. 로딩 실패');
+    await this.getTutoring();
+    let today = this.$moment();
+    for (let tutoring of this.tutorings) {
+      if (tutoring.status == 2 || tutoring.status == 3) {
+        continue;
+      }
+      if (
+        today.isAfter(tutoring.endDate) &&
+        today.isAfter(tutoring.startDate)
+      ) {
+        let data = {};
+        if (tutoring.status == 1) {
+          data.status = 3;
+        } else if (tutoring.status == 0) {
+          data.status = 2;
+        }
+        await this.updateStatus(tutoring.tutoringCode, data);
+      }
     }
+    this.getTutoring();
   },
 };
 </script>
