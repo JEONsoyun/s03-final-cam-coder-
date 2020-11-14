@@ -106,8 +106,11 @@ export default {
   }),
   methods: {
     async onMessageButtonClick() {
-      console.log('onMessageButtonClick');
-      console.log(this.input);
+      // console.log('onMessageButtonClick');
+      //console.log(this.input);
+      if (this.input.trim() == '') {
+        return;
+      }
       if (this.messages[0].receiver.userCode == this.me) {
         this.message.receiver = this.messages[0].sender.userCode;
       } else {
@@ -119,11 +122,18 @@ export default {
         console.log(this.message);
         console.log(this.$store.state.config);
         await this.$api.sendMessage(this.message, this.$store.state.config);
+        this.input = '';
         alert('쪽지를 전송했습니다.');
-        let url = '/mypage/message/' + this.message.receiver;
-        location.href = url;
       } catch (e) {
         alert('쪽지 전송에 실패했습니다.');
+      }
+      try {
+        this.messages = await this.$api.getUserMessage(
+          this.anotherUser,
+          this.$store.state.config
+        );
+      } catch (e) {
+        console.log('잘못된 접근입니다. 로딩 실패');
       }
     },
   },

@@ -82,10 +82,10 @@ public class TutoringServiceImpl implements TutoringService {
 			try {
 				Integer type = Optional.of(regist).map(TutorRegistRequest::getStatus).orElse(0);
 
-				if(type == 1 && (now.getStatus() == 1)) {
+				if(type == 0 && (now.getStatus() == 1)) {
 					now.setStatus(0);
 					//studentCnt 증가
-//					tc.setTutor(now);
+					tc.setTutor(now);
 				}else if(type == 2 && (now.getStatus() == 0)){
 					now.setStatus(2);//완료
 				}else if(type == 3 && (now.getStatus() == 1)) {
