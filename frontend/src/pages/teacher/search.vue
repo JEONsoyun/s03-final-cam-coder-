@@ -92,15 +92,6 @@ export default {
   name: 'teacher-search-page',
   data: () => ({
     teachers: [],
-    // searchKey: {
-    //   avaliableTime: '',
-    //   expertise: '',
-    //   intro: '',
-    //   keywords: '',
-    //   price: null,
-    //   profile: '',
-    //   sorttype: null,
-    // },
     keyword: '',
     data: {
       keywords: '',

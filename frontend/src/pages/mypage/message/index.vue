@@ -1,45 +1,50 @@
 <template>
   <c-mypage-layout title="쪽지함">
     <div class="mypage-message-page">
-      <div
-        @click="onMessageClick(item)"
-        class="d-flex align-center mypage-message-page__box"
-        v-for="(item, mi) in messages"
-        :key="`item-${mi}`"
-      >
+      <template v-if="messages != null && messages.length != 0">
         <div
-          v-if="$store.state.USER.userCode == item.sender.userCode"
-          class="d-flex flex-grow-0 flex-shrink-0 mypage-message-page__profile"
-          :style="`background-image:url(${item.receiver.userProfile})`"
-        />
-        <div
-          v-else
-          class="d-flex flex-grow-0 flex-shrink-0 mypage-message-page__profile"
-          :style="`background-image:url(${item.sender.userProfile})`"
-        />
-        <div class="d-flex flex-column" style="width: 100%; height: 100%">
-          <div class="d-flex flex-grow-0">
-            <div
-              v-if="$store.state.USER.userCode == item.sender.userCode"
-              class="d-flex mypage-message-page__name"
-            >
-              {{ item.receiver.userName }}
-            </div>
-            <div v-else class="d-flex mypage-message-page__name">
-              {{ item.sender.userName }}
-            </div>
-            <div class="d-flex flex-grow-0 mypage-message-page__date">
-              {{ $moment(item.sendDate).format('YYYY.MM.DD hh:mm') }}
-            </div>
-          </div>
+          @click="onMessageClick(item)"
+          class="d-flex align-center mypage-message-page__box"
+          v-for="(item, mi) in messages"
+          :key="`item-${mi}`"
+        >
           <div
-            class="d-flex mypage-message-page__content"
-            style="margin-top: 4px"
-          >
-            {{ item.content }}
+            v-if="$store.state.USER.userCode == item.sender.userCode"
+            class="d-flex flex-grow-0 flex-shrink-0 mypage-message-page__profile"
+            :style="`background-image:url(${item.receiver.userProfile})`"
+          />
+          <div
+            v-else
+            class="d-flex flex-grow-0 flex-shrink-0 mypage-message-page__profile"
+            :style="`background-image:url(${item.sender.userProfile})`"
+          />
+          <div class="d-flex flex-column" style="width: 100%; height: 100%">
+            <div class="d-flex flex-grow-0">
+              <div
+                v-if="$store.state.USER.userCode == item.sender.userCode"
+                class="d-flex mypage-message-page__name"
+              >
+                {{ item.receiver.userName }}
+              </div>
+              <div v-else class="d-flex mypage-message-page__name">
+                {{ item.sender.userName }}
+              </div>
+              <div class="d-flex flex-grow-0 mypage-message-page__date">
+                {{ $moment(item.sendDate).format('YYYY.MM.DD hh:mm') }}
+              </div>
+            </div>
+            <div
+              class="d-flex mypage-message-page__content"
+              style="margin-top: 4px"
+            >
+              {{ item.content }}
+            </div>
           </div>
         </div>
-      </div>
+      </template>
+      <template v-else>
+        <c-empty content='받은 쪽지' />
+      </template>
     </div>
   </c-mypage-layout>
 </template>
@@ -50,26 +55,6 @@ export default {
   data: () => ({
     me: 15,
     messages: [],
-    SAMPLE_DATA: [
-      {
-        messageCode: 13,
-        sendDate: '2020-10-28T05:46:00.000+00:00',
-        content: 'hello',
-        sender: 15,
-        profile: '/static/images/user.png',
-        receiver: 3,
-        isRead: 0,
-      },
-      {
-        messageCode: 12,
-        sendDate: '2020-10-28T05:45:02.000+00:00',
-        content: 'byebye',
-        sender: 15,
-        profile: '/static/images/user.png',
-        receiver: 14,
-        isRead: 0,
-      },
-    ],
   }),
   methods: {
     onMessageClick(item) {
@@ -84,13 +69,12 @@ export default {
     },
   },
   async created() {
-    //console.log(this.$store.state.config);
     try {
       let tmp = await this.$api.getMessage(this.$store.state.config);
       this.messages = tmp;
       console.log(this.messages);
     } catch (e) {
-      console.log('잘못된 접근입니다. 로딩 실패');
+      console.error(e);
     }
   },
 };
