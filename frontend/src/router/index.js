@@ -8,8 +8,9 @@ import login from '@/pages/login'
 import signup from '@/pages/signup'
 import signupResult from '@/pages/signup-result'
 import room from '@/pages/room'
+import review from '@/pages/review'
 
-import teacherSearch from '@/pages/teacher/search' 
+import teacherSearch from '@/pages/teacher/search'
 import teacherDetail from '@/pages/teacher/detail'
 import sendMessage from '@/pages/teacher/send-message'
 
@@ -48,52 +49,56 @@ const router = new Router({
       component: room
     },
     {
+      path: '/review/:tutoringCode',
+      component: review
+    },
+    {
       path: '/teacher/search',
       component: teacherSearch
     },
     {
-      path : '/teacher/detail/:id',
-      component : teacherDetail
+      path: '/teacher/detail/:id',
+      component: teacherDetail
     },
     {
-      path : '/teacher/send-message/:userid',
-      component : sendMessage
+      path: '/teacher/send-message/:userid',
+      component: sendMessage
     },
     {
-      path : '/mypage/student',
-      component : mypageStudent
+      path: '/mypage/student',
+      component: mypageStudent
     },
     {
       path: '/mypage/teacher',
       component: mypageTeacher
     },
     {
-      path : '/mypage/edit',
-      component : mypageEdit
+      path: '/mypage/edit',
+      component: mypageEdit
     },
     {
-      path : '/mypage/message',
-      component : mypageMessageIndex
+      path: '/mypage/message',
+      component: mypageMessageIndex
     },
     {
-      path : '/mypage/message/:usercode',
-      component : mypageMessageDetail
+      path: '/mypage/message/:usercode',
+      component: mypageMessageDetail
     },
     {
-      path : '/mypage/student/tutoring',
-      component : mypageStudentTutoring
+      path: '/mypage/student/tutoring',
+      component: mypageStudentTutoring
     },
     {
-      path : '/mypage/student/like',
-      component : mypageStudentLike
+      path: '/mypage/student/like',
+      component: mypageStudentLike
     },
     {
-      path : '/mypage/teacher/tutoring',
-      component : mypageTeacherTutoring
+      path: '/mypage/teacher/tutoring',
+      component: mypageTeacherTutoring
     },
     {
-      path : '/mypage/teacher/edit',
-      component : mypageTeacherEdit
+      path: '/mypage/teacher/edit',
+      component: mypageTeacherEdit
     },
   ]
 })
