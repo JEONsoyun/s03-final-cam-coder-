@@ -33,6 +33,7 @@
           {{ messages[0].sender.userName }}
         </div>
       </div>
+      <template v-if="messages != null && messages != 0">
       <div class="d-flex" v-for="(item, mi) in messages" :key="`message-${mi}`">
         <div
           class="d-flex flex-grow-1 flex-shrink-0 mypage-message-detail-page__blank"
@@ -64,6 +65,10 @@
           v-if="me != item.sender.userCode"
         />
       </div>
+      </template>
+      <template v-else>
+        <c-empty content="주고받은 쪽지" />
+      </template>
       <div class="d-flex mypage-message-detail-page__input-container">
         <v-text-field
           class="mypage-message-detail-page__input"
@@ -101,8 +106,11 @@ export default {
   }),
   methods: {
     async onMessageButtonClick() {
-      console.log('onMessageButtonClick');
-      console.log(this.input);
+      // console.log('onMessageButtonClick');
+      //console.log(this.input);
+      if (this.input.trim() == '') {
+        return;
+      }
       if (this.messages[0].receiver.userCode == this.me) {
         this.message.receiver = this.messages[0].sender.userCode;
       } else {
@@ -114,11 +122,18 @@ export default {
         console.log(this.message);
         console.log(this.$store.state.config);
         await this.$api.sendMessage(this.message, this.$store.state.config);
+        this.input = '';
         alert('쪽지를 전송했습니다.');
-        let url = '/mypage/message/' + this.message.receiver;
-        location.href = url;
       } catch (e) {
         alert('쪽지 전송에 실패했습니다.');
+      }
+      try {
+        this.messages = await this.$api.getUserMessage(
+          this.anotherUser,
+          this.$store.state.config
+        );
+      } catch (e) {
+        console.log('잘못된 접근입니다. 로딩 실패');
       }
     },
   },

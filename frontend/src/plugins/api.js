@@ -20,7 +20,7 @@ export default {
         return (await axios.post(`${baseURL}/users/signup`, data))
     },
     async updateUser(data, config) {
-        return (await axios.put((`${baseURL}/teachers`, data, config)))
+        return (await axios.put(`${baseURL}/users`, data, config))
     },
     // teacher api 
     async updateTeacher(data, config) {

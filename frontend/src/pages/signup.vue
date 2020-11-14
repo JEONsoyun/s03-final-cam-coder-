@@ -112,12 +112,12 @@ export default {
     },
     async onJoinClick() {
       if (this.data.pw != this.data.pw_verification) {
-        alert('패스워드가 다릅니다.');
+        alert('비밀번호가 다릅니다.');
         this.data.pw_verification = '';
       } else {
         try {
           await this.$api.signup(this.data);
-          alert('가입완료.');
+          alert('가입이 완료되었습니다.');
           location.href = '/';
         } catch (e) {
           alert('중복된 아이디입니다.');

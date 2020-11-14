@@ -15,7 +15,7 @@
         />
         <div class="d-flex flex-column ellipsis">
           <div class="send-message-page__name">
-            {{ teacher.user.userName }}
+            {{ teacher.user ? teacher.user.userName : "" }}
           </div>
           <div
             class="send-message-page__intro ellipsis"
