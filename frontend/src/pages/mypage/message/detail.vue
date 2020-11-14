@@ -85,6 +85,10 @@ export default {
     input: '',
     messages: [],
     anotherUser: '',
+    message: {
+      content: '',
+      receiver: '',
+    },
     SAMPLE_DATA: [
       {
         messageCode: 12,
@@ -115,8 +119,26 @@ export default {
     ],
   }),
   methods: {
-    onMessageButtonClick() {
-      this.$router.push(`/teacher/send-message/${this.userId}`);
+    async onMessageButtonClick() {
+      console.log('onMessageButtonClick');
+      console.log(this.input);
+      if (this.messages[0].receiver.userCode == this.me) {
+        this.message.receiver = this.messages[0].sender.userCode;
+      } else {
+        this.message.receiver = this.messages[0].receiver.userCode;
+      }
+      console.log(this.message);
+      try {
+        this.message.content = this.input;
+        console.log(this.message);
+        console.log(this.$store.state.config);
+        await this.$api.sendMessage(this.message, this.$store.state.config);
+        alert('메시지 전송 성공');
+        let url = '/mypage/message/' + this.message.receiver;
+        location.href = url;
+      } catch (e) {
+        alert('메시지 전송 실패.');
+      }
     },
   },
   async created() {
