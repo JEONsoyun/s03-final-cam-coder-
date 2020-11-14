@@ -322,6 +322,11 @@ export default {
     ],
     formdata: {},
     dates: [],
+    tutoringData: {
+      start: '',
+      end: '',
+      teacher_code: this.teacherId,
+    },
   }),
   methods: {
     async onFavoriteClick() {
@@ -353,10 +358,23 @@ export default {
       this.isFormVisible = false;
       this.dates = [];
     },
-    onPostClick() {
+    async onPostClick() {
       this.isFormVisible = false;
       // TODO: 과외 신청 보내는 api
-
+      console.log(this.dates);
+      this.tutoringData.start = this.dates[0];
+      this.tutoringData.end = this.dates[1];
+      this.tutoringData.teacher_code = this.teacherId;
+      console.log(this.tutoringData);
+      try {
+        await this.$api.postTutoring(
+          this.tutoringData,
+          this.$store.state.config
+        );
+        alert('과외 요청 성공');
+      } catch (e) {
+        alert('과외 요청 실패');
+      }
       this.dates = [];
     },
   },

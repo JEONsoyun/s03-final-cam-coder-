@@ -49,7 +49,7 @@ export default {
     },
     // Tutorings api
     async postTutoring(data, config) {
-        return (await axios.post(`${baseURL}/tutorings`, data))
+        return (await axios.post(`${baseURL}/tutorings`, data, config))
     },
     async getTeacherTutoring(config) {
         return (await axios.get(`${baseURL}/tutorings/0/teacher`, config)).data
