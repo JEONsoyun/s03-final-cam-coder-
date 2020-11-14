@@ -26,58 +26,67 @@
           >
         </div>
         <div class="d-flex teacher-search-page__content">
-          <div
-            v-for="(item, ti) in teachers"
-            :key="`teacher-${ti}`"
-            class="d-flex flex-column teacher-search-page__item-container"
-          >
+          <template v-if="teachers != null && teachers.length != 0">
             <div
-              class="d-flex flex-column teacher-search-page__item"
-              @click="onItemClick(item)"
+              v-for="(item, ti) in teachers"
+              :key="`teacher-${ti}`"
+              class="d-flex flex-column teacher-search-page__item-container"
             >
               <div
-                v-if="item.user.userProfile != null"
-                class="d-flex flex-shrink-0 teacher-search-page__profile-image"
-                :style="`background-image: url(${
-                  item.user ? item.user.userProfile : '/static/images/user.png'
-                })`"
-              />
-              <div
-                v-else
-                class="d-flex flex-shrink-0 teacher-search-page__profile-image"
-                :style="`background-image: url('/static/images/user.png')`"
-              />
-              <div class="d-flex flex-column teacher-search-page__item-content">
-                <div style="font-weight: 800">
-                  {{ item.user ? item.user.userName : '' }}
-                </div>
+                class="d-flex flex-column teacher-search-page__item"
+                @click="onItemClick(item)"
+              >
                 <div
-                  class="d-flex flex-grow-1 flex-column"
-                  style="height: 90px"
+                  v-if="item.user.userProfile != null"
+                  class="d-flex flex-shrink-0 teacher-search-page__profile-image"
+                  :style="`background-image: url(${
+                    item.user
+                      ? item.user.userProfile
+                      : '/static/images/user.png'
+                  })`"
+                />
+                <div
+                  v-else
+                  class="d-flex flex-shrink-0 teacher-search-page__profile-image"
+                  :style="`background-image: url('/static/images/user.png')`"
+                />
+                <div
+                  class="d-flex flex-column teacher-search-page__item-content"
                 >
-                  <div class="ellipsis" style="margin: 8px 0">
-                    {{ item.expertise }}
+                  <div style="font-weight: 800">
+                    {{ item.user ? item.user.userName : '' }}
                   </div>
-                  <div v-html="item.avaliableTime" class="ellipsis" />
-                </div>
-                <div class="d-flex teacher-search-page__item-bottom">
-                  <div class="d-flex flex-grow-0 align-center">
-                    <v-icon color="#ff4a62" style="margin-right: 2px"
-                      >favorite</v-icon
-                    >
-                    {{ item.likeCnt }}
+                  <div
+                    class="d-flex flex-grow-1 flex-column"
+                    style="height: 90px"
+                  >
+                    <div class="ellipsis" style="margin: 8px 0">
+                      {{ item.expertise }}
+                    </div>
+                    <div v-html="item.avaliableTime" class="ellipsis" />
                   </div>
-                  <div class="d-flex" />
-                  <div class="d-flex flex-grow-0 align-center">
-                    <v-icon color="#4e41ff" style="margin-right: 2px"
-                      >account_circle</v-icon
-                    >
-                    {{ item.studentCnt }}
+                  <div class="d-flex teacher-search-page__item-bottom">
+                    <div class="d-flex flex-grow-0 align-center">
+                      <v-icon color="#ff4a62" style="margin-right: 2px"
+                        >favorite</v-icon
+                      >
+                      {{ item.likeCnt }}
+                    </div>
+                    <div class="d-flex" />
+                    <div class="d-flex flex-grow-0 align-center">
+                      <v-icon color="#4e41ff" style="margin-right: 2px"
+                        >account_circle</v-icon
+                      >
+                      {{ item.studentCnt }}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </template>
+          <template v-else>
+            <c-empty content="해당하는 선생님 정보" style="width: 100%" />
+          </template>
         </div>
         <div class="teacher-search-page__more">
           <c-button @click="onMoreClick" type="gradient">더 불러오기</c-button>

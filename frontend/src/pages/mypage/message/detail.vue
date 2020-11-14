@@ -17,7 +17,11 @@
         <div
           v-if="messages && messages[0]"
           class="d-flex flex-grow-0 flex-shrink-0 mypage-message-detail-page__profile"
-          :style="`background-image:url(${messages[0].profile})`"
+          :style="`background-image:url(${
+            me != messages[0].receiver.userCode
+              ? messages[0].receiver.userProfile
+              : messages[0].sender.userProfile
+          })`"
         />
         <div
           v-if="me != messages[0].receiver.userCode"
@@ -36,9 +40,14 @@
         />
         <div class="d-flex flex-column">
           <div class="d-flex mypage-message-detail-page__date">
-            <div class="d-flex" v-if="me != item.receiver.userCode" />
-            {{ $moment(item.sendDate).format('YYYY.MM.DD hh:mm') }}
-            <div class="d-flex" v-if="me != item.sender.userCode" />
+            <div
+              class="d-flex flex-grow-1"
+              v-if="me != item.receiver.userCode"
+            />
+            <div class="d-flex flex-grow-0">
+              {{ $moment(item.sendDate).format('YYYY.MM.DD hh:mm') }}
+            </div>
+            <div class="d-flex flex-grow-1" v-if="me != item.sender.userCode" />
           </div>
           <div
             class="mypage-message-detail-page__message"
@@ -51,8 +60,8 @@
           </div>
         </div>
         <div
-          class="d-flex flex-grow-1 flex-shrink-0 mypage-message-detail-page__blank mypage-message-detail-page__blank"
-          v-if="me != item.sender"
+          class="d-flex flex-grow-1 flex-shrink-0 mypage-message-detail-page__blank"
+          v-if="me != item.sender.userCode"
         />
       </div>
       <div class="d-flex mypage-message-detail-page__input-container">
@@ -89,34 +98,6 @@ export default {
       content: '',
       receiver: '',
     },
-    SAMPLE_DATA: [
-      {
-        messageCode: 12,
-        sendDate: '2020-10-28T05:45:02.000+00:00',
-        content: 'byebye',
-        sender: 15,
-        profile: '/static/images/user.png',
-        receiver: 14,
-        isRead: 0,
-      },
-      {
-        messageCode: 11,
-        sendDate: '2020-10-28T05:00:29.000+00:00',
-        content: 'oh, hi',
-        sender: 14,
-        receiver: 15,
-        isRead: 0,
-      },
-      {
-        messageCode: 10,
-        sendDate: '2020-10-28T04:59:59.000+00:00',
-        content:
-          'hihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihihi',
-        sender: 15,
-        receiver: 14,
-        isRead: 0,
-      },
-    ],
   }),
   methods: {
     async onMessageButtonClick() {
@@ -133,11 +114,11 @@ export default {
         console.log(this.message);
         console.log(this.$store.state.config);
         await this.$api.sendMessage(this.message, this.$store.state.config);
-        alert('메시지 전송 성공');
+        alert('쪽지를 전송했습니다.');
         let url = '/mypage/message/' + this.message.receiver;
         location.href = url;
       } catch (e) {
-        alert('메시지 전송 실패.');
+        alert('쪽지 전송에 실패했습니다.');
       }
     },
   },
@@ -208,7 +189,8 @@ export default {
 }
 
 .mypage-message-detail-page__date {
-  max-width: 200px;
+  width: 100%;
+  /* max-width: 200px; */
   margin-bottom: 4px;
   font-size: 10px;
   color: #999;
