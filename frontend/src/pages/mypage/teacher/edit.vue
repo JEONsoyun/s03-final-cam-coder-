@@ -78,38 +78,30 @@ export default {
   name: 'mypage-teacher-edit-page',
   data: () => ({
     teacher: {},
-    data: {
-      intro: '재미있는 자료구조 수업입니다.',
-      expertise: 'OO대학교에서 자료구조 수업을 A+로 완료하였습니다.',
-      price: '10000',
-      profile: 'profile',
-      avaliableTime: 'every sunday',
-    },
   }),
   methods: {
     async onUpdateTeacher() {
       try {
-        console.log(this.$store.state.config);
         await this.$api.updateTeacher(this.data, this.$store.state.config);
-        alert('정보변경 성공');
+        alert('선생님 정보가 수정되었습니다.');
       } catch (e) {
-        alert('정보변경 실패.');
+        alert('처리 중 오류가 발생했습니다.');
+        console.error(e);
       }
     },
     async onEnrollTeacher() {
       try {
-        console.log(this.$store.state.config);
         await this.$api.postTeacher(this.data, this.$store.state.config);
-        alert('선생님 등록 성공');
+        alert('선생님 등록이 완료되었습니다.');
       } catch (e) {
-        alert('선생님 등록 실패.');
+        alert('처리 중 오류가 발생했습니다.');
+        console.error(e);
       }
     },
   },
   async created() {
     try {
       this.teacher = await this.$api.getTeacherMe(this.$store.state.config);
-      console.log(this.teacher);
       this.data = this.teacher;
     } catch (e) {
       alert('잘못된 접근입니다.');

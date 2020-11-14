@@ -188,143 +188,6 @@ export default {
     reviews: [],
     isSelected: false,
     isFormVisible: false,
-    SAMPLE_DATA: {
-      teacherCode: 1,
-      user: {
-        userCode: 3,
-        userId: 'teacher0',
-        userPw: '1234',
-        userName: '야근이싫은개발자',
-        userProfile: null,
-        joinDate: '2020-10-27T01:46:43.000+00:00',
-      },
-      intro:
-        '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-      expertise:
-        'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-      price: 20000,
-      profile: '/static/images/user.png',
-      likeCnt: 2,
-      avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-      studentCnt: 3,
-    },
-    SAMPLE_DATA2: [
-      {
-        reviewCode: 6,
-        tutoringCode: 7,
-        evaluationContent:
-          '이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.이해하기 쉬운 예시를 많이 들어주십니다.',
-        evaluationDate: '2020-11-02T06:57:48.000+00:00',
-        student: {
-          id: 1,
-          userCode: 16,
-          userId: 'studenta',
-          userPw:
-            '$2a$10$q4esBwQfUamOVv4kFCkSiuXdBCEAJeNWwzpFRUJ/o39x828XeUxEG',
-          userName: 'namea',
-          userProfile: '/static/images/user.png',
-          joinDate: '2020-10-29T01:07:45.000+00:00',
-        },
-        teacher: {
-          id: 2,
-          teacherCode: 1,
-          user: {
-            id: 3,
-            userCode: 3,
-            userId: 'teacher0',
-            userPw: '1234',
-            userName: '야근이싫은개발자',
-            userProfile: null,
-            joinDate: '2020-10-27T01:46:43.000+00:00',
-          },
-          intro:
-            '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-          expertise:
-            'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-          price: 20000,
-          profile: null,
-          likeCnt: 1,
-          avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-          studentCnt: 1,
-        },
-      },
-      {
-        reviewCode: 6,
-        tutoringCode: 7,
-        evaluationContent: '이해하기 쉬운 예시를 많이 들어주십니다.',
-        evaluationDate: '2020-11-02T06:57:48.000+00:00',
-        student: {
-          id: 1,
-          userCode: 16,
-          userId: 'studenta',
-          userPw:
-            '$2a$10$q4esBwQfUamOVv4kFCkSiuXdBCEAJeNWwzpFRUJ/o39x828XeUxEG',
-          userName: 'namea',
-          userProfile: '/static/images/user.png',
-          joinDate: '2020-10-29T01:07:45.000+00:00',
-        },
-        teacher: {
-          id: 2,
-          teacherCode: 1,
-          user: {
-            id: 3,
-            userCode: 3,
-            userId: 'teacher0',
-            userPw: '1234',
-            userName: '야근이싫은개발자',
-            userProfile: null,
-            joinDate: '2020-10-27T01:46:43.000+00:00',
-          },
-          intro:
-            '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-          expertise:
-            'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-          price: 20000,
-          profile: null,
-          likeCnt: 1,
-          avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-          studentCnt: 1,
-        },
-      },
-      {
-        reviewCode: 6,
-        tutoringCode: 7,
-        evaluationContent: '이해하기 쉬운 예시를 많이 들어주십니다.',
-        evaluationDate: '2020-11-02T06:57:48.000+00:00',
-        student: {
-          id: 1,
-          userCode: 16,
-          userId: 'studenta',
-          userPw:
-            '$2a$10$q4esBwQfUamOVv4kFCkSiuXdBCEAJeNWwzpFRUJ/o39x828XeUxEG',
-          userName: 'namea',
-          userProfile: '/static/images/user.png',
-          joinDate: '2020-10-29T01:07:45.000+00:00',
-        },
-        teacher: {
-          id: 2,
-          teacherCode: 1,
-          user: {
-            id: 3,
-            userCode: 3,
-            userId: 'teacher0',
-            userPw: '1234',
-            userName: '야근이싫은개발자',
-            userProfile: null,
-            joinDate: '2020-10-27T01:46:43.000+00:00',
-          },
-          intro:
-            '안녕하세요.<br> 저는 위메프에서 웹개발자로 일하고 있는 야근이 싫은 개발자입니다. <br>자바를 처음 접하는\n 분들에게 적합한 커리큘럼입니다. 마지막에는 프로젝트를 완성시켜서 포트폴리오를 하나 만드는 것이 목표입니다. 과외생 분이 배우시는 속도에 따라 커리큘럼은 조금씩 변동될 수 있습니다.<br>현업에서 웹 디자이너와 가장 가깝게 일하는 실무자로서 더 실용적이고 실무에서 필요하는 것들 위주로 가르쳐드리겠습니다.',
-          expertise:
-            'Javascript, Swift, Objective-C, C++, SQL, Java, 프로그래밍 과목을 수업합니다.',
-          price: 20000,
-          profile: null,
-          likeCnt: 1,
-          avaliableTime: '주말 모두 가능, 평일 7시 이후 ',
-          studentCnt: 1,
-        },
-      },
-    ],
     formdata: {},
     dates: [],
     tutoringData: {
@@ -339,9 +202,7 @@ export default {
         let data = {
           teacher: this.teacher.teacherCode,
         };
-        console.log(data);
         let result = await this.$api.postLike(data, this.$store.state.config);
-        console.log(result);
 
         this.isSelected = !this.isSelected;
         if (this.isSelected) {
@@ -366,11 +227,9 @@ export default {
     async onPostClick() {
       this.isFormVisible = false;
       // TODO: 과외 신청 보내는 api
-      console.log(this.dates);
       this.tutoringData.start = this.dates[0];
       this.tutoringData.end = this.dates[1];
       this.tutoringData.teacher_code = this.teacherId;
-      console.log(this.tutoringData);
       try {
         await this.$api.postTutoring(
           this.tutoringData,
@@ -385,7 +244,6 @@ export default {
   },
   async created() {
     this.teacherId = this.$route.params.id;
-    console.log(this.teacherId);
     if (this.teacherId == 0) {
       alert('잘못된 접근입니다.');
       this.$router.push('/');
@@ -399,6 +257,7 @@ export default {
     } catch (e) {
       console.error(e);
       alert('잘못된 접근입니다.');
+      this.$router.push('/');
     }
 
     try {
@@ -406,7 +265,6 @@ export default {
         this.teacherId,
         this.$store.state.config
       );
-      console.log(this.isSelected, '좋아요 했나 확인');
     } catch (e) {
       console.error(e);
     }
@@ -416,9 +274,8 @@ export default {
         this.$store.state.config
       );
     } catch (e) {
-      alert('리뷰로딩 실패');
+      console.error(e);
     }
-    console.log(this.teacher);
   },
 };
 </script>

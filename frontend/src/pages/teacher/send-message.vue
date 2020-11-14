@@ -15,7 +15,7 @@
         />
         <div class="d-flex flex-column ellipsis">
           <div class="send-message-page__name">
-            {{ teacher.user ? teacher.user.userName : "" }}
+            {{ teacher.user ? teacher.user.userName : '' }}
           </div>
           <div
             class="send-message-page__intro ellipsis"
@@ -50,11 +50,8 @@ export default {
     async onSendClick() {
       try {
         this.message.receiver = this.teacher.user.userCode;
-        console.log(this.message);
-        console.log(this.$store.state.config);
         await this.$api.sendMessage(this.message, this.$store.state.config);
         alert('쪽지를 전송했습니다.');
-        console.log(this.teacher.user.userCode);
         let url = '/mypage/message/' + this.teacher.user.userCode;
         location.href = url;
       } catch (e) {
@@ -65,7 +62,6 @@ export default {
   },
   async created() {
     this.teacherId = this.$route.params.userid;
-    console.log(this.teacherId);
     if (this.teacherId == 0) {
       alert('잘못된 접근입니다.');
       this.$router.push('/');
@@ -76,7 +72,7 @@ export default {
         this.$store.state.config
       );
     } catch (e) {
-      console.log('선생님 로딩 실패');
+      console.error(e);
     }
   },
 };

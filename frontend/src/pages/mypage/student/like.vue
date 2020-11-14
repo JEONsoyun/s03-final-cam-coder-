@@ -47,11 +47,10 @@ export default {
   }),
   methods: {},
   async created() {
-    console.log(this.$store.state.config);
     try {
       this.likes = await this.$api.getLike(this.$store.state.config);
     } catch (e) {
-      console.log('잘못된 접근입니다. 로딩 실패');
+      console.error(e);
     }
   },
 };

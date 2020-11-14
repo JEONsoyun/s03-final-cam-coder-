@@ -58,7 +58,6 @@ export default {
   methods: {
     async onLoginClick() {
       try {
-        console.log(this.$store.state.config);
         await this.$api.login(this.data).then((res) => {
           this.$store.commit('SET_AUTHTOKEN', res.data.token);
           location.href = '/';

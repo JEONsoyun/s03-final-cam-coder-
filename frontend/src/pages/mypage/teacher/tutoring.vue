@@ -155,18 +155,15 @@ export default {
   },
   async created() {
     await this.getTutoring();
-    console.log(this.tutorings);
     let today = this.$moment();
     for (let tutoring of this.tutorings) {
       if (tutoring.status == 2 || tutoring.status == 3) {
         continue;
       }
-      console.log(today.isAfter(tutoring.endDate), tutoring.endDate);
       if (
         today.isAfter(tutoring.endDate) &&
         today.isAfter(tutoring.startDate)
       ) {
-        console.log(tutoring);
         let data = {};
         if (tutoring.status == 1) {
           data.status = 3;

@@ -34,37 +34,45 @@
         </div>
       </div>
       <template v-if="messages != null && messages != 0">
-      <div class="d-flex" v-for="(item, mi) in messages" :key="`message-${mi}`">
         <div
-          class="d-flex flex-grow-1 flex-shrink-0 mypage-message-detail-page__blank"
-          v-if="me != item.receiver.userCode"
-        />
-        <div class="d-flex flex-column">
-          <div class="d-flex mypage-message-detail-page__date">
-            <div
-              class="d-flex flex-grow-1"
-              v-if="me != item.receiver.userCode"
-            />
-            <div class="d-flex flex-grow-0">
-              {{ $moment(item.sendDate).format('YYYY.MM.DD hh:mm') }}
+          class="d-flex"
+          v-for="(item, mi) in messages"
+          :key="`message-${mi}`"
+        >
+          <div
+            class="d-flex flex-grow-1 flex-shrink-0 mypage-message-detail-page__blank"
+            v-if="me != item.receiver.userCode"
+          />
+          <div class="d-flex flex-column">
+            <div class="d-flex mypage-message-detail-page__date">
+              <div
+                class="d-flex flex-grow-1"
+                v-if="me != item.receiver.userCode"
+              />
+              <div class="d-flex flex-grow-0">
+                {{ $moment(item.sendDate).format('YYYY.MM.DD hh:mm') }}
+              </div>
+              <div
+                class="d-flex flex-grow-1"
+                v-if="me != item.sender.userCode"
+              />
             </div>
-            <div class="d-flex flex-grow-1" v-if="me != item.sender.userCode" />
+            <div
+              class="mypage-message-detail-page__message"
+              :class="{
+                'mypage-message-detail-page__left':
+                  me != item.receiver.userCode,
+                'mypage-message-detail-page__right': me != item.sender.userCode,
+              }"
+            >
+              {{ item.content }}
+            </div>
           </div>
           <div
-            class="mypage-message-detail-page__message"
-            :class="{
-              'mypage-message-detail-page__left': me != item.receiver.userCode,
-              'mypage-message-detail-page__right': me != item.sender.userCode,
-            }"
-          >
-            {{ item.content }}
-          </div>
+            class="d-flex flex-grow-1 flex-shrink-0 mypage-message-detail-page__blank"
+            v-if="me != item.sender.userCode"
+          />
         </div>
-        <div
-          class="d-flex flex-grow-1 flex-shrink-0 mypage-message-detail-page__blank"
-          v-if="me != item.sender.userCode"
-        />
-      </div>
       </template>
       <template v-else>
         <c-empty content="주고받은 쪽지" />
@@ -106,8 +114,6 @@ export default {
   }),
   methods: {
     async onMessageButtonClick() {
-      // console.log('onMessageButtonClick');
-      //console.log(this.input);
       if (this.input.trim() == '') {
         return;
       }
@@ -116,11 +122,8 @@ export default {
       } else {
         this.message.receiver = this.messages[0].receiver.userCode;
       }
-      console.log(this.message);
       try {
         this.message.content = this.input;
-        console.log(this.message);
-        console.log(this.$store.state.config);
         await this.$api.sendMessage(this.message, this.$store.state.config);
         this.input = '';
         alert('쪽지를 전송했습니다.');
@@ -133,27 +136,23 @@ export default {
           this.$store.state.config
         );
       } catch (e) {
-        console.log('잘못된 접근입니다. 로딩 실패');
+        console.error(e);
       }
     },
   },
   async created() {
-    console.log(this.$store.state.config);
     try {
       this.anotherUser = this.$route.params.usercode;
-      console.log(this.anotherUser);
       this.messages = await this.$api.getUserMessage(
         this.anotherUser,
         this.$store.state.config
       );
     } catch (e) {
-      console.log('잘못된 접근입니다. 로딩 실패');
+      console.error(e);
     }
 
     let user = this.$store.state.USER;
     this.me = user.userCode;
-    console.log('나다', this.me);
-    console.log('메시지다', this.messages);
   },
 };
 </script>

@@ -21,7 +21,6 @@ export default {
   methods: {
     async onPoistClick() {
       try {
-        console.log(this.$store.state.config);
         let data = {
           content: this.content,
           tutoring_code: this.tutoringId,
@@ -37,7 +36,6 @@ export default {
   },
   async created() {
     this.tutoringId = this.$route.params.tutoringCode;
-    console.log(this.tutoringId);
   },
 };
 </script>
