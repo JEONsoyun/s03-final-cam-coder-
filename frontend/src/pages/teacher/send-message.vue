@@ -11,16 +11,16 @@
         </div>
         <div
           class="d-flex flex-grow-0 flex-shrink-0 send-message-page__profile"
-          :style="`background-image:url(${SAMPLE_DATA.profile})`"
+          :style="`background-image:url(${teacher.profile})`"
         />
         <div class="d-flex flex-column ellipsis">
           <div class="send-message-page__name">
-            {{ SAMPLE_DATA.user.userName }}
+            {{ teacher.user.userName }}
           </div>
           <div
             class="send-message-page__intro ellipsis"
             style="height: 24px"
-            v-html="SAMPLE_DATA.intro"
+            v-html="teacher.intro"
           />
         </div>
       </div>
@@ -69,33 +69,31 @@ export default {
   methods: {
     async onSendClick() {
       try {
+        this.message.receiver = this.teacher.user.userCode;
         console.log(this.message);
         console.log(this.$store.state.config);
         await this.$api.sendMessage(this.message, this.$store.state.config);
         alert('메시지 전송 성공');
+        console.log(this.teacher.user.userCode);
+        let url = '/mypage/message/' + this.teacher.user.userCode;
+        location.href = url;
       } catch (e) {
         alert('메시지 전송 실패.');
       }
     },
   },
   async created() {
-    console.log(this.$store.storagelocal);
     this.teacherId = this.$route.params.userid;
     console.log(this.teacherId);
     if (this.teacherId == 0) {
       alert('잘못된 접근입니다.');
       this.$router.push('/');
     }
-    console.dir(this.$store.state.config);
     try {
-      console.log(this.teacherId);
-      console.dir(this.$store.state.config);
       this.teacher = await this.$api.getTeacher(
         this.teacherId,
         this.$store.state.config
       );
-      this.message.receiver = this.teacher.user.userCode;
-      console.log(this.teacher.user.userCode);
     } catch (e) {
       console.log('선생님 로딩 실패');
     }
