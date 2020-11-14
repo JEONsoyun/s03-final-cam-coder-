@@ -57,6 +57,14 @@
         ></v-text-field>
       </div>
       <c-button
+        v-if="data.teacherCode == null"
+        class="flex-grow-0"
+        style="margin-top: 60px"
+        @click="onEnrollTeacher"
+        >선생님 등록하기</c-button
+      >
+      <c-button
+        v-else
         class="flex-grow-0"
         style="margin-top: 60px"
         @click="onUpdateTeacher"
@@ -86,6 +94,15 @@ export default {
         alert('정보변경 성공');
       } catch (e) {
         alert('정보변경 실패.');
+      }
+    },
+    async onEnrollTeacher() {
+      try {
+        console.log(this.$store.state.config);
+        await this.$api.postTeacher(this.data, this.$store.state.config);
+        alert('선생님 등록 성공');
+      } catch (e) {
+        alert('선생님 등록 실패.');
       }
     },
   },
