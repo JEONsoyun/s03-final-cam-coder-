@@ -69,10 +69,11 @@ export default {
     webRTC: {},
     displayRTC: {},
     isShared: false,
+    tutoringCode: null,
   }),
   methods: {
     initRoomToken() {
-      const hash = (Math.random() * new Date().getTime())
+      const hash = (this.tutoringCode)
         .toString(32)
         .toUpperCase()
         .replace(/\./g, '-');
@@ -87,6 +88,8 @@ export default {
     },
   },
   mounted() {
+    this.tutoringCode = this.$route.query.tutoringCode;
+
     // 방 초기화
     if (!this.$route.hash) {
       this.initRoomToken();
@@ -138,8 +141,7 @@ function initMedia(vue, options) {
   let remoteUserId;
   let isOffer;
 
-  console.log('socket: ' + location.hostname + ':3001' + options.namespace);
-  const socket = io(location.hostname + ':3001' + options.namespace);
+  const socket = io("k3a110.p.ssafy.io" + options.namespace);
   const mediaHandler = new MediaHandler();
   const peerHandler = new PeerHandler(Object.assign({
     send: send,

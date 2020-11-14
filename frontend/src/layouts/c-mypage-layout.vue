@@ -113,10 +113,11 @@ export default {
     onLogoutClick() {
       try {
         this.$store.commit('LOGOUT', null);
-        alert('로그아웃하였습니다.');
+        alert('로그아웃되었습니다.');
         location.href = '/';
       } catch (e) {
-        alert('로그아웃 실패');
+        alert('요청에 실패했습니다.');
+        console.error(e);
       }
     },
   },

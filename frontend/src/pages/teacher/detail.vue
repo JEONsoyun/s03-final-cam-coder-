@@ -146,29 +146,29 @@
             선생님 리뷰
           </div>
           <template v-if="reviews != null && reviews.length != 0">
-          <div
-            class="teacher-detail-page__review"
-            v-for="(item, ri) in reviews"
-            :key="`review-${ri}`"
-          >
-            <div class="d-flex align-center">
-              <div
-                v-if="teacher"
-                class="d-flex flex-grow-0 flex-shrink-0 teacher-detail-page__review-profile"
-                :style="`background-image:url(${item.student.userProfile})`"
-              />
-              <div style="font-weight: 800; font-size: 18px">
-                {{ item.student.userId }}
+            <div
+              class="teacher-detail-page__review"
+              v-for="(item, ri) in reviews"
+              :key="`review-${ri}`"
+            >
+              <div class="d-flex align-center">
+                <div
+                  v-if="teacher"
+                  class="d-flex flex-grow-0 flex-shrink-0 teacher-detail-page__review-profile"
+                  :style="`background-image:url(${item.student.userProfile})`"
+                />
+                <div style="font-weight: 800; font-size: 18px">
+                  {{ item.student.userId }}
+                </div>
+                <div class="d-flex" />
+                <div style="color: #666; font-size: 14px">
+                  {{ $moment(item.evaluationDate).format('YYYY.MM.DD hh:mm') }}
+                </div>
               </div>
-              <div class="d-flex" />
-              <div style="color: #666; font-size: 14px">
-                {{ $moment(item.evaluationDate).format('YYYY.MM.DD hh:mm') }}
+              <div class="teacher-detail-page__review-text">
+                {{ item.evaluationContent }}
               </div>
             </div>
-            <div class="teacher-detail-page__review-text">
-              {{ item.evaluationContent }}
-            </div>
-          </div>
           </template>
           <template v-else>
             <c-empty content="작성된 리뷰" />
@@ -376,9 +376,9 @@ export default {
           this.tutoringData,
           this.$store.state.config
         );
-        alert('과외 요청 성공');
+        alert('과외를 신청했습니다.');
       } catch (e) {
-        alert('과외 요청 실패');
+        alert('과외 요청을 실패했습니다.');
       }
       this.dates = [];
     },
@@ -397,7 +397,7 @@ export default {
         this.$store.state.config
       );
     } catch (e) {
-      console.log('선생님 로딩 실패');
+      console.error(e);
       alert('잘못된 접근입니다.');
     }
 
