@@ -92,15 +92,6 @@ export default {
   name: 'teacher-search-page',
   data: () => ({
     teachers: [],
-    // searchKey: {
-    //   avaliableTime: '',
-    //   expertise: '',
-    //   intro: '',
-    //   keywords: '',
-    //   price: null,
-    //   profile: '',
-    //   sorttype: null,
-    // },
     keyword: '',
     data: {
       keywords: '',
@@ -123,6 +114,11 @@ export default {
       alert('더 불러올 데이터가 없습니다.');
     },
     onItemClick(item) {
+      if (!this.$store.state.ISLOGGEDIN) {
+        alert('로그인 후 사용할 수 있습니다.');
+        this.$router.push('/login');
+        return;
+      }
       this.$router.push(`/teacher/detail/${item.teacherCode}`);
     },
   },
