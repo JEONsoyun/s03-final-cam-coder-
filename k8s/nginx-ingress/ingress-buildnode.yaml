@@ -18,4 +18,4 @@ spec:
       - path: /cbuild
         backend:
           serviceName: buildnode-svc
-          servicePort: 8081
+          servicePort: 3000
