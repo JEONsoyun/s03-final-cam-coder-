@@ -45,7 +45,9 @@
           style="max-height: 40vh"
           autoplay
         ></video>
-        <div class="d-flex align-center justify-center">상대방이 공유한 화면</div>
+        <div class="d-flex align-center justify-center">
+          상대방이 공유한 화면
+        </div>
       </div>
       <div
         class="d-flex flex-column flex-grow-1 flex-shrink-0"
@@ -310,9 +312,9 @@ export default {
       this.webRTC.mediaHandler[this.isPaused ? 'pauseVideo' : 'resumeVideo']();
     });
 
-    $('#btn-mic').click(function () {
+    $('#btn-mic').click(() => {
       this.isMuted = !this.isMuted;
-      console.log(this.isMuted)
+      console.log(this.isMuted);
       this.webRTC.mediaHandler[this.isMuted ? 'muteAudio' : 'unmuteAudio']();
     });
 

@@ -56,8 +56,8 @@
               style="margin-top: 4px"
             >
               과외 일자:
-              {{ $moment(item.startDate).format('YYYY.MM.DD hh:mm') }} ~
-              {{ $moment(item.endDate).format('YYYY.MM.DD hh:mm') }}
+              {{ $moment(item.startDate).format('YYYY.MM.DD') }} ~
+              {{ $moment(item.endDate).format('YYYY.MM.DD') }}
             </div>
             <div class="d-flex">
               <div class="d-flex" />
@@ -136,14 +136,14 @@ export default {
   },
   async created() {
     await this.getTutoring();
-    let today = this.$moment();
+    let today = this.$moment().add(1, 'day');
     for (let tutoring of this.tutorings) {
       if (tutoring.status == 2 || tutoring.status == 3) {
         continue;
       }
       if (
-        today.isAfter(tutoring.endDate) &&
-        today.isAfter(tutoring.startDate)
+        today.isSameOrAfter(tutoring.endDate) &&
+        today.isSameOrAfter(tutoring.startDate)
       ) {
         let data = {};
         if (tutoring.status == 1) {
