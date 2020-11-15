@@ -14,7 +14,8 @@
 - [ERD](#ERD)
 - [API](#API) 
 - [개발 스택](#기술스택)
-- [개발현황](#개발현황)
+- [기능소개](#기능소개)
+- [서비스 배포](#서비스-배포)
 
 # Cam Coder 소개
 [개발자 과외 플랫폼]
@@ -98,5 +99,20 @@ mvnw spring-boot:run
 
 <br>
 
-# 개발현황
-- Testttt
+# [기능소개](./doc/explain-function.md)
+- [공통](./doc/explain-function.md#공통)
+- [학생](./doc/explain-function.md#학생)
+- [선생님](./doc/explain-function.md#선생님)
+- [1대1 화상과외](./doc/explain-function.md#1대1-화상-과외)
+
+# 서비스 배포
+- [01 - Docker 설치](./doc/deploy/docker-설치.md)
+- [02 - Kubernetes 설치](./doc/deploy/k8s-설치.md)
+- [03 - metalLB 설치](./doc/deploy/metalLB-설치.md)
+- [04 - helm3 설치](./doc/deploy/helm-설치.md)
+- [05 - 백엔드 서버 배포](./doc/deploy/spring-배포.md)
+- [06 - Jenkins 서버 설치](./doc/deploy/jenkins-설치.md)
+- [07 - front 배포(vue.js)](./doc/deploy/front-배포.md)
+- [08 - ingress-nginx 설치](./doc/deploy/ingress-nginx-설치.md)
+- [09 - webRTC server 배포](./doc/deploy/webRTC-server-배포.md)
+- [10 - build server 배포](./doc/deploy/build-server-배포.md)
