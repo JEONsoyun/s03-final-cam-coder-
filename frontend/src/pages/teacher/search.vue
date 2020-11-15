@@ -3,7 +3,7 @@
     <div class="teacher-search-page__container">
       <div class="teacher-search-page">
         <div class="teacher-search-page__title">
-          221,440명의 과외 선생님이 있습니다.
+          221,440명의 과외 선생님을 목표로 합니다.
         </div>
         <div class="d-flex teacher-search-page__search-container">
           <v-text-field
