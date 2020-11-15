@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  name: backend-ingress
+  namespace: camcoder-project
+spec:
+  rules:
+  - host: k3a110.p.ssafy.io
+    http:
+      paths:
+      - backend:
+          serviceName: camcoder-spring-springboot
+          servicePort: 8082
+        path: /api
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - k3a110.p.ssafy.io
+    secretName: k3a110.p.ssafy.io

@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  name: node-ingress
+  namespace: ns-node
+spec:
+  rules:
+  - host: k3a110.p.ssafy.io
+    http:
+      paths:
+      - backend:
+          serviceName: node-svc
+          servicePort: 3000
+        path: /displayMedia
+        pathType: ImplementationSpecific
+      - backend:
+          serviceName: node-svc
+          servicePort: 3000
+        path: /userMedia
+        pathType: ImplementationSpecific
+      - backend:
+          serviceName: node-svc
+          servicePort: 3000
+        path: /socket.io/
+        pathType: ImplementationSpecific
+      - backend:
+          serviceName: node-svc
+          servicePort: 3000
+        path: /realtime
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - k3a110.p.ssafy.io
+    secretName: k3a110.p.ssafy.io
