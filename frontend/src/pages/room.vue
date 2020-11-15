@@ -1,43 +1,100 @@
 <template>
-  <div class="d-flex flex-column" style="width: 100%; height: 100%">
+  <div class="d-flex flex-column room-page">
     <!-- 상단 카메라/에디터 -->
     <div class="d-flex">
       <div class="d-flex flex-column room-page__camera">
-        <video width="200" id="remote-video" autoplay />
+        <video
+          width="199"
+          id="remote-video"
+          autoplay
+          style="
+            background-image: url('/static/images/user.png');
+            background-position: center;
+            background-size: 150px;
+            border-bottom: solid 1px #fff;
+            height: 150px;
+          "
+        />
+        <div>상대방 화면</div>
         <div class="d-flex" />
-        <video width="200" id="local-video" autoplay />
+        <div>내 화면</div>
+        <video
+          width="199"
+          id="local-video"
+          autoplay
+          style="
+            background-image: url('/static/images/user.png');
+            background-position: center;
+            background-size: 150px;
+            border-top: solid 1px #fff;
+            height: 150px;
+          "
+        />
       </div>
-      <div class="d-flex flex-column room-page__contents-share">
-        <video width="100%" id="screen-local-video" autoplay></video>
-        <video width="100%" id="screen-remote-video" autoplay></video>
+      <div class="d-flex flex-column flex-grow-0 room-page__contents-share">
+        <div class="d-flex align-center justify-center">내가 공유한 화면</div>
+        <video
+          width="100%"
+          id="screen-local-video"
+          autoplay
+          style="border-bottom: solid 1px #fff; max-height: 40vh"
+        ></video>
+        <video
+          width="100%"
+          id="screen-remote-video"
+          style="max-height: 40vh"
+          autoplay
+        ></video>
+        <div class="d-flex align-center justify-center">상대방이 공유한 화면</div>
       </div>
       <div
         class="d-flex flex-column flex-grow-1 flex-shrink-0"
-        style="min-width: 500px"
+        style="min-width: 40%"
       >
         <div class="d-flex flex-grow-1 flex-column room-page__code-editor">
-          <label for="lang-select">Choose a language:</label>
-          <select v-model="language" style="background: white;">
-            <option value="">--Please choose an option--</option>
-            <option value="c"> C </option>
-            <option value="cpp"> C++ </option>
-            <option value="java"> Java </option>
-            <option value="python"> Python 3.7</option>
-          </select>
-          <div id="monaco" style="height:50vh"></div>
-          <!-- <div class="d-flex flex-grow-0">
+          <div class="d-flex flex-grow-0 align-center">
             <div class="d-flex" />
-            <div>언어</div>
+            언어
+            <select
+              v-model="language"
+              style="
+                margin-left: 8px;
+                background: white;
+                margin-right: 16px;
+                height: 40px;
+                padding: 8px;
+                border-radius: 4px;
+                border: solid 1px #fb8805;
+                font-size: 14px;
+                font-weight: 800;
+              "
+            >
+              <option value="c">C</option>
+              <option value="cpp">C++</option>
+              <option value="java">Java</option>
+              <option value="python">Python 3.7</option>
+            </select>
           </div>
-          <div class="d-flex">editor</div>
-          -->
+          <div class="d-flex" style="padding-top: 4px">
+            <div id="monaco" style="height: 100%; width: 100%"></div>
+          </div>
+
           <div class="d-flex flex-grow-0">
             <div class="d-flex" />
-            <c-button class="flex-grow-0" @click="executeBuild">run</c-button>
+            <c-button
+              class="flex-grow-0"
+              style="margin-right: 16px"
+              @click="executeBuild"
+              >run</c-button
+            >
           </div>
         </div>
         <div class="d-flex flex-grow-1 room-page__console">
-          <textarea ref="output" style="resize:none; width:400px; height:50px; overflow: visible" readonly="readonly"></textarea>
+          <textarea
+            ref="output"
+            style="resize: none; width: 400px; height: 50px; overflow: visible"
+            readonly="readonly"
+          ></textarea>
         </div>
       </div>
     </div>
@@ -100,8 +157,8 @@ int main() {
   cout << "Hello, world!" << endl;
   return 0;
 }`,
-  python: `print("Hello, world!")`
-}
+  python: `print("Hello, world!")`,
+};
 
 export default {
   name: 'room-page',
@@ -167,36 +224,47 @@ export default {
       sharedb.types.register(richText.type);
 
       // Open WebSocket connection to ShareDB server
-      var socket = new ReconnectingWebSocket('ws://' + window.location.hostname + ':3000/realtime');
+      var socket = new ReconnectingWebSocket(
+        'ws://' + window.location.hostname + '/realtime'
+      );
       var connection = new sharedb.Connection(socket);
       console.log(connection, '1234');
 
       // For testing reconnection
-      window.disconnect = function() {
+      window.disconnect = function () {
         connection.close();
       };
-      window.connect = function() {
-        var socket = new ReconnectingWebSocket('ws://' + window.location.hostname + ':3000/realtime');
+      window.connect = function () {
+        var socket = new ReconnectingWebSocket(
+          'ws://' + window.location.hostname + '/realtime'
+        );
         connection.bindToSocket(socket);
       };
 
       // Create local Doc instance mapped to 'examples' collection document with id 'richtext'
       var doc = connection.get('examples', 'richtext');
-      doc.on('error', err => { /* Ignore replay error. */ });
+      doc.on('error', (err) => {
+        /* Ignore replay error. */
+      });
       doc.subscribe((err) => {
         if (err) throw err;
 
-        this.editor.onDidChangeModelContent(e => {
+        this.editor.onDidChangeModelContent((e) => {
           if (this.editorValueChangedByRemote) {
             this.editorValueChangedByRemote = false;
             return;
           }
           const content = this.editor.getValue();
-          doc.submitOp({
-            ops: [{
-              sr: content,
-            }]
-          }, { source: this });
+          doc.submitOp(
+            {
+              ops: [
+                {
+                  sr: content,
+                },
+              ],
+            },
+            { source: this }
+          );
         });
 
         doc.on('op', ({ ops }, source) => {
@@ -504,37 +572,45 @@ function initMedia(vue, options) {
 </script>
 
 <style>
+.room-page {
+  height: 100vh;
+  width: 100vw;
+  background: rgb(30, 30, 30);
+}
 .room-page__camera {
-  background: #fff;
   width: 200px;
+  margin-right: 2px;
+  border-right: solid 1px #fff;
+  color: #fff;
+  text-align: center;
 }
 
 .room-page__contents-share {
-  background: #eaeaea;
+  height: 100%;
+  min-width: 40%;
+  border-right: solid 1px #fff;
+  color: #fff;
+  text-align: center;
 }
 
 .room-page__code-editor {
   width: 100%;
-  background: rgb(49, 35, 29);
-  height: 70%;
-  padding: 16px;
+  height: 80%;
+  padding: 16px 0;
   color: white;
   border-bottom: solid 1px #fff;
 }
 
 .room-page__console {
   width: 100%;
-  background: rgb(49, 35, 29);
-  height: 30%;
+  height: 20%;
   padding: 16px;
-  background: white;
 }
 
 .room-page__footer {
-  background: #eaeaea;
-  height: 70px;
+  height: 65px;
   padding: 0 32px;
-  border-top: solid 1px rgb(49, 35, 29);
+  border-top: solid 1px#fff;
 }
 
 .room-page__circle {
