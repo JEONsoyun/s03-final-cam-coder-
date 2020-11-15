@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: wlgh325/project-camcoder:0.3
+  repository: wlgh325/project-camcoder:0.4
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -36,8 +36,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: NodePort
-  port: 8080
+  type: ClusterIP
+  port: 8082
 
 ingress:
   enabled: false

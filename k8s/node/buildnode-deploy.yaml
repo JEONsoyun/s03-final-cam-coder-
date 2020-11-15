@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: buildnode
+  namespace: ns-buildnode
+spec:
+  selector:
+    matchLabels:
+      app: buildnode
+  replicas: 1
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels:
+        app: buildnode
+    spec:
+      containers:
+        - name: buildnode
+          image: wlgh325/build-node:0.4
+          resources:
+            requests:
+              cpu: 100m
+              memory: 300Mi
+          imagePullPolicy: Always
+          ports:
+            - name: buildnode-port
+              containerPort: 3000
+          volumeMounts:
+          - name: buildnode-pv
+            mountPath: /home/dist
+          - name: docker-pv
+            mountPath: /var/run/docker.sock
+      volumes:
+      - name: buildnode-pv
+        persistentVolumeClaim:
+          claimName: buildnode-pv-claim
+      - name: docker-pv
+        hostPath:
+          path: /var/run/docker.sock
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: buildnode-svc
+  namespace: ns-buildnode
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: buildnode-port
+  selector:
+    app: buildnode

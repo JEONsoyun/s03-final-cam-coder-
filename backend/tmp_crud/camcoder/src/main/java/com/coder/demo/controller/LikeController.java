@@ -26,15 +26,19 @@ public class LikeController {
 	
 	@PostMapping(value="/likes")
 	public String insert(@RequestBody LikeRequest like, HttpServletRequest request) throws Exception{
-		likeService.insert(like, (String)(request.getAttribute("loginUserId")));
-		return "좋아요 완료";
+		return likeService.insert(like, (String)(request.getAttribute("loginUserId")));
 	}
 	
+	//유저가 좋아요한 목록
 	@GetMapping(value="/likes")
 	public List<Like> selectAll(HttpServletRequest request) throws Exception{
 		return likeService.selectMine((String)(request.getAttribute("loginUserId")));
 	}
-	
+	@GetMapping(value="/likes/{Code}")
+	public boolean isLike(@PathVariable Long Code, HttpServletRequest request) throws Exception{
+		//likeService.isLike(Code, (String)(request.getAttribute("loginUserId")));
+		return likeService.isLike(Code, (String)(request.getAttribute("loginUserId")));
+	}
 	@DeleteMapping(value="/likes/{Code}")
 	public String deleteLike(@PathVariable Long Code, HttpServletRequest request) throws Exception{
 		likeService.delete(Code, (String)(request.getAttribute("loginUserId")));

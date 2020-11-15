@@ -4,22 +4,18 @@
 
 const path = require('path')
 
-const URL = 'http://k3a110.p.ssafy.io:8080'
-
+const URL = 'https://k3a110.p.ssafy.io'
+// const URL = 'http://localhost:8080'
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {        
+      '/api': {
+        secure: false,        
         target: URL,
-        // changeOrigin:true,
-
-        pathRewrite: {
-          '^/api': ''
-        },
+        changeOrigin: true,
       },
       '/imageFile': {
         target: URL,

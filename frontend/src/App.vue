@@ -14,29 +14,24 @@ export default {
   data: () => ({
     isLoggedIn: null,
     allowedBeforeLoggedInContext: [],
+    user: {},
   }),
   async beforeCreate() {
-    // try {
-    //   this.isLoggedIn = await this.$api.isLoggedIn();
-    //   this.$store.commit('ISLOGGEDIN', this.isLoggedIn);
-    // } catch (e) {
-    //   this.isLoggedIn = false;
-    //   this.$store.commit('ISLOGGEDIN', false);
-    // }
-    // if (this.isLoggedIn) {
-    //   try {
-    //     let {
-    //       user: [user],
-    //     } = await this.$api.getMe();
-    //     this.$store.commit('USER', user);
-    //   } catch (e) {
-    //     if (!e || !e.response || e.response.status != 400) {
-    //       console.error(e);
-    //     }
-    //     this.$store.commit('USER', {});
-    //   }
-    // }
-
+    try {
+      this.user = await this.$api.getMe(this.$store.state.config);
+      if (this.user != '') {
+        this.$store.commit('USER', this.user);
+        this.$store.commit('ISLOGGEDIN', true);
+      }
+    } catch (e) {
+      this.isLoggedIn = null;
+      this.$store.commit('ISLOGGEDIN', null);
+      this.$store.commit('LOGOUT', null);
+      if (!e || !e.response || e.response.status != 400) {
+        console.error(e);
+      }
+      this.$store.commit('USER', {});
+    }
     // window.$root = this;
   },
 };
@@ -53,6 +48,16 @@ export default {
 
 span {
   margin: 0 !important;
+}
+
+.ellipsis {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+textarea:focus {
+  outline: 0 !important;
 }
 
 .mobile-layout-container {

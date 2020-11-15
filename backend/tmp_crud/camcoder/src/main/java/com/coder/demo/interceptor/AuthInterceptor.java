@@ -27,7 +27,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 		String token = authExtractor.extract(request, "Bearer");
 		System.out.println(">>> interceptor.preHandle 호출");
 		if (StringUtils.isEmpty(token)) {
-            return true;
+			return true;
         }
 		
 		if(!jwtTokenProvider.validateToken(token)) {  // 토큰의 유효성 검증
@@ -36,6 +36,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         
         String id = jwtTokenProvider.getSubject(token);
         request.setAttribute("loginUserId", id);
+        System.out.println("save id : " + request.getAttribute("loginUserId"));
         return true;
 	}
 }

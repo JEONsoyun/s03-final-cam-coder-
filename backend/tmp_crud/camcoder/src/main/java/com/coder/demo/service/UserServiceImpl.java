@@ -45,23 +45,28 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public void insert(SignupRequest request) throws Exception{
+	public String insert(SignupRequest request) throws Exception{
+		//id중복 체크
+		Optional<User> check = Optional.ofNullable(userdao.findByUserId(request.getId()));
+		if(check.isPresent()) {
+			return "이미 존재하는 아이디 입니다.";
+		}
 		String encPw = "";
 		
 		Optional.of(request)
 		.map(SignupRequest::getPw).orElseThrow(NotExistIdException::new);
 
 		encPw = passwordEncoder.encode(request.getPw());
-		try {
-			//Optional.of(request)
-			//.map(SignupRequest::getId).map(SignupRequest::getName).map(SignupRequest::getProfile)
-			//.ifPresent(pw -> now.setUserPw(pw));
-			
+		
+		try {			
 			userdao.save(new User(request.getId(), encPw, request.getName(), request.getProfile()));
+			return "회원가입 성공";
 		}catch(DataAccessException ex) {
 			ex.printStackTrace();
 			System.out.println(ex.getCause().getMessage());
 		}
+		
+		return "회원가입 실패";
 	}
 
 	@Override
@@ -81,7 +86,7 @@ public class UserServiceImpl implements UserService {
 		User now = userdao.findByUserId(id);
 		
 		Optional.of(u)
-		.map(SignupRequest::getPw).ifPresent(pw -> now.setUserPw(pw));
+		.map(SignupRequest::getPw).ifPresent(pw -> now.setUserPw(passwordEncoder.encode(pw)));
 
 		Optional.of(u)
 		.map(SignupRequest::getName).ifPresent(name -> now.setUserName(name));

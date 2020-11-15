@@ -7,6 +7,7 @@ import com.coder.demo.vo.Like;
 
 public interface LikeService {
 	public List<Like> selectMine(String userid)throws Exception;
-	public void insert(LikeRequest like, String userid)throws Exception;
+	public String insert(LikeRequest like, String userid)throws Exception;
 	public void delete(Long code, String id)throws Exception;
+	public boolean isLike(Long code, String string) throws Exception;
 }

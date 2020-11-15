@@ -1,9 +1,9 @@
 package com.coder.demo.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -47,17 +47,13 @@ public class TutoringServiceImpl implements TutoringService {
 		Teacher tc = Optional.ofNullable(tdao.findByTeacherCode(tcode)).orElseThrow(() -> new NotExistIdException("teacher"));
 
 		try {
-			//String content = Optional.of(regist).map(TutorRegistRequest::getContent).orElse("");
-			//Long price = Optional.of(regist).map(TutorRegistRequest::getPrice).orElse((long)0);
 			Date starttime = Optional.of(regist).map(TutorRegistRequest::getStart).orElse(new Date());
 			Date endtime = Optional.of(regist).map(TutorRegistRequest::getEnd).orElse(new Date());
 
 			Tutoring now = new Tutoring(starttime, endtime, 1, 0);
-
-			//studentCnt 증가
-			tc.addTutor(now);
-			student.addTutor(now);
-
+			
+			now.setTeacher(tc);
+			now.setStudent(student);
 			tutoringdao.save(now);
 
 		}catch(DataAccessException ex) {
@@ -86,13 +82,13 @@ public class TutoringServiceImpl implements TutoringService {
 			try {
 				Integer type = Optional.of(regist).map(TutorRegistRequest::getStatus).orElse(0);
 
-				if(type == 1 && (now.getStatus() == 1)) {
+				if(type == 0) {// && (now.getStatus() == 1)) {
 					now.setStatus(0);
 					//studentCnt 증가
 					tc.setTutor(now);
-				}else if(type == 2 && (now.getStatus() == 0)){
+				}else if(type == 2) {// && (now.getStatus() == 0)){
 					now.setStatus(2);//완료
-				}else if(type == 3 && (now.getStatus() == 1)) {
+				}else if(type == 3) {// && (now.getStatus() == 1)) {
 					now.setStatus(3);//거절
 				}			
 
@@ -126,7 +122,11 @@ public class TutoringServiceImpl implements TutoringService {
 	public List<Tutoring> selectAllTutee(String id) throws NotExistIdException {
 		//내가 선생인 수업 목록을 가져옴
 		Long ucode = Optional.ofNullable(userdao.findByUserId(id)).map(User::getUserCode).orElseThrow(NotExistIdException::new);		
-		Long tcode = Optional.ofNullable(tdao.findByUserCode(ucode)).map(Teacher::getTeacherCode).orElseThrow(() -> new NotExistIdException("teacher"));
+		Long tcode = Optional.ofNullable(tdao.findByUserCode(ucode)).map(Teacher::getTeacherCode).orElse((long) -1);
+		
+		if(tcode == -1) {
+			return new ArrayList<Tutoring>();
+		}
 
 		return tutoringdao.findByTeacherCode(tcode);
 	}

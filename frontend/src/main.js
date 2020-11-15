@@ -46,13 +46,19 @@ Vue.prototype.$teamLogos = {
 
 // Layout
 import CMainLayout from './layouts/c-main-layout'
+import CMypageLayout from './layouts/c-mypage-layout'
 
 Vue.component('c-main-layout', CMainLayout)
+Vue.component('c-mypage-layout', CMypageLayout)
 
 // Component
 import CButton from './components/common/c-button'
+import CDialog from './components/c-dialog'
+import CEmpty from './components/c-empty'
 
 Vue.component('c-button', CButton)
+Vue.component('c-dialog', CDialog)
+Vue.component('c-empty', CEmpty)
 
 // HTML 태그 제거용
 Vue.filter('striphtml', function (value) {
@@ -69,5 +75,12 @@ new Vue({
   components: { App },
   template: '<App/>',
   store,
-  vuetify
+  vuetify,
+  created() {
+    let token = localStorage.getItem('token')
+    if (token) {
+      //console.log(token)
+      this.$store.commit('SET_AUTHTOKEN', token)
+    }
+  },
 })

@@ -19,16 +19,16 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Builder.Default;
 
 @Getter
 @Setter
 @Entity
 @Table(name="users")
 @EntityScan(basePackages = {"com.coder.demo.vo"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -41,49 +41,37 @@ public class User {
 	private String userProfile;
 
 	private Date joinDate;
-	/*
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Teacher teacher;
 
-	public Teacher getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}*/
-
-	///////////////////////////////////////////////////////////////////////////////////////
-	@Default
-	@OneToMany(mappedBy = "student",cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Tutoring> tutors = new ArrayList<Tutoring>();
+	//자신이 학생으로 등록된 튜터링 목록
+//	@Default
+//	@OneToMany(mappedBy = "tstudent",cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<Tutoring> tutors = new ArrayList<Tutoring>();
 
 	public void addTutor(final Tutoring tutor) {
-		tutors.add(tutor);
+//		tutors.add(tutor);
 		tutor.setStudent(this);
 	}
 
 	public void deleteTutor(final Tutoring tutor) {
-		tutors.remove(tutor);
+//		tutors.remove(tutor);
 		tutor.setStudent(null);
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////
-	//for reviews
-	@Default
-	@OneToMany(mappedBy = "student",cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Review> reviews = new ArrayList<Review>();
+//	//자신이 작성한 모든 리뷰 목록
+//	@Default
+//	@OneToMany(mappedBy = "rstudent",cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<Review> reviews = new ArrayList<Review>();
 
 	public void addReview(final Review review) {
-		reviews.add(review);
+//		reviews.add(review);
 		review.setStudent(this);
 	}
 
 	public void deleteReview(final Review review) {
-		reviews.remove(review);
+//		reviews.remove(review);
 		review.setStudent(null);
 	}
-	////////////////////////////////////////////////////////////////////////////////////////////////
+	
 
 	@PrePersist
 	public void beforeCreate() {

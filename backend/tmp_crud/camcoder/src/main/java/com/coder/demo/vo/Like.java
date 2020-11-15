@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name = "like_teachers")
 @EntityScan(basePackages = {"com.coder.demo.vo"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Like{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -31,11 +31,11 @@ public class Like{
 	
 	@ManyToOne
 	@JoinColumn(name = "teacher_code",referencedColumnName = "teacher_code")
-	private Teacher teacher;
+	private Teacher likeTeacher;
 	
 	public Like(Long userCode, Teacher teacher) {
 		this.userCode = userCode;
-		this.teacher = teacher;
+		this.likeTeacher = teacher;
 	}
 
 	@PrePersist
@@ -71,11 +71,16 @@ public class Like{
 	}
 
 	public Teacher getTeacher() {
-		return teacher;
+		return likeTeacher;
 	}
 
 	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
+		this.likeTeacher = teacher;
 	}
 
+	@Override
+	public String toString() {
+		return "Like [likeCode=" + likeCode + ", userCode=" + userCode + ", likeDate=" + likeDate + ", likeTeacher="
+				+ likeTeacher + "]";
+	}
 }

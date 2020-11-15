@@ -23,7 +23,11 @@ import com.coder.demo.vo.Teacher;
 public class TeacherController {	
 	@Autowired
 	TeacherService tservice;
-
+	
+	@GetMapping(value = "/teachers/all")
+	public List<Teacher> selectAll() { // select
+		return tservice.selectAll(); // List -> json(by jackson)
+	}
 	@PostMapping(value = "/teachers")
 	public String insert(@Valid @RequestBody RegisterRequest register, HttpServletRequest request) throws Exception{
 		String id = (String)(request.getAttribute("loginUserId"));
@@ -35,14 +39,20 @@ public class TeacherController {
 	public String update(@Valid @RequestBody RegisterRequest register, HttpServletRequest request) throws Exception{
 		String id = (String)(request.getAttribute("loginUserId"));
 		tservice.update(register, id);	
-		return "변경 완료"; //
+		return "변경 완료";
 	}
 	
 	@DeleteMapping(value = "/teachers")
 	public String update(HttpServletRequest request) throws Exception{
 		String id = (String)(request.getAttribute("loginUserId"));
 		tservice.delete(id);	
-		return "삭제 완료"; //
+		return "삭제 완료";
+	}
+	
+	@GetMapping(value = "/teachers/me")
+	public Teacher findMe(HttpServletRequest request) {
+		String id = (String)(request.getAttribute("loginUserId"));
+		return tservice.selectOneByMyCode(id);
 	}
 	
 	@GetMapping(value = "/teachers/{code}")
@@ -66,9 +76,9 @@ public class TeacherController {
 		//null이면 무슨 값으로 넣어주지 일단은 "-1" -> 전체다 보이게함
 		String keyword = Optional.ofNullable(register).map(RegisterRequest::getKeywords).orElse("-1");
 		
-		if(keyword.equals("-1")) {
-			return tservice.selectAll();
-		}
+//		if(keyword.equals("-1")) {
+//			return tservice.selectAll();
+//		}
 		return tservice.contain(keyword);
 	}
 	

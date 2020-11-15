@@ -12,7 +12,7 @@ import com.coder.demo.vo.User;
 public interface UserService {
 	public List<User> selectAll();
 	public User selectOneByCode(long userCode);
-	public void insert(SignupRequest request) throws Exception;
+	public String insert(SignupRequest request) throws Exception;
 	public String createToken(LoginRequest loginRequest) throws Exception;
 	public User selectOneByID(String id);
 	public void update(String id, @Valid SignupRequest u);

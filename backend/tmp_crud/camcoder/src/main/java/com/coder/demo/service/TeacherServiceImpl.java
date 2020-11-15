@@ -39,6 +39,7 @@ public class TeacherServiceImpl implements TeacherService {
 			String profile = Optional.of(register).map(RegisterRequest::getProfile).orElse("");
 			String time = Optional.of(register).map(RegisterRequest::getAvaliableTime).orElse("");
 			
+			profile = userdao.findByUserId(id).getUserProfile();
 			tdao.save(new Teacher(userdao.findByUserId(id), intro, expertise, price, profile, time));
 		}catch(DataAccessException ex) {
 			ex.printStackTrace();
@@ -102,6 +103,12 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public List<Teacher> contain(String keyword) {
 		return tdao.findContainKeyword(keyword);
+	}
+
+	@Override
+	public Teacher selectOneByMyCode(String id) {
+		Long code = userdao.findByUserId(id).getUserCode();		
+		return Optional.ofNullable(tdao.findByUserCode(code)).orElse(new Teacher());
 	}
 
 }

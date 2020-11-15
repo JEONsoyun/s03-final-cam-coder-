@@ -25,12 +25,15 @@ spec:
         ports:
         - containerPort: 8080
         - containerPort: 50000
+        env:
+        - name: TZ
+          value: "Asia/Seoul"
       volumes:
       - name: jenkins-home
         persistentVolumeClaim:
           claimName: jenkins-leader-pv-claim
       nodeSelector:
-        kubernetes.io/hostname: k8s-master
+        kubernetes.io/hostname: ip-172-26-7-12
 
 ---
 apiVersion: v1

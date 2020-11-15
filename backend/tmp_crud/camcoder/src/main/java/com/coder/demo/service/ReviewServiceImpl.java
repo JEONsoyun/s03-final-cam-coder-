@@ -45,10 +45,10 @@ public class ReviewServiceImpl implements ReviewService {
 			throw new NotExistIdException("tutoring");
 		}
 		
-		if(tutoring.getStatus() != 2) {
+		/*if(tutoring.getStatus() != 2) {
 			//완료되지 않은 수업을 평가 불가
 			throw new NotExistIdException("Finished tutoring");
-		}
+		}*/
 		
 		Teacher tc = Optional.ofNullable(tdao.findByTeacherCode(tutoring.getTeacher().getTeacherCode())).orElseThrow(() -> new NotExistIdException("teacher"));
 
@@ -57,7 +57,7 @@ public class ReviewServiceImpl implements ReviewService {
 			Review rv = new Review(tutoring_code, content, student, tc);
 
 			tc.addReview(rv);
-			student.addReview(rv);
+			//student.addReview(rv);
 			reviewdao.save(rv);
 		}catch(DataAccessException ex) {
 			ex.printStackTrace();
