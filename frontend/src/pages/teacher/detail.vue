@@ -236,6 +236,7 @@ export default {
           this.$store.state.config
         );
         alert('과외를 신청했습니다.');
+        this.$router.push('/mypage/student/tutoring');
       } catch (e) {
         alert('과외 요청을 실패했습니다.');
       }
