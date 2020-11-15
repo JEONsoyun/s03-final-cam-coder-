@@ -198,7 +198,7 @@ export default {
       }
     },
     executeBuild() {
-      const url = 'k3a110.p.ssafy.io/cbuild';
+      const url = 'cbuild';
       const code = this.editor.getValue();
       const lang = this.language;
       const data = JSON.stringify({ code, lang });
