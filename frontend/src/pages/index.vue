@@ -22,11 +22,10 @@
             class="d-flex justify-center main-page__fs-22"
             style="margin-top: -8px"
           >
-            CamCoder는 많은 분께 신뢰받을 것입니다.
+            CamCoder는 실시간 영상 공유, 코드 빌더를 제공합니다.
           </div>
           <div class="d-flex justify-center main-page__fs-14">
-            개발자를 꿈꾸는 학생 이용 1위, 전문적인 선생님 풀 압도적 1위가 될
-            과외 플랫폼입니다.
+            멋진 개발자를 꿈꾸는 학생들이 가진 코딩의 어려움을 해결해 줄 과외 플랫폼입니다.
           </div>
         </div>
         <div class="d-flex">
