@@ -122,7 +122,7 @@ export default {
   height: 100%;
   background-image: url('/static/images/monitor.png');
   background-size: 320px auto;
-  background-position: center 65px;
+  background-position: center 56px;
 }
 
 .main-page__content-container {

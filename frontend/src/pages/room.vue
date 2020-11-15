@@ -577,12 +577,12 @@ function initMedia(vue, options) {
   height: 100vh;
   width: 100vw;
   background: rgb(30, 30, 30);
+  color: #fff;
 }
 .room-page__camera {
   width: 200px;
   margin-right: 2px;
   border-right: solid 1px #fff;
-  color: #fff;
   text-align: center;
 }
 
@@ -590,7 +590,6 @@ function initMedia(vue, options) {
   height: 100%;
   min-width: 40%;
   border-right: solid 1px #fff;
-  color: #fff;
   text-align: center;
 }
 
@@ -598,7 +597,6 @@ function initMedia(vue, options) {
   width: 100%;
   height: 80%;
   padding: 16px 0;
-  color: white;
   border-bottom: solid 1px #fff;
 }
 
