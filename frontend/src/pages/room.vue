@@ -312,6 +312,7 @@ export default {
 
     $('#btn-mic').click(function () {
       this.isMuted = !this.isMuted;
+      console.log(this.isMuted)
       this.webRTC.mediaHandler[this.isMuted ? 'muteAudio' : 'unmuteAudio']();
     });
 
