@@ -129,7 +129,7 @@ export default {
     try {
       this.teachers = await this.$api.sortTeacher(
         {
-          keywords: this.keyword,
+          sorttype: 0,
         },
 
         this.$store.state.config
