@@ -99,6 +99,7 @@ export default {
       try {
         await this.$api.postTeacher(this.data, this.$store.state.config);
         alert('선생님 등록이 완료되었습니다.');
+        location.reload();
       } catch (e) {
         alert('처리 중 오류가 발생했습니다.');
         console.error(e);

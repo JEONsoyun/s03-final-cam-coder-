@@ -37,18 +37,13 @@
                 @click="onItemClick(item)"
               >
                 <div
-                  v-if="item.user.userProfile != null"
+                  v-if="item.user"
                   class="d-flex flex-shrink-0 teacher-search-page__profile-image"
                   :style="`background-image: url(${
-                    item.user
+                    item.user.userProfile
                       ? item.user.userProfile
                       : '/static/images/user.png'
                   })`"
-                />
-                <div
-                  v-else
-                  class="d-flex flex-shrink-0 teacher-search-page__profile-image"
-                  :style="`background-image: url('/static/images/user.png')`"
                 />
                 <div
                   class="d-flex flex-column teacher-search-page__item-content"
