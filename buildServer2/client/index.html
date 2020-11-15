@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css"/>
     <title>Build Server</title>
 </head>
 <body>
@@ -15,7 +16,7 @@
 		<option value="python37"> Python 3.7</option>
     </select>
     <p>
-        <textarea id="code" style="resize:none; width:400px; height:300px;"></textarea>
+		<div id="monaco" style="height:50vh"></div>
     </p>
     <p>
         <textarea id="output" style="resize:none; width:400px; height:50px; overflow: visible" readonly="readonly"></textarea>
@@ -23,7 +24,11 @@
     <p>
         <button type="button" class="btnBuild" onclick="btn_build()">Build</button>
     </p>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs/loader.js"></script>
     <script type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript" src="/js/monaco.js"></script>
 </body>
 </html>
