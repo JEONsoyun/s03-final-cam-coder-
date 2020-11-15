@@ -200,12 +200,13 @@ export default {
 
 .mypage-teacher-tutoring-page__profile {
   margin: 12px;
-  width: 48px;
-  height: 48px;
+  width: 76px;
+  height: 76px;
   margin-right: 28px;
   border-radius: 50%;
   background-size: cover;
   background-position: center center;
+  border: solid 1px #aaa;
 }
 
 .mypage-teacher-tutoring-page__tag {

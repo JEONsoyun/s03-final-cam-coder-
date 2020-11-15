@@ -190,10 +190,11 @@ export default {
 .mypage-message-detail-page__profile {
   width: 36px;
   height: 36px;
-  margin-right: 12px;
+  margin-right: 8px;
   border-radius: 50%;
   background-size: cover;
   background-position: center center;
+  border: solid 1px #aaa;
 }
 
 .mypage-message-detail-page__name {

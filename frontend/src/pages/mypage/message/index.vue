@@ -96,12 +96,13 @@ export default {
 
 .mypage-message-page__profile {
   margin: 12px;
-  width: 48px;
-  height: 48px;
-  margin-right: 28px;
+  height: 76px;
+  width: 76px;
+  margin-right: 16px;
   border-radius: 50%;
   background-size: cover;
   background-position: center center;
+  border: solid 1px #aaa;
 }
 
 .mypage-message-page__name {

@@ -18,10 +18,10 @@
           hide-details
           outlined
         ></v-text-field>
-        <div class="signup-page-title">이메일 (ID)</div>
+        <div class="signup-page-title">아이디</div>
         <v-text-field
           v-model="data.id"
-          placeholder="이메일 입력 (예: camcoder@camcoder.com)"
+          placeholder="아이디 입력 (예: camcoder)"
           class="signup-page-box"
           dense
           required
@@ -36,7 +36,7 @@
           dense
           hide-details
           required
-          placeholder="비밀번호 입력 (8자 이상의 영문,특수문자를 조합)"
+          placeholder="비밀번호 입력"
           counter
           outlined
         ></v-text-field>
