@@ -225,7 +225,7 @@ export default {
 
       // Open WebSocket connection to ShareDB server
       var socket = new ReconnectingWebSocket(
-        'ws://' + window.location.hostname + '/realtime'
+        'wss://' + window.location.hostname + '/realtime'
       );
       var connection = new sharedb.Connection(socket);
       console.log(connection, '1234');
@@ -236,7 +236,7 @@ export default {
       };
       window.connect = function () {
         var socket = new ReconnectingWebSocket(
-          'ws://' + window.location.hostname + '/realtime'
+          'wss://' + window.location.hostname + '/realtime'
         );
         connection.bindToSocket(socket);
       };
