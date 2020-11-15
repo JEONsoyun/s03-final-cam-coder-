@@ -78,6 +78,12 @@ export default {
   name: 'mypage-teacher-edit-page',
   data: () => ({
     teacher: {},
+    data: {
+      intro: '',
+      expertise: '',
+      avaliableTime: '',
+      price: '',
+    },
   }),
   methods: {
     async onUpdateTeacher() {
