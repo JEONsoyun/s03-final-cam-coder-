@@ -1,6 +1,6 @@
 function btn_build(){
     var url = "http://k3a110.p.ssafy.io:8081/cbuild"
-    var code = document.querySelector("#code").value;
+    var code = editor.getValue();
 	var lang = document.querySelector("#language");
 	var selectedLang = lang.options[lang.selectedIndex].value;
     var data = {'code': code, 'lang': selectedLang};
