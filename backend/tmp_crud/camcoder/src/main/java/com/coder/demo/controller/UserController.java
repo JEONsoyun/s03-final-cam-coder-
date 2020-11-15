@@ -31,9 +31,7 @@ public class UserController {
 
 	@PostMapping(value = "/users/signup")
 	public Object insert(@Valid @RequestBody SignupRequest request) throws Exception{
-		userservice.insert(request);
-		System.out.println(request.getId());
-		return "회원 가입 완료"; //
+		return userservice.insert(request);
 	}
 
 	@GetMapping(value = "/users/all")
