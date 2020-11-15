@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: buildnode
-          image: wlgh325/build-node:0.2
+          image: wlgh325/build-node:0.4
           resources:
             requests:
               cpu: 100m
