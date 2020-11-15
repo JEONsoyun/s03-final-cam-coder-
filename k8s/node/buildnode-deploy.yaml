@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: buildnode
-          image: wlgh325/build-node:0.2
+          image: wlgh325/build-node:0.4
           resources:
             requests:
               cpu: 100m
@@ -25,6 +25,18 @@ spec:
           ports:
             - name: buildnode-port
               containerPort: 3000
+          volumeMounts:
+          - name: buildnode-pv
+            mountPath: /home/dist
+          - name: docker-pv
+            mountPath: /var/run/docker.sock
+      volumes:
+      - name: buildnode-pv
+        persistentVolumeClaim:
+          claimName: buildnode-pv-claim
+      - name: docker-pv
+        hostPath:
+          path: /var/run/docker.sock
 ---
 apiVersion: v1
 kind: Service
