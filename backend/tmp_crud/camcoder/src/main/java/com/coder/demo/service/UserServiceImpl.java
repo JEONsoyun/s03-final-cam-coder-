@@ -47,11 +47,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String insert(SignupRequest request) throws Exception{
 		//id중복 체크
-		Optional<User> check = Optional.of(userdao.findByUserId(request.getId()));
+		Optional<User> check = Optional.ofNullable(userdao.findByUserId(request.getId()));
 		if(check.isPresent()) {
 			return "이미 존재하는 아이디 입니다.";
 		}
-		
 		String encPw = "";
 		
 		Optional.of(request)
