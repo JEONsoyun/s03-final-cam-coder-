@@ -3,7 +3,7 @@
     <div class="teacher-search-page__container">
       <div class="teacher-search-page">
         <div class="teacher-search-page__title">
-          221,440명의 과외 선생님이 있습니다.
+          221,440명의 과외 선생님을 목표로 합니다.
         </div>
         <div class="d-flex teacher-search-page__search-container">
           <v-text-field
@@ -37,18 +37,13 @@
                 @click="onItemClick(item)"
               >
                 <div
-                  v-if="item.user.userProfile != null"
+                  v-if="item.user"
                   class="d-flex flex-shrink-0 teacher-search-page__profile-image"
                   :style="`background-image: url(${
-                    item.user
+                    item.user.userProfile
                       ? item.user.userProfile
                       : '/static/images/user.png'
                   })`"
-                />
-                <div
-                  v-else
-                  class="d-flex flex-shrink-0 teacher-search-page__profile-image"
-                  :style="`background-image: url('/static/images/user.png')`"
                 />
                 <div
                   class="d-flex flex-column teacher-search-page__item-content"
@@ -134,7 +129,7 @@ export default {
     try {
       this.teachers = await this.$api.sortTeacher(
         {
-          keywords: this.keyword,
+          sorttype: 0,
         },
 
         this.$store.state.config

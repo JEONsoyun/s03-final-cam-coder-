@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  name: buildnode-ingress
+  namespace: ns-buildnode
+spec:
+  rules:
+  - host: k3a110.p.ssafy.io
+    http:
+      paths:
+      - backend:
+          serviceName: buildnode-svc
+          servicePort: 3000
+        path: /cbuild
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - k3a110.p.ssafy.io
+    secretName: k3a110.p.ssafy.io

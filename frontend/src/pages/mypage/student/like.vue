@@ -7,7 +7,10 @@
           :key="`teacher-${ti}`"
           class="d-flex flex-column mypage-student-like-page__item-container"
         >
-          <div class="d-flex flex-column mypage-student-like-page__item">
+          <div
+            @click="$router.push(`/teacher/detail/${item.teacher.teacherCode}`)"
+            class="d-flex flex-column mypage-student-like-page__item"
+          >
             <div
               v-if="item.teacher.user.userProfile != null"
               class="d-flex flex-shrink-0 mypage-student-like-page__profile-image"

@@ -228,7 +228,12 @@ export default {
       this.isFormVisible = false;
       // TODO: 과외 신청 보내는 api
       this.tutoringData.start = this.dates[0];
-      this.tutoringData.end = this.dates[1];
+      if (this.dates.length == 1) {
+        this.tutoringData.end = this.dates[0];
+      } else if (this.dates.length == 2) {
+        this.tutoringData.end = this.dates[1];
+      }
+
       this.tutoringData.teacher_code = this.teacherId;
       try {
         await this.$api.postTutoring(
@@ -236,6 +241,7 @@ export default {
           this.$store.state.config
         );
         alert('과외를 신청했습니다.');
+        this.$router.push('/mypage/student/tutoring');
       } catch (e) {
         alert('과외 요청을 실패했습니다.');
       }

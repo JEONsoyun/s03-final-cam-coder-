@@ -161,15 +161,16 @@ export default {
   },
   async created() {
     await this.getTutoring();
-    let today = this.$moment();
+    let today = this.$moment().add(-1, 'day');
     for (let tutoring of this.tutorings) {
       if (tutoring.status == 2 || tutoring.status == 3) {
         continue;
       }
       if (
-        today.isAfter(tutoring.endDate) &&
-        today.isAfter(tutoring.startDate)
+        today.isSameOrAfter(tutoring.endDate) &&
+        today.isSameOrAfter(tutoring.startDate)
       ) {
+        console.log(tutoring.startDate, tutoring.endDate);
         let data = {};
         if (tutoring.status == 1) {
           data.status = 3;
@@ -200,12 +201,13 @@ export default {
 
 .mypage-teacher-tutoring-page__profile {
   margin: 12px;
-  width: 48px;
-  height: 48px;
+  width: 76px;
+  height: 76px;
   margin-right: 28px;
   border-radius: 50%;
   background-size: cover;
   background-position: center center;
+  border: solid 1px #aaa;
 }
 
 .mypage-teacher-tutoring-page__tag {

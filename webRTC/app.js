@@ -42,6 +42,9 @@ app.use(errors.error());
 //const server = https.createServer(sslOptions, app);
 const server = http.createServer(app);
 
+// Realtime code sharing
+require('./src/socket/realtime-code-share.js')(server);
+
 debug('App is initiated');
 
 module.exports = server;
