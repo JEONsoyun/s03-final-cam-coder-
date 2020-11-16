@@ -136,7 +136,7 @@ export default {
   },
   async created() {
     await this.getTutoring();
-    let today = this.$moment().add(1, 'day');
+    let today = this.$moment().add(-1, 'day');
     for (let tutoring of this.tutorings) {
       if (tutoring.status == 2 || tutoring.status == 3) {
         continue;
@@ -145,6 +145,7 @@ export default {
         today.isSameOrAfter(tutoring.endDate) &&
         today.isSameOrAfter(tutoring.startDate)
       ) {
+        console.log(tutoring.startDate, tutoring.endDate)
         let data = {};
         if (tutoring.status == 1) {
           data.status = 3;
