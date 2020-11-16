@@ -5,6 +5,8 @@
 # SSAFY 3기 2학기 서울 1반 10팀 자율 프로젝트
 ## 📹 Cam-Coder
 
+![image](https://user-images.githubusercontent.com/50106311/99208608-4ce52d00-2804-11eb-9210-a5fd2906b1cc.png)
+
 </div>
 
 # 목차
@@ -17,7 +19,7 @@
 - [기능소개](#기능소개)
 - [서비스 배포](#서비스-배포)
 
-# Cam Coder 소개
+# 📹 Cam Coder 소개
 [개발자 과외 플랫폼]
 개발중에 너무 어려운 문제를 마주쳤지만, 구글링을 아무리 해봐도 해결할 수 없을 때, 
 캠코더를 이용해 과외선생님을 찾아보세요.
@@ -25,7 +27,7 @@
 <br>
 
 
-# 프로 젝트 진행 기간
+# 🗓프로 젝트 진행 기간
 - 2020.10.12 ~ 2020.11.27 (약 7주)
 
 - 2020.10.13 ~ 2020.10.16
@@ -37,7 +39,7 @@
     구성 : https://docs.google.com/presentation/d/1ZRkNElEq_4RqCXx84PFv2ZG2fIW1xKlzgGjxolAzEbo/edit?usp=sharing
 
 
-# Developer
+# 💪Developer
 
 - 🙋[임진희](https://lab.ssafy.com/jinhee6340)
 - 🙆[김채은](https://lab.ssafy.com/fairy037)
@@ -45,12 +47,19 @@
 - 🙎[서승희](https://lab.ssafy.com/pucca94)
 - 💁️[전소윤](https://lab.ssafy.com/twoposition)
 
+<br>
 
-# ERD 
-![image](https://user-images.githubusercontent.com/50106311/96872564-c19ba480-14ae-11eb-994b-dfb4969d5e86.png)
+# ✨[기능소개](./doc/explain-function.md)
+- ### [공통](./doc/explain-function.md#공통)
+- ### [학생](./doc/explain-function.md#학생)
+- ### [선생님](./doc/explain-function.md#선생님)
+- ### [1대1 화상과외](./doc/explain-function.md#1대1-화상-과외)
 
-# API
-![image](https://user-images.githubusercontent.com/50106311/96872899-2ce57680-14af-11eb-8561-fb05ed1855c1.png)
+<!--# ERD -->
+<!--![image](https://user-images.githubusercontent.com/50106311/96872564-c19ba480-14ae-11eb-994b-dfb4969d5e86.png)-->
+
+<!--# API-->
+<!--![image](https://user-images.githubusercontent.com/50106311/96872899-2ce57680-14af-11eb-8561-fb05ed1855c1.png)-->
 
 # INSTALLATION
 
@@ -97,15 +106,9 @@ mvnw spring-boot:run
 ![Mattermost Badge](https://img.shields.io/badge/-Mattermost-blue?style=flat-square&logo=Mattermost)
 ![Webex](https://img.shields.io/badge/-Webex-blueviolet?style=flat-square)
 
-<br>
 
-# [기능소개](./doc/explain-function.md)
-- [공통](./doc/explain-function.md#공통)
-- [학생](./doc/explain-function.md#학생)
-- [선생님](./doc/explain-function.md#선생님)
-- [1대1 화상과외](./doc/explain-function.md#1대1-화상-과외)
 
-# 서비스 배포
+# 🔗서비스 배포
 - [01 - Docker 설치](./doc/deploy/docker-설치.md)
 - [02 - Kubernetes 설치](./doc/deploy/k8s-설치.md)
 - [03 - metalLB 설치](./doc/deploy/metalLB-설치.md)
