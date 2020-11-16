@@ -4,7 +4,8 @@
 
 # SSAFY 3기 2학기 서울 1반 10팀 자율 프로젝트
 ## 📹 Cam-Coder
-![image](https://user-images.githubusercontent.com/50106311/99208341-7f425a80-2803-11eb-813b-145646083c65.png)
+
+![image](https://user-images.githubusercontent.com/50106311/99208608-4ce52d00-2804-11eb-9210-a5fd2906b1cc.png)
 
 </div>
 
