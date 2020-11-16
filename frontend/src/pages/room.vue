@@ -96,7 +96,7 @@
             ref="output"
             style="resize: none; width: 400px; height: 50px; overflow: visible;color:#fff"
             readonly="readonly"
-          ></textarea>
+          >sdf</textarea>
         </div>
       </div>
     </div>
@@ -165,7 +165,7 @@ int main() {
 export default {
   name: 'room-page',
   data: () => ({
-    isMuted: true,
+    isMuted: false,
     isPaused: true,
     webRTC: {},
     displayRTC: {},
