@@ -46,12 +46,19 @@
 - 🙎[서승희](https://lab.ssafy.com/pucca94)
 - 💁️[전소윤](https://lab.ssafy.com/twoposition)
 
+<br>
 
-# ERD 
-![image](https://user-images.githubusercontent.com/50106311/96872564-c19ba480-14ae-11eb-994b-dfb4969d5e86.png)
+# [기능소개](./doc/explain-function.md)
+- [공통](./doc/explain-function.md#공통)
+- [학생](./doc/explain-function.md#학생)
+- [선생님](./doc/explain-function.md#선생님)
+- [1대1 화상과외](./doc/explain-function.md#1대1-화상-과외)
 
-# API
-![image](https://user-images.githubusercontent.com/50106311/96872899-2ce57680-14af-11eb-8561-fb05ed1855c1.png)
+<!--# ERD -->
+<!--![image](https://user-images.githubusercontent.com/50106311/96872564-c19ba480-14ae-11eb-994b-dfb4969d5e86.png)-->
+
+<!--# API-->
+<!--![image](https://user-images.githubusercontent.com/50106311/96872899-2ce57680-14af-11eb-8561-fb05ed1855c1.png)-->
 
 # INSTALLATION
 
@@ -98,13 +105,7 @@ mvnw spring-boot:run
 ![Mattermost Badge](https://img.shields.io/badge/-Mattermost-blue?style=flat-square&logo=Mattermost)
 ![Webex](https://img.shields.io/badge/-Webex-blueviolet?style=flat-square)
 
-<br>
 
-# [기능소개](./doc/explain-function.md)
-- [공통](./doc/explain-function.md#공통)
-- [학생](./doc/explain-function.md#학생)
-- [선생님](./doc/explain-function.md#선생님)
-- [1대1 화상과외](./doc/explain-function.md#1대1-화상-과외)
 
 # 서비스 배포
 - [01 - Docker 설치](./doc/deploy/docker-설치.md)
