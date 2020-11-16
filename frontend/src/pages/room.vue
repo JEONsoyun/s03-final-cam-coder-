@@ -94,7 +94,7 @@
         <div class="d-flex flex-grow-1 room-page__console">
           <textarea
             ref="output"
-            style="resize: none; width: 400px; height: 50px; overflow: visible"
+            style="resize: none; width: 400px; height: 50px; overflow: visible;color:#fff"
             readonly="readonly"
           ></textarea>
         </div>
@@ -606,6 +606,7 @@ function initMedia(vue, options) {
   width: 100%;
   height: 20%;
   padding: 16px;
+  color: #fff;
 }
 
 .room-page__footer {
