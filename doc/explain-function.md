@@ -28,7 +28,7 @@
 ![visual stduio code editor](./img/func4_vscode.png)  <br> <br>
 
 - 실시간 코드 빌드 및 출력 값 확인 <br>
-![실시간 코드 빌드 및 출력 값 확인](./img/func4_build.png)  <br> <br>
+![실시간 코드 빌드 및 출력 값 확인](./img/realtime-build.gif)  <br> <br>
 
 - C, C++, java, python 지원 <br>
 ![언어 지원](./img/func4_lang.png)  <br> <br>
