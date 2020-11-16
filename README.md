@@ -27,17 +27,8 @@
 <br>
 
 
-# 🗓프로 젝트 진행 기간
-- 2020.10.12 ~ 2020.11.27 (약 7주)
-
-- 2020.10.13 ~ 2020.10.16
-    - 2020.10.15 세부 기능 계획
-    기획서 작성 : https://www.notion.so/SSAFY-PJT-8c8a35904ca7490da92db0ea44a23f27
-    - 2020.10.16 ERD & 쿼리
-    구성 : https://www.notion.so/SSAFY-PJT-8c8a35904ca7490da92db0ea44a23f27
-    - 2020.10.20 와이어 프레임
-    구성 : https://docs.google.com/presentation/d/1ZRkNElEq_4RqCXx84PFv2ZG2fIW1xKlzgGjxolAzEbo/edit?usp=sharing
-
+# 프로 젝트 진행 기간
+- 2020.10.12 ~ 2020.11.15 (약 4주)
 
 # 💪Developer
 
@@ -46,39 +37,6 @@
 - 🧑[박지호](https://lab.ssafy.com/wlgh325)
 - 🙎[서승희](https://lab.ssafy.com/pucca94)
 - 💁️[전소윤](https://lab.ssafy.com/twoposition)
-
-<br>
-
-# ✨[기능소개](./doc/explain-function.md)
-- ### [공통](./doc/explain-function.md#공통)
-- ### [학생](./doc/explain-function.md#학생)
-- ### [선생님](./doc/explain-function.md#선생님)
-- ### [1대1 화상과외](./doc/explain-function.md#1대1-화상-과외)
-
-<!--# ERD -->
-<!--![image](https://user-images.githubusercontent.com/50106311/96872564-c19ba480-14ae-11eb-994b-dfb4969d5e86.png)-->
-
-<!--# API-->
-<!--![image](https://user-images.githubusercontent.com/50106311/96872899-2ce57680-14af-11eb-8561-fb05ed1855c1.png)-->
-
-# INSTALLATION
-
-```
-git clone https://lab.ssafy.com/s03-final/s03p31a110.git
-```
-
-# FRONTEND
-
-```sh
-cd frontend
-npm install
-npm run dev
-```
-# BACKEND
-
-```sh
-mvnw spring-boot:run
-```
 
 # 💻기술스택
 
