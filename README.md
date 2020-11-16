@@ -39,7 +39,7 @@
     구성 : https://docs.google.com/presentation/d/1ZRkNElEq_4RqCXx84PFv2ZG2fIW1xKlzgGjxolAzEbo/edit?usp=sharing
 
 
-# Developer
+# 💪Developer
 
 - 🙋[임진희](https://lab.ssafy.com/jinhee6340)
 - 🙆[김채은](https://lab.ssafy.com/fairy037)
@@ -49,11 +49,11 @@
 
 <br>
 
-# [기능소개](./doc/explain-function.md)
-- [공통](./doc/explain-function.md#공통)
-- [학생](./doc/explain-function.md#학생)
-- [선생님](./doc/explain-function.md#선생님)
-- [1대1 화상과외](./doc/explain-function.md#1대1-화상-과외)
+# ✨[기능소개](./doc/explain-function.md)
+- ### [공통](./doc/explain-function.md#공통)
+- ### [학생](./doc/explain-function.md#학생)
+- ### [선생님](./doc/explain-function.md#선생님)
+- ### [1대1 화상과외](./doc/explain-function.md#1대1-화상-과외)
 
 <!--# ERD -->
 <!--![image](https://user-images.githubusercontent.com/50106311/96872564-c19ba480-14ae-11eb-994b-dfb4969d5e86.png)-->
@@ -108,7 +108,7 @@ mvnw spring-boot:run
 
 
 
-# 서비스 배포
+# 🔗서비스 배포
 - [01 - Docker 설치](./doc/deploy/docker-설치.md)
 - [02 - Kubernetes 설치](./doc/deploy/k8s-설치.md)
 - [03 - metalLB 설치](./doc/deploy/metalLB-설치.md)
