@@ -22,7 +22,7 @@
 ![실시간 화상 캠](./img/func4_realtimeCam.png)  <br> <br>
 
 - 코드 실시간 공유 <br>
-![코드 실시간 공유](./img/func4_shareCode.png)  <br> <br>
+<br> <br>
 
 - visual studio code editor <br>
 ![visual stduio code editor](./img/func4_vscode.png)  <br> <br>
