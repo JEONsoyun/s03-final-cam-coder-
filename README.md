@@ -64,7 +64,11 @@
 ![Mattermost Badge](https://img.shields.io/badge/-Mattermost-blue?style=flat-square&logo=Mattermost)
 ![Webex](https://img.shields.io/badge/-Webex-blueviolet?style=flat-square)
 
-
+# [기능소개](./doc/explain-function.md)
+- [공통](./doc/explain-function.md#공통)
+- [학생](./doc/explain-function.md#학생)
+- [선생님](./doc/explain-function.md#선생님)
+- [1대1 화상과외](./doc/explain-function.md#1대1-화상-과외)
 
 # 🔗서비스 배포
 - [01 - Docker 설치](./doc/deploy/docker-설치.md)
